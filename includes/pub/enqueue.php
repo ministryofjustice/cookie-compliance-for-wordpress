@@ -20,7 +20,7 @@ class Enqueue extends Controller {
 	}
 
 	public function enqueue() {
-		wp_enqueue_style( 'CCFWPluginStyle', $this->plugin_url . 'inc/assets/css/cookie-compliance-for-wordpress.min.css' );
-		wp_enqueue_script( 'CCFWPluginScript', $this->plugin_url . 'inc/assets/js/cookie-compliance-for-wordpress.min.js', array( 'jquery' ), '1.0.0', false );
+		wp_enqueue_style( 'CCFWPluginStyle', $this->plugin_url . 'includes/assets/css/cookie-compliance-for-wordpress.min.css' );
+		wp_enqueue_script( 'CCFWPluginScript', $this->plugin_url . 'includes/assets/js/cookie-compliance-for-wordpress.min.js', array( 'jquery' ), '1.0.0', false );
 	}
 }

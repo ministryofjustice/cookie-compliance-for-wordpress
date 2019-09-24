@@ -33,7 +33,7 @@ class Pub extends Controller {
 		// if the cookie has not been set and you're not on the policy page, show banner
 		if ( $cookieSet === false ) {
 			if ( $request_URI !== '/ccfw-cookie-policy' ) {
-				require_once $this->plugin_path . 'inc/pub/partials/cookie-compliance-for-wordpress-banner.php';
+				require_once $this->plugin_path . 'includes/pub/partials/cookie-compliance-for-wordpress-banner.php';
 			}
 		}
 	}
@@ -45,7 +45,7 @@ class Pub extends Controller {
 
 	public function cookie_policy_page( &$wp ) {
 		if ( array_key_exists( 'ccfw_cookie_policy', $wp->query_vars ) ) {
-			require_once $this->plugin_path . 'inc/pub/partials/cookie-compliance-for-wordpress-page.php';
+			require_once $this->plugin_path . 'includes/pub/partials/cookie-compliance-for-wordpress-page.php';
 			exit();
 		}
 	}

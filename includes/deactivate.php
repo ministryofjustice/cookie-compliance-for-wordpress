@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Fired during plugin activation
+ * Fired during plugin deactivation
  *
  * @link       https://github.com/ministryofjustice/cookie-compliance-for-wordpress
  * @since      1.0.0

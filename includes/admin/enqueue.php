@@ -20,7 +20,7 @@ class Enqueue extends Controller {
 	}
 
 	public function enqueue() {
-		wp_enqueue_style( 'CCFWPluginStyleAdmin', $this->plugin_url . 'inc/assets/css/cookie-compliance-for-wordpress-admin.min.css', 999 );
+		wp_enqueue_style( 'CCFWPluginStyleAdmin', $this->plugin_url . 'includes/assets/css/cookie-compliance-for-wordpress-admin.min.css', 999 );
 	}
 
 

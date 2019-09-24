@@ -6,6 +6,6 @@
     "minimum-stability": "dev",
     "require": {},
     "autoload": {
-        "psr-4":{ "CCFW\\": "./inc" }
+        "psr-4":{ "CCFW\\": "./includes" }
     }
 }

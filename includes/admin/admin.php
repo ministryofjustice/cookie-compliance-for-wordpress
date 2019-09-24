@@ -33,6 +33,6 @@ class Admin extends Controller {
 	}
 
 	public function admin_index() {
-		require_once $this->plugin_path . 'inc/admin/partials/cookie-compliance-for-wordpress-display.php';
+		require_once $this->plugin_path . 'includes/admin/partials/cookie-compliance-for-wordpress-display.php';
 	}
 }
