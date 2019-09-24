@@ -1,0 +1,11 @@
+{
+    "name": "ministryofjustice/cookie-compliance-for-wordpress",
+    "description": "WP Cookie Compliance plugin",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4":{ "CCFW\\": "./inc" }
+    }
+}

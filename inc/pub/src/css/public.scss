@@ -1,0 +1,58 @@
+@import "node_modules/govuk-frontend/govuk/all";
+
+.c-cookie-banner {
+    background-color: #ffffff;
+    padding: 20px 0;
+    box-sizing: border-box;
+    border:3px solid black;
+}
+
+.c-button--secondary {
+    padding: 8px 10px;
+    border-color: #00823b;
+    color: #00823b;
+    background-color: #ffffff;
+    box-shadow: none;
+
+    &:hover {
+        border-color: #00692f;
+        color: #00692f;
+        background-color: #f8f8f8;
+        text-decoration: none;
+        }
+
+    &:visited {
+        color: #00692f;
+    }
+}
+
+.c-cookie-banner__button, 
+.c-cookie-banner__buttons {
+    display: inline-block;
+}
+
+.c-cookie-banner__message {
+    display: inline;
+    color: #00823b;
+    margin-right: 12px;
+}
+
+.c-button--inline {
+    display: inline-block;
+    width: auto;
+    vertical-align: baseline;
+    margin-right: 10px;
+}
+
+.govuk-radios__item {
+    display: inline-block;
+}
+
+.govuk-button {
+    font-size: inherit;
+    margin-bottom: inherit;
+}
+
+.govuk-body {
+    font-size: inherit;
+}

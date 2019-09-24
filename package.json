@@ -1,0 +1,70 @@
+{
+    "name": "cookie-compliance-for-wordpress",
+    "version": "2.1.0",
+    "engines": {
+        "node": "11.10.0",
+        "npm": "6.7.0"
+    },
+    "description": "Gulp compiler for cookie-compliance-for-wordpress plugin",
+    "main": "index.js",
+    "scripts": {
+        "start": "gulp",
+        "watch": "gulp watch",
+        "test": "standard",
+        "build": "gulp build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ministryofjustice/cookie-compliance-for-wordpress.git"
+    },
+    "contributors": [
+        "Ministry of Justice"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress/issues"
+    },
+    "homepage": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress/#readme",
+    "dependencies": {
+        "autoprefixer": "^9.6.1",
+        "del": "^3.0.0",
+        "govuk-frontend": "^3.2.0",
+        "gulp": "^4.0.2",
+        "gulp-babel": "^8.0.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-csso": "^3.0.1",
+        "gulp-eslint": "^5.0.0",
+        "gulp-jslint": "^1.0.10",
+        "gulp-plumber": "^1.2.1",
+        "gulp-rename": "^1.4.0",
+        "gulp-uglify": "^3.0.2",
+        "jquery": "^3.4.1",
+        "js-cookie": "^2.2.1",
+        "node-notifier": "^5.4.3",
+        "npm": "^6.11.2",
+        "standard": "^12.0.1"
+    },
+    "author": "MoJ",
+    "standard": {
+        "globals": [
+            "jQuery",
+            "myAjax"
+        ]
+    },
+    "browserslist": [
+        "last 4 version",
+        "> 5%",
+        "maintained node versions",
+        "not dead",
+        "not ie <= 8"
+    ],
+    "devDependencies": {
+        "@babel/core": "^7.5.5",
+        "@babel/preset-env": "^7.5.5",
+        "cssnano": "^4.1.10",
+        "gulp-postcss": "^8.0.0",
+        "gulp-sass": "^4.0.2",
+        "gulp-standard": "^12.0.0",
+        "node-sass": "^4.12.0"
+    }
+}
