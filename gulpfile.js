@@ -47,14 +47,14 @@ standard = require('gulp-standard');
  */
 
 // SASS/CSS
-const scssSRC = ["inc/admin/src/css/*.scss"];
-const scssPubSRC = ["inc/pub/src/css/*.scss"];
+const scssSRC = ["includes/admin/src/css/*.scss"];
+const scssPubSRC = ["includes/pub/src/css/*.scss"];
 // formatting
-const cssASSETS = ["inc/assets/css/*.css"];
+const cssASSETS = ["includes/assets/css/*.css"];
 
 // JS
-const jsSRC = ["inc/admin/src/js/**.js"];
-const jsPubSRC = ["inc/pub/src/js/**.js"];
+const jsSRC = ["includes/admin/src/js/**.js"];
+const jsPubSRC = ["includes/pub/src/js/**.js"];
 
 // tasks
 
@@ -67,7 +67,7 @@ function css() {
       })
     )
     .pipe(concat("cookie-compliance-for-wordpress-admin.css"))
-    .pipe(dest("inc/assets/css"));
+    .pipe(dest("includes/assets/css"));
 }
 
 function cssPub() {
@@ -79,7 +79,7 @@ function cssPub() {
       })
     )
     .pipe(concat("cookie-compliance-for-wordpress.css"))
-    .pipe(dest("inc/assets/css"));
+    .pipe(dest("includes/assets/css"));
 }
 
 function js() {
@@ -138,11 +138,11 @@ function formatCSS() {
     .pipe(rename({
       suffix: ".min"
     }))
-    .pipe(dest("inc/assets/css"));
+    .pipe(dest("includes/assets/css"));
 }
 
 function clean() {
-  return del(["inc/assets/css/*", "inc/assets/js/*"]);
+  return del(["includes/assets/css/*", "inc/assets/js/*"]);
 }
 
 function watchFiles() {

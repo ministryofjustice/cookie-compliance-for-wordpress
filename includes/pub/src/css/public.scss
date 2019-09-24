@@ -1,11 +1,56 @@
 @import "node_modules/govuk-frontend/govuk/all";
 
+.govuk-body {
+    font-size: inherit;
+}
+
 .c-cookie-banner {
     background-color: #ffffff;
     padding: 20px 0;
     box-sizing: border-box;
-    border:3px solid black;
+    border: 3px solid black;
 }
+
+.govuk-button {
+    font-size: inherit;
+    border-color: #00823b;
+    color: #00692f;
+    background-color: #ffffff;
+    margin-bottom: inherit;
+}
+
+.govuk-button:active,
+.govuk-button:link,
+.govuk-button:visited {
+    color: #00692f;
+    text-decoration: none;
+}
+
+.govuk-button {
+    color: #00692f;
+    text-decoration: none;
+    box-shadow: none;
+
+    &:hover {
+        color: #00692f;
+        background-color: #f8f8f8;
+    }
+
+    &:active {
+        border-color: #00823b;
+    }
+
+    &:link {
+        border-color: #00823b;
+    }
+
+    &:visited {
+        border-color: #00823b;
+        background-color: #f8f8f8;
+    }
+}
+
+
 
 .c-button--secondary {
     padding: 8px 10px;
@@ -19,20 +64,20 @@
         color: #00692f;
         background-color: #f8f8f8;
         text-decoration: none;
-        }
+    }
 
     &:visited {
         color: #00692f;
     }
 }
 
-.c-cookie-banner__button, 
+.c-cookie-banner__button,
 .c-cookie-banner__buttons {
-    display: inline-block;
+    display: inline;
 }
 
 .c-cookie-banner__message {
-    display: inline;
+    display: block;
     color: #00823b;
     margin-right: 12px;
 }
@@ -46,13 +91,4 @@
 
 .govuk-radios__item {
     display: inline-block;
-}
-
-.govuk-button {
-    font-size: inherit;
-    margin-bottom: inherit;
-}
-
-.govuk-body {
-    font-size: inherit;
 }
