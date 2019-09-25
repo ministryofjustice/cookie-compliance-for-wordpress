@@ -40,4 +40,4 @@ This plugin uses OOP PHP and Namespaces (PSR-4 Autoloader).
 
 To add new functionality/new classes, first add your class to the service register array in `/includes/init.php` and then create a corresponding .php file for this class. 
 
-If functionality is javascript based, this plugin uses the JavaScript Object Literal pattern to encapsulate functions into modules. Edit the JS file in the `src` folder and that will get compiled into the `assets` folder. 
+If functionality is javascript based, this plugin uses the JavaScript Object Literal pattern to encapsulate functions into modules. Edit the JS file in the `src` folder and that will get compiled into the `assets` folder.
