@@ -30,12 +30,6 @@
 				getCookie: function (name) {
 					var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
 					return v ? v[2] : null;
-				},
-				gaRegEx: function () {
-					var page = $('html').text();
-					var gTagManagerID = /GTM-[a-zA-Z0-9]+/g;
-					var foundID = page.match(gTagManagerID);
-					console.log(foundID[0])
 				}
 			};
 
