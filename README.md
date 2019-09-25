@@ -12,10 +12,6 @@ Core Wordpress plugns are considered essential to the functioning of the site so
 Rasie issues via 
 <a href="https://github.com/ministryofjustice/cookie-compliance-for-wordpress/issues">https://github.com/ministryofjustice/cookie-compliance-for-wordpress/issues</a>
 
-## Security
-
-Security related issues contact <a mailto="wordpress@justice.gov.uk">us</a>
-
 ## Installation
 
 Download this repository, unzip and copy the folder into your Wordpress plugin file directory.
