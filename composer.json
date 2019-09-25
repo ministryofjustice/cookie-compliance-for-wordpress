@@ -11,5 +11,9 @@
         "psr-4": {
             "CCFW\\": "./includes"
         }
-    }
+    },
+    "authors": [{
+        "name": "Minstry of Justice",
+        "email": "wordpress@digital.justice.gov.uk"
+    }]
 }
