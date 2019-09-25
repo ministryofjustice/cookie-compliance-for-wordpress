@@ -1,11 +1,15 @@
 {
     "name": "ministryofjustice/cookie-compliance-for-wordpress",
-    "description": "WP Cookie Compliance plugin",
-    "type": "project",
+    "description": "WP plugin that presents visitor with a cookie consent banner and opt-out setting page.",
     "license": "MIT",
     "minimum-stability": "dev",
-    "require": {},
+    "type": "wordpress-plugin",
+    "require": {
+        "composer/installers": "^1.0"
+    },
     "autoload": {
-        "psr-4":{ "CCFW\\": "./includes" }
+        "psr-4": {
+            "CCFW\\": "./includes"
+        }
     }
 }
