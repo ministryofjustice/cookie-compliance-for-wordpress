@@ -22,7 +22,11 @@ You will need to have a working version of Wordpress to run this plugin and runn
 
 ## Coding guidelines
 
-This plugin follows standards set by the Wordpress organisation. https://codex.wordpress.org/Writing_a_Plugin. Further this plugin, when possible follows the PHP Framework Interop Group's standards. http://www.php-fig.org/
+This plugin follows
+
+* Standards set by the Wordpress organisation https://codex.wordpress.org/Writing_a_Plugin. 
+* PHP Framework Interop Group's standards http://www.php-fig.org/
+* JS Standard https://standardjs.com/rules.html
 
 ## Developer notes
 
@@ -41,3 +45,7 @@ This plugin uses OOP PHP and Namespaces (PSR-4 Autoloader).
 To add new functionality/new classes, first add your class to the service register array in `/includes/init.php` and then create a corresponding .php file for this class. 
 
 If functionality is javascript based, this plugin uses the JavaScript Object Literal pattern to encapsulate functions into modules. Edit the JS file in the `src` folder and that will get compiled into the `assets` folder.
+
+## Testing
+
+Javascripts used in this plugin follow the JS Standard format (JS Standard https://standardjs.com/rules.html). Not writing JS in this format, or JS package issues will throw linting errors via GitHub Actions and the deploy will fail.
