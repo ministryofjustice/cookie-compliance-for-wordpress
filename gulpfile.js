@@ -12,7 +12,7 @@ If everything installs correctly, you will have several Gulp commands available,
 `gulp build` = compiles the assest on command then stops
 `gulp resync` = sync WP theme folders with the Docker environment
 
-If issues installing try 
+If issues installing try
 `rm -rf node_modules/` and `rm package-lock.json` then run `sudo npm i --unsafe-perm`
 The --unsafe-perm flag ignores some issues caused by running in root (locally)
 */
@@ -26,20 +26,18 @@ const {
   parallel,
   series,
   watch
-} = require("gulp");
+} = require('gulp')
 
-const sass = require("gulp-sass");
-uglify = require("gulp-uglify");
-rename = require("gulp-rename");
-notifier = require("node-notifier");
-csso = require("gulp-csso");
-cssnano = require("cssnano");
-postcss = require("gulp-postcss");
-del = require("del");
-concat = require("gulp-concat");
-plumber = require("gulp-plumber");
-autoprefixer = require("autoprefixer");
-standard = require('gulp-standard');
+const sass = require('gulp-sass')
+const uglify = require('gulp-uglify')
+const rename = require('gulp-rename')
+const notifier = require('node-notifier')
+const csso = require('gulp-csso')
+const del = require('del')
+const concat = require('gulp-concat')
+const plumber = require('gulp-plumber')
+const standard = require('gulp-standard')
+const cleanCSS = require('gulp-clean-css')
 
 /* Source Gulp glob vars
  * Be careful on source order, make sure to follow
@@ -47,42 +45,42 @@ standard = require('gulp-standard');
  */
 
 // SASS/CSS
-const scssSRC = ["includes/admin/src/css/*.scss"];
-const scssPubSRC = ["includes/pub/src/css/*.scss"];
+const scssSRC = ['includes/admin/src/css/*.scss']
+const scssPubSRC = ['includes/pub/src/css/*.scss']
 // formatting
-const cssASSETS = ["includes/assets/css/*.css"];
+const cssASSETS = ['includes/assets/css/*.css']
 
 // JS
-const jsSRC = ["includes/admin/src/js/**.js"];
-const jsPubSRC = ["includes/pub/src/js/**.js"];
+const jsSRC = ['includes/admin/src/js/**.js']
+const jsPubSRC = ['includes/pub/src/js/**.js']
 
 // tasks
 
-function css() {
+function css () {
   return src(scssSRC)
     .pipe(plumber())
     .pipe(
       sass({
-        includePaths: "node_modules"
+        includePaths: 'node_modules'
       })
     )
-    .pipe(concat("cookie-compliance-for-wordpress-admin.css"))
-    .pipe(dest("includes/assets/css"));
+    .pipe(concat('cookie-compliance-for-wordpress-admin.css'))
+    .pipe(dest('includes/assets/css'))
 }
 
-function cssPub() {
+function cssPub () {
   return src(scssPubSRC)
     .pipe(plumber())
     .pipe(
       sass({
-        includePaths: "node_modules"
+        includePaths: 'node_modules'
       })
     )
-    .pipe(concat("cookie-compliance-for-wordpress.css"))
-    .pipe(dest("includes/assets/css"));
+    .pipe(concat('cookie-compliance-for-wordpress.css'))
+    .pipe(dest('includes/assets/css'))
 }
 
-function js() {
+function js () {
   return src(jsSRC)
     .pipe(plumber())
     .pipe(standard())
@@ -90,22 +88,22 @@ function js() {
       breakOnError: true,
       quiet: true
     }))
-    .pipe(concat("cookie-compliance-for-wordpress-admin.js"))
+    .pipe(concat('cookie-compliance-for-wordpress-admin.js'))
     .pipe(rename({
-      suffix: ".min"
+      suffix: '.min'
     }))
     .pipe(
       uglify({
         ie8: true,
         mangle: {
-          reserved: ["$", "jQuery"]
+          reserved: ['$', 'jQuery']
         }
       })
     )
-    .pipe(dest("inc/assets/js"));
+    .pipe(dest('includes/assets/js'))
 }
 
-function jsPub() {
+function jsPub () {
   return src(jsPubSRC)
     .pipe(plumber())
     .pipe(standard())
@@ -113,69 +111,69 @@ function jsPub() {
       breakOnError: true,
       quiet: true
     }))
-    .pipe(concat("cookie-compliance-for-wordpress.js"))
+    .pipe(concat('cookie-compliance-for-wordpress.js'))
     .pipe(rename({
-      suffix: ".min"
+      suffix: '.min'
     }))
     .pipe(
       uglify({
         ie8: true,
         mangle: {
-          reserved: ["$", "jQuery"]
+          reserved: ['$', 'jQuery']
         }
       })
     )
-    .pipe(dest("inc/assets/js"));
+    .pipe(dest('includes/assets/js'))
 }
 
 // format final CSS file to spec
 
-function formatCSS() {
+function formatCSS () {
   return src(cssASSETS)
     .pipe(plumber())
     .pipe(csso())
-    .pipe(postcss())
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
     .pipe(rename({
-      suffix: ".min"
+      suffix: '.min'
     }))
-    .pipe(dest("includes/assets/css"));
+    .pipe(dest('includes/assets/css'))
 }
 
-function clean() {
-  return del(["includes/assets/css/*", "inc/assets/js/*"]);
+function clean () {
+  return del(['includes/assets/css/*', 'includes/assets/js/*'])
 }
 
-function watchFiles() {
+function watchFiles () {
   // watch and process files in order
-  watch(scssSRC, series([clean, css, formatCSS]));
-  watch(scssPubSRC, series([clean, cssPub, formatCSS]));
-  watch(jsSRC, series([js]));
-  watch(jsPubSRC, series([jsPub]));
+  watch(scssSRC, series([clean, css, formatCSS]))
+  watch(scssPubSRC, series([clean, cssPub, formatCSS]))
+  watch(jsSRC, series([js]))
+  watch(jsPubSRC, series([jsPub]))
 
   notifier.notify({
-    title: "Gulp running",
-    message: "(•_•) watching plugin asset files"
-  });
+    title: 'Gulp running',
+    message: '(•_•) watching plugin asset files'
+  })
 }
 
 // consolidate two main functions (watching and building) into variables
 
-let watcher = parallel(watchFiles);
-let build = series([clean, css, cssPub, formatCSS, js, jsPub]);
+let watcher = parallel(watchFiles)
+let build = series([clean, css, cssPub, formatCSS, js, jsPub])
 
 // expose functions
 
-exports.js = js;
-exports.cssPub = cssPub;
-exports.css = css;
-exports.clean = clean;
-exports.formatCSS = formatCSS;
-exports.build = build;
+exports.js = js
+exports.cssPub = cssPub
+exports.css = css
+exports.clean = clean
+exports.formatCSS = formatCSS
+exports.build = build
 
 /*
  * allow the running of Gulp tasks via cmd
  * run `gulp --tasks` to view task structure
  */
-task("default", watcher);
-task("watch", watcher);
-task("build", build);
+task('default', watcher)
+task('watch', watcher)
+task('build', build)
