@@ -9,11 +9,16 @@ class ComposerStaticInit6de5904d02adcc89a80e07529827df6b
     public static $prefixLengthsPsr4 = array (
         'C' => 
         array (
+            'Composer\\Installers\\' => 20,
             'CCFW\\' => 5,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Composer\\Installers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
+        ),
         'CCFW\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
