@@ -1,2 +1,8 @@
 .DS_Store
 node_modules
+
+vendor
+
+# keep these for autoloading
+!vendor/composer
+!vendor/autoload.php
