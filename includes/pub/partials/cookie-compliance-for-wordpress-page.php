@@ -60,7 +60,7 @@ get_header();
 					<div class="govuk-radios__item">
 
 						<input class="govuk-radios__input" id="ga-yes" name="gAnalytics" type="radio" value="" checked>
-						<label class="govuk-label govuk-radios__label" for="">
+						<label class="govuk-label govuk-radios__label" for="ga-yes">
 							Yes
 						</label>
 					</div>
@@ -68,7 +68,7 @@ get_header();
 					<div class="govuk-radios__item">
 
 						<input class="govuk-radios__input" id="ga-no" name="gAnalytics" type="radio" value="">
-						<label class="govuk-label govuk-radios__label" for="">
+						<label class="govuk-label govuk-radios__label" for="ga-no">
 							No
 						</label>
 					</div>
@@ -83,7 +83,6 @@ get_header();
 						<li>allow for interactive website elements</li>
 					</ul>
 					<p>They always need to be on.</p>
-					</p>
 
 	</main>
 </div>
