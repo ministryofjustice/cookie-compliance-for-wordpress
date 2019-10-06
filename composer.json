@@ -10,7 +10,10 @@
     "autoload": {
         "psr-4": {
             "CCFW\\": "./includes"
-        }
+        },
+        "classmap": [
+            "includes/"
+        ]
     },
     "authors": [{
         "name": "Minstry of Justice",
