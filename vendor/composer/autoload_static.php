@@ -25,11 +25,23 @@ class ComposerStaticInit6de5904d02adcc89a80e07529827df6b
         ),
     );
 
+    public static $classMap = array (
+        'CCFW\\Activate' => __DIR__ . '/../..' . '/includes/activate.php',
+        'CCFW\\Admin\\Admin' => __DIR__ . '/../..' . '/includes/admin/admin.php',
+        'CCFW\\Admin\\Enqueue' => __DIR__ . '/../..' . '/includes/admin/enqueue.php',
+        'CCFW\\Controller' => __DIR__ . '/../..' . '/includes/controller.php',
+        'CCFW\\Deactivate' => __DIR__ . '/../..' . '/includes/deactivate.php',
+        'CCFW\\Init' => __DIR__ . '/../..' . '/includes/init.php',
+        'CCFW\\Pub\\Enqueue' => __DIR__ . '/../..' . '/includes/pub/enqueue.php',
+        'CCFW\\Pub\\Pub' => __DIR__ . '/../..' . '/includes/pub/pub.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit6de5904d02adcc89a80e07529827df6b::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit6de5904d02adcc89a80e07529827df6b::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit6de5904d02adcc89a80e07529827df6b::$classMap;
 
         }, null, ClassLoader::class);
     }
