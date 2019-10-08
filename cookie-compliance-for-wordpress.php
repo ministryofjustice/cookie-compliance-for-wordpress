@@ -1,7 +1,7 @@
 <?php
 /**
  * @link              https://github.com/ministryofjustice/cookie-compliance-for-wordpress
- * @since             12.0.0
+ * @since             1.0.0
  * @package           cookie-compliance-for-wordpress
  *
  * Plugin Name:       Cookie Compliance for WordPress
