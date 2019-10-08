@@ -1,92 +1,378 @@
-@import "node_modules/govuk-frontend/govuk/all";
+/**
+*
+* Cookie Compliance For Wordpress styles
+* Based off of Gov.uk Styling
+*
+**/
 
-.govuk-body {
-    font-size: inherit;
-}
+// =========================================================
+// Banner
+// =========================================================
 
-.c-cookie-banner {
-    background-color: #ffffff;
-    padding: 20px 0;
-    box-sizing: border-box;
-    border: 3px solid black;
-}
+#ccfw-page-banner-container {
+    // normalise CSS
+    font-family: inherit;
+    /* 1 */
+    font-size: 100%;
+    /* 1 */
+    line-height: 1.15;
+    /* 1 */
+    margin: 0;
+    /* 2 */
 
-.govuk-button {
-    font-size: inherit;
-    border-color: #00823b;
-    color: #00692f;
-    background-color: #ffffff;
-    margin-bottom: inherit;
-}
-
-.govuk-button:active,
-.govuk-button:link,
-.govuk-button:visited {
-    color: #00692f;
-    text-decoration: none;
-}
-
-.govuk-button {
-    color: #00692f;
-    text-decoration: none;
-    box-shadow: none;
-
-    &:hover {
-        color: #00692f;
-        background-color: #f8f8f8;
-    }
-
-    &:active {
-        border-color: #00823b;
-    }
-
-    &:link {
-        border-color: #00823b;
-    }
-
-    &:visited {
-        border-color: #00823b;
-        background-color: #f8f8f8;
-    }
-}
-
-.c-button--secondary {
-    padding: 8px 10px;
-    border-color: #00823b;
-    color: #00823b;
-    background-color: #ffffff;
-    box-shadow: none;
-
-    &:hover {
-        border-color: #00692f;
-        color: #00692f;
-        background-color: #f8f8f8;
-        text-decoration: none;
-    }
-
-    &:visited {
-        color: #00692f;
-    }
-}
-
-.c-cookie-banner__button,
-.c-cookie-banner__buttons {
-    display: inline;
-}
-
-.c-cookie-banner__message {
+    width: 100%;
     display: block;
-    color: #00823b;
+    border: 3px solid black;
+    background-color: #ffffff;
+    padding: 30px 10px;
+}
+
+.ccfw-banner {
+    &__wrapper {
+        color: #00823b;
+        font-size: inherit;
+        box-sizing: border-box;
+        margin: 0 auto;
+        max-width: 960px;
+    }
+}
+
+.ccfw-banner__message {
+    display: block;
     margin-right: 12px;
 }
 
-.c-button--inline {
-    display: inline-block;
-    width: auto;
-    vertical-align: baseline;
-    margin-right: 10px;
+.ccfw-banner-button__wrapper {
+    a {
+        color: #00823b;
+    }
+
+    button {
+        // normalise button
+        border: none;
+        background: #ffffff;
+        padding: 0;
+
+        color: #00823b;
+    }
+
+    &:hover,
+    :link,
+    :active,
+    :visited {
+        color: #00823b;
+        background: #ffffff;
+        text-decoration: none;
+    }
 }
 
-.govuk-radios__item {
+.ccfw-banner-button {
+    padding: 6px;
+    border: 2px solid #00823b;
+    display: inline;
+
+    &:nth-child(2n) {
+        margin-left: 8px;
+    }
+}
+
+// =========================================================
+// Settings page
+// =========================================================
+
+#ccfw-settings-page-container {
+    display: block;
+    width: 100%;
+}
+
+.ccfw-settings-page {
+    &__wrapper {
+        margin: 0 auto;
+        max-width: 960px;
+    }
+
+    &__row {
+        padding: 0 10px;
+    }
+}
+
+// =========================================================
+// Radio button styling imported from Gov.uk
+// =========================================================
+
+.ccfw-radios__item {
+    font-family: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+    display: block;
+    position: relative;
+    min-height: 40px;
+    margin-bottom: 10px;
+    padding-left: 40px;
+    clear: left
+}
+
+@media print {
+    .ccfw-radios__item {
+        font-family: sans-serif
+    }
+}
+
+@media (min-width: 40.0625em) {
+    .ccfw-radios__item {
+        font-size: 19px;
+        font-size: 1.1875rem;
+        line-height: 1.31579
+    }
+}
+
+@media print {
+    .ccfw-radios__item {
+        font-size: 14pt;
+        line-height: 1.15
+    }
+}
+
+.ccfw-radios__item:last-child,
+.ccfw-radios__item:last-of-type {
+    margin-bottom: 0
+}
+
+.ccfw-radios__input {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    top: -2px;
+    left: -2px;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    opacity: 0
+}
+
+.ccfw-radios__label {
     display: inline-block;
+    margin-bottom: 0;
+    padding: 8px 15px 5px;
+    cursor: pointer;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation
+}
+
+.ccfw-radios__label::before {
+    content: "";
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    background: transparent
+}
+
+.ccfw-radios__label::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 0;
+    height: 0;
+    border: 10px solid currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    background: currentColor
+}
+
+.ccfw-radios__hint {
+    display: block;
+    padding-right: 15px;
+    padding-left: 15px
+}
+
+.ccfw-radios__input:focus+.ccfw-radios__label::before {
+    border-width: 4px;
+    -webkit-box-shadow: 0 0 0 4px #fd0;
+    box-shadow: 0 0 0 4px #fd0
+}
+
+.ccfw-radios__input:checked+.ccfw-radios__label::after {
+    opacity: 1
+}
+
+.ccfw-radios__input:disabled,
+.ccfw-radios__input:disabled+.ccfw-radios__label {
+    cursor: default
+}
+
+.ccfw-radios__input:disabled+.ccfw-radios__label {
+    opacity: .5
+}
+
+@media (min-width: 40.0625em) {
+    .ccfw-radios--inline:after {
+        content: "";
+        display: block;
+        clear: both
+    }
+
+    .ccfw-radios--inline .ccfw-radios__item {
+        margin-right: 20px;
+        float: left;
+        clear: none
+    }
+}
+
+.ccfw-radios--inline.ccfw-radios--conditional .ccfw-radios__item {
+    margin-right: 0;
+    float: none
+}
+
+.ccfw-radios__divider {
+    font-family: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #0b0c0c;
+    width: 40px;
+    margin-bottom: 10px;
+    text-align: center
+}
+
+@media print {
+    .ccfw-radios__divider {
+        font-family: sans-serif
+    }
+}
+
+@media (min-width: 40.0625em) {
+    .ccfw-radios__divider {
+        font-size: 19px;
+        font-size: 1.1875rem;
+        line-height: 1.31579
+    }
+}
+
+@media print {
+    .ccfw-radios__divider {
+        font-size: 14pt;
+        line-height: 1.15
+    }
+}
+
+@media print {
+    .ccfw-radios__divider {
+        color: #000
+    }
+}
+
+.ccfw-radios__conditional {
+    margin-bottom: 15px;
+    margin-left: 18px;
+    padding-left: 33px;
+    border-left: 4px solid #b1b4b6
+}
+
+@media (min-width: 40.0625em) {
+    .ccfw-radios__conditional {
+        margin-bottom: 20px
+    }
+}
+
+.js-enabled .ccfw-radios__conditional--hidden {
+    display: none
+}
+
+.ccfw-radios__conditional>:last-child {
+    margin-bottom: 0
+}
+
+.ccfw-radios--small .ccfw-radios__item {
+    min-height: 0;
+    margin-bottom: 0;
+    padding-left: 34px;
+    float: left
+}
+
+.ccfw-radios--small .ccfw-radios__item:after {
+    content: "";
+    display: block;
+    clear: both
+}
+
+.ccfw-radios--small .ccfw-radios__input {
+    left: -10px
+}
+
+.ccfw-radios--small .ccfw-radios__label {
+    margin-top: -2px;
+    padding: 13px 15px 13px 1px;
+    float: left
+}
+
+@media (min-width: 40.0625em) {
+    .ccfw-radios--small .ccfw-radios__label {
+        padding: 11px 15px 10px 1px
+    }
+}
+
+.ccfw-radios--small .ccfw-radios__label::before {
+    top: 8px;
+    width: 24px;
+    height: 24px
+}
+
+.ccfw-radios--small .ccfw-radios__label::after {
+    top: 15px;
+    left: 7px;
+    border-width: 5px
+}
+
+.ccfw-radios--small .ccfw-radios__hint {
+    padding: 0;
+    clear: both;
+    pointer-events: none
+}
+
+.ccfw-radios--small .ccfw-radios__conditional {
+    margin-left: 10px;
+    padding-left: 20px;
+    clear: both
+}
+
+.ccfw-radios--small .ccfw-radios__divider {
+    width: 24px;
+    margin-bottom: 5px
+}
+
+.ccfw-radios--small .ccfw-radios__item:hover .ccfw-radios__input:not(:disabled)+.ccfw-radios__label::before {
+    -webkit-box-shadow: 0 0 0 10px #b1b4b6;
+    box-shadow: 0 0 0 10px #b1b4b6
+}
+
+.ccfw-radios--small .ccfw-radios__item:hover .ccfw-radios__input:focus+.ccfw-radios__label::before {
+    -webkit-box-shadow: 0 0 0 4px #fd0, 0 0 0 10px #b1b4b6;
+    box-shadow: 0 0 0 4px #fd0, 0 0 0 10px #b1b4b6
+}
+
+@media (hover: none),
+(pointer: coarse) {
+    .ccfw-radios--small .ccfw-radios__item:hover .ccfw-radios__input:not(:disabled)+.ccfw-radios__label::before {
+        -webkit-box-shadow: initial;
+        box-shadow: initial
+    }
+
+    .ccfw-radios--small .ccfw-radios__item:hover .ccfw-radios__input:focus+.ccfw-radios__label::before {
+        -webkit-box-shadow: 0 0 0 4px #fd0;
+        box-shadow: 0 0 0 4px #fd0
+    }
 }

@@ -10,7 +10,7 @@
         this.bindEvents()
       },
       cacheDom: function () {
-        this.$el = $('#global-cookie-message')
+        this.$el = $('#ccfw-page-banner-container')
         this.$buttonAccept = this.$el.find('button')
       },
       bindEvents: function () {
@@ -39,7 +39,7 @@
         this.disableEnableGA()
       },
       cacheDom: function () {
-        this.$el = $('#ccfw-settings-page')
+        this.$el = $('#ccfw-settings-page-container')
         this.$googleYes = this.$el.find('#ga-yes')
         this.$googleNo = this.$el.find('#ga-no')
       },
