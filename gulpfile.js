@@ -140,15 +140,20 @@ function formatCSS () {
 }
 
 function clean () {
-  return del(['includes/assets/css/*', 'includes/assets/js/*'])
+  return del(['includes/assets/css/*'])
 }
+
+function cleanJS () {
+  return del(['includes/assets/js/*'])
+}
+
 
 function watchFiles () {
   // watch and process files in order
   watch(scssSRC, series([clean, css, formatCSS]))
   watch(scssPubSRC, series([clean, cssPub, formatCSS]))
-  watch(jsSRC, series([js]))
-  watch(jsPubSRC, series([jsPub]))
+  watch(jsSRC, series([cleanJS, js]))
+  watch(jsPubSRC, series([cleanJS, jsPub]))
 
   notifier.notify({
     title: 'Gulp running',

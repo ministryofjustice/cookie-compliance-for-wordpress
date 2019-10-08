@@ -1,7 +1,7 @@
 /**
 *
 * Cookie Compliance For Wordpress styles
-* Based off of Gov.uk Styling
+* Based off of Gov.uk styling
 *
 **/
 
@@ -19,10 +19,11 @@
     /* 1 */
     margin: 0;
     /* 2 */
+    font-weight: 300;
 
     width: 100%;
     display: block;
-    border: 3px solid black;
+    border: 2px solid black;
     background-color: #ffffff;
     padding: 30px 10px;
 }
@@ -30,7 +31,8 @@
 .ccfw-banner {
     &__wrapper {
         color: #00823b;
-        font-size: inherit;
+        font-size: 19px;
+        line-height: 1.3157894737;
         box-sizing: border-box;
         margin: 0 auto;
         max-width: 960px;
@@ -45,15 +47,27 @@
 .ccfw-banner-button__wrapper {
     a {
         color: #00823b;
+        padding: 4px 8px;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     button {
         // normalise button
+        font-size: 19px;
+        font-family: inherit;
+        font-weight: 300;
         border: none;
         background: #ffffff;
-        padding: 0;
-
+        padding: 2px 8px;
+        cursor: pointer;
         color: #00823b;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     &:hover,
@@ -63,6 +77,9 @@
         color: #00823b;
         background: #ffffff;
         text-decoration: none;
+        cursor: pointer;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation
     }
 }
 

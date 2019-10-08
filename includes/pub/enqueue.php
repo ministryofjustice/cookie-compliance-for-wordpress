@@ -16,7 +16,7 @@ use \CCFW\Controller;
 class Enqueue extends Controller {
 
 	public function register() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 11 );
 	}
 
 	public function enqueue() {

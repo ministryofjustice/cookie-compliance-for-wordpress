@@ -21,13 +21,13 @@ filter_var( $domainName, FILTER_SANITIZE_URL )
 			data collected is anonymised. By continuing to use this site, you agree to our use of cookies.</p>
 		<div class="ccfw-banner-button__wrapper">
 			<div class="ccfw-banner-button">
-				<button id="cookie-accept" class="c-button govuk-button c-button--inline" type="submit">
+				<button type="submit">
 					<?php _e( 'Accept cookies', 'cookie-compliance-for-wordpress' ); ?>
 				</button>
 			</div>
 			<div class="ccfw-banner-button">
 				<a role="button" href="/ccfw-cookie-policy">
-					<?php _e( 'Cookie settings','cookie-compliance-for-wordpress' ); ?>
+					<?php _e( 'Cookie settings', 'cookie-compliance-for-wordpress' ); ?>
 				</a>
 			</div>
 		</div>
