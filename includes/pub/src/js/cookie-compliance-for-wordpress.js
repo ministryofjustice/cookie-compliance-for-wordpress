@@ -1,7 +1,7 @@
 (function ($) {
   'use strict'
 
-  // This enables you to define handlers for when the DOM is ready
+  // This enables you to define handlers for when the DOM is ready.
   $(function () {
     var cookieBanner = {
 
