@@ -31,7 +31,7 @@ class Pub extends Controller {
 		if ( $request_URI !== '/ccfw-cookie-policy' ) {
 			require_once $this->plugin_path . 'includes/pub/partials/cookie-compliance-for-wordpress-banner.php';
 		}
-		
+
 	}
 
 	public function ccfw_query_vars( $query_vars ) {
