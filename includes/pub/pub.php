@@ -26,16 +26,12 @@ class Pub extends Controller {
 
 	public function cookie_compliance_banner() {
 
-		// cookie set onclick in jQuery file get cookie if exists
-		$cookieSet   = isset( $_COOKIE['ccfw_cookie_policy'] );
 		$request_URI = $_SERVER['REQUEST_URI'];
 
-		// if the cookie has not been set and you're not on the policy page, show banner
-		if ( $cookieSet === false ) {
-			if ( $request_URI !== '/ccfw-cookie-policy' ) {
-				require_once $this->plugin_path . 'includes/pub/partials/cookie-compliance-for-wordpress-banner.php';
-			}
+		if ( $request_URI !== '/ccfw-cookie-policy' ) {
+			require_once $this->plugin_path . 'includes/pub/partials/cookie-compliance-for-wordpress-banner.php';
 		}
+		
 	}
 
 	public function ccfw_query_vars( $query_vars ) {
