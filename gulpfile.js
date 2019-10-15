@@ -147,7 +147,6 @@ function cleanJS () {
   return del(['includes/assets/js/*'])
 }
 
-
 function watchFiles () {
   // watch and process files in order
   watch(scssSRC, series([clean, css, formatCSS]))
