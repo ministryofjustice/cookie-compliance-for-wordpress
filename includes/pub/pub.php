@@ -31,7 +31,6 @@ class Pub extends Controller {
 		if ( $request_URI !== '/ccfw-cookie-policy' ) {
 			require_once $this->plugin_path . 'includes/pub/partials/cookie-compliance-for-wordpress-banner.php';
 		}
-
 	}
 
 	public function ccfw_query_vars( $query_vars ) {
@@ -40,6 +39,7 @@ class Pub extends Controller {
 	}
 
 	public function cookie_policy_page( &$wp ) {
+
 		if ( array_key_exists( 'ccfw_cookie_policy', $wp->query_vars ) ) {
 			require_once $this->plugin_path . 'includes/pub/partials/cookie-compliance-for-wordpress-page.php';
 			exit();
