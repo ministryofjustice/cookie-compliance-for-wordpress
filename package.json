@@ -26,7 +26,7 @@
     },
     "homepage": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress/#readme",
     "dependencies": {
-        "autoprefixer": "^9.6.1",
+        "autoprefixer": "^9.6.5",
         "del": "^3.0.0",
         "gulp": "^4.0.2",
         "gulp-babel": "^8.0.0",
@@ -40,7 +40,7 @@
         "jquery": "^3.4.1",
         "js-cookie": "^2.2.1",
         "node-notifier": "^5.4.3",
-        "npm": "^6.11.2",
+        "npm": "^6.12.0",
         "postcss-import": "^12.0.1",
         "postcss-preset-env": "^6.7.0",
         "standard": "^12.0.1"
@@ -61,8 +61,8 @@
         "not ie <= 8"
     ],
     "devDependencies": {
-        "@babel/core": "^7.5.5",
-        "@babel/preset-env": "^7.5.5",
+        "@babel/core": "^7.6.4",
+        "@babel/preset-env": "^7.6.3",
         "cssnano": "^4.1.10",
         "gulp-clean-css": "^4.2.0",
         "gulp-postcss": "^8.0.0",
