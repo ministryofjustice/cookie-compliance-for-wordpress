@@ -8,7 +8,7 @@
  * Plugin URI:        https://github.com/ministryofjustice/cookie-compliance-for-wordpress
  * Description:       Presents users with cookie compliance field when they first visit the website.
  * Version:           1.3.0
- * Requires at least: 5.3.2
+ * Requires at least: 5.2.3
  * Requires PHP:      7.0
  * Author:            Ministry of Justice
  * Author URI:        https://github.com/ministryofjustice
