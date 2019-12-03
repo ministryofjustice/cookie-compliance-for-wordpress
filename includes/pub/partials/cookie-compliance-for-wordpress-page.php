@@ -63,7 +63,7 @@ get_header();
 			</div>
 			
 			<h2>Strictly necessary cookies</h2>
-			<p>In some instances we may use WordPress cookes. These essential cookies do things like:</p>
+			<p>In some instances we may use WordPress cookies. These essential cookies do things like:</p>
 			<ul>
 				<li>remember the notifications you've seen so we do not show them to you again</li>
 				<li>allow for interactive website elements</li>
