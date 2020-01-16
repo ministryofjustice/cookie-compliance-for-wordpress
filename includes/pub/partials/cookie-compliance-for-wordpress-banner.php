@@ -11,7 +11,8 @@
  * @package    cookie-compliance-for-wordpress
  */
 $domainName = $_SERVER['SERVER_NAME'];
-filter_var( $domainName, FILTER_SANITIZE_URL )
+filter_var( $domainName, FILTER_SANITIZE_URL );
+$domainName = str_replace('www.', '', $domainName);
 ?>
 
 <div id="ccfw-page-banner-container">
@@ -19,7 +20,7 @@ filter_var( $domainName, FILTER_SANITIZE_URL )
         <span class="ccfw-banner__heading">Tell us whether you accept cookies</span>
 
         <p class="ccfw-banner__message">
-			<?php _e( 'We use cookies to collect information about how you use ' . strtoupper( $domainName ) . ' . 
+			<?php _e( 'We use cookies to <a href="/ccfw-cookie-policy">collect information</a> about how you use ' . strtoupper( $domainName ) . ' . 
 			We use this information to make the website work as well as possible and improve our digital services.', 'cookie-compliance-for-wordpress'); ?>
         </p>
 
@@ -35,6 +36,6 @@ filter_var( $domainName, FILTER_SANITIZE_URL )
                 </a>
             </div>
         </div>
-		
+
     </div>
 </div>
