@@ -1,4 +1,4 @@
-(function ($) {
+;(function ($) {
   'use strict'
 
   /**
@@ -48,7 +48,7 @@
     }
 
     /**
-     *  Top of page banner - JS that controls the display of the cookie banner at the top of the page
+     *  Top of page banner - controls the display of the cookie banner
      * */
     var cookieBanner = {
 

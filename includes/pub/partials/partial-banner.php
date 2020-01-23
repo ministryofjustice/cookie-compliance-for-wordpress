@@ -20,7 +20,7 @@ $domainName = str_replace('www.', '', $domainName);
         <span class="ccfw-banner__heading">Tell us whether you accept cookies</span>
 
         <p class="ccfw-banner__message">
-			<?php _e( 'We use cookies to <a href="/ccfw-cookie-policy">collect information</a> about how you use ' . strtoupper( $domainName ) . ' . 
+			<?php _e( 'We use cookies to <a href="/data-cookie-settings">collect information</a> about how you use ' . strtoupper( $domainName ) . ' . 
 			We use this information to make the website work as well as possible and improve our digital services.', 'cookie-compliance-for-wordpress'); ?>
         </p>
 
@@ -31,7 +31,7 @@ $domainName = str_replace('www.', '', $domainName);
                 </button>
             </div>
             <div class="ccfw-banner-button">
-                <a role="button" href="/ccfw-cookie-policy">
+                <a role="button" href="/data-cookie-settings">
                     <?php _e( 'Set cookie preferences', 'cookie-compliance-for-wordpress' ); ?>
                 </a>
             </div>
