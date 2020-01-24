@@ -30,7 +30,7 @@
   display: none; }
 
 .ccfw-banner__wrapper {
-  color: #00823b;
+  color: #005C2C;
   font-size: 19px;
   line-height: 1.3157894737;
   box-sizing: border-box;
@@ -48,11 +48,11 @@
   max-width: 680px;
   padding: 12px 0; }
   .ccfw-banner__message a {
-    color: #00823b;
+    color: #005C2C;
     text-decoration: underline; }
 
 .ccfw-banner-button__wrapper a {
-  color: #00823b;
+  color: #005C2C;
   padding: 4px 8px; }
   .ccfw-banner-button__wrapper a:hover {
     text-decoration: underline; }
@@ -65,7 +65,7 @@
   background: #f3f2f1;
   padding: 2px 8px;
   cursor: pointer;
-  color: #00823b; }
+  color: #005C2C; }
   .ccfw-banner-button__wrapper button:hover {
     text-decoration: underline; }
 
@@ -73,7 +73,7 @@
 .ccfw-banner-button__wrapper :link,
 .ccfw-banner-button__wrapper :active,
 .ccfw-banner-button__wrapper :visited {
-  color: #00823b;
+  color: #005C2C;
   text-decoration: none;
   cursor: pointer;
   -ms-touch-action: manipulation;
@@ -82,7 +82,7 @@
 .ccfw-banner-button {
   margin-top: 12px;
   padding: 6px;
-  border: 2px solid #00823b;
+  border: 2px solid #005C2C;
   background-color: #f3f2f1; }
   .ccfw-banner-button:nth-child(2n) {
     margin-left: 0; }

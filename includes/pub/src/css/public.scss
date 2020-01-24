@@ -76,7 +76,7 @@ $breakpoints: ('small': (min-width: 767px),
 .ccfw-banner {
 
     &__wrapper {
-        color: #00823b;
+        color: #005C2C;
         font-size: 19px;
         line-height: 1.3157894737;
         box-sizing: border-box;
@@ -98,14 +98,14 @@ $breakpoints: ('small': (min-width: 767px),
     padding: 12px 0;
 
     a {
-        color: #00823b;
+        color: #005C2C;
         text-decoration: underline;
     }
 }
 
 .ccfw-banner-button__wrapper {
     a {
-        color: #00823b;
+        color: #005C2C;
         padding: 4px 8px;
 
         &:hover {
@@ -122,7 +122,7 @@ $breakpoints: ('small': (min-width: 767px),
         background:#f3f2f1;
         padding: 2px 8px;
         cursor: pointer;
-        color: #00823b;
+        color: #005C2C;
 
         &:hover {
             text-decoration: underline;
@@ -133,7 +133,7 @@ $breakpoints: ('small': (min-width: 767px),
     :link,
     :active,
     :visited {
-        color: #00823b;
+        color: #005C2C;
         text-decoration: none;
         cursor: pointer;
         -ms-touch-action: manipulation;
@@ -144,7 +144,7 @@ $breakpoints: ('small': (min-width: 767px),
 .ccfw-banner-button {
     margin-top: 12px;
     padding: 6px;
-    border: 2px solid #00823b;
+    border: 2px solid #005C2C;
     background-color: #f3f2f1;
 
     &:nth-child(2n) {

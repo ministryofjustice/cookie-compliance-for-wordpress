@@ -28,7 +28,7 @@
           var x = '__storage_test__'
           storage.setItem(x, x)
           storage.removeItem(x)
-          return true
+          return false // temporary change to false to turn off local storage use as I wanted only cookies used
         } catch (e) {
           return false
         }
@@ -111,8 +111,8 @@
         this.$googleNo = this.$el.find('#ga-no')
       },
       bindEvents: function () {
-        this.$googleNo.on('click', this.setGACookieTrue.bind(this))
-        this.$googleYes.on('click', this.setGACookieFalse.bind(this))
+        this.$googleNo.on('click', this.setGACookieFalse.bind(this))
+        this.$googleYes.on('click', this.setGACookieTrue.bind(this))
       },
       setGACookieTrue: function () {
         if (utilities.storageAvailable('localStorage')) {
@@ -139,7 +139,7 @@
           var lStorage = this.localStorage.getItem('ccfwCookiePolicy')
         } else {
           // Older browser support < IE8
-          var cStorage = utilities.getCookieValue('ccfwCookiePolicy')
+          var cStorage = utilities.getCookie('ccfwCookiePolicy') || false
         }
 
         // return true or false depending on what was clicked
@@ -148,10 +148,10 @@
         // set CSS button to what was selected
         if (x === true) {
           x = true
-          this.$googleNo.prop('checked', true)
+          this.$googleYes.prop('checked', true)
         } else {
           x = false
-          this.$googleYes.prop('checked', true)
+          this.$googleNo.prop('checked', true)
         }
 
         // Set the Google Analytic method to true or false where x === true or false

@@ -11,6 +11,7 @@
  *
  * @package    cookie-compliance-for-wordpress
  */
+
 namespace CCFW\Pub;
 
 use \CCFW\Controller;
@@ -68,7 +69,7 @@ class Pub extends Controller
                     exit();
                 }
             default:
-            // no uri match
+            // no uri match.
             break;
         }
     }

@@ -47,8 +47,13 @@ get_header();
             // Google on/off toggle setting
             require_once $this->plugin_path . 'includes/pub/partials/components/c-google.php';
 
-            // Hotjar on/off toggle setting
-            require_once $this->plugin_path . 'includes/pub/partials/components/c-hotjar.php';
+            /** 
+             * set up so that toggling Google's dataLayer turns off both, in future activating this could allow togging
+             * Hotjar individually from Google
+             * Hotjar on/off toggle setting
+             **/
+            
+             // require_once $this->plugin_path . 'includes/pub/partials/components/c-hotjar.php';
 
             ?>
     </main>
