@@ -15,18 +15,18 @@
  * Required, load the WP environment ie header/footer as we are using a PHP page outside the WP loop - maybe this can be refactored better?
  * */
 require_once $_SERVER['DOCUMENT_ROOT'] . '/index.php';
-$matches = preg_grep( '/wp-blog-header.php/', get_included_files() );
+$matches = preg_grep('/wp-blog-header.php/', get_included_files());
 
-if ( ! empty( $matches ) ) {
-	$abspath = dirname( reset( $matches ) ) . '/';
-	require_once ABSPATH . 'wp-load.php';
+if (! empty($matches)) {
+    $abspath = dirname(reset($matches)) . '/';
+    require_once ABSPATH . 'wp-load.php';
 }
 
 /**
  * Strip off www from domain name for easier reading
- * */ 
+ * */
 $domainName = $_SERVER['SERVER_NAME'];
-filter_var( $domainName, FILTER_SANITIZE_URL );
+filter_var($domainName, FILTER_SANITIZE_URL);
 $domainName = str_replace('www.', '', $domainName);
 
 get_header();

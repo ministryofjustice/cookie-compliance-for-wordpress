@@ -13,15 +13,15 @@
 
  // required to load the wp header for use with custom external php - maybe this can be refactored better?
 require_once $_SERVER['DOCUMENT_ROOT'] . '/index.php';
-$matches = preg_grep( '/wp-blog-header.php/', get_included_files() );
+$matches = preg_grep('/wp-blog-header.php/', get_included_files());
 
-if ( ! empty( $matches ) ) {
-	$abspath = dirname( reset( $matches ) ) . '/';
-	require_once ABSPATH . 'wp-load.php';
+if (! empty($matches)) {
+    $abspath = dirname(reset($matches)) . '/';
+    require_once ABSPATH . 'wp-load.php';
 }
 
 $domainName = $_SERVER['SERVER_NAME'];
-filter_var( $domainName, FILTER_SANITIZE_URL );
+filter_var($domainName, FILTER_SANITIZE_URL);
 $domainName = str_replace('www.', '', $domainName);
 
 get_header();
@@ -30,8 +30,8 @@ get_header();
 <div id="ccfw-settings-page-container">
     <main class="ccfw-settings-page__wrapper">
         <div class="ccfw-settings-page__row">
-			<p>Return to <a href="/data-cookie-settings">cookie settings</a></p>
-			
+            <p>Return to <a href="/data-cookie-settings">cookie settings</a></p>
+            
             <h1>Cookie details</h1>
 
             <p>How this website uses cookies to improve the information we.</p>
@@ -54,31 +54,31 @@ get_header();
 
             <p>We use Google Analytics software to collect information about how you use this site. We do this to help
                 make sure we’re meeting the needs of users and to help us make improvements.</p>
-			
-			<div class="ccfw-settings-page__table">
-				<table>
-					<tbody>
-						<tr>
-							<td>Name</td>
-							<td>Purpose</td>
-							<td>Expires</td>
-						</tr>
-						<tr>
-							<td>__ga</td>
-							<td>This helps us count how many people visit the site by tracking if you’ve visited before</td>
-							<td>2 years</td>
-						</tr>
-						<tr>
-							<td>__gid</td>
-							<td>This helps us count how many people visit the site by tracking if you’ve visited
-								beforeGoogle Analytics stores information about</td>
-							<td>24 hrs</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+            
+            <div class="ccfw-settings-page__table">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>Purpose</td>
+                            <td>Expires</td>
+                        </tr>
+                        <tr>
+                            <td>__ga</td>
+                            <td>This helps us count how many people visit the site by tracking if you’ve visited before</td>
+                            <td>2 years</td>
+                        </tr>
+                        <tr>
+                            <td>__gid</td>
+                            <td>This helps us count how many people visit the site by tracking if you’ve visited
+                                beforeGoogle Analytics stores information about</td>
+                            <td>24 hrs</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-			<h2>Necessary cookies</h2>
+            <h2>Necessary cookies</h2>
             
             <p>In some instances we may use WordPress cookies. These essential cookies do things like:</p>
             

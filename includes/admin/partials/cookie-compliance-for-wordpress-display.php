@@ -10,6 +10,7 @@
  *
  * @package    cookie-compliance-for-wordpress
  */
+
 ?>
 
 <h1>Cookie Admin</h1>

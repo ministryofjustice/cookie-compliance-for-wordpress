@@ -9,19 +9,21 @@
  * @package    cookie-compliance-for-wordpress
  * @subpackage cookie-compliance-for-wordpress/admin
  */
+
 namespace CCFW\Admin;
 
 use \CCFW\Controller;
 
-class Enqueue extends Controller {
+class Enqueue extends Controller
+{
 
-	public function register() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
-	}
+    public function register()
+    {
+        add_action('admin_enqueue_scripts', array( $this, 'enqueue' ));
+    }
 
-	public function enqueue() {
-		wp_enqueue_style( 'CCFWPluginStyleAdmin', $this->plugin_url . 'includes/assets/css/cookie-compliance-for-wordpress-admin.min.css', 999 );
-	}
-
-
+    public function enqueue()
+    {
+        wp_enqueue_style('CCFWPluginStyleAdmin', $this->plugin_url . 'includes/assets/css/cookie-compliance-for-wordpress-admin.min.css', 999);
+    }
 }
