@@ -22,7 +22,6 @@ final class Init
     {
         return [
             Admin\Admin::class,
-            Admin\Enqueue::class,
             Pub\Pub::class,
             Pub\Enqueue::class,
         ];
