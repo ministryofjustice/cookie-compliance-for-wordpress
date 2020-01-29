@@ -34,13 +34,13 @@ get_header();
 
             <h1>Data and privacy</h1>
             
-            <p>View the <a href="/data-privacy-notice">privacy notice</a> on <?php echo $domainName; ?>.</p>
+            <p>View the <a href="/privacy-notice/">privacy notice</a> on <?php echo $domainName; ?>.</p>
             
             <h2>Cookie settings</h2>
             
             <p>Cookies are files saved on your phone, tablet or computer when you visit a website. We use cookies to
                 store information about how you use the <?php echo $domainName; ?> website, such as
-                the pages you visit.<a href="/data-cookie-details"> Find out more about how we use cookies</a>.</p>
+                the pages you visit.<a href="/cookies/"> Find out more about how we use cookies</a>.</p>
 
             <?php
             
@@ -56,6 +56,17 @@ get_header();
              // require_once $this->plugin_path . 'includes/pub/partials/components/c-hotjar.php';
 
             ?>
+
+            <h2>Necessary cookies</h2>
+
+            <p>In some instances we may use WordPress cookies. These essential cookies do things like:</p>
+
+            <ul>
+                <li>remember the notifications you've seen so we do not show them to you again</li>
+                <li>allow for interactive website elements</li>
+            </ul>
+
+            <p>They always need to be on.</p>
     </main>
 </div>
 

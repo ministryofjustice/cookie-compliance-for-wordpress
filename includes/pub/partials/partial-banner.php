@@ -21,7 +21,7 @@ $domainName = str_replace('www.', '', $domainName);
         <span class="ccfw-banner__heading">Tell us whether you accept cookies</span>
 
         <p class="ccfw-banner__message">
-            <?php _e('We use cookies to <a href="/data-privacy-notice">collect information</a> about how you use ' . strtoupper($domainName) . ' . 
+            <?php _e('We use cookies to <a href="/privacy-notice/">collect information</a> about how you use ' . strtoupper($domainName) . ' . 
 			We use this information to make the website work as well as possible and improve our digital services.', 'cookie-compliance-for-wordpress'); ?>
         </p>
 
