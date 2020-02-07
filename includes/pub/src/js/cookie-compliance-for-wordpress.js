@@ -66,10 +66,10 @@
             },
             setBannerDisplay: function () {
                 if (utilities.storageAvailable('localStorage')) {
-                    var getValueFromLocalStorage = this.localStorage.getItem('ccfwCookiePolicy')
+                    var getValueFromLocalStorage = this.localStorage.getItem('ccfwCookiePolicySaved')
                     var getValueFromLocalStorageBool = getValueFromLocalStorage || false
                 } else {
-                    var getValueFromCookie = utilities.getCookie('ccfwCookiePolicy')
+                    var getValueFromCookie = utilities.getCookie('ccfwCookiePolicySaved')
                     var getValueFromCookieBool = getValueFromCookie || false
                 }
 
@@ -85,10 +85,12 @@
             hideBanner: function () {
                 if (utilities.storageAvailable('localStorage')) {
                     this.localStorage.setItem('ccfwCookiePolicy', 'true')
+                    this.localStorage.setItem('ccfwCookiePolicySaved', 'true')
                     this.$el.hide()
                 } else {
                     this.$el.hide()
                     utilities.setCookie('ccfwCookiePolicy', 'true', 365)
+                    utilities.setCookie('ccfwCookiePolicySaved', 'true', 365)
                 }
             }
         }
@@ -98,9 +100,12 @@
         var cookiePageSettings = {
 
             init: function () {
-                this.cacheDom()
-                this.bindEvents()
-                this.disableEnableGA()
+                if ( $('#ccfw-settings-page-container').length ) {
+                    this.cacheDom()
+                    this.bindEvents()
+                    this.disableEnableGA()
+                    this.setPrevLink()
+                }
             },
             cacheDom: function () {
                 if (utilities.storageAvailable('localStorage')) {
@@ -109,10 +114,40 @@
                 this.$el = $('#ccfw-settings-page-container')
                 this.$googleYes = this.$el.find('#ga-yes')
                 this.$googleNo = this.$el.find('#ga-no')
+                this.$saveBtn = this.$el.find('#save-changes-btn')
+                this.$saveNtc = this.$el.find('#save-notice')
+                this.$prevLink = this.$el.find('#prev-link')
+            },
+            setPrevLink: function () {
+                var referrer = document.referrer
+                
+                if(referrer.length > 0) {
+                    this.$prevLink.attr("href", referrer)
+                }
             },
             bindEvents: function () {
-                this.$googleNo.on('click', this.setGACookieFalse.bind(this))
-                this.$googleYes.on('click', this.setGACookieTrue.bind(this))
+                this.$saveBtn.on('click', this.saveSettings.bind(this))
+            },
+            saveSettings: function () {
+
+                if(this.$googleYes.prop('checked')){
+                    this.setGACookieTrue()
+                }
+                else {
+                    this.setGACookieFalse()
+                }
+
+                if (utilities.storageAvailable('localStorage')) {
+                    this.localStorage.setItem('ccfwCookiePolicySaved', 'true')
+                } else {
+                    utilities.setCookie('ccfwCookiePolicySaved', 'true', 365)
+                }
+
+                this.$saveNtc.show()
+                $(document).scrollTop(this.$saveNtc.offset().top)
+                this.$saveNtc.focus()
+
+
             },
             setGACookieTrue: function () {
                 if (utilities.storageAvailable('localStorage')) {

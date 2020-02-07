@@ -32,6 +32,15 @@ get_header();
     <main class="ccfw-settings-page__wrapper">
         <div class="ccfw-settings-page__row">
 
+            <section id="save-notice" class="ccfw-settings-page__save-notice" aria-label="Notice" aria-live="polite" role="region">
+                <h2>Your cookie settings were saved</h2>
+
+                <a id="prev-link" class="ccfw-settings-page__prev-page" href="/" >
+                    Go back to the page you were looking at
+                </a>
+
+            </section>
+
             <h1>Data and privacy</h1>
             
             <p>View the <a href="/privacy-notice/">privacy notice</a> on <?php echo $domainName; ?>.</p>
@@ -41,6 +50,17 @@ get_header();
             <p>Cookies are files saved on your phone, tablet or computer when you visit a website. We use cookies to
                 store information about how you use the <?php echo $domainName; ?> website, such as
                 the pages you visit.<a href="/cookies/"> Find out more about how we use cookies</a>.</p>
+
+            <h2>Necessary cookies</h2>
+
+            <p>In some instances we may use WordPress cookies. These essential cookies do things like:</p>
+
+            <ul>
+                <li>remember the notifications you've seen so we do not show them to you again</li>
+                <li>allow for interactive website elements</li>
+            </ul>
+
+            <p>They always need to be on.</p>
 
             <?php
             
@@ -57,16 +77,11 @@ get_header();
 
             ?>
 
-            <h2>Necessary cookies</h2>
-
-            <p>In some instances we may use WordPress cookies. These essential cookies do things like:</p>
-
-            <ul>
-                <li>remember the notifications you've seen so we do not show them to you again</li>
-                <li>allow for interactive website elements</li>
-            </ul>
-
-            <p>They always need to be on.</p>
+            <div class="ccfw-settings-page__button-wrapper">
+                <div class="ccfw-settings-page__button">
+                    <button id="save-changes-btn" type="submit">Save changes</button>
+                </div>
+            </div>
     </main>
 </div>
 

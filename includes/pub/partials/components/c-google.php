@@ -5,7 +5,7 @@
  */
 
 ?>
-<h3>Google analytics and Hotjar</h3>
+<h2>Google Analytics and Hotjar</h2>
 <p>We use Google Analytics and Hotjar to measure how you use the website so we can improve it based on user needs.
     Google Analytics and Hotjar set cookies that store anonymised information about:
     <ul>
