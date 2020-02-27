@@ -20,11 +20,17 @@ class Enqueue extends Controller
     public function register()
     {
         add_action('wp_enqueue_scripts', array( $this, 'enqueue' ), 11);
+        add_action('admin_enqueue_scripts', array( $this, 'enqueueAdmin' ), 11);
     }
 
     public function enqueue()
     {
-        wp_enqueue_style('CCFWPluginStyle', $this->plugin_url . 'includes/assets/css/cookie-compliance-for-wordpress.min.css');
-        wp_enqueue_script('CCFWPluginScript', $this->plugin_url . 'includes/assets/js/cookie-compliance-for-wordpress.min.js', array( 'jquery' ), '1.0.0', false);
+        wp_enqueue_style('CCFWPluginStyle', $this->plugin_url . 'dist/css/cookie-compliance-for-wordpress.css');
+        wp_enqueue_script('CCFWPluginScript', $this->plugin_url . 'dist/js/cookie-compliance-for-wordpress.js', array( 'jquery' ), '1.0.0', false);
+    }
+
+    public function enqueueAdmin()
+    {
+        wp_enqueue_style('CCFWPluginStyleAdmin', $this->plugin_url . 'dist/css/admin-cookie-compliance-for-wordpress.css');
     }
 }
