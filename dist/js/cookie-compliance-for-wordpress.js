@@ -111,8 +111,8 @@
 
   $(function () {
     /**
-     *  Utilities - helper functions for shared tasks
-     * */
+       *  Utilities - helper functions for shared tasks
+       * */
     var utilities = {
       init: function init() {
         this.storageAvailable();
@@ -144,8 +144,8 @@
       }
     };
     /**
-     *  Top of page banner - controls the display of the cookie banner
-     * */
+       *  Top of page banner - controls the display of the cookie banner
+       * */
 
     var cookieBanner = {
       init: function init() {
@@ -192,8 +192,8 @@
       }
     };
     /**
-     *  Cookie policy setting page - JS that controls the toggling of privacy/cookie settings
-     * */
+       *  Cookie policy setting page - JS that controls the toggling of privacy/cookie settings
+       * */
 
     var cookiePageSettings = {
       init: function init() {
@@ -220,7 +220,7 @@
         var referrer = document.referrer;
 
         if (referrer.length > 0) {
-          this.$prevLink.attr("href", referrer);
+          this.$prevLink.attr('href', referrer);
         }
       },
       bindEvents: function bindEvents() {
