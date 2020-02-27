@@ -17,4 +17,4 @@
 
 Frontend cookie setting page can be found at:
 <br>
-<h2><sitename>/ccfw-cookie-policy</a><h2>
+<h2><sitename>/data-cookie-settings</a><h2>
