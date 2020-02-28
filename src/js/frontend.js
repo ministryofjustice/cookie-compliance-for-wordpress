@@ -61,7 +61,7 @@
         if (utilities.storageAvailable('localStorage')) {
           this.localStorage = window.localStorage
         }
-        this.$el = $('#ccfw-page-banner-container')
+        this.$el = $('#ccfw-page-banner')
         this.$buttonAccept = this.$el.find('button')
       },
       setBannerDisplay: function () {
