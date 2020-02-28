@@ -35,28 +35,18 @@ $breakpoints: ('small': (min-width: 767px),
 }
 
 // =========================================================
-// Frontend page navigation
-// =========================================================
-
-.ccfw-navbar {
-    max-width: 100%;
-
-    &__item {
-        list-style-type: none;
-    }
-}
-
-// =========================================================
 // Banner
 // =========================================================
-#ccfw-page-banner-container {
+
+:root {
     --light: #f3f2f1;
-    --dark:#005C2C;
+    --dark: #005C2C;
     --xDark: black;
+    --focus: yellow;
 }
 
-
-#ccfw-page-banner-container {
+#ccfw-page-banner {
+    all: initial;
     // normalise CSS
     font-family: inherit;
     /* 1 */
@@ -72,96 +62,113 @@ $breakpoints: ('small': (min-width: 767px),
     left: 0;
     max-width: 100%;
     display: block;
-    border: 2px solid var(--xDark);
+    border-bottom: 2px solid var(--xDark, black);
     background-color: var(--light);
     padding: 30px 10px;
     display: none;
 }
 
-.ccfw-banner {
+.ccfw-banner-container {
 
-    &__wrapper {
-        color: var(--dark);
-        font-size: 19px;
-        line-height: 1.3157894737;
-        box-sizing: border-box;
-        margin: 0 auto;
-        max-width: 960px;
-    }
+    color: var(--dark);
+    font-size: 19px;
+    line-height: 1.3157894737;
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 960px;
 
-    &__heading {
+    &__header {
         font-size: 24px;
         line-height: 1.25;
         padding-bottom: 12px;
     }
-}
 
-.ccfw-banner__message {
-    display: block;
-    margin-right: 12px;
-    max-width: 680px;
-    padding: 12px 0 6px;
+    &__infotext {
+        display: block;
+        margin-right: 12px;
+        max-width: 680px;
+        padding: 12px 0 6px;
 
-    a {
-        color: var(--dark);
-        text-decoration: underline;
-    }
-}
-
-.ccfw-banner-button__wrapper {
-
-    button {
-        // normalise button
-        padding: 0;
-        font-size: 19px;
-        font-family: inherit;
-        font-weight: 300;
-        border: none;
-        cursor: pointer;
-        padding: 12px 14px;
-
-        &:hover,
-        :active {
-            text-decoration: underline;
-
-        }
-    }
-
-}
-
-.ccfw-banner-button {
-    margin-top: 8px;
-    display: inline-block;
-
-    &:nth-child(2n) {
-        margin-left: 0;
-        padding: 12px 0;
-        background-color: var(--dark);
-        
         a {
-            color: var(--light);
-            padding: 12px 10px;
-            margin-left: 0;
+            color: var(--dark);
+            text-decoration: underline;
 
             &:focus {
                 color: var(--xDark);
+                background-color: var(--focus);
             }
         }
     }
 
-    @include respond-to('medium') {
-        display: inline;
+    &__buttons {
 
-        &:nth-child(2n) {
-            margin-left: 8px;
-        }
-    }
+        .ccfw-banner-button {
+            margin-top: 8px;
+            display: inline-block;
 
-    @include respond-to('large') {
-        display: inline;
+            button {
+                // normalise button
+                padding: 0;
+                font-size: 19px;
+                font-family: inherit;
+                font-weight: 300;
+                border: none;
+                cursor: pointer;
+                padding: 12px 14px;
 
-        &:nth-child(2n) {
-            margin-left: 8px;
+                background-color: var(--dark);
+                color: var(--light);
+
+                &:hover,
+                :active {
+                    text-decoration: underline;
+                }
+
+                &:focus {
+                    color: var(--xDark);
+                    background-color: var(--focus);
+                }
+            }
+
+            &:nth-child(2n) {
+                margin-left: 0;
+                padding: 12px 0;
+                background-color: var(--dark);
+
+                a {
+                    color: var(--light);
+                    padding: 12px 10px;
+                    margin-left: 0;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: var(--light);
+                        text-decoration: underline;
+                    }
+
+                    &:focus {
+                        color: var(--xDark);
+                        background-color: var(--focus);
+                    }
+                }
+            }
+
+
+            @include respond-to('medium') {
+                display: inline;
+
+                &:nth-child(2n) {
+                    margin-left: 8px;
+                }
+            }
+
+            @include respond-to('large') {
+                display: inline;
+
+                &:nth-child(2n) {
+                    margin-left: 8px;
+                }
+            }
         }
     }
 }
@@ -171,6 +178,8 @@ $breakpoints: ('small': (min-width: 767px),
 // =========================================================
 
 #ccfw-settings-page-container {
+    all: initial;
+
     display: block;
     padding: 20px 0 60px 0;
 }
@@ -197,7 +206,7 @@ $breakpoints: ('small': (min-width: 767px),
         ul {
             list-style-position: inside !important;
             padding: 20px 0;
-          }
+        }
     }
 
     &__table {
@@ -218,33 +227,36 @@ $breakpoints: ('small': (min-width: 767px),
         font-weight: 400;
     }
 
-    &__button-wrapper{
+    &__button-wrapper {
 
-    }
+        .ccfw-settings-page__button {
+            color: var(--light);
+            background-color: var(--dark);
+            margin-top: 12px;
+            padding: 6px;
+            display: inline-block;
 
-    &__button {
-
-        color: var(--light);
-
-        margin-top: 12px;
-        padding: 6px;
-        border: 2px solid var(--dark);
-        display: inline-block;
-
-        button {
-            // normalise button
-            font-size: 19px;
-            font-family: inherit;
-            font-weight: 300;
-            border: none;
-            padding: 10px 14px;
-            cursor: pointer;
-
-            &:hover, 
-            :active, 
-            :focus {
-                text-decoration: underline;
+            button {
+                // normalise button
+                font-size: 19px;
+                font-family: inherit;
+                font-weight: 300;
+                border: none;
+                padding: 10px 14px;
+                cursor: pointer;
+                background-color: transparent;
                 color: var(--light);
+
+                &:hover,
+                :active {
+                    text-decoration: underline;
+                    color: var(--light);
+                }
+
+                &:focus {
+                    color: var(--xDark);
+                    background-color: var(--focus);
+                }
             }
         }
 

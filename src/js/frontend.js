@@ -74,9 +74,9 @@
         }
 
         if ((getValueFromLocalStorageBool || getValueFromCookieBool) === 'true') {
-          $('#ccfw-page-banner-container').hide()
+          $('#ccfw-page-banner').hide()
         } else {
-          $('#ccfw-page-banner-container').show()
+          $('#ccfw-page-banner').show()
         }
       },
       bindEvents: function () {

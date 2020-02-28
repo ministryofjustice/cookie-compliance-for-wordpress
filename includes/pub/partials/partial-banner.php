@@ -16,21 +16,24 @@ filter_var($domainName, FILTER_SANITIZE_URL);
 $domainName = str_replace('www.', '', $domainName);
 ?>
 
-<div id="ccfw-page-banner-container">
-    <div class="ccfw-banner__wrapper">
-        <span class="ccfw-banner__heading">Tell us whether you accept cookies</span>
+<div id="ccfw-page-banner">
+    <div class="ccfw-banner-container">
 
-        <p class="ccfw-banner__message">
+        <span class="ccfw-banner-container__header">Tell us whether you accept cookies</span>
+
+        <p class="ccfw-banner-container__infotext">
             <?php _e('We use cookies to <a href="/privacy-notice/">collect information</a> about how you use ' . strtoupper($domainName) . ' . 
 			We use this information to make the website work as well as possible and improve our digital services.', 'cookie-compliance-for-wordpress'); ?>
         </p>
 
-        <div class="ccfw-banner-button__wrapper">
+        <div class="ccfw-banner-container__buttons">
+
             <div class="ccfw-banner-button">
                 <button type="submit">
                     <?php _e('Accept all cookies', 'cookie-compliance-for-wordpress'); ?>
                 </button>
             </div>
+
             <div class="ccfw-banner-button">
                 <a role="button" href="/data-cookie-settings">
                     <?php _e('Set cookie preferences', 'cookie-compliance-for-wordpress'); ?>
