@@ -3,7 +3,7 @@
     "version": "2.2.0",
     "engines": {
         "node": "11.10.0",
-        "npm": "6.13.4"
+        "npm": "6.13.6"
     },
     "description": "WP plugin cookie-compliance-for-wordpress",
     "main": "index.js",
