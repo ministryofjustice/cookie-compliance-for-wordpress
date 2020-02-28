@@ -28,7 +28,6 @@ class ComposerStaticInit6de5904d02adcc89a80e07529827df6b
     public static $classMap = array (
         'CCFW\\Activate' => __DIR__ . '/../..' . '/includes/activate.php',
         'CCFW\\Admin\\Admin' => __DIR__ . '/../..' . '/includes/admin/admin.php',
-        'CCFW\\Admin\\Enqueue' => __DIR__ . '/../..' . '/includes/admin/enqueue.php',
         'CCFW\\Controller' => __DIR__ . '/../..' . '/includes/controller.php',
         'CCFW\\Deactivate' => __DIR__ . '/../..' . '/includes/deactivate.php',
         'CCFW\\Init' => __DIR__ . '/../..' . '/includes/init.php',

@@ -8,7 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'CCFW\\Activate' => $baseDir . '/includes/activate.php',
     'CCFW\\Admin\\Admin' => $baseDir . '/includes/admin/admin.php',
-    'CCFW\\Admin\\Enqueue' => $baseDir . '/includes/admin/enqueue.php',
     'CCFW\\Controller' => $baseDir . '/includes/controller.php',
     'CCFW\\Deactivate' => $baseDir . '/includes/deactivate.php',
     'CCFW\\Init' => $baseDir . '/includes/init.php',
