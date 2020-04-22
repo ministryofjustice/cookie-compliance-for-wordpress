@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/frontend.js":
-/*!****************************!*\
-  !*** ./src/js/frontend.js ***!
-  \****************************/
+/***/ "./src/js/cookie-compliance-for-wordpress.js":
+/*!***************************************************!*\
+  !*** ./src/js/cookie-compliance-for-wordpress.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -106,29 +106,20 @@
 
   /**
    *  Define handlers for when the html/DOM is ready.
-   *  Banner settings use local storage but with cookies as a fall back for older browers < IE8
+   *  Banner settings use cookies (rather than local storage) to make older browers < IE8 happy
+   * TODO: Target data attributes rather than CSS classes
    * */
 
   $(function () {
+    var cookie_key_hide_banner = 'ccfw_wp_plugin.hide_banner';
+    var cookie_key_ga = 'ccfw_wp_plugin.ga';
+    var cookie_key_gtm = 'ccfw_wp_plugin.gtm';
     /**
-       *  Utilities - helper functions for shared tasks
-       * */
+    *  Helper functions for shared tasks
+    * */
+
     var utilities = {
-      init: function init() {
-        this.storageAvailable();
-      },
-      // Run a small test to determine if the browser can use local storage functionality if not use browser cookies
-      storageAvailable: function storageAvailable(type) {
-        try {
-          var storage = window[type];
-          var x = '__storage_test__';
-          storage.setItem(x, x);
-          storage.removeItem(x);
-          return false; // temporary change to false to turn off local storage use as I wanted only cookies used
-        } catch (e) {
-          return false;
-        }
-      },
+      init: function init() {},
       getCookie: function getCookie(name) {
         var value = '; ' + document.cookie;
         var parts = value.split('; ' + name + '=');
@@ -141,79 +132,124 @@
         var d = new Date();
         d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days);
         document.cookie = name + '=' + value + '; path=/; expires=' + d.toGMTString();
+      },
+      checkForCookie: function checkForCookie(key) {
+        var cookie = this.getCookie(key);
+
+        if (cookie === undefined) {
+          var bool = false;
+        } else {
+          var bool = true;
+        }
+
+        return bool;
       }
     };
     /**
-       *  Top of page banner - controls the display of the cookie banner
-       * */
+     *  Module to interact with Google Data Layer and setting Google cookie config
+     *  
+     * */
 
-    var cookieBanner = {
+    var googleAnalytics = {
+      init: function init() {},
+      googleSetDataLayer: function googleSetDataLayer(analytics, tagManager) {
+        // Google Analytics value on or off
+        if (analytics === 'on') {
+          var boolGA = false;
+        } else if (analytics === 'off') {
+          var boolGA = true;
+        } // Google Tag Manager value on or off
+
+
+        if (tagManager === 'on') {
+          var boolGTM = false;
+        } else if (tagManager === 'off') {
+          var boolGTM = true;
+        }
+
+        if (typeof ga === 'function') {
+          ga(function () {
+            // ga() function loads last, retrieve GA and GTM ID numbers
+            var GA_ID = Object.keys(gaData)[0];
+            var GTM_ID = Object.keys(google_tag_manager)[0];
+            window['ga-disable-' + GA_ID] = boolGA;
+            window['ga-disable-' + GTM_ID] = boolGTM;
+          });
+        }
+      },
+      googleSetCookie: function googleSetCookie(analytics, tagManager) {
+        utilities.setCookie(cookie_key_ga, analytics, 365);
+        utilities.setCookie(cookie_key_gtm, tagManager, 365);
+      }
+    };
+    /**
+     *  Opt-out by default of all analytics/trackers
+     *  on page load or first visit
+     * */
+
+    var optOutByDefault = {
+      init: function init() {
+        this.loadGA();
+      },
+      loadGA: function loadGA() {
+        if (utilities.getCookie(cookie_key_hide_banner) != 'true') {
+          googleAnalytics.googleSetDataLayer('off', 'off');
+          googleAnalytics.googleSetCookie('revoke', 'revoke');
+        }
+      }
+    };
+    /**
+     *  Banner management and control
+     * */
+
+    var banner = {
       init: function init() {
         this.cacheDom();
         this.bindEvents();
         this.setBannerDisplay();
       },
       cacheDom: function cacheDom() {
-        if (utilities.storageAvailable('localStorage')) {
-          this.localStorage = window.localStorage;
-        }
-
         this.$el = $('#ccfw-page-banner');
-        this.$buttonAccept = this.$el.find('button');
+        this.$buttonaccept = this.$el.find('button');
       },
       setBannerDisplay: function setBannerDisplay() {
-        if (utilities.storageAvailable('localStorage')) {
-          var getValueFromLocalStorage = this.localStorage.getItem('ccfwCookiePolicySaved');
-          var getValueFromLocalStorageBool = getValueFromLocalStorage || false;
-        } else {
-          var getValueFromCookie = utilities.getCookie('ccfwCookiePolicySaved');
-          var getValueFromCookieBool = getValueFromCookie || false;
-        }
+        var cookieExists = utilities.checkForCookie(cookie_key_hide_banner);
 
-        if ((getValueFromLocalStorageBool || getValueFromCookieBool) === 'true') {
-          $('#ccfw-page-banner').hide();
+        if (cookieExists === true) {
+          this.$el.hide();
         } else {
-          $('#ccfw-page-banner').show();
+          this.$el.show();
         }
       },
       bindEvents: function bindEvents() {
-        this.$buttonAccept.on('click', this.hideBanner.bind(this));
+        this.$buttonaccept.on('click', this.acceptAllButton.bind(this));
+      },
+      acceptAllButton: function acceptAllButton() {
+        utilities.setCookie(cookie_key_hide_banner, 'true', 365);
+        googleAnalytics.googleSetDataLayer('on', 'on');
+        googleAnalytics.googleSetCookie('accept', 'accept');
+        this.hideBanner();
       },
       hideBanner: function hideBanner() {
-        if (utilities.storageAvailable('localStorage')) {
-          this.localStorage.setItem('ccfwCookiePolicy', 'true');
-          this.localStorage.setItem('ccfwCookiePolicySaved', 'true');
-          this.$el.hide();
-        } else {
-          this.$el.hide();
-          utilities.setCookie('ccfwCookiePolicy', 'true', 365);
-          utilities.setCookie('ccfwCookiePolicySaved', 'true', 365);
-        }
+        this.$el.hide();
       }
     };
     /**
-       *  Cookie policy setting page - JS that controls the toggling of privacy/cookie settings
-       * */
+     *  Settings page where a user toggles tracking on/off
+     * */
 
-    var cookiePageSettings = {
+    var settingsPage = {
       init: function init() {
-        if ($('#ccfw-settings-page-container').length) {
-          this.cacheDom();
-          this.bindEvents();
-          this.disableEnableGA();
-          this.setPrevLink();
-        }
+        this.cacheDom();
+        this.bindEvents();
+        this.setPrevLink();
       },
       cacheDom: function cacheDom() {
-        if (utilities.storageAvailable('localStorage')) {
-          this.localStorage = window.localStorage;
-        }
-
         this.$el = $('#ccfw-settings-page-container');
         this.$googleYes = this.$el.find('#ga-yes');
         this.$googleNo = this.$el.find('#ga-no');
         this.$saveBtn = this.$el.find('#save-changes-btn');
-        this.$saveNtc = this.$el.find('#save-notice');
+        this.$saveNoticeBanner = this.$el.find('#save-notice');
         this.$prevLink = this.$el.find('#prev-link');
       },
       setPrevLink: function setPrevLink() {
@@ -227,98 +263,49 @@
         this.$saveBtn.on('click', this.saveSettings.bind(this));
       },
       saveSettings: function saveSettings() {
-        if (this.$googleYes.prop('checked')) {
-          this.setGACookieTrue();
-        } else {
-          this.setGACookieFalse();
+        /**
+        *  Right now there is no distinction between
+        *  GA and GTM both Google trackers here are checked on or off together.
+        *  In the future we may want to refactor to check each individually.
+        * */
+        var googleButtonYes = this.$googleYes.prop('checked');
+        var googleButtonNo = this.$googleNo.prop('checked');
+
+        if (googleButtonYes === true) {
+          googleAnalytics.googleSetDataLayer('on', 'on');
+          googleAnalytics.googleSetCookie('accept', 'accept');
+        } else if (googleButtonNo === true) {
+          googleAnalytics.googleSetDataLayer('off', 'off');
+          googleAnalytics.googleSetCookie('revoke', 'revoke');
         }
 
-        if (utilities.storageAvailable('localStorage')) {
-          this.localStorage.setItem('ccfwCookiePolicySaved', 'true');
-        } else {
-          utilities.setCookie('ccfwCookiePolicySaved', 'true', 365);
-        }
-
-        this.$saveNtc.show();
-        $(document).scrollTop(this.$saveNtc.offset().top);
-        this.$saveNtc.focus();
+        utilities.setCookie(cookie_key_hide_banner, 'true', 365);
+        this.displayNoticeBanner();
       },
-      setGACookieTrue: function setGACookieTrue() {
-        if (utilities.storageAvailable('localStorage')) {
-          this.localStorage.setItem('ccfwCookiePolicy', 'true');
-        } else {
-          utilities.setCookie('ccfwCookiePolicy', 'true', 365);
-        }
-      },
-      setGACookieFalse: function setGACookieFalse() {
-        if (utilities.storageAvailable('localStorage')) {
-          this.localStorage.setItem('ccfwCookiePolicy', 'false');
-        } else {
-          utilities.setCookie('ccfwCookiePolicy', 'false', 365);
-        }
-      },
-      setCookie: function setCookie(name, value, days) {
-        var d = new Date();
-        d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days);
-        document.cookie = name + '=' + value + '; path=/; expires=' + d.toGMTString();
-      },
-      disableEnableGA: function disableEnableGA() {
-        // get the set cookie value (true or false)
-        if (utilities.storageAvailable('localStorage')) {
-          var lStorage = this.localStorage.getItem('ccfwCookiePolicy');
-        } else {
-          // Older browser support < IE8
-          var cStorage = utilities.getCookie('ccfwCookiePolicy') || false;
-        } // return true or false depending on what was clicked
-
-
-        var x = (lStorage || cStorage) === 'true'; // set CSS button to what was selected
-
-        if (x === true) {
-          x = true;
-          this.$googleYes.prop('checked', true);
-        } else {
-          x = false;
-          this.$googleNo.prop('checked', true);
-        } // Set the Google Analytic method to true or false where x === true or false
-        // True === Google is disabled & False === Google is kept on
-
-
-        if (typeof ga === 'function') {
-          ga(function (tracker) {
-            window['ga-disable-UA-' + tracker.get('trackingId')] = x;
-          });
-        }
+      displayNoticeBanner: function displayNoticeBanner() {
+        this.$saveNoticeBanner.show();
+        $(document).scrollTop(this.$saveNoticeBanner.offset().top);
+        this.$saveNoticeBanner.focus();
       }
     };
     utilities.init();
-    cookieBanner.init();
-    cookiePageSettings.init();
+    googleAnalytics.init();
+    optOutByDefault.init();
+    banner.init();
+    settingsPage.init();
   });
 })(jQuery);
 
 /***/ }),
 
-/***/ "./src/scss/frontend-styles.scss":
-/*!***************************************!*\
-  !*** ./src/scss/frontend-styles.scss ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 0:
-/*!******************************************************************!*\
-  !*** multi ./src/js/frontend.js ./src/scss/frontend-styles.scss ***!
-  \******************************************************************/
+/***/ 1:
+/*!*********************************************************!*\
+  !*** multi ./src/js/cookie-compliance-for-wordpress.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/adam/Dev/moj/wp-brookhouse/web/app/plugins/cookie-compliance-for-wordpress/src/js/frontend.js */"./src/js/frontend.js");
-module.exports = __webpack_require__(/*! /Users/adam/Dev/moj/wp-brookhouse/web/app/plugins/cookie-compliance-for-wordpress/src/scss/frontend-styles.scss */"./src/scss/frontend-styles.scss");
+module.exports = __webpack_require__(/*! /Users/adam/Dev/moj/wp-brookhouse/web/app/plugins/cookie-compliance-for-wordpress/src/js/cookie-compliance-for-wordpress.js */"./src/js/cookie-compliance-for-wordpress.js");
 
 
 /***/ })

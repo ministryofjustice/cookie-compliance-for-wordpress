@@ -27,8 +27,8 @@
   left: 0;
   max-width: 100%;
   display: block;
-  border-bottom: 2px solid var(--xDark, black);
-  background-color: var(--light);
+  border-bottom: 2px solid black;
+  background-color: #f3f2f1;
   padding: 30px 10px;
   display: none;
 }

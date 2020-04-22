@@ -27,6 +27,7 @@
     "homepage": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress/#readme",
     "author": "MoJ",
     "devDependencies": {
+        "@babel/preset-react": "^7.9.4",
         "copy-webpack-plugin": "^5.1.0",
         "cross-env": "^6.0.3",
         "laravel-mix": "^4.1.4",
