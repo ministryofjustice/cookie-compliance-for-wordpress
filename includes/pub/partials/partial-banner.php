@@ -21,7 +21,7 @@ $domainName = str_replace('www.', '', $domainName);
 
         <h2 class="govuk-heading-l">Are you OK with cookies?</h2>
 
-        <p class="ccfw-banner-container__infotext">
+        <p class="ccfw-banner-container__infotext govuk-body">
             <?php _e('We use small files called ‘cookies’ on ' . strtoupper($domainName) . ' to give you the best experience on our site.  Some are essential to make the site work, and some help us understand how people use the site so that we can improve your experience. You can choose to turn off the non-essential cookies.  Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'); ?>
         </p>
 
@@ -35,7 +35,7 @@ $domainName = str_replace('www.', '', $domainName);
                 <?php _e('Only use essential cookies', 'cookie-compliance-for-wordpress'); ?>
             </button>
 
-            <button class="ccfw-banner-button ccfw-banner-button--link govuk-link" id="cookie-more-info" aria-controls="ccfw-info-popup" aria-expanded="false">
+            <button class="ccfw-banner-button ccfw-banner-button--link govuk-link govuk-details" id="cookie-more-info" aria-controls="ccfw-info-popup" aria-expanded="false">
                 <?php _e('Choose which cookies we use', 'cookie-compliance-for-wordpress'); ?>
             </button>
         </div>
@@ -55,7 +55,7 @@ $domainName = str_replace('www.', '', $domainName);
                 </fieldset>
             </div>
 
-            <p class="ccfw-info-popup__summary-text">We use Google Analytics to measure how you use the website so we can improve it based on user needs. We do not allow Google Analytics to use or share the data about how you use this site. </p>
+            <p class="ccfw-info-popup__summary-text govuk-body">We use Google Analytics to measure how you use the website so we can improve it based on user needs. We do not allow Google Analytics to use or share the data about how you use this site. </p>
 
             <details class="govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
@@ -97,7 +97,7 @@ $domainName = str_replace('www.', '', $domainName);
 
             <h4 class="govuk-heading-s">Cookies that make our site work (functional cookies)</h4>
 
-            <p class="ccfw-info-popup__summary-text">These cookies will always need to be on because they make our site work.</p>
+            <p class="ccfw-info-popup__summary-text govuk-body">These cookies will always need to be on because they make our site work.</p>
 
             <details class="govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
@@ -169,7 +169,7 @@ $domainName = str_replace('www.', '', $domainName);
             </details>
 
             <h4 class="govuk-heading-s">Cookies added by other sites (third-party cookies)</h4>
-            <p class="ccfw-info-popup__summary-text">We embed videos from our official YouTube channel using YouTube’s privacy-enhanced mode. This mode may set cookies on your computer once you click on the YouTube video player, but YouTube will not store personally-identifiable cookie information for playbacks of embedded videos using the privacy-enhanced mode.</p>
+            <p class="ccfw-info-popup__summary-text govuk-body">We embed videos from our official YouTube channel using YouTube’s privacy-enhanced mode. This mode may set cookies on your computer once you click on the YouTube video player, but YouTube will not store personally-identifiable cookie information for playbacks of embedded videos using the privacy-enhanced mode.</p>
             <p class="ccfw-info-popup__summary-text">We have no control over cookies set on other websites - you can turn them off, but not through us.</p>
 
             <details class="govuk-details" data-module="govuk-details">
