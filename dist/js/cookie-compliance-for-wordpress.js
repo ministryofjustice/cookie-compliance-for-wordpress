@@ -147,7 +147,7 @@
     };
     /**
      *  Module to interact with Google Data Layer and setting Google cookie config
-     *  
+     *
      * */
 
     var googleAnalytics = {
@@ -210,7 +210,12 @@
       },
       cacheDom: function cacheDom() {
         this.$el = $('#ccfw-page-banner');
-        this.$buttonaccept = this.$el.find('button');
+        this.$popup = $('#cookie-popup');
+        this.$buttonaccept = this.$el.find('#cookie-accept');
+        this.$buttondecline = this.$el.find('#cookie-decline');
+        this.$buttoninfo = this.$el.find('#cookie-more-info');
+        this.$buttonsavepreferences = this.$el.find('#cookie-save-preferences');
+        this.$GAcheckbox = this.$el.find('#ccfw-ga-checkbox');
       },
       setBannerDisplay: function setBannerDisplay() {
         var cookieExists = utilities.checkForCookie(cookie_key_hide_banner);
@@ -223,6 +228,9 @@
       },
       bindEvents: function bindEvents() {
         this.$buttonaccept.on('click', this.acceptAllButton.bind(this));
+        this.$buttondecline.on('click', this.declineAllButton.bind(this));
+        this.$buttoninfo.on('click', this.viewMoreInfo.bind(this));
+        this.$buttonsavepreferences.on('click', this.saveCookiePreferences.bind(this));
       },
       acceptAllButton: function acceptAllButton() {
         utilities.setCookie(cookie_key_hide_banner, 'true', 365);
@@ -230,8 +238,69 @@
         googleAnalytics.googleSetCookie('accept', 'accept');
         this.hideBanner();
       },
+      declineAllButton: function declineAllButton() {
+        utilities.setCookie(cookie_key_hide_banner, 'true', 365);
+        googleAnalytics.googleSetDataLayer('off', 'off');
+        googleAnalytics.googleSetCookie('revoke', 'revoke');
+        this.hideBanner();
+      },
+      viewMoreInfo: function viewMoreInfo() {
+        if (this.$el.hasClass("cookie-banner-open")) {
+          this.$buttoninfo.attr('aria-expanded', 'false');
+          this.$popup.hide();
+          this.$el.removeClass("cookie-banner-open");
+        } else {
+          this.$buttoninfo.attr('aria-expanded', 'true');
+          this.$popup.show();
+          this.$el.addClass("cookie-banner-open");
+          /*Trap focus */
+
+          /* Based on Hidde de Vries' solution: https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element */
+
+          var focusableEls = $('#ccfw-page-banner a[href], #ccfw-page-banner details, #ccfw-page-banner button, #ccfw-page-banner input[type="checkbox"]');
+          var firstFocusableEl = focusableEls[0];
+          console.log(focusableEls);
+          var lastFocusableEl = focusableEls[focusableEls.length - 1];
+          this.$el.on('keydown', function (e) {
+            var isTabPressed = e.key === 'Tab';
+
+            if (!isTabPressed) {
+              return;
+            }
+
+            if (e.shiftKey)
+              /* shift + tab */
+              {
+                if (document.activeElement === firstFocusableEl) {
+                  lastFocusableEl.focus();
+                }
+              } else
+              /* tab */
+              {
+                if (document.activeElement === lastFocusableEl) {
+                  firstFocusableEl.focus();
+                }
+              }
+          });
+        }
+      },
+      saveCookiePreferences: function saveCookiePreferences() {
+        var analyticsCookiesTurnedOn = this.$GAcheckbox.prop('checked');
+        console.log(analyticsCookiesTurnedOn);
+
+        if (analyticsCookiesTurnedOn === true) {
+          googleAnalytics.googleSetDataLayer('on', 'on');
+          googleAnalytics.googleSetCookie('accept', 'accept');
+        } else {
+          googleAnalytics.googleSetDataLayer('off', 'off');
+          googleAnalytics.googleSetCookie('revoke', 'revoke');
+        }
+
+        this.hideBanner();
+      },
       hideBanner: function hideBanner() {
         this.$el.hide();
+        this.$el.removeClass("cookie-banner-open");
       }
     };
     /**
@@ -305,7 +374,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/adam/Dev/moj/wp-brookhouse/web/app/plugins/cookie-compliance-for-wordpress/src/js/cookie-compliance-for-wordpress.js */"./src/js/cookie-compliance-for-wordpress.js");
+module.exports = __webpack_require__(/*! /Users/beverleynewing/sites/wp-imb/web/app/plugins/cookie-compliance-for-wordpress/src/js/cookie-compliance-for-wordpress.js */"./src/js/cookie-compliance-for-wordpress.js");
 
 
 /***/ })
