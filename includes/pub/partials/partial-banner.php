@@ -86,8 +86,8 @@ $domainName = str_replace('www.', '', $domainName);
                             </tr>
                             <tr class="govuk-table__row">
                             <th scope="row" class="govuk-table__header">_gat</th>
-                            <td class="govuk-table__cell">10 minutes</td>
                             <td class="govuk-table__cell">These help us to manage how we collect analytics when we have lots of visitors on the site at one time</td>
+                            <td class="govuk-table__cell">10 minutes</td>
                             </tr>
                         </tbody>
                         </table>

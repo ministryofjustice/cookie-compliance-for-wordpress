@@ -161,7 +161,6 @@
           /* Based on Hidde de Vries' solution: https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element */
           let focusableEls = $('#ccfw-page-banner a[href], #ccfw-page-banner details, #ccfw-page-banner button, #ccfw-page-banner input[type="checkbox"]')
           let firstFocusableEl = focusableEls[0];
-          console.log(focusableEls)
           let lastFocusableEl = focusableEls[focusableEls.length - 1];
 
           this.$el.on('keydown', function (e) {
@@ -186,7 +185,7 @@
       },
       saveCookiePreferences: function () {
         let analyticsCookiesTurnedOn = this.$GAcheckbox.prop('checked')
-        console.log(analyticsCookiesTurnedOn)
+        utilities.setCookie(cookie_key_hide_banner, 'true', 365)
 
         if (analyticsCookiesTurnedOn === true) {
           googleAnalytics.googleSetDataLayer('on', 'on')
@@ -195,7 +194,6 @@
           googleAnalytics.googleSetDataLayer('off', 'off')
           googleAnalytics.googleSetCookie('revoke', 'revoke')
         }
-
         this.hideBanner()
       },
       hideBanner: function () {
