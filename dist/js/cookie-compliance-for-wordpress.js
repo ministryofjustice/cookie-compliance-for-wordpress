@@ -259,7 +259,6 @@
 
           var focusableEls = $('#ccfw-page-banner a[href], #ccfw-page-banner details, #ccfw-page-banner button, #ccfw-page-banner input[type="checkbox"]');
           var firstFocusableEl = focusableEls[0];
-          console.log(focusableEls);
           var lastFocusableEl = focusableEls[focusableEls.length - 1];
           this.$el.on('keydown', function (e) {
             var isTabPressed = e.key === 'Tab';
@@ -286,7 +285,7 @@
       },
       saveCookiePreferences: function saveCookiePreferences() {
         var analyticsCookiesTurnedOn = this.$GAcheckbox.prop('checked');
-        console.log(analyticsCookiesTurnedOn);
+        utilities.setCookie(cookie_key_hide_banner, 'true', 365);
 
         if (analyticsCookiesTurnedOn === true) {
           googleAnalytics.googleSetDataLayer('on', 'on');
