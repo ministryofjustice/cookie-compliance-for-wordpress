@@ -216,6 +216,8 @@
         this.$buttoninfo = this.$el.find('#cookie-more-info');
         this.$buttonsavepreferences = this.$el.find('#cookie-save-preferences');
         this.$GAcheckbox = this.$el.find('#ccfw-ga-checkbox');
+        this.$buttonmodalclose = this.$el.find('#ccfw-modal-close');
+        this.$body = $('body');
       },
       setBannerDisplay: function setBannerDisplay() {
         var cookieExists = utilities.checkForCookie(cookie_key_hide_banner);
@@ -231,6 +233,7 @@
         this.$buttondecline.on('click', this.declineAllButton.bind(this));
         this.$buttoninfo.on('click', this.viewMoreInfo.bind(this));
         this.$buttonsavepreferences.on('click', this.saveCookiePreferences.bind(this));
+        this.$buttonmodalclose.on('click', this.closeModal.bind(this));
       },
       acceptAllButton: function acceptAllButton() {
         utilities.setCookie(cookie_key_hide_banner, 'true', 365);
@@ -245,43 +248,46 @@
         this.hideBanner();
       },
       viewMoreInfo: function viewMoreInfo() {
-        if (this.$el.hasClass("cookie-banner-open")) {
-          this.$buttoninfo.attr('aria-expanded', 'false');
-          this.$popup.hide();
-          this.$el.removeClass("cookie-banner-open");
-        } else {
-          this.$buttoninfo.attr('aria-expanded', 'true');
-          this.$popup.show();
-          this.$el.addClass("cookie-banner-open");
-          /*Trap focus */
+        this.$buttoninfo.attr('aria-expanded', 'true');
+        this.$popup.show();
+        this.$el.addClass("cookie-banner-open");
+        this.$body.addClass("ccfw-modal-open");
+        /*Trap focus */
 
-          /* Based on Hidde de Vries' solution: https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element */
+        /* Based on Hidde de Vries' solution: https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element */
 
-          var focusableEls = $('#ccfw-page-banner a[href], #ccfw-page-banner details, #ccfw-page-banner button, #ccfw-page-banner input[type="checkbox"]');
-          var firstFocusableEl = focusableEls[0];
-          var lastFocusableEl = focusableEls[focusableEls.length - 1];
-          this.$el.on('keydown', function (e) {
-            var isTabPressed = e.key === 'Tab';
+        var focusableEls = $('#cookie-popup a[href], #cookie-popup details, #cookie-popup button, #cookie-popup input[type="checkbox"]');
+        var firstFocusableEl = focusableEls[0];
+        var lastFocusableEl = focusableEls[focusableEls.length - 1];
+        this.$el.on('keydown', function (e) {
+          var isTabPressed = e.key === 'Tab';
 
-            if (!isTabPressed) {
-              return;
-            }
+          if (!isTabPressed) {
+            return;
+          }
 
-            if (e.shiftKey)
-              /* shift + tab */
-              {
-                if (document.activeElement === firstFocusableEl) {
-                  lastFocusableEl.focus();
-                }
-              } else
-              /* tab */
-              {
-                if (document.activeElement === lastFocusableEl) {
-                  firstFocusableEl.focus();
-                }
+          if (e.shiftKey)
+            /* shift + tab */
+            {
+              if (document.activeElement === firstFocusableEl) {
+                lastFocusableEl.focus();
               }
-          });
-        }
+            } else
+            /* tab */
+            {
+              if (document.activeElement === lastFocusableEl) {
+                firstFocusableEl.focus();
+              }
+            }
+        });
+      },
+      closeModal: function closeModal() {
+        this.$buttoninfo.attr('aria-expanded', 'false');
+        this.$popup.hide();
+        this.$el.removeClass("cookie-banner-open");
+        this.$body.removeClass("ccfw-modal-open");
+        this.$el.removeClass("cookie-banner-open");
+        this.$popup.hide();
       },
       saveCookiePreferences: function saveCookiePreferences() {
         var analyticsCookiesTurnedOn = this.$GAcheckbox.prop('checked');
@@ -295,6 +301,7 @@
           googleAnalytics.googleSetCookie('revoke', 'revoke');
         }
 
+        this.closeModal();
         this.hideBanner();
       },
       hideBanner: function hideBanner() {
@@ -373,7 +380,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/beverleynewing/sites/wp-imb/web/app/plugins/cookie-compliance-for-wordpress/src/js/cookie-compliance-for-wordpress.js */"./src/js/cookie-compliance-for-wordpress.js");
+module.exports = __webpack_require__(/*! /Users/beverleynewing/sites/wp-ccrc/web/app/plugins/cookie-compliance-for-wordpress/src/js/cookie-compliance-for-wordpress.js */"./src/js/cookie-compliance-for-wordpress.js");
 
 
 /***/ })

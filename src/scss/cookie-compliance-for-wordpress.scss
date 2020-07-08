@@ -12,6 +12,7 @@
 @import 'node_modules/govuk-frontend/govuk/components/details/details';
 @import 'node_modules/govuk-frontend/govuk/components/table/table';
 @import 'node_modules/govuk-frontend/govuk/core/typography';
+@import 'node_modules/govuk-frontend/govuk/core/links';
 
 // =========================================================
 // Responsive mixins
@@ -83,14 +84,49 @@ $breakpoints: ('small': (min-width: 767px),
     padding: 30px 10px 10px 10px;
     display: none;
     position: fixed;
-    z-index: 999;
+    z-index: 9999;
     overflow-y: scroll;
+    box-sizing: border-box;
 
      &.cookie-banner-open {
+        top: 10%;
+        left: 10%;
+        right: 10%;
+        bottom: 10%;
+        width: 80%;
+        height: 80%;
+        border-top: 0;
+        padding: 2rem;
+
+        & .ccfw-banner__intro {
+            display: none;
+        }
+    }
+}
+
+html {
+    font-size: 16px;
+}
+
+.ccfw-modal-open {
+    overflow: hidden;
+
+    .ccfw-background-grey-overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
+        z-index: 9999;
+        opacity: 1;
+        background: rgba( 0, 0, 0, 0.6 );
+    }
+
+    footer {
+        -webkit-filter: blur(5px);
+
+        /* Recede */
+        -webkit-transform: scale(0.9);
     }
 }
 
@@ -114,11 +150,7 @@ html, body, .cookie-banner-open {
         a {
             color: var(--dark);
             text-decoration: underline;
-
-            &:focus {
-                color: var(--xDark);
-                background-color: var(--focus);
-            }
+            @extend .govuk-link;
         }
     }
 
@@ -189,14 +221,34 @@ html, body, .cookie-banner-open {
     }
     .ccfw-info-popup {
         display: none;
-        margin-top: 2rem;
+
+        &__heading {
+            display: inline-block;
+        }
 
         &__summary-text {
             max-width: 50rem;
         }
+
+        &__close-button {
+            float: right;
+            background: none;
+            border: 0;
+            text-decoration: underline;
+            color:#1D70B8;
+            margin-bottom: 1rem;
+            @extend .govuk-link;
+
+            &:focus {
+                color: var(--xDark);
+                background-color: var(--focus);
+                box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+            }
+        }
     }
 
 }
+
 
 .govuk-table__caption {
     padding: 0;
@@ -207,7 +259,7 @@ html, body, .cookie-banner-open {
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: 65px;
   height: 34px;
   margin-right: 1rem;
 
@@ -229,7 +281,7 @@ html, body, .cookie-banner-open {
     }
     &__heading {
         float: left;
-        width: 75%;
+        width: 65%;
     }
     &__fieldset {
         float: right;

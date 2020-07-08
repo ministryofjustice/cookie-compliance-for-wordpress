@@ -19,30 +19,36 @@ $domainName = str_replace('www.', '', $domainName);
 <div id="ccfw-page-banner">
     <div class="ccfw-banner-container">
 
-        <h2 class="govuk-heading-l">Are you OK with cookies?</h2>
+        <div class="ccfw-banner__intro">
+            <h2 class="govuk-heading-l">Are you OK with cookies?</h2>
 
-        <p class="ccfw-banner-container__infotext govuk-body">
-            <?php _e('We use small files called ‘cookies’ on ' . strtoupper($domainName) . ' to give you the best experience on our site.  Some are essential to make the site work, and some help us understand how people use the site so that we can improve your experience. You can choose to turn off the non-essential cookies.  Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'); ?>
-        </p>
+            <p class="ccfw-banner-container__infotext govuk-body">
+                <?php _e('We use small files called ‘cookies’ on ' . strtoupper($domainName) . ' to give you the best experience on our site.  Some are essential to make the site work, and some help us understand how people use the site so that we can improve your experience. You can choose to turn off the non-essential cookies.  Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'); ?>
+            </p>
 
-        <div class="ccfw-banner-container__buttons">
 
-            <button  class="govuk-button" id="cookie-accept" type="submit">
-                <?php _e('I am OK with cookies', 'cookie-compliance-for-wordpress'); ?>
-            </button>
+            <div class="ccfw-banner-container__buttons">
 
-            <button class="govuk-button govuk-button--secondary" id="cookie-decline" type="submit">
-                <?php _e('Only use essential cookies', 'cookie-compliance-for-wordpress'); ?>
-            </button>
+                <button  class="govuk-button" id="cookie-accept" type="submit">
+                    <?php _e('I am OK with cookies', 'cookie-compliance-for-wordpress'); ?>
+                </button>
 
-            <button class="ccfw-banner-button ccfw-banner-button--link govuk-link govuk-details" id="cookie-more-info" aria-controls="ccfw-info-popup" aria-expanded="false">
-                <?php _e('Choose which cookies we use', 'cookie-compliance-for-wordpress'); ?>
-            </button>
+                <button class="govuk-button govuk-button--secondary" id="cookie-decline" type="submit">
+                    <?php _e('Only use essential cookies', 'cookie-compliance-for-wordpress'); ?>
+                </button>
+
+                <button class="ccfw-banner-button ccfw-banner-button--link govuk-link govuk-details" id="cookie-more-info" aria-controls="cookie-popup" aria-expanded="false">
+                    <?php _e('Choose which cookies we use', 'cookie-compliance-for-wordpress'); ?>
+                </button>
+            </div>
         </div>
 
-
         <div id="cookie-popup" class="ccfw-info-popup" role="region">
-            <h3 class="govuk-heading-m">Choose which cookies we use</h3>
+            <button id="ccfw-modal-close" class="ccfw-info-popup__close-button">
+                Close
+            </button>
+
+            <h3 class="govuk-heading-m ccfw-info-popup__heading">Choose which cookies we use</h3>
 
             <div class="ccfw-toggle__header-container">
                 <h4 class="govuk-heading-s ccfw-toggle__heading">Cookies that measure website use (analytics cookies)</h4>
@@ -170,7 +176,7 @@ $domainName = str_replace('www.', '', $domainName);
 
             <h4 class="govuk-heading-s">Cookies added by other sites (third-party cookies)</h4>
             <p class="ccfw-info-popup__summary-text govuk-body">We embed videos from our official YouTube channel using YouTube’s privacy-enhanced mode. This mode may set cookies on your computer once you click on the YouTube video player, but YouTube will not store personally-identifiable cookie information for playbacks of embedded videos using the privacy-enhanced mode.</p>
-            <p class="ccfw-info-popup__summary-text">We have no control over cookies set on other websites - you can turn them off, but not through us.</p>
+            <p class="ccfw-info-popup__summary-text govuk-body">We have no control over cookies set on other websites - you can turn them off, but not through us.</p>
 
             <details class="govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
