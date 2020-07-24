@@ -13,7 +13,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 16px;
-  font-size: 1rem;
   line-height: 1.1875;
   box-sizing: border-box;
   display: inline-block;
@@ -60,7 +59,6 @@
 @media (min-width: 40.0625em) {
   .govuk-button {
     font-size: 19px;
-    font-size: 1.1875rem;
     line-height: 1;
   }
 }
@@ -204,7 +202,6 @@
 .govuk-button--start {
   font-weight: 700;
   font-size: 18px;
-  font-size: 1.125rem;
   line-height: 1;
   display: inline-flex;
   min-height: auto;
@@ -214,7 +211,6 @@
 @media (min-width: 40.0625em) {
   .govuk-button--start {
     font-size: 24px;
-    font-size: 1.5rem;
     line-height: 1;
   }
 }
@@ -245,7 +241,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 16px;
-  font-size: 1rem;
   line-height: 1.25;
   color: #0b0c0c;
   margin-bottom: 20px;
@@ -261,7 +256,6 @@
 @media (min-width: 40.0625em) {
   .govuk-details {
     font-size: 19px;
-    font-size: 1.1875rem;
     line-height: 1.31578947;
   }
 }
@@ -376,7 +370,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 16px;
-  font-size: 1rem;
   line-height: 1.25;
   color: #0b0c0c;
   width: 100%;
@@ -394,7 +387,6 @@
 @media (min-width: 40.0625em) {
   .govuk-table {
     font-size: 19px;
-    font-size: 1.1875rem;
     line-height: 1.31578947;
   }
 }
@@ -474,7 +466,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
   font-size: 32px;
-  font-size: 2rem;
   line-height: 1.09375;
   display: block;
   margin-top: 0;
@@ -496,7 +487,6 @@
 @media (min-width: 40.0625em) {
   .govuk-heading-xl {
     font-size: 48px;
-    font-size: 3rem;
     line-height: 1.04166667;
   }
 }
@@ -521,7 +511,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
   font-size: 24px;
-  font-size: 1.5rem;
   line-height: 1.04166667;
   display: block;
   margin-top: 0;
@@ -543,7 +532,6 @@
 @media (min-width: 40.0625em) {
   .govuk-heading-l {
     font-size: 36px;
-    font-size: 2.25rem;
     line-height: 1.11111111;
   }
 }
@@ -568,7 +556,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
   font-size: 18px;
-  font-size: 1.125rem;
   line-height: 1.11111111;
   display: block;
   margin-top: 0;
@@ -590,7 +577,6 @@
 @media (min-width: 40.0625em) {
   .govuk-heading-m {
     font-size: 24px;
-    font-size: 1.5rem;
     line-height: 1.25;
   }
 }
@@ -615,7 +601,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
   font-size: 16px;
-  font-size: 1rem;
   line-height: 1.25;
   display: block;
   margin-top: 0;
@@ -637,7 +622,6 @@
 @media (min-width: 40.0625em) {
   .govuk-heading-s {
     font-size: 19px;
-    font-size: 1.1875rem;
     line-height: 1.31578947;
   }
 }
@@ -661,7 +645,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 18px;
-  font-size: 1.125rem;
   line-height: 1.11111111;
   display: block;
   margin-bottom: 5px;
@@ -677,7 +660,6 @@
 @media (min-width: 40.0625em) {
   .govuk-caption-xl {
     font-size: 27px;
-    font-size: 1.6875rem;
     line-height: 1.11111111;
   }
 }
@@ -695,7 +677,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 18px;
-  font-size: 1.125rem;
   line-height: 1.11111111;
   display: block;
   margin-bottom: 5px;
@@ -711,7 +692,6 @@
 @media (min-width: 40.0625em) {
   .govuk-caption-l {
     font-size: 24px;
-    font-size: 1.5rem;
     line-height: 1.25;
   }
 }
@@ -735,7 +715,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 16px;
-  font-size: 1rem;
   line-height: 1.25;
   display: block;
   color: #626a6e;
@@ -750,7 +729,6 @@
 @media (min-width: 40.0625em) {
   .govuk-caption-m {
     font-size: 19px;
-    font-size: 1.1875rem;
     line-height: 1.31578947;
   }
 }
@@ -770,7 +748,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 18px;
-  font-size: 1.125rem;
   line-height: 1.11111111;
   margin-top: 0;
   margin-bottom: 20px;
@@ -794,7 +771,6 @@
   .govuk-body-l,
   .govuk-body-lead {
     font-size: 24px;
-    font-size: 1.5rem;
     line-height: 1.25;
   }
 }
@@ -822,7 +798,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 16px;
-  font-size: 1rem;
   line-height: 1.25;
   margin-top: 0;
   margin-bottom: 15px;
@@ -846,7 +821,6 @@
   .govuk-body-m,
   .govuk-body {
     font-size: 19px;
-    font-size: 1.1875rem;
     line-height: 1.31578947;
   }
 }
@@ -873,7 +847,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 14px;
-  font-size: 0.875rem;
   line-height: 1.14285714;
   margin-top: 0;
   margin-bottom: 15px;
@@ -894,7 +867,6 @@
 @media (min-width: 40.0625em) {
   .govuk-body-s {
     font-size: 16px;
-    font-size: 1rem;
     line-height: 1.25;
   }
 }
@@ -919,7 +891,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 12px;
-  font-size: 0.75rem;
   line-height: 1.25;
   margin-top: 0;
   margin-bottom: 15px;
@@ -940,7 +911,6 @@
 @media (min-width: 40.0625em) {
   .govuk-body-xs {
     font-size: 14px;
-    font-size: 0.875rem;
     line-height: 1.42857143;
   }
 }

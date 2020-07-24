@@ -7,6 +7,8 @@
 
 /* Import necessary components from the GOV.UK Frontend toolkit */
 
+$govuk-typography-use-rem: false;
+
 @import "node_modules/govuk-frontend/govuk/base";
 @import 'node_modules/govuk-frontend/govuk/components/button/button';
 @import 'node_modules/govuk-frontend/govuk/components/details/details';

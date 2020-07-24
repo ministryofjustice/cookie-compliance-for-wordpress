@@ -44,7 +44,7 @@ $domainName = str_replace('www.', '', $domainName);
         </div>
 
         <div id="cookie-popup" class="ccfw-info-popup" role="region">
-            <button id="ccfw-modal-close" class="ccfw-info-popup__close-button">
+            <button id="ccfw-modal-close" class="ccfw-info-popup__close-button govuk-body">
                 Close
             </button>
 
