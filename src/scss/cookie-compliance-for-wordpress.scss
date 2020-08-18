@@ -84,7 +84,6 @@ $breakpoints: ('small': (min-width: 767px),
     border-top: 2px solid black; // no var for improved IE ux
     background-color: #FFFFFF; // no var for improved IE ux
     padding: 30px 10px 10px 10px;
-    display: none;
     position: fixed;
     z-index: 9999;
     overflow-y: scroll;
@@ -100,7 +99,7 @@ $breakpoints: ('small': (min-width: 767px),
         border-top: 0;
         padding: 2rem;
 
-        & .ccfw-banner__intro {
+        &.ccfw-banner__intro {
             display: none;
         }
     }
