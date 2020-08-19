@@ -28,9 +28,19 @@ class Pub extends Controller
     public function register()
     {
         add_action('wp_body_open', array( $this, 'cookie_compliance_banner' ), 11);
+        add_action('wp_head', array( $this, 'turnOffGA' ), 11);
         add_action('query_vars', array( $this, 'ccfw_query_vars' ), 11);
         add_action('parse_request', array( $this, 'cookie_compliance_pages' ), 11);
         add_action('init', array( $this, 'ccfw_rewrite_rule' ), 11, 0);
+    }
+
+    public function turnOffGA() {
+        ?>
+        <script>
+            var cookieSet = document.cookie.indexOf('ccfw_wp_plugin.ga=') == -1 ? true : false;
+            window['ga-disable-UA-174461977-1'] = cookieSet;
+        </script>
+        <?php
     }
 
     public function cookie_compliance_banner()
