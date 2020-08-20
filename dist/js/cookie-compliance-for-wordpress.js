@@ -131,6 +131,7 @@
       cacheDom: function cacheDom() {
         this.$el = cacheMainElements.$el;
         this.$settingsModal = this.$el.find('#cookie-popup');
+        this.$body = $('body');
       },
       getCookie: function getCookie(name) {
         var value = '; ' + document.cookie;
@@ -158,9 +159,13 @@
       },
       hideSettingsModal: function hideSettingsModal() {
         this.$settingsModal.hide();
+        this.$body.removeClass("ccfw-modal-open");
+        this.$el.removeClass("cookie-banner-open");
       },
       showSettingsModal: function showSettingsModal() {
         this.$settingsModal.show();
+        this.$body.addClass("ccfw-modal-open");
+        this.$el.addClass("cookie-banner-open");
       }
     };
     /**
@@ -235,7 +240,6 @@
       },
       viewMoreInfo: function viewMoreInfo() {
         this.$buttonInfo.attr('aria-expanded', 'true');
-        this.$body.addClass("ccfw-modal-open");
         utilities.showSettingsModal();
         /*Trap focus */
 
