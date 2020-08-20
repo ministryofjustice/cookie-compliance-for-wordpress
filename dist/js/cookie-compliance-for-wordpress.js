@@ -112,14 +112,25 @@
 
   $(function () {
     var cookie_key_hide_banner = 'ccfw_wp_plugin.hide_banner';
-    var cookie_key_ga_accept = 'ccfw_wp_plugin.ga.accept';
-    var cookie_key_ga_reject = 'ccfw_wp_plugin.ga.reject';
+    var cookie_key_ga_accept = 'ccfw_wp_plugin.ga.accept'; // This is used so much make sure all modules use it to save calls to DOM
+
+    var cacheMainElement = {
+      init: function init() {
+        this.$el = $('#ccfw-page-banner');
+      }
+    };
     /**
     *  Helper functions for shared tasks
     * */
 
     var utilities = {
-      init: function init() {},
+      init: function init() {
+        this.cacheDom();
+      },
+      cacheDom: function cacheDom() {
+        this.$el = cacheMainElement.$el;
+        this.$settingsModal = this.$el.find('#cookie-popup');
+      },
       getCookie: function getCookie(name) {
         var value = '; ' + document.cookie;
         var parts = value.split('; ' + name + '=');
@@ -134,20 +145,21 @@
         document.cookie = name + '=' + value + '; path=/; expires=' + d.toGMTString();
       },
       deleteCookie: function deleteCookie(name) {
-        var d = new Date();
-        d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * 365);
-        document.cookie = name + '=; Path=/; expires=' + d.toGMTString();
+        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
       },
       checkForCookie: function checkForCookie(key) {
         var cookie = this.getCookie(key);
-
-        if (cookie === undefined) {
-          var bool = false;
-        } else {
-          var bool = true;
-        }
-
+        var bool = cookie === undefined ? false : true;
         return bool;
+      },
+      hideBanner: function hideBanner() {
+        this.$el.hide();
+      },
+      hideSettingsModal: function hideSettingsModal() {
+        this.$settingsModal.hide();
+      },
+      showSettingsModal: function showSettingsModal() {
+        this.$settingsModal.show();
       }
     };
     /**
@@ -158,22 +170,17 @@
       init: function init() {
         this.cacheDom();
         this.bindEvents();
-        this.setBannerDisplay();
+        this.bannerDisplay();
       },
       cacheDom: function cacheDom() {
-        this.$el = $('#ccfw-page-banner');
-        this.$popup = $('#cookie-popup');
+        this.$el = cacheMainElement.$el;
         this.$buttonaccept = this.$el.find('#cookie-accept');
         this.$buttondecline = this.$el.find('#cookie-decline');
         this.$buttoninfo = this.$el.find('#cookie-more-info');
-        this.$buttonsavepreferences = this.$el.find('#cookie-save-preferences');
-        this.$GAcheckbox = this.$el.find('#ccfw-ga-toggle');
-        this.$buttonmodalclose = this.$el.find('#ccfw-modal-close');
-        this.$body = $('body');
       },
-      setBannerDisplay: function setBannerDisplay() {
+      bannerDisplay: function bannerDisplay() {
         if (utilities.checkForCookie(cookie_key_hide_banner) === true) {
-          this.$el.hide();
+          utilities.hideBanner();
         } else {
           this.$el.show();
         }
@@ -181,24 +188,53 @@
       bindEvents: function bindEvents() {
         this.$buttonaccept.on('click', this.acceptAllButton.bind(this));
         this.$buttondecline.on('click', this.declineAllButton.bind(this));
-        this.$buttoninfo.on('click', this.viewMoreInfo.bind(this));
-        this.$buttonsavepreferences.on('click', this.saveCookiePreferences.bind(this));
-        this.$buttonmodalclose.on('click', this.closeModal.bind(this));
+        this.$buttoninfo.on('click', this.chooseCookieSettingsButton.bind(this));
       },
       acceptAllButton: function acceptAllButton() {
         utilities.setCookie(cookie_key_hide_banner, 'true', 365);
         utilities.setCookie(cookie_key_ga_accept, 'true', 365);
-        this.hideBanner();
+        utilities.hideBanner();
       },
       declineAllButton: function declineAllButton() {
-        utilities.setCookie(cookie_key_hide_banner, 'true', 365);
-        utilities.setCookie(cookie_key_ga_reject, 'true', 365);
-        this.hideBanner();
+        utilities.setCookie(cookie_key_hide_banner, 'true', 365); // GA - If present remove GA cookie, otherwise do nothing, default is GA off
+
+        if (utilities.checkForCookie(cookie_key_ga_accept)) {
+          utilities.deleteCookie(cookie_key_ga_accept);
+        }
+
+        utilities.hideBanner();
+      },
+      chooseCookieSettingsButton: function chooseCookieSettingsButton() {
+        utilities.showSettingsModal();
+      }
+    };
+    var settingsModal = {
+      init: function init() {
+        this.cacheDom();
+        this.bindEvents();
+      },
+      cacheDom: function cacheDom() {
+        this.$el = cacheMainElement.$el;
+        this.$settingsModal = this.$el.find('#cookie-popup');
+        this.$buttonaccept = this.$settingsModal.find('#cookie-accept');
+        this.$buttondecline = this.$settingsModal.find('#cookie-decline');
+        this.$buttoninfo = this.$settingsModal.find('#cookie-more-info');
+        this.$buttonsavepreferences = this.$settingsModal.find('#cookie-save-preferences');
+        this.$GAcheckbox = this.$settingsModal.find('#ccfw-ga-toggle');
+        this.$buttonmodalclose = this.$settingsModal.find('#ccfw-modal-close');
+        this.$body = $('body');
+      },
+      bindEvents: function bindEvents() {
+        this.$buttoninfo.on('click', this.viewMoreInfo.bind(this));
+        this.$buttonsavepreferences.on('click', this.saveCookiePreferences.bind(this));
+        this.$buttonmodalclose.on('click', this.modalDisplay.bind(this));
+      },
+      modalDisplay: function modalDisplay() {
+        utilities.hideSettingsModal();
       },
       viewMoreInfo: function viewMoreInfo() {
         this.$buttoninfo.attr('aria-expanded', 'true');
-        this.$popup.show();
-        this.$el.addClass("cookie-banner-open");
+        utilities.showSettingsModal();
         this.$body.addClass("ccfw-modal-open");
         /*Trap focus */
 
@@ -229,37 +265,29 @@
             }
         });
       },
-      closeModal: function closeModal() {
-        this.$buttoninfo.attr('aria-expanded', 'false');
-        this.$popup.hide();
-        this.$el.removeClass("cookie-banner-open");
-        this.$body.removeClass("ccfw-modal-open");
-        this.$el.removeClass("cookie-banner-open");
-        this.$popup.hide();
-      },
       saveCookiePreferences: function saveCookiePreferences() {
         var analyticsCookiesTurnedOn = this.$GAcheckbox.prop('checked');
-        console.log(analyticsCookiesTurnedOn);
-        utilities.setCookie(cookie_key_hide_banner, 'true', 365);
 
         if (analyticsCookiesTurnedOn === true) {
           utilities.setCookie(cookie_key_ga_accept, 'true', 365);
         }
 
         if (analyticsCookiesTurnedOn === false) {
-          utilities.setCookie(cookie_key_ga_reject, 'true', 365);
+          // GA - If present remove GA cookie, otherwise do nothing, default is GA off
+          if (utilities.checkForCookie(cookie_key_ga_accept)) {
+            utilities.deleteCookie(cookie_key_ga_accept);
+          }
         }
 
-        this.closeModal();
-        this.hideBanner();
-      },
-      hideBanner: function hideBanner() {
-        this.$el.hide();
-        this.$el.removeClass("cookie-banner-open");
+        utilities.setCookie(cookie_key_hide_banner, 'true', 365);
+        utilities.hideBanner();
+        utilities.hideSettingsModal();
       }
     };
+    cacheMainElement.init();
     utilities.init();
     banner.init();
+    settingsModal.init();
   });
 })(jQuery);
 
