@@ -16,44 +16,41 @@ filter_var($domainName, FILTER_SANITIZE_URL);
 $domainName = str_replace('www.', '', $domainName);
 ?>
 
+<div class="ccfw-background-grey-overlay"></div>
 <div id="ccfw-page-banner">
-    <div class="ccfw-banner-container">
-
+    <div class="ccfw-banner">
         <div class="ccfw-banner__intro">
             <h2 class="govuk-heading-l">Are you OK with cookies?</h2>
-
-            <p class="ccfw-banner-container__infotext govuk-body">
+            <p class="ccfw-banner__info-text govuk-body">
                 <?php _e('We use small files called ‘cookies’ on ' . strtoupper($domainName) . ' to give you the best experience on our site.  Some are essential to make the site work, and some help us understand how people use the site so that we can improve your experience. You can choose to turn off the non-essential cookies.  Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'); ?>
             </p>
 
-
-            <div class="ccfw-banner-container__buttons">
-
-                <button  class="govuk-button" id="cookie-accept" type="submit">
+            <div class="ccfw-banner__buttons">
+                <button  class="ccfw-banner__button" id="cookie-accept" type="submit">
                     <?php _e('I am OK with cookies', 'cookie-compliance-for-wordpress'); ?>
                 </button>
 
-                <button class="govuk-button govuk-button--secondary" id="cookie-decline" type="submit">
+                <button class="ccfw-banner__button ccfw-banner__button--decline" id="cookie-decline" type="submit">
                     <?php _e('Only use essential cookies', 'cookie-compliance-for-wordpress'); ?>
                 </button>
 
-                <button class="ccfw-banner-button ccfw-banner-button--link govuk-link govuk-details" id="cookie-more-info" aria-controls="cookie-popup" aria-expanded="false">
+                <button class="ccfw-banner-button ccfw-banner__button--expand-options" id="cookie-more-info" aria-controls="cookie-popup" aria-expanded="false">
                     <?php _e('Choose which cookies we use', 'cookie-compliance-for-wordpress'); ?>
                 </button>
             </div>
         </div>
 
-        <div id="cookie-popup" class="ccfw-info-popup" role="region">
-            <button id="ccfw-modal-close" class="ccfw-info-popup__close-button govuk-body">
+        <div id="cookie-popup" class="ccfw-banner__modal-container" role="region">
+            <button id="ccfw-modal-close" class="ccfw-banner__button ccfw-banner__button--close">
                 Close
             </button>
 
-            <h3 class="govuk-heading-m ccfw-info-popup__heading">Choose which cookies we use</h3>
+            <h3 class="ccfw-banner__info-heading">Choose which cookies we use</h3>
 
-            <div class="ccfw-toggle__header-container">
-                <h4 class="govuk-heading-s ccfw-toggle__heading">Cookies that measure website use (analytics cookies)</h4>
-                <fieldset class="ccfw-toggle__fieldset">
-                    <label class="switch">
+            <div class="ccfw-banner__toggle-header-container">
+                <h4 class="govuk-heading-s ccfw-banner__toggle-heading">Cookies that measure website use (analytics cookies)</h4>
+                <fieldset class="ccfw-banner__fieldset">
+                    <label class="ccfw-banner__toggle">
                         <input type="checkbox" id="ccfw-ga-toggle">
                         <span class="slider round"></span>
                         <span class="visually-hidden">Turn on analytics cookies</span>
@@ -61,7 +58,7 @@ $domainName = str_replace('www.', '', $domainName);
                 </fieldset>
             </div>
 
-            <p class="ccfw-info-popup__summary-text govuk-body">We use Google Analytics to measure how you use the website so we can improve it based on user needs. We do not allow Google Analytics to use or share the data about how you use this site. </p>
+            <p class="ccfw-banner__summary-text govuk-body">We use Google Analytics to measure how you use the website so we can improve it based on user needs. We do not allow Google Analytics to use or share the data about how you use this site. </p>
 
             <details class="govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
@@ -96,13 +93,11 @@ $domainName = str_replace('www.', '', $domainName);
                             <td class="govuk-table__cell">10 minutes</td>
                             </tr>
                         </tbody>
-                        </table>
+                    </table>
                 </div>
             </details>
 
-
             <h4 class="govuk-heading-s">Cookies that make our site work (functional cookies)</h4>
-
             <p class="ccfw-info-popup__summary-text govuk-body">These cookies will always need to be on because they make our site work.</p>
 
             <details class="govuk-details" data-module="govuk-details">
@@ -112,65 +107,60 @@ $domainName = str_replace('www.', '', $domainName);
                     </span>
                 </summary>
                 <div class="govuk-details__text">
-
-                <table class="govuk-table">
-                    <caption class="govuk-table__caption">All users</caption>
-                    <thead class="govuk-table__head">
-                        <tr class="govuk-table__row">
-                        <th scope="col" class="govuk-table__header">Name</th>
-                        <th scope="col" class="govuk-table__header">Purpose</th>
-                        <th scope="col" class="govuk-table__header">Expires</th>
-                        </tr>
-                    </thead>
-                    <tbody class="govuk-table__body">
-                        <tr class="govuk-table__row">
-                            <th scope="row" class="govuk-table__header">wordpress_test_cookie</th>
-                            <td class="govuk-table__cell">This is used to test whether the browser accepts cookies</td>
-                            <td class="govuk-table__cell">When you close your browser</td>
-                        </tr>
-                        <tr class="govuk-table__row">
-                            <th scope="row" class="govuk-table__header">PHPSESSID</th>
-                            <td class="govuk-table__cell">This is used to link your device to the information sent to the server from your browser. It is typically used to avoid you having to retype information when moving from one page to another. </td>
-                            <td class="govuk-table__cell">When you close your browser</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
-                <table class="govuk-table">
-                    <caption class="govuk-table__caption">Logged in users</caption>
-                    <thead class="govuk-table__head">
-                        <tr class="govuk-table__row">
-                        <th scope="col" class="govuk-table__header">Name</th>
-                        <th scope="col" class="govuk-table__header">Purpose</th>
-                        <th scope="col" class="govuk-table__header">Expires</th>
-                        </tr>
-                    </thead>
-                    <tbody class="govuk-table__body">
-                        <tr class="govuk-table__row">
-                            <th scope="row" class="govuk-table__header">wordpress_[hash]</th>
-                            <td class="govuk-table__cell">This authenticates you when you log in to the admin area</td>
-                            <td class="govuk-table__cell">When you close your browser</td>
-                        </tr>
-                        <tr class="govuk-table__row">
-                            <th scope="row" class="govuk-table__header">wordpress_logged_in</th>
-                            <td class="govuk-table__cell">This shows the site that you’re logged in and who you are so you can access the functions you need </td>
-                            <td class="govuk-table__cell">When you close your browser</td>
-                        </tr>
-                        <tr class="govuk-table__row">
-                            <th scope="row" class="govuk-table__header">wordpress_sec</th>
-                            <td class="govuk-table__cell">If you are logged in as a site admin, this stores your authentication details.</td>
-                            <td class="govuk-table__cell">When you close your browser</td>
-                        </tr>
-                        <tr class="govuk-table__row">
-                            <th scope="row" class="govuk-table__header">wp-settings-{time}-[UID]</th>
-                            <td class="govuk-table__cell">The number on the end [UID] is your individual user ID from the users database.</td>
-                            <td class="govuk-table__cell">1 year</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
+                    <table class="govuk-table">
+                        <caption class="govuk-table__caption">All users</caption>
+                        <thead class="govuk-table__head">
+                            <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">Name</th>
+                            <th scope="col" class="govuk-table__header">Purpose</th>
+                            <th scope="col" class="govuk-table__header">Expires</th>
+                            </tr>
+                        </thead>
+                        <tbody class="govuk-table__body">
+                            <tr class="govuk-table__row">
+                                <th scope="row" class="govuk-table__header">wordpress_test_cookie</th>
+                                <td class="govuk-table__cell">This is used to test whether the browser accepts cookies</td>
+                                <td class="govuk-table__cell">When you close your browser</td>
+                            </tr>
+                            <tr class="govuk-table__row">
+                                <th scope="row" class="govuk-table__header">PHPSESSID</th>
+                                <td class="govuk-table__cell">This is used to link your device to the information sent to the server from your browser. It is typically used to avoid you having to retype information when moving from one page to another. </td>
+                                <td class="govuk-table__cell">When you close your browser</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="govuk-table">
+                        <caption class="govuk-table__caption">Logged in users</caption>
+                        <thead class="govuk-table__head">
+                            <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">Name</th>
+                            <th scope="col" class="govuk-table__header">Purpose</th>
+                            <th scope="col" class="govuk-table__header">Expires</th>
+                            </tr>
+                        </thead>
+                        <tbody class="govuk-table__body">
+                            <tr class="govuk-table__row">
+                                <th scope="row" class="govuk-table__header">wordpress_[hash]</th>
+                                <td class="govuk-table__cell">This authenticates you when you log in to the admin area</td>
+                                <td class="govuk-table__cell">When you close your browser</td>
+                            </tr>
+                            <tr class="govuk-table__row">
+                                <th scope="row" class="govuk-table__header">wordpress_logged_in</th>
+                                <td class="govuk-table__cell">This shows the site that you’re logged in and who you are so you can access the functions you need </td>
+                                <td class="govuk-table__cell">When you close your browser</td>
+                            </tr>
+                            <tr class="govuk-table__row">
+                                <th scope="row" class="govuk-table__header">wordpress_sec</th>
+                                <td class="govuk-table__cell">If you are logged in as a site admin, this stores your authentication details.</td>
+                                <td class="govuk-table__cell">When you close your browser</td>
+                            </tr>
+                            <tr class="govuk-table__row">
+                                <th scope="row" class="govuk-table__header">wp-settings-{time}-[UID]</th>
+                                <td class="govuk-table__cell">The number on the end [UID] is your individual user ID from the users database.</td>
+                                <td class="govuk-table__cell">1 year</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </details>
 
@@ -224,7 +214,5 @@ $domainName = str_replace('www.', '', $domainName);
                 <?php _e('Save my choice', 'cookie-compliance-for-wordpress'); ?>
             </button>
         </div>
-
-
     </div>
 </div>

@@ -36,6 +36,7 @@
       cacheDom: function () {
         this.$el = cacheMainElements.$el
         this.$settingsModal = this.$el.find('#cookie-popup')
+        this.$body = cacheMainElements.$body
       },
       getCookie: function (name) {
         var value = '; ' + document.cookie
@@ -62,9 +63,13 @@
       },
       hideSettingsModal: function () {
         this.$settingsModal.hide()
+        this.$body.removeClass("ccfw-modal-open")
+        this.$el.removeClass("cookie-banner-open")
       },
       showSettingsModal: function () {
         this.$settingsModal.show()
+        this.$body.addClass("ccfw-modal-open")
+        this.$el.addClass("cookie-banner-open")
       }
     }
 
@@ -140,7 +145,6 @@
       },
       viewMoreInfo: function () {
         this.$buttonInfo.attr('aria-expanded', 'true')
-        this.$body.addClass("ccfw-modal-open")
         utilities.showSettingsModal()
 
         /*Trap focus */
