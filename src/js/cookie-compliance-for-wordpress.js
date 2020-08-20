@@ -36,7 +36,7 @@
       cacheDom: function () {
         this.$el = cacheMainElements.$el
         this.$settingsModal = this.$el.find('#cookie-popup')
-        this.$body = $('body')
+        this.$body = cacheMainElements.$body
       },
       getCookie: function (name) {
         var value = '; ' + document.cookie
