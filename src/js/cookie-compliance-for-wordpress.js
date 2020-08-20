@@ -15,13 +15,14 @@
    * */
   $(function () {
 
-    const cookie_key_hide_banner = 'ccfw_wp_plugin.hide_banner'
+    const cookie_key_banner_hidden = 'ccfw_wp_plugin.banner.hidden'
     const cookie_key_ga_accept   = 'ccfw_wp_plugin.ga.accept'
 
     // This is used so much make sure all modules use it to save calls to DOM
-    const cacheMainElement = {
+    const cacheMainElements = {
       init: function () {
         this.$el = $('#ccfw-page-banner')
+        this.$body = $('body')
       }
     }
 
@@ -33,7 +34,7 @@
         this.cacheDom()
       },
       cacheDom: function () {
-        this.$el = cacheMainElement.$el
+        this.$el = cacheMainElements.$el
         this.$settingsModal = this.$el.find('#cookie-popup')
       },
       getCookie: function (name) {
@@ -77,30 +78,30 @@
         this.bannerDisplay()
       },
       cacheDom: function () {
-        this.$el = cacheMainElement.$el
-        this.$buttonaccept = this.$el.find('#cookie-accept')
-        this.$buttondecline = this.$el.find('#cookie-decline')
-        this.$buttoninfo = this.$el.find('#cookie-more-info')
+        this.$el = cacheMainElements.$el
+        this.$buttonAccept = this.$el.find('#cookie-accept')
+        this.$buttonDecline = this.$el.find('#cookie-decline')
+        this.$buttonInfo = this.$el.find('#cookie-more-info')
       },
       bannerDisplay: function () {
-        if (utilities.checkForCookie(cookie_key_hide_banner) === true) {
+        if (utilities.checkForCookie(cookie_key_banner_hidden) === true) {
           utilities.hideBanner()
         } else {
           this.$el.show()
         }
       },
       bindEvents: function () {
-        this.$buttonaccept.on('click', this.acceptAllButton.bind(this))
-        this.$buttondecline.on('click', this.declineAllButton.bind(this))
-        this.$buttoninfo.on('click', this.chooseCookieSettingsButton.bind(this))
+        this.$buttonAccept.on('click', this.acceptAllButton.bind(this))
+        this.$buttonDecline.on('click', this.declineAllButton.bind(this))
+        this.$buttonInfo.on('click', this.chooseCookieSettingsButton.bind(this))
       },
       acceptAllButton: function () {
-        utilities.setCookie(cookie_key_hide_banner, 'true', 365)
+        utilities.setCookie(cookie_key_banner_hidden, 'true', 365)
         utilities.setCookie(cookie_key_ga_accept, 'true', 365)
         utilities.hideBanner()
       },
       declineAllButton: function() {
-        utilities.setCookie(cookie_key_hide_banner, 'true', 365)
+        utilities.setCookie(cookie_key_banner_hidden, 'true', 365)
 
         // GA - If present remove GA cookie, otherwise do nothing, default is GA off
         if (utilities.checkForCookie(cookie_key_ga_accept)) {
@@ -119,28 +120,28 @@
         this.bindEvents()
       },
       cacheDom: function () {
-        this.$el = cacheMainElement.$el
+        this.$el = cacheMainElements.$el
         this.$settingsModal = this.$el.find('#cookie-popup')
-        this.$buttonaccept = this.$settingsModal.find('#cookie-accept')
-        this.$buttondecline = this.$settingsModal.find('#cookie-decline')
-        this.$buttoninfo = this.$settingsModal.find('#cookie-more-info')
-        this.$buttonsavepreferences = this.$settingsModal.find('#cookie-save-preferences')
-        this.$GAcheckbox = this.$settingsModal.find('#ccfw-ga-toggle')
-        this.$buttonmodalclose = this.$settingsModal.find('#ccfw-modal-close')
-        this.$body = $('body')
+        this.$buttonAccept = this.$settingsModal.find('#cookie-accept')
+        this.$buttonDecline = this.$settingsModal.find('#cookie-decline')
+        this.$buttonInfo = this.$settingsModal.find('#cookie-more-info')
+        this.$buttonSavePreferences = this.$settingsModal.find('#cookie-save-preferences')
+        this.$GAcheckBox = this.$settingsModal.find('#ccfw-ga-toggle')
+        this.$buttonModalClose = this.$settingsModal.find('#ccfw-modal-close')
+        this.$body = cacheMainElements.$body
       },
       bindEvents: function () {
-        this.$buttoninfo.on('click', this.viewMoreInfo.bind(this))
-        this.$buttonsavepreferences.on('click', this.saveCookiePreferences.bind(this))
-        this.$buttonmodalclose.on('click', this.modalDisplay.bind(this))
+        this.$buttonModalClose.on('click', this.modalDisplay.bind(this))
+        this.$buttonInfo.on('click', this.viewMoreInfo.bind(this))
+        this.$buttonSavePreferences.on('click', this.saveCookiePreferences.bind(this))
       },
       modalDisplay: function () {
         utilities.hideSettingsModal()
       },
       viewMoreInfo: function () {
-        this.$buttoninfo.attr('aria-expanded', 'true')
-        utilities.showSettingsModal()
+        this.$buttonInfo.attr('aria-expanded', 'true')
         this.$body.addClass("ccfw-modal-open")
+        utilities.showSettingsModal()
 
         /*Trap focus */
         /* Based on Hidde de Vries' solution: https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element */
@@ -167,7 +168,7 @@
         })
       },
       saveCookiePreferences: function () {
-        let analyticsCookiesTurnedOn = this.$GAcheckbox.prop('checked')
+        let analyticsCookiesTurnedOn = this.$GAcheckBox.prop('checked')
 
         if (analyticsCookiesTurnedOn === true) {
           utilities.setCookie(cookie_key_ga_accept, 'true', 365)
@@ -180,13 +181,13 @@
           }
         }
 
-        utilities.setCookie(cookie_key_hide_banner, 'true', 365)
+        utilities.setCookie(cookie_key_banner_hidden, 'true', 365)
         utilities.hideBanner()
         utilities.hideSettingsModal()
       },
     }
 
-    cacheMainElement.init()
+    cacheMainElements.init()
     utilities.init()
     banner.init()
     settingsModal.init()
