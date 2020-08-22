@@ -18,34 +18,43 @@
  * Domain Path:       /languages
  */
 
- /**
-  * Do not allow access outside of WP to plugin
-  */
-defined( 'ABSPATH' ) or die();
+namespace CCFW\Components;
 
-if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
-	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
-}
+// Do not allow access outside of WP to plugin
+defined('ABSPATH') || exit;
+
+// Create constant for plugin path
+define( 'CCFW_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
  * Activate/Decativation functions to be in here
  * as WP requires register being outside a class
  */
-
 function activate_ccfw_plugin() {
-	CCFW\Activate::activate();
+// activate code here.
 }
-register_activation_hook( __FILE__, 'activate_ccfw_plugin' );
+register_activation_hook( CCFW_PLUGIN_PATH, 'activate_ccfw_plugin' );
 
 function deactivate_ccfw_plugin() {
-	CCFW\Deactivate::deactivate();
+// deactivate code here.
 }
-register_deactivation_hook( __FILE__, 'deactivate_ccfw_plugin' );
+register_deactivation_hook( CCFW_PLUGIN_PATH, 'deactivate_ccfw_plugin' );
 
-/**
- * Launch app via a register of services (aka classes that make up the plugin)
- */
-if ( class_exists( 'CCFW\\Init' ) ) {
-	CCFW\Init::register_services();
-}
+// Plugin components
+require_once('components/AdminSettings/AdminSettings.php');
+require_once('components/Helper/Helper.php');
+require_once('components/Banner/Banner.php');
+require_once('components/Banner/BannerSettings.php');
+require_once('components/Analytics/Analytics.php');
+require_once('components/Analytics/AnalyticsSettings.php');
 
+// Include autoloader
+include_once "load.php";
+
+global $ccfwHelper;
+$ccfwHelper = new Helper();
+
+// Instantiate classes
+new AdminSettings();
+new Banner();
+new Analytics();
