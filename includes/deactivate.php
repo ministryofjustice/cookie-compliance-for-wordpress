@@ -8,16 +8,18 @@
  *
  * @package    cookie-compliance-for-wordpress
  */
+
 namespace CCFW;
 
-class Deactivate {
+class Deactivate
+{
 
-	/**
-	 *
-	 * @since    1.0.0
-	 */
-	public static function deactivate() {
-		flush_rewrite_rules();
-	}
-
+    /**
+     *
+     * @since    1.0.0
+     */
+    public static function deactivate()
+    {
+        flush_rewrite_rules();
+    }
 }
