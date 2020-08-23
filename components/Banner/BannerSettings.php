@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Admin area banner functionality
+ *
+ * @link       https://github.com/ministryofjustice/cookie-compliance-for-wordpress
+ * @since      1.0.0
+ *
+ * @package    cookie-compliance-for-wordpress
+ */
 namespace CCFW\Components;
 
 use CCFW\Components\Banner;
@@ -35,11 +42,11 @@ class BannerSettings extends Banner
      */
     public function bannerText()
     {
-        echo '<h1>Hellow</h1>';
+        echo 'Add banner text here.';
     }
 
     public function settingsSectionCB()
     {
-        echo '<h1>Hellow2</h1>';
+        echo 'Add banner generally settings here.';
     }
 }

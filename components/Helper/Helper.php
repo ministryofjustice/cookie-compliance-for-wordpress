@@ -1,9 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: damienwilson
- * Date: 2019-09-23
- * Time: 13:56
+ * Common functions shared by components
+ *
+ * @link       https://github.com/ministryofjustice/cookie-compliance-for-wordpress
+ * @since      1.0.0
+ *
+ * @package    cookie-compliance-for-wordpress
  */
 
 namespace CCFW\Components;
@@ -52,9 +54,6 @@ class Helper
         add_filter('cron_schedules', [$this, 'addIntervals']);
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.ShortVariable)
-     */
     public function getPageUrl()
     {
         global $wp;
@@ -135,9 +134,6 @@ class Helper
         }
     }
 
-    /**
-     *
-     */
     public function mail()
     {
         $headers = "MIME-Version: 1.0\r\n";

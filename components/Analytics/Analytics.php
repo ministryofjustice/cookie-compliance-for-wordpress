@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Analytics functinality
+ *
+ * @link       https://github.com/ministryofjustice/cookie-compliance-for-wordpress
+ * @since      1.0.0
+ *
+ * @package    cookie-compliance-for-wordpress
+ */
 namespace CCFW\Components;
 
 use CCFW\Components\Analytics\AnalyticsSettings as Settings;

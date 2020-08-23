@@ -15,7 +15,7 @@ class AdminSettings
     public $helper;
     public $tabs = [];
     public $content = [];
-    public $object = ''; // the settings() current object
+    public $object = '';
 
     public function __construct()
     {
@@ -66,8 +66,6 @@ class AdminSettings
 
                 $className = $this->helper->splitCamelCase(basename($thisClass));
 
-
-
                 $this->tabs[] = [
                     'key' => $key,
                     'class' => str_replace(' Settings', '', $className)
@@ -116,7 +114,7 @@ class AdminSettings
     }
 
     /**
-     * @SuppressWarnings(PHPMD.CamelCaseVariableName)
+     * Load into text into new tab section
      */
     public function doSettingsSections($page)
     {
