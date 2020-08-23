@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -916,26 +916,14 @@
 
 /***/ }),
 
-/***/ "./src/scss/cookie-compliance-for-wordpress.scss":
-/*!*******************************************************!*\
-  !*** ./src/scss/cookie-compliance-for-wordpress.scss ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 0:
-/*!**********************************************************************************************!*\
-  !*** multi ./src/js/ie11CustomProperties.js ./src/scss/cookie-compliance-for-wordpress.scss ***!
-  \**********************************************************************************************/
+/***/ 1:
+/*!**********************************************!*\
+  !*** multi ./src/js/ie11CustomProperties.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/adam/Dev/moj/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/js/ie11CustomProperties.js */"./src/js/ie11CustomProperties.js");
-module.exports = __webpack_require__(/*! /Users/adam/Dev/moj/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/scss/cookie-compliance-for-wordpress.scss */"./src/scss/cookie-compliance-for-wordpress.scss");
+module.exports = __webpack_require__(/*! /Users/adam/Dev/moj/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/js/ie11CustomProperties.js */"./src/js/ie11CustomProperties.js");
 
 
 /***/ })

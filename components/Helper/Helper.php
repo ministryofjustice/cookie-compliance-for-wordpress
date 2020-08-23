@@ -15,7 +15,7 @@ namespace CCFW\Components;
  */
 class Helper
 {
-    public $assetPath = '';
+    public $assetPath;
 
     // mail related stuff
     /**
@@ -77,34 +77,40 @@ class Helper
      * @param $path | the path to the assets directory in the given component
      * @return string
      */
-    public function assetPath($path)
+    public function assetPath()
     {
-        return esc_url(plugins_url('dist/', $path));
+        // http://<site-name-here>/app/plugins/cookie-compliance-for-wordpress/dist/
+        return esc_url(plugin_dir_url(dirname(__FILE__, 2)). 'dist/');
     }
 
-    public function cssPath($path)
+    public function cssPath()
     {
-        return $this->assetPath($path) . 'css/';
+        return $this->assetPath() . 'css/';
     }
 
-    public function fontPath($path)
+    public function fontPath()
     {
-        return $this->assetPath($path) . 'fonts/';
+        return $this->assetPath() . 'fonts/';
     }
 
-    public function imagePath($path)
+    public function imagePath()
     {
-        return $this->assetPath($path) . 'images/';
+        return $this->assetPath() . 'images/';
     }
 
-    public function jsPath($path)
+    public function jsPath()
     {
-        return $this->assetPath($path) . 'js/';
+        return $this->assetPath() . 'js/';
     }
 
-    public function emailPath($path)
+    public function emailPath()
     {
-        return $path . 'email-templates/';
+        return 'email-templates/';
+    }
+
+    public function filePath()
+    {
+        return esc_url(plugin_dir_path(dirname(__FILE__, 2)).'dist/');
     }
 
     /**

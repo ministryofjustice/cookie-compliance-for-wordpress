@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @link              https://github.com/ministryofjustice/cookie-compliance-for-wordpress
  * @since             1.0.0
@@ -24,22 +23,19 @@ namespace CCFW\Components;
 // Do not allow access outside of WP to plugin
 defined('ABSPATH') || exit;
 
-// Create constant for plugin path
-define( 'CCFW_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-
 /**
  * Activate/Decativation functions to be in here
  * as WP requires register being outside a class
  */
 function activate_ccfw_plugin() {
-// activate code here.
+    //do_action( 'my_plugin_activate' );
 }
-register_activation_hook( CCFW_PLUGIN_PATH, 'activate_ccfw_plugin' );
+register_activation_hook(__FILE__, 'activate_ccfw_plugin' );
 
 function deactivate_ccfw_plugin() {
-// deactivate code here.
+   // do_action( 'my_plugin_activate' );
 }
-register_deactivation_hook( CCFW_PLUGIN_PATH, 'deactivate_ccfw_plugin' );
+register_deactivation_hook(__FILE__, 'deactivate_ccfw_plugin' );
 
 // Plugin components
 require_once('components/AdminSettings/AdminSettings.php');

@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/cookie-compliance-for-wordpress.js":
-/*!***************************************************!*\
-  !*** ./src/js/cookie-compliance-for-wordpress.js ***!
-  \***************************************************/
+/***/ "./src/js/ccfw_frontend.js":
+/*!*********************************!*\
+  !*** ./src/js/ccfw_frontend.js ***!
+  \*********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -294,14 +294,14 @@
 
 /***/ }),
 
-/***/ 1:
-/*!*********************************************************!*\
-  !*** multi ./src/js/cookie-compliance-for-wordpress.js ***!
-  \*********************************************************/
+/***/ 2:
+/*!***************************************!*\
+  !*** multi ./src/js/ccfw_frontend.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/adam/Dev/moj/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/js/cookie-compliance-for-wordpress.js */"./src/js/cookie-compliance-for-wordpress.js");
+module.exports = __webpack_require__(/*! /Users/adam/Dev/moj/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/js/ccfw_frontend.js */"./src/js/ccfw_frontend.js");
 
 
 /***/ })
