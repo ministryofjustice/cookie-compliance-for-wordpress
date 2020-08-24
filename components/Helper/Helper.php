@@ -17,27 +17,6 @@ class Helper
 {
     public $assetPath;
 
-    // mail related stuff
-    /**
-     * @var string
-     */
-    public $mailTo = '';
-
-    /**
-     * @var string
-     */
-    public $mailSubject = '';
-
-    /**
-     * @var string
-     */
-    public $mailMessage = '';
-
-    /**
-     * @var array
-     */
-    public $mailHeaders = [];
-
     /**
      * @var array
      */
@@ -47,11 +26,6 @@ class Helper
     public function __construct()
     {
         $this->actions();
-    }
-
-    private function actions()
-    {
-        add_filter('cron_schedules', [$this, 'addIntervals']);
     }
 
     public function getPageUrl()
@@ -103,11 +77,6 @@ class Helper
         return $this->assetPath() . 'js/';
     }
 
-    public function emailPath()
-    {
-        return 'email-templates/';
-    }
-
     public function filePath()
     {
         return esc_url(plugin_dir_path(dirname(__FILE__, 2)).'dist/');
@@ -140,13 +109,6 @@ class Helper
         }
     }
 
-    public function mail()
-    {
-        $headers = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-        wp_mail($this->mailTo, $this->mailSubject, $this->mailMessage, $headers);
-    }
-
     public function splitCamelCase($string)
     {
         $regex = '/
@@ -157,43 +119,6 @@ class Helper
         /x';
         $array = preg_split($regex, $string);
         return implode(' ', $array);
-    }
-
-    public function setMailSubject($subject)
-    {
-        $this->mailSubject = $subject;
-    }
-
-    public function setMailMessage($message)
-    {
-        $this->mailMessage = $message;
-    }
-
-    public function setMaiTo($to)
-    {
-        $this->mailTo = $to;
-    }
-
-    public function addIntervals($schedules)
-    {
-        $schedules['weekly'] = array(
-            'interval' => 604800,
-            'display' => __('Once Weekly')
-        );
-        $schedules['monthly'] = array(
-            'interval' => 2635200,
-            'display' => __('Once Monthly')
-        );
-        $schedules['five_minutes'] = [
-            'interval' => 300,
-            'display' => esc_html__('Every Five Minutes')
-        ];
-        $schedules['three_minutes'] = [
-            'interval' => 180,
-            'display' => esc_html__('Every Three Minutes')
-        ];
-
-        return $schedules;
     }
 }
 
