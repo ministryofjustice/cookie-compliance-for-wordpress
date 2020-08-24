@@ -1,5 +1,7 @@
 {
     "/js/ccfw-ie11CustomProperties.js": "/js/ccfw-ie11CustomProperties.js",
-    "/css/cookie-compliance-for-wordpress.css": "/css/cookie-compliance-for-wordpress.css",
-    "/js/cookie-compliance-for-wordpress.js": "/js/cookie-compliance-for-wordpress.js"
+    "/js/ccfw_admin_main.js": "/js/ccfw_admin_main.js",
+    "/css/ccfw_frontend.css": "/css/ccfw_frontend.css",
+    "/css/ccfw_admin_main.css": "/css/ccfw_admin_main.css",
+    "/js/ccfw_frontend.js": "/js/ccfw_frontend.js"
 }
