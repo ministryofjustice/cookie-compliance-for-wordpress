@@ -202,12 +202,7 @@
         utilities.hideBanner();
       },
       declineAllButton: function declineAllButton() {
-        utilities.setCookie(cookie_key_banner_hidden, 'true', 365); // GA - If present remove GA cookie, otherwise do nothing, default is GA off
-
-        if (utilities.checkForCookie(cookie_key_ga_accept)) {
-          utilities.deleteCookie(cookie_key_ga_accept);
-        }
-
+        utilities.setCookie(cookie_key_banner_hidden, 'true', 365);
         utilities.hideBanner();
       },
       chooseCookieSettingsButton: function chooseCookieSettingsButton() {

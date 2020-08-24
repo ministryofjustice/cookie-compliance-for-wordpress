@@ -51,12 +51,27 @@ class Banner
         add_action('wp_body_open', array( $this, 'cookie_compliance_banner' ), 11);
     }
 
-    public function disable_google_analytics_on_load() {
-        // If cookie "ccfw_wp_plugin.ga.accept" not present, disable GA
+    public function disable_google_analytics_on_load()
+    {
+        /**
+         * If cookie "ccfw_wp_plugin.ga.accept" not present, disable GA.
+         * Also check if any previous GA cookies are hanging around
+         * without an explicit "ccfw_wp_plugin.ga.accept" cookie present.
+         * If they are, remove.
+         */
         ?>
         <script>
             var ccfwPluginGACookieNotPresent = document.cookie.indexOf('ccfw_wp_plugin.ga.accept=') == -1 ? true : false;
             window['ga-disable-<?php echo $this->googleAnalyticsID; ?>'] = ccfwPluginGACookieNotPresent;
+
+            if (ccfwPluginGACookieNotPresent) {
+                var ccfwCookies = ['_ga', '_gid', '_gat_<?php echo $this->googleAnalyticsID; ?>'];
+                var ccfwCookiesLength = ccfwCookies.length;
+                for (var i = 0; i < ccfwCookiesLength; i++) {
+                    document.cookie = ccfwCookies[i] + '=; Path=/; domain=.'+ document.domain
+                    +'; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                };
+            };
         </script>
         <?php
     }

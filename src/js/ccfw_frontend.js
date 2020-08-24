@@ -51,7 +51,7 @@
         document.cookie = name + '=' + value + '; path=/; expires=' + d.toGMTString()
       },
       deleteCookie: function (name) {
-        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
       },
       checkForCookie: function (key) {
         let cookie = this.getCookie(key)
@@ -107,11 +107,6 @@
       },
       declineAllButton: function() {
         utilities.setCookie(cookie_key_banner_hidden, 'true', 365)
-
-        // GA - If present remove GA cookie, otherwise do nothing, default is GA off
-        if (utilities.checkForCookie(cookie_key_ga_accept)) {
-          utilities.deleteCookie(cookie_key_ga_accept)
-        }
         utilities.hideBanner()
       },
       chooseCookieSettingsButton: function() {
