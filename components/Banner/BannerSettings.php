@@ -29,24 +29,34 @@ class BannerSettings extends Banner
     public function settingsFields($section)
     {
         add_settings_field(
-            'banner_text',
-            __('Banner text', 'cookie-compliance-for-wordpress'),
-            [$this, 'bannerText'],
+            'banner_title',
+            __('Banner title', 'cookie-compliance-for-wordpress'),
+            [$this, 'bannerTitle'],
             'cookie-compliance-for-wordpress-settings',
             $section
         );
     }
 
     /**
-     * Function that collects inputed GTM ID and running checks on it.
+     * Add custom banner title
      */
-    public function bannerText()
+    public function bannerTitle()
     {
-        echo 'Add banner text here.';
+
+        $options = get_option('ccfw_plugin_settings');
+        $bannerTitle = $options['banner_title'] ?? '';
+
+        ?>
+        <input type='text' name='ccfw_plugin_settings[banner_title]'
+        placeholder="Add custom cookie banner title" value='<?php echo esc_attr($bannerTitle); ?>'
+        class="ccfw-component-input">
+        <?php
     }
 
     public function settingsSectionCB()
     {
-        echo 'Add banner generally settings here.';
+        ?>
+        <p><?php _e('Make custom changes to your cookie banner.', 'wp_banner_page'); ?></p>
+        <?php
     }
 }

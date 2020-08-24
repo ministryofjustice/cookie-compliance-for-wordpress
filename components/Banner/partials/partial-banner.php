@@ -14,18 +14,21 @@
 $domainName = $_SERVER['SERVER_NAME'];
 filter_var($domainName, FILTER_SANITIZE_URL);
 $domainName = str_replace('www.', '', $domainName);
+
+$options = get_option('ccfw_plugin_settings');
+$bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Are you OK with cookies?';
 ?>
 
 <div id="ccfw-page-banner">
     <div class="ccfw-banner-container">
 
         <div class="ccfw-banner__intro">
-            <h2 class="govuk-heading-l">Are you OK with cookies?</h2>
+
+            <?php _e('<h2 class="govuk-heading-l">'. esc_attr($bannerTitle) . '</h2>', 'cookie-compliance-for-wordpress'); ?>
 
             <p class="ccfw-banner-container__infotext govuk-body">
                 <?php _e('We use small files called ‘cookies’ on ' . strtoupper($domainName) . ' to give you the best experience on our site.  Some are essential to make the site work, and some help us understand how people use the site so that we can improve your experience. You can choose to turn off the non-essential cookies.  Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'); ?>
             </p>
-
 
             <div class="ccfw-banner-container__buttons">
 
@@ -224,7 +227,5 @@ $domainName = str_replace('www.', '', $domainName);
                 <?php _e('Save my choice', 'cookie-compliance-for-wordpress'); ?>
             </button>
         </div>
-
-
     </div>
 </div>
