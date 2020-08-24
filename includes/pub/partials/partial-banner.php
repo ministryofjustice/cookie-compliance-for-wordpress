@@ -49,13 +49,11 @@ $domainName = str_replace('www.', '', $domainName);
 
             <div class="ccfw-banner__toggle-header-container">
                 <h4 class="govuk-heading-s ccfw-banner__toggle-heading">Cookies that measure website use (analytics cookies)</h4>
-                <fieldset class="ccfw-banner__fieldset">
-                    <label class="ccfw-banner__toggle">
-                        <input type="checkbox" id="ccfw-ga-toggle">
-                        <span class="slider round"></span>
-                        <span class="visually-hidden">Turn on analytics cookies</span>
-                    </label>
-                </fieldset>
+                <label class="ccfw-banner__toggle-label">
+                    <input type="checkbox" id="ccfw-ga-toggle" class="ccfw-banner__toggle-input">
+                    <span class="ccfw-banner__toggle-slider"></span>
+                    <span class="visually-hidden">Turn on analytics cookies</span>
+                </label>
             </div>
 
             <p class="ccfw-banner__summary-text govuk-body">We use Google Analytics to measure how you use the website so we can improve it based on user needs. We do not allow Google Analytics to use or share the data about how you use this site. </p>
