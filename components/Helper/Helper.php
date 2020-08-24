@@ -28,6 +28,9 @@ class Helper
         $this->actions();
     }
 
+    private function actions()
+    {}
+
     public function getPageUrl()
     {
         global $wp;
