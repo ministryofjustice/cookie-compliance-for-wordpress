@@ -85,7 +85,7 @@ class AdminSettings
 
     public function settings()
     {
-        register_setting('ccfwGroupOptionSettings', 'ccfw_plugin_setting');
+        register_setting('ccfwGroupOptionSettings', 'ccfw_plugin_settings');
 
         foreach ($this->helper->adminSettings as $key => $class) {
 

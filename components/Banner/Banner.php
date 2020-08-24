@@ -7,7 +7,7 @@
  *
  * @package    cookie-compliance-for-wordpress
  */
-namespace CCFW\components;
+namespace CCFW\Components;
 
 use CCFW\Components\BannerSettings as Settings;
 
@@ -28,10 +28,18 @@ class Banner
      */
     public $settings;
 
+    /**
+     * @var string
+     */
+    public $googleAnalyticsID;
+
 
     public function __construct()
     {
         $this->settings = new Settings();
+
+        $options = get_option('ccfw_plugin_settings');
+        $this->googleAnalyticsID = $options['ga_analytics_id'] ?? '';
 
         $this->actions();
     }
@@ -48,7 +56,7 @@ class Banner
         ?>
         <script>
             var ccfwPluginGACookieNotPresent = document.cookie.indexOf('ccfw_wp_plugin.ga.accept=') == -1 ? true : false;
-            window['ga-disable-UA-174461977-1'] = ccfwPluginGACookieNotPresent;
+            window['ga-disable-<?php echo $this->googleAnalyticsID; ?>'] = ccfwPluginGACookieNotPresent;
         </script>
         <?php
     }

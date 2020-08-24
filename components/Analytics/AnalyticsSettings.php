@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Admin page covering the analytics tab settings
+ *
+ * @link       https://github.com/ministryofjustice/cookie-compliance-for-wordpress
+ * @since      1.0.0
+ *
+ * @package    cookie-compliance-for-wordpress
+ */
 namespace CCFW\Components\Analytics;
 
 use CCFW\Components\Analytics;
@@ -31,37 +38,31 @@ class AnalyticsSettings extends Analytics
     }
 
     /**
-     * Function that collects inputed GTM ID and running checks on it.
+     * Function that collects inputed GA tracking ID and running checks on it.
      */
     public function setGoogleAnalyticsID()
     {
-        $options = get_option('moj_component_settings');
-        $googleTagManagerID = $options['gtm_analytics_id'] ?? '';
+        $options = get_option('ccfw_plugin_settings');
+        $googleAnalyticsID = $options['ga_analytics_id'] ?? '';
 
         ?>
-        <input type='text' name='moj_component_settings[gtm_analytics_id]'
-        placeholder="GTM-XXXXXXX" value='<?php echo sanitize_html_class($googleTagManagerID); ?>'
-        class="moj-component-input">
+        <input type='text' name='ccfw_plugin_settings[ga_analytics_id]'
+        placeholder="UA-XXXXXXXXX-X" value='<?php echo sanitize_html_class($googleAnalyticsID); ?>'
+        class="ccfw-component-input">
         <?php
 
-        // Run a few basic checks (mainly for devs in case of C&P typos)
+        // Run a few basic checks
 
-        // Check if empty string stop rest of checks.
-        if ($googleTagManagerID === '') return;
+        // Check if empty string, stop rest of checks.
+        if ($googleAnalyticsID === '') return;
 
         // Remove whitespace, tabs & line ends.
-        $googleTagManagerID = preg_replace('/\s+/', '', $googleTagManagerID);
+        $googleAnalyticsID = preg_replace('/\s+/', '', $googleAnalyticsID);
 
-        // Too many, too few characters
-        if (strlen($googleTagManagerID) != 11) {
+        // Basic check that it is a GA ID
+        if (!preg_match('/^UA-/', $googleAnalyticsID)) {
             echo '<div class="notice notice-error settings-error" style="margin-left: 0;">
-            GTM ID might be invalid. Double check the charactor count.</div>';
-        }
-
-        // Check it is a GTM ID (not GA for example)
-        if (!preg_match('/^GTM-/', $googleTagManagerID)) {
-            echo '<div class="notice notice-error settings-error" style="margin-left: 0;">
-            GTM ID might be invalid. ID must start with GTM.</div>';
+            GA ID might be invalid. ID must start with UA-.</div>';
         }
     }
 
@@ -69,14 +70,11 @@ class AnalyticsSettings extends Analytics
     {
         ?>
         <div class="welcome-panel-column">
-            <h4><?php _e('Google Tag Manager (GTM)', 'wp_analytics_page') ?></h4>
-            <p style="max-width: 600px"><?php _e('Analytic tracking on our site is done through GTM.
-            First setup a GTM account and then add the GTM container ID below and save.
-            This will add GTM code to the site. You can find the eleven charactor GTM ID, by logining into your GTM account,
-            in the top right corner of the dashboard.<br><br>If no GTM ID is added, no code is loaded on the page.', 'wp_analytics_page'); ?></p>
-            <h4><?php _e('Google Analytics (GA)', 'wp_analytics_page') ?></h4>
-            <p style="max-width: 600px"><?php _e('Add Google Analytics or any other tracker, via the GTM dashboard.',
-            'wp_analytics_page'); ?></p>
+            <h4><?php _e('Google Analytics (GA) Tracking ID', 'wp_analytics_page'); ?></h4>
+            <p><?php _e('Enter your GA tracking ID and save. This enables the banner to disable/enable your GA tracking for visitors.
+            <br>More information on where to find you GA code is available on Google Help pages.
+            <br> https://support.google.com/analytics/answer/7372977?hl=en ', 'wp_analytics_page'); ?>
+            </p>
         </div>
         <?php
     }

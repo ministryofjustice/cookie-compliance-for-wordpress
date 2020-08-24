@@ -1,6 +1,6 @@
 <?php
 /**
- * Analytics functinality
+ * Analytics functionality
  *
  * @link       https://github.com/ministryofjustice/cookie-compliance-for-wordpress
  * @since      1.0.0
@@ -28,26 +28,15 @@ class Analytics
      */
     public $settings;
 
-    /**
-     * @var string
-     */
-    public $googleTagManagerID;
-
     public function __construct()
     {
         $this->settings = new Settings();
 
         $this->actions();
-
-        // Get GTM ID if provided via the settings field
-        // $options = get_option('moj_component_settings');
-        // $this->googleTagManagerID = $options['gtm_analytics_id'] ?? '';
     }
 
     public function actions()
     {
         add_action('wp_loaded', [$this->settings, 'settings'], 1);
-        // add_action('wp_head', [$this,'loadGoogleTagManagerInHead']);
-        // add_action('wp_body_open', [$this,'loadGoogleTagManagerInBody']);
     }
 }
