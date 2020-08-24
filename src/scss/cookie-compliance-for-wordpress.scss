@@ -90,7 +90,7 @@ $breakpoints: ('small': (min-width: 767px),
     overflow-y: scroll;
     box-sizing: border-box;
 
-     &.cookie-banner-open {
+    &.cookie-banner-open {
         all: unset;
         top: 10%;
         left: 10%;
@@ -121,12 +121,17 @@ $breakpoints: ('small': (min-width: 767px),
         max-width: 960px;
         display: block;
 
+        &__heading {
+            @extend .govuk-heading-l;
+        }
+
         &__info-text {
             all: unset;
             display: block;
             margin-right: 12px;
             padding: 12px 0 6px;
             margin-bottom: 20px;
+            @extend .govuk-body;
 
             a {
                 all: unset;
@@ -154,6 +159,11 @@ $breakpoints: ('small': (min-width: 767px),
                     color: var(--xDark);
                     background-color: var(--focus);
                     box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+                }
+
+                &:hover {
+                    background: none;
+                    text-decoration: underline;
                 }
             }
 
@@ -190,7 +200,7 @@ $breakpoints: ('small': (min-width: 767px),
                 }
 
                 &::before {
-                    right: unset;
+                    right: auto;
                 }
 
                 &[aria-expanded="true"] {
@@ -240,8 +250,13 @@ $breakpoints: ('small': (min-width: 767px),
             @extend .govuk-heading-m;
         }
 
+        &__summary-heading {
+            @extend .govuk-heading-s;
+        }
+
         &__summary-text {
             max-width: 800px;
+            @extend .govuk-body;
         }
 
         &__toggle-header-container {
@@ -256,6 +271,7 @@ $breakpoints: ('small': (min-width: 767px),
         &__toggle-heading {
             float: left;
             width: 65%;
+            @extend .govuk-heading-s;
         }
 
         &__toggle-label {
@@ -286,7 +302,6 @@ $breakpoints: ('small': (min-width: 767px),
             border-radius: 34px;
 
             &:focus {
-
                 & + #ccfw-ga-toggle {
                     outline: 4px solid --focus;
                 }
@@ -333,13 +348,53 @@ $breakpoints: ('small': (min-width: 767px),
         &__toggle-input:focus + .ccfw-banner__toggle-slider {
             background: #ffdd00;
         }
+
+        &__expanding-section {
+            @extend .govuk-details;
+        }
+
+        &__expanding-section-summary {
+            @extend .govuk-details__summary;
+        }
+
+        &__expanding-section-summary-text {
+            @extend .govuk-details__summary-text;
+        }
+
+        &__expanding-section-text {
+            @extend .govuk-details__text;
+        }
+
+        &__table {
+            @extend .govuk-table;
+        }
+
+        &__table-caption {
+            padding: 0;
+            color: black;
+            caption-side: top;
+            clip: unset;
+            width: auto;
+            height: auto;
+            clip-path: unset;
+            position: relative;
+            @extend .govuk-table__caption;
+        }
+
+        &__table-header {
+            @extend .govuk-table__header;
+        }
+
+        &__table-cell {
+            @extend .govuk-table__cell;
+        }
     }
-}x
+}
 
 .ccfw-modal-open {
     overflow: hidden;
 
-    .ccfw-background-grey-overlay {
+    & .ccfw-background-grey-overlay {
         position: fixed;
         width: 100%;
         height: 100%;
@@ -360,10 +415,4 @@ $breakpoints: ('small': (min-width: 767px),
 
 html, body, .cookie-banner-open {
     height: 100%;
-}
-
-.govuk-table__caption {
-    padding: 0;
-    color: black;
-    caption-side: top;
 }
