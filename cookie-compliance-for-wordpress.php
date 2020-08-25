@@ -23,20 +23,6 @@ namespace CCFW\Components;
 // Do not allow access outside of WP to plugin
 defined('ABSPATH') || exit;
 
-/**
- * Activate/Decativation functions to be in here
- * as WP requires register being outside a class
- */
-function activate_ccfw_plugin() {
-    //do_action( 'my_plugin_activate' );
-}
-register_activation_hook(__FILE__, 'activate_ccfw_plugin' );
-
-function deactivate_ccfw_plugin() {
-   // do_action( 'my_plugin_activate' );
-}
-register_deactivation_hook(__FILE__, 'deactivate_ccfw_plugin' );
-
 // Plugin components
 require_once('components/AdminSettings/AdminSettings.php');
 require_once('components/Helper/Helper.php');

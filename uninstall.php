@@ -9,7 +9,7 @@
  * @package    cookie-compliance-for-wordpress
  */
 
-defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
+defined('WP_UNINSTALL_PLUGIN') || exit;
 
 // delete the registered database options
 delete_option('ccfw_plugin_settings');
