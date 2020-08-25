@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Common functions shared by components
  *
@@ -29,7 +30,8 @@ class Helper
     }
 
     private function actions()
-    {}
+    {
+    }
 
     public function getPageUrl()
     {
@@ -57,7 +59,7 @@ class Helper
     public function assetPath()
     {
         // http://<site-name-here>/app/plugins/cookie-compliance-for-wordpress/dist/
-        return esc_url(plugin_dir_url(dirname(__FILE__, 2)). 'dist/');
+        return esc_url(plugin_dir_url(dirname(__FILE__, 2)) . 'dist/');
     }
 
     public function cssPath()
@@ -82,7 +84,7 @@ class Helper
 
     public function filePath()
     {
-        return esc_url(plugin_dir_path(dirname(__FILE__, 2)).'dist/');
+        return esc_url(plugin_dir_path(dirname(__FILE__, 2)) . 'dist/');
     }
 
     /**

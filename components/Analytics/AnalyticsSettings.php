@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Admin page covering the analytics tab settings
  *
@@ -7,6 +8,7 @@
  *
  * @package    cookie-compliance-for-wordpress
  */
+
 namespace CCFW\Components\Analytics;
 
 use CCFW\Components\Analytics;
@@ -54,7 +56,9 @@ class AnalyticsSettings extends Analytics
         // Run a few basic checks
 
         // Check if empty string, stop rest of checks.
-        if ($googleAnalyticsID === '') return;
+        if ($googleAnalyticsID === '') {
+            return;
+        }
 
         // Remove whitespace, tabs & line ends.
         $googleAnalyticsID = preg_replace('/\s+/', '', $googleAnalyticsID);

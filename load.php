@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Cookie Compliance For Wordpress plugin autoload implementation.
  * Based on PSR4 specifications

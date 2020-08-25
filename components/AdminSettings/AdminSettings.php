@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Setup all plugin admin settings
  *
@@ -37,21 +38,21 @@ class AdminSettings
     {
         global $wp_version;
 
-        $file_existsCSS = file_exists($this->helper->filePath() .'css/ccfw_frontend.css');
-        $file_existsJS = file_exists($this->helper->filePath() .'js/ccfw_frontend.js');
+        $file_existsCSS = file_exists($this->helper->filePath() . 'css/ccfw_frontend.css');
+        $file_existsJS = file_exists($this->helper->filePath() . 'js/ccfw_frontend.js');
 
         // Cache bust
-        $css_has_changed_hash = $file_existsCSS ? filemtime($this->helper->filePath() .'css/ccfw_frontend.css') : $wp_version;
-        $js_has_changed_hash = $file_existsJS ? filemtime($this->helper->filePath() .'js/ccfw_frontend.js') : $wp_version;
+        $css_has_changed_hash = $file_existsCSS ? filemtime($this->helper->filePath() . 'css/ccfw_frontend.css') : $wp_version;
+        $js_has_changed_hash = $file_existsJS ? filemtime($this->helper->filePath() . 'js/ccfw_frontend.js') : $wp_version;
 
-        wp_enqueue_style('CCFWPluginStyle', $this->helper->cssPath() .'ccfw_frontend.css', null, $css_has_changed_hash, false);
-        wp_enqueue_script('CCFWPluginScript', $this->helper->jsPath() .'ccfw_frontend.js', ['jquery'], $js_has_changed_hash , true);
+        wp_enqueue_style('CCFWPluginStyle', $this->helper->cssPath() . 'ccfw_frontend.css', null, $css_has_changed_hash, false);
+        wp_enqueue_script('CCFWPluginScript', $this->helper->jsPath() . 'ccfw_frontend.js', ['jquery'], $js_has_changed_hash, true);
 
         global $is_IE;
 
         if ($is_IE) {
         // Fix IE11 banner issues - https://github.com/nuxodin/ie11CustomProperties
-            wp_enqueue_script('CCFWPluginScriptIE11', $this->helper->jsPath().'ccfw-ie11CustomProperties.js', ['jquery'], $js_has_changed_hash, false);
+            wp_enqueue_script('CCFWPluginScriptIE11', $this->helper->jsPath() . 'ccfw-ie11CustomProperties.js', ['jquery'], $js_has_changed_hash, false);
         }
     }
 
@@ -88,7 +89,6 @@ class AdminSettings
         register_setting('ccfwGroupOptionSettings', 'ccfw_plugin_settings');
 
         foreach ($this->helper->adminSettings as $key => $class) {
-
             $this->object = new $class();
 
             $hasSettings = $this->object->hasSettings ?? false;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Analytics functionality
  *
@@ -7,6 +8,7 @@
  *
  * @package    cookie-compliance-for-wordpress
  */
+
 namespace CCFW\Components;
 
 use CCFW\Components\Analytics\AnalyticsSettings as Settings;
