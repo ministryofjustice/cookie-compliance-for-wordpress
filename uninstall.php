@@ -9,7 +9,13 @@
  * @package    cookie-compliance-for-wordpress
  */
 
-defined('WP_UNINSTALL_PLUGIN') || exit;
+// if uninstall.php is not called by WordPress, die
+if (!defined('WP_UNINSTALL_PLUGIN')) {
+    die;
+}
 
 // delete the registered database options
 delete_option('ccfw_plugin_settings');
+
+// for site options in Multisite
+delete_site_option('ccfw_plugin_settings');
