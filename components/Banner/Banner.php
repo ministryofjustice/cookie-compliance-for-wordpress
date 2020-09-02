@@ -68,9 +68,9 @@ class Banner
 
             if (ccfwPluginGACookieNotPresent) {
                 var ccfwCookies = ['_ga', '_gid', '_gat_<?php echo $this->googleAnalyticsID; ?>'];
-                var ccfwCookiesLength = ccfwCookies.length;
-                for (var i = 0; i < ccfwCookiesLength; i++) {
-                    document.cookie = ccfwCookies[i] + '=; Path=/; domain=.'+ document.domain
+                var ccfwCookiesArrayLength = ccfwCookies.length;
+                for (var ccfwCookie = 0; ccfwCookie < ccfwCookiesArrayLength; ccfwCookie++) {
+                    document.cookie = ccfwCookies[ccfwCookie] + '=; Path=/; domain=.'+ document.domain
                     +'; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                 };
             };
