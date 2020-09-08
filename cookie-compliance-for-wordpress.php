@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link              https://github.com/ministryofjustice/cookie-compliance-for-wordpress
  * @since             1.0.0
@@ -7,7 +8,7 @@
  * Plugin Name:       Cookie Compliance for WordPress
  * Plugin URI:        https://github.com/ministryofjustice/cookie-compliance-for-wordpress
  * Description:       Presents users with cookie compliance field when they first visit the website.
- * Version:           1.3.2
+ * Version:           2.0.0
  * Requires at least: 5.2.3
  * Requires PHP:      7.0
  * Author:            Ministry of Justice
@@ -18,34 +19,26 @@
  * Domain Path:       /languages
  */
 
- /**
-  * Do not allow access outside of WP to plugin
-  */
-defined( 'ABSPATH' ) or die();
+namespace CCFW\Components;
 
-if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
-	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
-}
+// Do not allow access outside of WP to plugin
+defined('ABSPATH') || exit;
 
-/**
- * Activate/Decativation functions to be in here
- * as WP requires register being outside a class
- */
+// Plugin components
+require_once('components/AdminSettings/AdminSettings.php');
+require_once('components/Helper/Helper.php');
+require_once('components/Banner/Banner.php');
+require_once('components/Banner/BannerSettings.php');
+require_once('components/Analytics/Analytics.php');
+require_once('components/Analytics/AnalyticsSettings.php');
 
-function activate_ccfw_plugin() {
-	CCFW\Activate::activate();
-}
-register_activation_hook( __FILE__, 'activate_ccfw_plugin' );
+// Include autoloader
+include_once "load.php";
 
-function deactivate_ccfw_plugin() {
-	CCFW\Deactivate::deactivate();
-}
-register_deactivation_hook( __FILE__, 'deactivate_ccfw_plugin' );
+global $ccfwHelper;
+$ccfwHelper = new Helper();
 
-/**
- * Launch app via a register of services (aka classes that make up the plugin)
- */
-if ( class_exists( 'CCFW\\Init' ) ) {
-	CCFW\Init::register_services();
-}
-
+// Instantiate classes
+new AdminSettings();
+new Banner();
+new Analytics();
