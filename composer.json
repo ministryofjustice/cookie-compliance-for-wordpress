@@ -1,0 +1,8 @@
+{
+    "name": "ministryofjustice/cookie-compliance-for-wordpress",
+    "description": "WP plugin that presents visitor with a cookie consent banner and opt-in setting page.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {}
+}
