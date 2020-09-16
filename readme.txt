@@ -1,5 +1,5 @@
-=== NHS Blocks ===
-Contributors: brown-a2, bnewing
+=== Cookie compliance for WordPress ===
+Contributors:
 Tags: GDPR, PECR, cookies
 Plugin Name:: Cookie Compliance for WordPress
 Plugin URI: (we might need to set up a page, maybe in our JOTW Jekyll site?)
