@@ -212,7 +212,7 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
             </details>
 
             <button id="cookie-save-preferences" class="ccfw-banner__button">
-                <?php _e('Save my choice', 'cookie-compliance-for-wordpress'); ?>
+                <?php _e('Save cookie preferences', 'cookie-compliance-for-wordpress'); ?>
             </button>
         </div>
     </div>
