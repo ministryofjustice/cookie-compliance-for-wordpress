@@ -243,6 +243,7 @@ $breakpoints: ('small': (min-width: 767px),
 
         &__modal-container {
             display: none;
+            max-width: 1100px;
         }
 
         &__info-heading {
