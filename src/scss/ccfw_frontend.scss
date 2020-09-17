@@ -57,6 +57,7 @@ $breakpoints: ('small': (min-width: 767px),
 #ccfw-page-banner {
     /* Rems were causing problems because different base themes had a different base rem (some 16px, some 10px) */
     $govuk-typography-use-rem: false;
+    $govuk-font-family: Arial, sans-serif;
 
     /* Import necessary components from the GOV.UK Frontend toolkit */
     @import "node_modules/govuk-frontend/govuk/base";
