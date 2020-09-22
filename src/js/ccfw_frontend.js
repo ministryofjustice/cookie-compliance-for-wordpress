@@ -149,6 +149,12 @@
         let lastFocusableEl = focusableEls[focusableEls.length - 1];
 
         this.$el.on('keydown', function (e) {
+
+          // Close banner if user presses escape key
+          if (e.key === 'Escape') {
+            utilities.hideSettingsModal()
+          }
+
           var isTabPressed = (e.key === 'Tab');
 
           if (!isTabPressed) {
