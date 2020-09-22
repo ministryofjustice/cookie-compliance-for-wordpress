@@ -139,7 +139,6 @@
         utilities.hideSettingsModal()
       },
       viewMoreInfo: function () {
-        this.$buttonInfo.attr('aria-expanded', 'true')
         utilities.showSettingsModal()
 
         /*Trap focus */
