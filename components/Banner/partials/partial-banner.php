@@ -37,18 +37,18 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
                     <?php _e('Only use essential cookies', 'cookie-compliance-for-wordpress'); ?>
                 </button>
 
-                <button class="ccfw-banner-button ccfw-banner__button--expand-options" id="cookie-more-info" aria-controls="cookie-popup" aria-expanded="false">
+                <button class="ccfw-banner-button ccfw-banner__button--expand-options" id="cookie-more-info">
                     <?php _e('Choose which cookies we use', 'cookie-compliance-for-wordpress'); ?>
                 </button>
             </div>
         </div>
 
-        <div id="cookie-popup" class="ccfw-banner__modal-container" role="region">
+        <div id="cookie-popup" class="ccfw-banner__modal-container" role="dialog" aria-labelledby="ccfw-banner-title" aria-modal="true">
             <button id="ccfw-modal-close" class="ccfw-banner__button ccfw-banner__button--close">
                 Close
             </button>
 
-            <h3 class="ccfw-banner__info-heading">Choose which cookies we use</h3>
+            <h3 class="ccfw-banner__info-heading" id="ccfw-banner-title">Choose which cookies we use</h3>
 
             <div class="ccfw-banner__toggle-header-container">
                 <h4 class="ccfw-banner__toggle-heading">Cookies that measure website use (analytics cookies)</h4>

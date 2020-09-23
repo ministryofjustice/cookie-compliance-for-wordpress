@@ -70,6 +70,7 @@
         this.$settingsModal.show()
         this.$body.addClass("ccfw-modal-open")
         this.$el.addClass("cookie-banner-open")
+        settingsModal.trapFocus();
       }
     }
 
@@ -132,15 +133,14 @@
       },
       bindEvents: function () {
         this.$buttonModalClose.on('click', this.modalDisplay.bind(this))
-        this.$buttonInfo.on('click', this.viewMoreInfo.bind(this))
+        this.$buttonInfo.on('click', this.trapFocus.bind(this))
         this.$buttonSavePreferences.on('click', this.saveCookiePreferences.bind(this))
       },
       modalDisplay: function () {
         utilities.hideSettingsModal()
       },
-      viewMoreInfo: function () {
-        this.$buttonInfo.attr('aria-expanded', 'true')
-        utilities.showSettingsModal()
+      trapFocus: function () {
+        this.$buttonModalClose.focus()
 
         /*Trap focus */
         /* Based on Hidde de Vries' solution: https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element */
@@ -149,6 +149,12 @@
         let lastFocusableEl = focusableEls[focusableEls.length - 1];
 
         this.$el.on('keydown', function (e) {
+
+          // Close banner if user presses escape key
+          if (e.key === 'Escape') {
+            utilities.hideSettingsModal()
+          }
+
           var isTabPressed = (e.key === 'Tab');
 
           if (!isTabPressed) {
@@ -157,11 +163,13 @@
 
           if (e.shiftKey) /* shift + tab */ {
             if (document.activeElement === firstFocusableEl) {
-              lastFocusableEl.focus();
+              lastFocusableEl.focus()
+              e.preventDefault()
             }
           } else /* tab */ {
             if (document.activeElement === lastFocusableEl) {
-              firstFocusableEl.focus();
+              firstFocusableEl.focus()
+              e.preventDefault()
             }
           }
         })
