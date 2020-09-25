@@ -146,6 +146,7 @@ $breakpoints: ('extra-small': (min-width: 641px),
         &__button {
             background-color: #1976D2;
             color: #FFFFFF;
+            -webkit-text-fill-color: #FFFFFF;
             border-radius: 5px;
             font-weight: bold;
             box-shadow: none;
@@ -178,11 +179,13 @@ $breakpoints: ('extra-small': (min-width: 641px),
                 border: 0;
                 text-decoration: underline;
                 color:#1D70B8;
+                -webkit-text-fill-color: #1D70B8;
                 margin-bottom: 16px;
                 @extend .govuk-link;
 
                 &:focus, &:hover, &:active {
                     color: var(--xDark);
+                    -webkit-text-fill-color: var(--xDark);
                     background-color: #ffdd00;
                     box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
                 }
@@ -204,6 +207,7 @@ $breakpoints: ('extra-small': (min-width: 641px),
 
                 &:focus, &:hover {
                     color: #FFFFFF;
+                    -webkit-text-fill-color: #FFFFFF;
                     background-color: #0D47A1;
                     fill: #FFFFFF;
                     border: 1px solid #0D47A1;
