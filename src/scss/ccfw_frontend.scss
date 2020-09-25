@@ -190,7 +190,6 @@ $breakpoints: ('extra-small': (min-width: 641px),
 
             &--arrow {
                 vertical-align: sub;
-                fill: #1976D2;
             }
 
             &--expand-options {
@@ -201,6 +200,7 @@ $breakpoints: ('extra-small': (min-width: 641px),
                 box-shadow: none;
                 padding: 9px 17px;
                 width: 100%;
+                fill: #1976D2;
 
                 &:focus, &:hover {
                     color: #FFFFFF;
