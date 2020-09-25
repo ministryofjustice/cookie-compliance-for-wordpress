@@ -10,7 +10,8 @@
 // Responsive mixins
 // =========================================================
 
-$breakpoints: ('small': (min-width: 767px),
+$breakpoints: ('extra-small': (min-width: 641px),
+'small': (min-width: 767px),
 'medium': (min-width: 992px),
 'large': (min-width: 1200px)) !default;
 
@@ -143,7 +144,32 @@ $breakpoints: ('small': (min-width: 767px),
         }
 
         &__button {
-            @extend .govuk-button;
+            background-color: #1976D2;
+            color: #FFFFFF;
+            -webkit-text-fill-color: #FFFFFF;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: none;
+            padding: 8px 16px;
+            margin: 0 2px;
+
+            &:hover {
+                background-color: #0D47A1;
+            }
+
+            &:focus {
+                background-color: #0D47A1;
+                box-shadow:
+                    0 0 0 2px #FFFFFF,
+                    0 0 0 4px #00A0CC;
+                outline: none;
+            }
+
+            &:active {
+                background-color: #403DD0;
+                outline: 2px solid #00A0CC;
+                outline-offset: 2px;
+            }
 
             &--close {
                 box-shadow: none;
@@ -153,82 +179,53 @@ $breakpoints: ('small': (min-width: 767px),
                 border: 0;
                 text-decoration: underline;
                 color:#1D70B8;
+                -webkit-text-fill-color: #1D70B8;
                 margin-bottom: 16px;
                 @extend .govuk-link;
 
-                &:focus {
+                &:focus, &:hover, &:active {
                     color: var(--xDark);
-                    background-color: var(--focus);
+                    -webkit-text-fill-color: var(--xDark);
+                    background-color: #ffdd00;
                     box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
-                }
-
-                &:hover {
-                    background: none;
-                    text-decoration: underline;
                 }
             }
 
-            &--decline {
-                @extend .govuk-button--secondary;
+            &--arrow {
+                vertical-align: sub;
             }
 
             &--expand-options {
-                margin-top: 8px;
-                display: inline-block;
-                padding: 0;
                 font-family: inherit;
-                font-weight: 300;
-                border: none;
-                cursor: pointer;
-                padding: 8px 10px 7px 25px;
-                background-color: transparent;
-                color:#1D70B8;
-                text-decoration: underline;
-                margin-right: 16px;
+                background-color: #E8F1FB;
+                color:#1976D2;
+                border: 1px solid #1976D2;
                 box-shadow: none;
-                border-radius: 0;
-                @extend .govuk-details__summary;
-                @extend .govuk-link;
-                @extend .govuk-details;
+                padding: 9px 17px;
+                width: 100%;
+                fill: #1976D2;
 
-                @include respond-to('small') {
-                    float: right;
+                &:focus, &:hover {
+                    color: #FFFFFF;
+                    -webkit-text-fill-color: #FFFFFF;
+                    background-color: #0D47A1;
+                    fill: #FFFFFF;
+                    border: 1px solid #0D47A1;
                 }
 
-                &:focus {
-                    color: var(--xDark);
-                    background-color: var(--focus);
+                &:focus, &:active {
+                    box-shadow:
+                    0 0 0 2px #FFFFFF,
+                    0 0 0 4px #00A0CC;
                 }
 
-                &::before {
-                    right: auto;
+                &:active {
+                    background-color:#403DD0;
                 }
 
-                &[aria-expanded="true"] {
-                    &::before{
-                        display: block;
-                        width: 0;
-                        height: 0;
-                        border-style: solid;
-                        border-color: transparent;
-                        border-top-color: transparent;
-                        -webkit-clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-                        clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-                        border-width: 12.124px 7px 0 7px;
-                        border-top-color: inherit;
-                    }
-                }
-
-                @include respond-to('medium') {
-                    display: inline;
-                }
-
-                @include respond-to('large') {
-                    display: inline;
-
-                    &:nth-child(2n) {
-                        margin-left: 8px;
-                    }
+                @include respond-to('extra-small') {
+                    display: inline-block;
+                    width: auto;
                 }
             }
         }
@@ -245,6 +242,7 @@ $breakpoints: ('small': (min-width: 767px),
         &__modal-container {
             display: none;
             max-width: 1100px;
+            padding-bottom: 32px;
         }
 
         &__info-heading {
@@ -254,6 +252,8 @@ $breakpoints: ('small': (min-width: 767px),
 
         &__summary-heading {
             @extend .govuk-heading-s;
+            border-top: 1px solid grey;
+            padding-top: 16px;
         }
 
         &__summary-text {
@@ -263,6 +263,13 @@ $breakpoints: ('small': (min-width: 767px),
 
         &__toggle-header-container {
             position: relative;
+            border-top: 1px solid gray;
+            padding-top: 16px;
+
+            & .ccfw-banner__summary-heading {
+                border-top: none;
+            }
+
             &:after {
                 content: "";
                 display: block;
@@ -353,6 +360,11 @@ $breakpoints: ('small': (min-width: 767px),
 
         &__expanding-section {
             @extend .govuk-details;
+
+            &:last-of-type {
+                padding-bottom: 32px;
+                border-bottom: 1px solid grey;
+            }
         }
 
         &__expanding-section-summary {
