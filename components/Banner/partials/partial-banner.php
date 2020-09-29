@@ -46,7 +46,7 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
             </div>
         </div>
 
-        <div id="cookie-popup" class="ccfw-banner__modal-container" role="dialog" aria-labelledby="ccfw-banner-title" aria-modal="true">
+        <div id="cookie-popup" class="ccfw-banner__modal-container" role="dialog" aria-labelledby="ccfw-banner-title" aria-modal="true" tabindex="-1">
             <button id="ccfw-modal-close" class="ccfw-banner__button ccfw-banner__button--close">
                 Close
             </button>
