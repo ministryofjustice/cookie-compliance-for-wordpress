@@ -70,7 +70,7 @@
         this.$settingsModal.show()
         this.$body.addClass("ccfw-modal-open")
         this.$el.addClass("cookie-banner-open")
-        settingsModal.trapFocus();
+        settingsModal.trapSettingsFocus();
       }
     }
 
@@ -94,12 +94,40 @@
           utilities.hideBanner()
         } else {
           this.$el.show()
+          this.trapBannerFocus();
         }
       },
       bindEvents: function () {
         this.$buttonAccept.on('click', this.acceptAllButton.bind(this))
         this.$buttonDecline.on('click', this.declineAllButton.bind(this))
         this.$buttonInfo.on('click', this.chooseCookieSettingsButton.bind(this))
+      },
+      trapBannerFocus: function () {
+        let cookieBannerButtons = $('.ccfw-banner__buttons')
+        let focusableEls = $('.ccfw-banner__buttons #cookie-accept, .ccfw-banner__buttons #cookie-decline, .ccfw-banner__buttons #cookie-more-info')
+
+        let firstFocusableEl = focusableEls[0];
+        let lastFocusableEl = focusableEls[focusableEls.length - 1];
+
+        cookieBannerButtons.on('keydown', function (e) {
+          var isTabPressed = (e.key === 'Tab');
+
+          console.log(focusableEls);
+          if (!isTabPressed) {
+            return;
+          }
+          if (e.shiftKey) /* shift + tab */ {
+            if (document.activeElement === firstFocusableEl) {
+              lastFocusableEl.focus()
+              e.preventDefault()
+            }
+          } else /* tab */ {
+            if (document.activeElement === lastFocusableEl) {
+              firstFocusableEl.focus()
+              e.preventDefault()
+            }
+          }
+        })
       },
       acceptAllButton: function () {
         utilities.setCookie(cookie_key_banner_hidden, 'true', 365)
@@ -133,13 +161,13 @@
       },
       bindEvents: function () {
         this.$buttonModalClose.on('click', this.modalDisplay.bind(this))
-        this.$buttonInfo.on('click', this.trapFocus.bind(this))
+        this.$buttonInfo.on('click', this.trapSettingsFocus.bind(this))
         this.$buttonSavePreferences.on('click', this.saveCookiePreferences.bind(this))
       },
       modalDisplay: function () {
         utilities.hideSettingsModal()
       },
-      trapFocus: function () {
+      trapSettingsFocus: function () {
         this.$buttonModalClose.focus()
 
         /*Trap focus */
