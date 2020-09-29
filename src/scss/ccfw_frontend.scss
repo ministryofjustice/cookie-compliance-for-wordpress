@@ -243,6 +243,10 @@ $breakpoints: ('extra-small': (min-width: 641px),
             display: none;
             max-width: 1100px;
             padding-bottom: 32px;
+
+            &:focus {
+                outline: 0;
+            }
         }
 
         &__info-heading {

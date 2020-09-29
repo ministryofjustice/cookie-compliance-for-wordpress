@@ -168,7 +168,7 @@
         utilities.hideSettingsModal()
       },
       trapSettingsFocus: function () {
-        this.$buttonModalClose.focus()
+        this.$settingsModal.focus()
 
         /*Trap focus */
         /* Based on Hidde de Vries' solution: https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element */
