@@ -179,15 +179,32 @@ $breakpoints: ('extra-small': (min-width: 641px),
                 border: 0;
                 text-decoration: underline;
                 color:#1D70B8;
-                -webkit-text-fill-color: #1D70B8;
+                -webkit-text-fill-color: #1976D2;
                 margin-bottom: 16px;
                 @extend .govuk-link;
 
-                &:focus, &:hover, &:active {
-                    color: var(--xDark);
-                    -webkit-text-fill-color: var(--xDark);
-                    background-color: #ffdd00;
-                    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+                &:focus {
+                    color: #0D47A1;
+                    background: #0090B8;
+                    border-bottom: 4px solid #0090B8;
+                    background: #d9eef4;
+                    box-shadow: none;
+                }
+
+                &:hover {
+                    color: #0D47A1;
+                    -webkit-text-fill-color: #0D47A1;
+                    background-color: transparent;
+                }
+
+                &:active {
+                    color: #403DD0;
+                    border-bottom: 4px solid #0090B8;
+                    background: #d9eef4;
+                }
+
+                &:visited {
+                    color: #7E57C2;
                 }
             }
 
@@ -285,6 +302,11 @@ $breakpoints: ('extra-small': (min-width: 641px),
             float: left;
             width: 65%;
             @extend .govuk-heading-s;
+
+            &--always-on {
+                color: blue;
+                float: right;
+            }
         }
 
         &__toggle-label {
@@ -373,10 +395,40 @@ $breakpoints: ('extra-small': (min-width: 641px),
 
         &__expanding-section-summary {
             @extend .govuk-details__summary;
+            border-bottom: 4px solid transparent;
+
+            &:focus {
+                    color: #0D47A1;
+                    background: #0090B8;
+                    border-bottom: 4px solid #0090B8;
+                    background: #d9eef4;
+                    box-shadow: none;
+                }
+
+                &:hover {
+                    color: #0D47A1;
+                    -webkit-text-fill-color: #0D47A1;
+                    background-color: transparent;
+                }
+
+                &:active {
+                    color: #403DD0;
+                    border-bottom: 4px solid #0090B8;
+                    background: #d9eef4;
+                }
+
+                &:visited {
+                    color: #7E57C2;
+
+                    & .ccfw-banner__expanding-section-summary-text {
+                        text-decoration: underline;
+                    }
+                }
         }
 
         &__expanding-section-summary-text {
             @extend .govuk-details__summary-text;
+            text-decoration: none;
         }
 
         &__expanding-section-text {

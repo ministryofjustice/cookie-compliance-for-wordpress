@@ -54,12 +54,11 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
             <h3 class="ccfw-banner__info-heading" id="ccfw-banner-title">Choose which cookies we use</h3>
 
             <div class="ccfw-banner__toggle-header-container">
-                <h4 class="ccfw-banner__toggle-heading">Cookies that measure website use (analytics cookies)</h4>
-                <label class="ccfw-banner__toggle-label">
-                    <input type="checkbox" id="ccfw-ga-toggle" class="ccfw-banner__toggle-input">
-                    <span class="ccfw-banner__toggle-slider"></span>
-                    <span class="visually-hidden">Turn on analytics cookies</span>
-                </label>
+                <h4 class="ccfw-banner__toggle-heading" id="ccfw-analytics-cookies-toggle">Cookies that measure website use (analytics cookies)</h4>
+                <button role="switch" aria-checked="false" aria-labelledby="ccfw-analytics-cookies-toggle" class="ccfw-banner__toggle-label">
+                    <span>on</span>
+                    <span>off</span>
+                </button>
             </div>
 
             <p class="ccfw-banner__summary-text">We use Google Analytics to measure how you use the website so we can improve it based on user needs. We do not allow Google Analytics to use or share the data about how you use this site. </p>
@@ -101,7 +100,10 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
                 </div>
             </details>
 
-            <h4 class="ccfw-banner__summary-heading">Cookies that make our site work (functional cookies)</h4>
+            <div class="ccfw-banner__toggle-header-container">
+                <h4 class="ccfw-banner__toggle-heading">Cookies that make our site work (functional cookies)</h4>
+                <p class="ccfw-banner__toggle-heading--always-on">Always on</p>
+            </div>
             <p class="ccfw-banner__summary-text">These cookies will always need to be on because they make our site work.</p>
 
             <details class="ccfw-banner__expanding-section" data-module="govuk-details">
