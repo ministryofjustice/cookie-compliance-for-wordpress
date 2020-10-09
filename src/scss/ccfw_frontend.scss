@@ -151,7 +151,8 @@ $breakpoints: ('extra-small': (min-width: 641px),
             font-weight: bold;
             box-shadow: none;
             padding: 8px 16px;
-            margin: 0 2px;
+            margin: 0 2px 16px 2px;
+            width: 100%;
 
             &:hover {
                 background-color: #0D47A1;
@@ -171,6 +172,11 @@ $breakpoints: ('extra-small': (min-width: 641px),
                 outline-offset: 2px;
             }
 
+            @include respond-to('extra-small') {
+                display: inline-block;
+                width: auto;
+            }
+
             &--close {
                 box-shadow: none;
                 border-radius: 0;
@@ -181,6 +187,7 @@ $breakpoints: ('extra-small': (min-width: 641px),
                 color:#1D70B8;
                 -webkit-text-fill-color: #1976D2;
                 margin-bottom: 16px;
+                text-align: right;
                 @extend .govuk-link;
 
                 &:focus {
@@ -219,8 +226,8 @@ $breakpoints: ('extra-small': (min-width: 641px),
                 border: 1px solid #1976D2;
                 box-shadow: none;
                 padding: 9px 17px;
-                width: 100%;
                 fill: #1976D2;
+                width: 100%;
 
                 &:focus, &:hover {
                     color: #FFFFFF;
@@ -249,6 +256,7 @@ $breakpoints: ('extra-small': (min-width: 641px),
 
         &__buttons {
             all: unset;
+
             &:after {
                 content: "";
                 display: block;
@@ -304,8 +312,9 @@ $breakpoints: ('extra-small': (min-width: 641px),
             @extend .govuk-heading-s;
 
             &--always-on {
-                color: blue;
+                color: #1976D2;
                 float: right;
+                font-weight: bold;
             }
         }
 
@@ -315,12 +324,6 @@ $breakpoints: ('extra-small': (min-width: 641px),
             width: 65px;
             height: 34px;
             margin-right: 16px;
-
-            & input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
         }
 
         &__toggle-slider {
@@ -330,58 +333,81 @@ $breakpoints: ('extra-small': (min-width: 641px),
             left: 0;
             right: 0;
             bottom: 0;
-            border:black solid 2px;
-            background-color: white;
+            background-color: #1976D2;
             -webkit-transition: .4s;
             transition: .4s;
             border-radius: 34px;
+            box-shadow: none;
+            width: 60px;
+            height: 32px;
 
-            &:focus {
-                & + #ccfw-ga-toggle {
-                    outline: 4px solid --focus;
-                }
+            &--on-text {
+                font-size: 10px;
+                position: absolute;
+                top: 6px;
+                left: 7px;
+            }
+
+            &--off-text {
+                font-size: 10px;
+                position: absolute;
+                top: 6px;
+                right: 7px;
             }
 
             &:before {
                 position: absolute;
-                content: "\2715";
                 text-align: center;
                 height: 26px;
                 width: 26px;
                 left: 4px;
-                bottom: 2px;
-                background-color: grey;
+                top: 1px;
+                background-color: #FFFFFF;
                 -webkit-transition: .4s;
                 transition: .4s;
                 border-radius: 50%;
                 color: white;
             }
+
+            &:hover {
+                background-color: #0D47A1;
+            }
+
+            &:focus {
+                background-color: #0D47A1;
+                box-shadow:
+                    0 0 0 2px #FFFFFF,
+                    0 0 0 4px #00A0CC;
+                outline: none;
+                color: #FFFFFF;
+            }
+
+            &:active {
+                background-color: #403DD0;
+                box-shadow:
+                    0 0 0 2px #FFFFFF,
+                    0 0 0 4px #00A0CC;
+                outline-offset: 2px;
+            }
         }
 
-        &__toggle-input + .ccfw-banner__toggle-slider:after {
+        &__toggle-slider:after {
             position: absolute;
             top: 5px;
             left: 32px;
-            content: "off";
         }
 
-        &__toggle-input:checked + .ccfw-banner__toggle-slider:after {
+        &__toggle-slider[aria-pressed=true]:after {
             position: absolute;
             top: 5px;
             left: 7px;
-            content: "on";
         }
 
-        &__toggle-input:checked + .ccfw-banner__toggle-slider:before {
-            background-color: green;
+        &__toggle-slider[aria-pressed=true]:before {
+            background-color: #FFFFFF;
             -webkit-transform: translateX(24px);
             -ms-transform: translateX(24px);
             transform: translateX(24px);
-            content: "\2713";
-        }
-
-        &__toggle-input:focus + .ccfw-banner__toggle-slider {
-            background: #ffdd00;
         }
 
         &__expanding-section {

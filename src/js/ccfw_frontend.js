@@ -163,9 +163,14 @@
         this.$buttonModalClose.on('click', this.modalDisplay.bind(this))
         this.$buttonInfo.on('click', this.trapSettingsFocus.bind(this))
         this.$buttonSavePreferences.on('click', this.saveCookiePreferences.bind(this))
+        this.$GAcheckBox.on('click', this.toggleAriaPressed.bind(this))
       },
       modalDisplay: function () {
         utilities.hideSettingsModal()
+      },
+      toggleAriaPressed: function () {
+        let pressed = this.$GAcheckBox.attr("aria-pressed") === "true";
+        this.$GAcheckBox.attr("aria-pressed", !pressed);
       },
       trapSettingsFocus: function () {
         this.$settingsModal.focus()
@@ -202,7 +207,7 @@
         })
       },
       saveCookiePreferences: function () {
-        let analyticsCookiesTurnedOn = this.$GAcheckBox.prop('aria-checked')
+        let analyticsCookiesTurnedOn = this.$GAcheckBox.attr("aria-pressed") === "true";
 
         if (analyticsCookiesTurnedOn === true) {
           utilities.setCookie(cookie_key_ga_accept, 'true', 365)

@@ -54,11 +54,17 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
             <h3 class="ccfw-banner__info-heading" id="ccfw-banner-title">Choose which cookies we use</h3>
 
             <div class="ccfw-banner__toggle-header-container">
-                <h4 class="ccfw-banner__toggle-heading" id="ccfw-analytics-cookies-toggle">Cookies that measure website use (analytics cookies)</h4>
-                <button role="switch" aria-checked="false" aria-labelledby="ccfw-analytics-cookies-toggle" class="ccfw-banner__toggle-label">
-                    <span>on</span>
-                    <span>off</span>
-                </button>
+                <h4 class="ccfw-banner__toggle-heading" id="ccfw-analytics-cookies">Cookies that measure website use (analytics cookies)</h4>
+                <div class="ccfw-banner__toggle-label">
+                    <button
+                        role="switch"    aria-labelledby="ccfw-analytics-cookies-toggle"
+                        class="ccfw-banner__toggle-slider"
+                        id="ccfw-analytics-cookies-toggle"
+                        aria-pressed="false">
+                        <span class="ccfw-banner__toggle-slider--on-text" aria-hidden="true">On</span>
+                        <span class="ccfw-banner__toggle-slider--off-text" aria-hidden="true">Off</span>
+                    </button>
+                </div>
             </div>
 
             <p class="ccfw-banner__summary-text">We use Google Analytics to measure how you use the website so we can improve it based on user needs. We do not allow Google Analytics to use or share the data about how you use this site. </p>
@@ -106,8 +112,8 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
             </div>
             <p class="ccfw-banner__summary-text">These cookies will always need to be on because they make our site work.</p>
 
-            <details class="ccfw-banner__expanding-section" data-module="govuk-details">
-                <summary class="ccfw-banner__expanding-section-summary">
+            <details class="ccfw-banner__expanding-section govuk-details" data-module="govuk-details">
+                <summary class="ccfw-banner__expanding-section-summary govuk-details__summary">
                     <span class="ccfw-banner__expanding-section-summary-text">
                         See our functional cookies
                     </span>
@@ -176,11 +182,11 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
 
             <details class="ccfw-banner__expanding-section" data-module="govuk-details">
                 <summary class="ccfw-banner__expanding-section-summary">
-                    <span class="ccfw-banner__expanding-section-summary-text">
+                    <span class="ccfw-banner__expanding-section-summary-text govuk-details__summary-text">
                         See our third party cookies
                     </span>
                 </summary>
-                <div class="ccfw-banner__expanding-section-text">
+                <div class="ccfw-banner__expanding-section-text govuk-details__text">
                     <table class="ccfw-banner__table">
                     <caption class="ccfw-banner__table-caption">Third party cookies</caption>
                         <thead>
