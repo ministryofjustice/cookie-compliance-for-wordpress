@@ -54,7 +54,7 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
             <h3 class="ccfw-banner__info-heading" id="ccfw-banner-title">Choose which cookies we use</h3>
 
             <div class="ccfw-banner__toggle-header-container">
-                <h4 class="ccfw-banner__toggle-heading" id="ccfw-analytics-cookies">Cookies that measure website use (analytics cookies)</h4>
+                <h4 class="ccfw-banner__toggle-heading" id="ccfw-analytics-cookies">Analytics cookies</h4>
                 <div class="ccfw-banner__toggle-label">
                     <button
                         role="switch"    aria-labelledby="ccfw-analytics-cookies-toggle"
@@ -107,7 +107,7 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
             </details>
 
             <div class="ccfw-banner__toggle-header-container">
-                <h4 class="ccfw-banner__toggle-heading">Cookies that make our site work (functional cookies)</h4>
+                <h4 class="ccfw-banner__toggle-heading">Essential cookies</h4>
                 <p class="ccfw-banner__toggle-heading--always-on">Always on</p>
             </div>
             <p class="ccfw-banner__summary-text">These cookies will always need to be on because they make our site work.</p>
@@ -176,7 +176,7 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
                 </div>
             </details>
 
-            <h4 class="ccfw-banner__summary-heading">Cookies added by other sites (third-party cookies)</h4>
+            <h4 class="ccfw-banner__summary-heading">Third-party cookies</h4>
             <p class="ccfw-banner__summary-text">We embed videos from our official YouTube channel using YouTube’s privacy-enhanced mode. This mode may set cookies on your computer once you click on the YouTube video player, but YouTube will not store personally-identifiable cookie information for playbacks of embedded videos using the privacy-enhanced mode.</p>
             <p class="ccfw-banner__summary-text">We have no control over cookies set on other websites - you can turn them off, but not through us.</p>
 
