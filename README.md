@@ -20,6 +20,20 @@ Download this repository, unzip and copy the folder into your Wordpress plugin f
 
 You will need to have a working version of Wordpress to run this plugin and running PHP 7+.
 
+You will need the following code snipped placed after the body tag in your theme.
+
+```
+if ( ! function_exists( 'wp_body_open' ) ) {
+    /**
+     * Open the body tag, pull in any hooked triggers.
+     **/
+    function wp_body_open() {
+        do_action( 'wp_body_open' );
+    }
+}
+wp_body_open();
+```
+
 ## Coding guidelines
 
 This plugin follows
