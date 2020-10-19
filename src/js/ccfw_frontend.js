@@ -155,7 +155,7 @@
         this.$buttonDecline = this.$settingsModal.find('#cookie-decline')
         this.$buttonInfo = this.$settingsModal.find('#cookie-more-info')
         this.$buttonSavePreferences = this.$settingsModal.find('#cookie-save-preferences')
-        this.$GAcheckBox = this.$settingsModal.find('#ccfw-ga-toggle')
+        this.$GAcheckBox = this.$settingsModal.find('#ccfw-analytics-cookies-toggle')
         this.$buttonModalClose = this.$settingsModal.find('#ccfw-modal-close')
         this.$body = cacheMainElements.$body
       },
@@ -163,9 +163,14 @@
         this.$buttonModalClose.on('click', this.modalDisplay.bind(this))
         this.$buttonInfo.on('click', this.trapSettingsFocus.bind(this))
         this.$buttonSavePreferences.on('click', this.saveCookiePreferences.bind(this))
+        this.$GAcheckBox.on('click', this.toggleAriaPressed.bind(this))
       },
       modalDisplay: function () {
         utilities.hideSettingsModal()
+      },
+      toggleAriaPressed: function () {
+        let pressed = this.$GAcheckBox.attr("aria-pressed") === "true";
+        this.$GAcheckBox.attr("aria-pressed", !pressed);
       },
       trapSettingsFocus: function () {
         this.$settingsModal.focus()
@@ -177,7 +182,6 @@
         let lastFocusableEl = focusableEls[focusableEls.length - 1];
 
         this.$el.on('keydown', function (e) {
-
           // Close banner if user presses escape key
           if (e.key === 'Escape') {
             utilities.hideSettingsModal()
@@ -203,7 +207,7 @@
         })
       },
       saveCookiePreferences: function () {
-        let analyticsCookiesTurnedOn = this.$GAcheckBox.prop('checked')
+        let analyticsCookiesTurnedOn = this.$GAcheckBox.attr("aria-pressed") === "true";
 
         if (analyticsCookiesTurnedOn === true) {
           utilities.setCookie(cookie_key_ga_accept, 'true', 365)
