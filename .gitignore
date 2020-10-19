@@ -2,6 +2,7 @@
 ehthumbs.db
 Thumbs.db
 .DS_Store
+.idea
 
 # ignore Editor files
 *.sublime-project
