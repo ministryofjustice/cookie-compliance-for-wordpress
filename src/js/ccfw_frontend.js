@@ -23,6 +23,7 @@
       init: function () {
         this.$el = $('#ccfw-page-banner')
         this.$body = $('body')
+        this.$html = $('html')
       }
     }
 
@@ -37,6 +38,7 @@
         this.$el = cacheMainElements.$el
         this.$settingsModal = this.$el.find('#cookie-popup')
         this.$body = cacheMainElements.$body
+        this.$html = cacheMainElements.$html
       },
       getCookie: function (name) {
         var value = '; ' + document.cookie
@@ -64,12 +66,16 @@
       hideSettingsModal: function () {
         this.$settingsModal.hide()
         this.$body.removeClass("ccfw-modal-open")
-        this.$el.removeClass("cookie-banner-open")
+        this.$el.removeClass("ccfw-cookie-banner-open")
+        this.$html.removeClass("ccfw-cookie-banner-open")
+        this.$body.removeClass("ccfw-cookie-banner-open")
       },
       showSettingsModal: function () {
         this.$settingsModal.show()
         this.$body.addClass("ccfw-modal-open")
-        this.$el.addClass("cookie-banner-open")
+        this.$el.addClass("ccfw-cookie-banner-open")
+        this.$html.addClass("ccfw-cookie-banner-open")
+        this.$body.addClass("ccfw-cookie-banner-open")
         settingsModal.trapSettingsFocus();
       }
     }

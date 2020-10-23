@@ -92,7 +92,7 @@ $breakpoints: ('extra-small': (min-width: 641px),
     overflow-y: scroll;
     box-sizing: border-box;
 
-    &.cookie-banner-open {
+    &.ccfw-cookie-banner-open {
         all: unset;
         top: 10%;
         left: 10%;
@@ -509,6 +509,6 @@ $breakpoints: ('extra-small': (min-width: 641px),
     }
 }
 
-html, body, .cookie-banner-open {
+.ccfw-cookie-banner-open {
     height: 100%;
 }
