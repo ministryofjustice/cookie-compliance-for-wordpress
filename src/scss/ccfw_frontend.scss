@@ -86,7 +86,7 @@ $breakpoints: ('extra-small': (min-width: 641px),
     display: block;
     border-top: 2px solid black; // no var for improved IE ux
     background-color: #FFFFFF; // no var for improved IE ux
-    padding: 30px 10px 10px 10px;
+    padding: 18px 10px 0 10px;
     position: fixed;
     z-index: 9999;
     overflow-y: scroll;
@@ -124,7 +124,13 @@ $breakpoints: ('extra-small': (min-width: 641px),
         display: block;
 
         &__heading {
-            @extend .govuk-heading-l;
+            @extend .govuk-heading-m;
+            font-size: 22px;
+            margin-bottom: 12px;
+
+            @include respond-to('small') {
+                font-size: 24px;
+            }
         }
 
         &__info-text {
@@ -132,8 +138,14 @@ $breakpoints: ('extra-small': (min-width: 641px),
             display: block;
             margin-right: 12px;
             padding: 12px 0 6px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             @extend .govuk-body;
+            font-size: 16px;
+            padding-top: 0;
+
+            @include respond-to('small') {
+                font-size: 18px;
+            }
 
             a {
                 all: unset;
@@ -150,8 +162,8 @@ $breakpoints: ('extra-small': (min-width: 641px),
             border-radius: 5px;
             font-weight: bold;
             box-shadow: none;
-            padding: 8px 16px;
-            margin: 0 2px 16px 2px;
+            padding: 5px 16px;
+            margin-bottom: 18px;
             width: 100%;
 
             &:hover {
@@ -225,9 +237,10 @@ $breakpoints: ('extra-small': (min-width: 641px),
                 color:#1976D2;
                 border: 1px solid #1976D2;
                 box-shadow: none;
-                padding: 9px 17px;
+                padding: 6px 17px;
                 fill: #1976D2;
                 width: 100%;
+                margin-bottom: 18px;
 
                 &:focus, &:hover {
                     color: #FFFFFF;
