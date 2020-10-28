@@ -10,11 +10,13 @@
 // Responsive mixins
 // =========================================================
 
-$breakpoints: ('extra-small': (min-width: 641px),
+$breakpoints: ('extra-extra-small': (min-width: 420px),
+'extra-small': (min-width: 641px),
 'small': (min-width: 767px),
 'medium': (min-width: 992px),
 'large': (min-width: 1200px)) !default;
 
+// The extra-extra small is for the cookie tables
 /// Mixin to manage responsive breakpoints
 /// @param {String} $breakpoint - Breakpoint name
 
@@ -67,6 +69,7 @@ $breakpoints: ('extra-small': (min-width: 641px),
     @import 'node_modules/govuk-frontend/govuk/components/table/table';
     @import 'node_modules/govuk-frontend/govuk/core/typography';
     @import 'node_modules/govuk-frontend/govuk/core/links';
+    @import 'node_modules/govuk-frontend/govuk/overrides/width';
 
     all: unset;
     // normalise CSS
@@ -94,20 +97,30 @@ $breakpoints: ('extra-small': (min-width: 641px),
 
     &.ccfw-cookie-banner-open {
         all: unset;
-        top: 10%;
-        left: 10%;
-        right: 10%;
-        bottom: 10%;
-        width: 80%;
-        height: 80%;
+        top: 5%;
+        left: 5%;
+        right: 5%;
+        bottom: 5%;
+        width: 90%;
+        height: 90%;
         border-top: 0;
-        padding: 32px;
+        padding: 8px;
         position: fixed;
         z-index: 100000;
         display: block;
         background: #FFFFFF;
         overflow-y: scroll;
         box-sizing: border-box;
+
+        @include respond-to('extra-extra-small') {
+            padding: 32px;
+            top: 10%;
+            left: 10%;
+            right: 10%;
+            bottom: 10%;
+            width: 80%;
+            height: 80%;
+        }
 
         & .ccfw-banner__intro {
             display: none;
@@ -200,6 +213,7 @@ $breakpoints: ('extra-small': (min-width: 641px),
                 -webkit-text-fill-color: #1976D2;
                 margin-bottom: 16px;
                 text-align: right;
+                padding-right: 0;
                 @extend .govuk-link;
 
                 &:focus {
@@ -290,6 +304,11 @@ $breakpoints: ('extra-small': (min-width: 641px),
         &__info-heading {
             display: inline-block;
             @extend .govuk-heading-m;
+            font-size: 22px;
+
+            @include respond-to('small') {
+                font-size: 24px;
+            }
         }
 
         &__summary-heading {
@@ -336,7 +355,7 @@ $breakpoints: ('extra-small': (min-width: 641px),
             float: right;
             width: 65px;
             height: 34px;
-            margin-right: 16px;
+            right: 0;
         }
 
         &__toggle-slider {
@@ -371,10 +390,10 @@ $breakpoints: ('extra-small': (min-width: 641px),
             &:before {
                 position: absolute;
                 text-align: center;
-                height: 26px;
-                width: 26px;
-                left: 4px;
-                top: 1px;
+                height: 22px;
+                width: 22px;
+                left: 3px;
+                top: 3px;
                 background-color: #FFFFFF;
                 -webkit-transition: .4s;
                 transition: .4s;
@@ -398,30 +417,35 @@ $breakpoints: ('extra-small': (min-width: 641px),
             &:active {
                 background-color: #403DD0;
                 box-shadow:
-                    0 0 0 2px #FFFFFF,
-                    0 0 0 4px #00A0CC;
+                0 0 0 2px #FFFFFF,
+                0 0 0 4px #00A0CC;
                 outline-offset: 2px;
+            }
+
+            &[aria-pressed=false] {
+                background-color: #535A5E;
+            }
+
+            &[aria-pressed=true]:after {
+                position: absolute;
+                top: 5px;
+                left: 7px;
+            }
+
+            &[aria-pressed=true]:before {
+                background-color: #FFFFFF;
+                -webkit-transform: translateX(24px);
+                -ms-transform: translateX(24px);
+                transform: translateX(24px);
+            }
+
+            &:after {
+                position: absolute;
+                top: 5px;
+                left: 32px;
             }
         }
 
-        &__toggle-slider:after {
-            position: absolute;
-            top: 5px;
-            left: 32px;
-        }
-
-        &__toggle-slider[aria-pressed=true]:after {
-            position: absolute;
-            top: 5px;
-            left: 7px;
-        }
-
-        &__toggle-slider[aria-pressed=true]:before {
-            background-color: #FFFFFF;
-            -webkit-transform: translateX(24px);
-            -ms-transform: translateX(24px);
-            transform: translateX(24px);
-        }
 
         &__expanding-section {
             @extend .govuk-details;
@@ -468,10 +492,21 @@ $breakpoints: ('extra-small': (min-width: 641px),
         &__expanding-section-summary-text {
             @extend .govuk-details__summary-text;
             text-decoration: none;
+
+            @include respond-to('extra-small') {
+                display: inline-block;
+                width: auto;
+            }
         }
 
         &__expanding-section-text {
             @extend .govuk-details__text;
+            padding-left: 8px;
+
+            @include respond-to('extra-extra-small') {
+                padding-left: 20px;
+            }
+
         }
 
         &__table {
@@ -492,6 +527,11 @@ $breakpoints: ('extra-small': (min-width: 641px),
 
         &__table-header {
             @extend .govuk-table__header;
+            width: 25%;
+
+            &:nth-of-type(2) {
+                width: 50%;
+            }
         }
 
         &__table-cell {
