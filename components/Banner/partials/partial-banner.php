@@ -59,12 +59,12 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
                 <h4 class="ccfw-banner__toggle-heading" id="ccfw-analytics-cookies">Analytics cookies</h4>
                 <div class="ccfw-banner__toggle-label">
                     <button
-                        role="switch"    aria-labelledby="ccfw-analytics-cookies-toggle"
+                        role="switch"    aria-labelledby="ccfw-analytics-cookies"
                         class="ccfw-banner__toggle-slider"
                         id="ccfw-analytics-cookies-toggle"
-                        aria-pressed="false">
-                        <span class="ccfw-banner__toggle-slider--on-text" aria-hidden="true">On</span>
+                        aria-checked="false">
                         <span class="ccfw-banner__toggle-slider--off-text" aria-hidden="true">Off</span>
+                        <span class="ccfw-banner__toggle-slider--on-text" aria-hidden="true">On</span>
                     </button>
                 </div>
             </div>
