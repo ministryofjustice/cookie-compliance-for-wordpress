@@ -96,11 +96,11 @@
         this.$buttonInfo = this.$el.find('#cookie-more-info')
       },
       bannerDisplay: function () {
-        if (utilities.checkForCookie(cookie_key_banner_hidden) === true) {
-          utilities.hideBanner()
-        } else {
+        if (utilities.checkForCookie(cookie_key_banner_hidden) === false) {
           this.$el.show()
-          this.trapBannerFocus();
+          this.trapBannerFocus()
+        } else {
+          utilities.hideBanner()
         }
       },
       bindEvents: function () {

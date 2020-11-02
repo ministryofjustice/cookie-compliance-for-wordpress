@@ -86,7 +86,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
     bottom: 0;
     left: 0;
     width: 100%;
-    display: block;
+    display: none;
     border-top: 2px solid black; // no var for improved IE ux
     background-color: #FFFFFF; // no var for improved IE ux
     padding: 18px 10px 0 10px;
