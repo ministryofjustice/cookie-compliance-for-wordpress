@@ -366,6 +366,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             right: 0;
             bottom: 0;
             background-color: #1976D2;
+            -webkit-text-fill-color: #FFFFFF;
+            color: #FFFFFF;
             -webkit-transition: .4s;
             transition: .4s;
             border-radius: 34px;
@@ -374,17 +376,18 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             height: 32px;
 
             &--on-text {
-                font-size: 10px;
+                font-size: 12px;
                 position: absolute;
-                top: 6px;
+                top: 5px;
                 left: 7px;
+                color: white;
             }
 
             &--off-text {
-                font-size: 10px;
+                font-size: 12px;
                 position: absolute;
-                top: 6px;
-                right: 7px;
+                top: 5px;
+                right: 8px;
             }
 
             &:before {
@@ -422,17 +425,17 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 outline-offset: 2px;
             }
 
-            &[aria-pressed=false] {
+            &[aria-checked=false] {
                 background-color: #535A5E;
             }
 
-            &[aria-pressed=true]:after {
+            &[aria-checked=true]:after {
                 position: absolute;
                 top: 5px;
                 left: 7px;
             }
 
-            &[aria-pressed=true]:before {
+            &[aria-checked=true]:before {
                 background-color: #FFFFFF;
                 -webkit-transform: translateX(24px);
                 -ms-transform: translateX(24px);

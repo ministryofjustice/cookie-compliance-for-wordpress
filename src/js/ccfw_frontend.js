@@ -175,8 +175,8 @@
         utilities.hideSettingsModal()
       },
       toggleAriaPressed: function () {
-        let pressed = this.$GAcheckBox.attr("aria-pressed") === "true";
-        this.$GAcheckBox.attr("aria-pressed", !pressed);
+        let pressed = this.$GAcheckBox.attr("aria-checked") === "true";
+        this.$GAcheckBox.attr("aria-checked", !pressed);
       },
       trapSettingsFocus: function () {
         this.$settingsModal.focus()
@@ -213,7 +213,7 @@
         })
       },
       saveCookiePreferences: function () {
-        let analyticsCookiesTurnedOn = this.$GAcheckBox.attr("aria-pressed") === "true";
+        let analyticsCookiesTurnedOn = this.$GAcheckBox.attr("aria-checked") === "true";
 
         if (analyticsCookiesTurnedOn === true) {
           utilities.setCookie(cookie_key_ga_accept, 'true', 365)
