@@ -250,6 +250,7 @@
       },
       declineAllButton: function declineAllButton() {
         utilities.setCookie(cookie_key_banner_hidden, 'true', 365);
+        utilities.setCookie(cookie_key_ga_accept, 'false', 365);
         utilities.hideBanner();
       },
       chooseCookieSettingsButton: function chooseCookieSettingsButton() {

@@ -63,7 +63,7 @@ class Banner
          */
         ?>
         <script>
-            var ccfwPluginGACookieNotPresent = document.cookie.indexOf('ccfw_wp_plugin.ga.accept=') == -1 ? true : false;
+            var ccfwPluginGACookieNotPresent = document.cookie.indexOf('ccfw_wp_plugin.ga.accept=true') == -1 ? true : false;
             window['ga-disable-<?php echo $this->googleAnalyticsID; ?>'] = ccfwPluginGACookieNotPresent;
 
             if (ccfwPluginGACookieNotPresent) {
