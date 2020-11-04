@@ -112,7 +112,7 @@
       },
       bannerDisplay: function () {
         if (utilities.checkForCookie(cookie_key_banner_hidden) === false) {
-          utilities.showBanner
+          utilities.showBanner()
           this.trapBannerFocus()
         } else {
           utilities.hideBanner()

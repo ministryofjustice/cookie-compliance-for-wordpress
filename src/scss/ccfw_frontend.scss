@@ -579,6 +579,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
     text-align: right;
     padding: 20px 8px 8px 20px;
     border: 0;
+    height: 94px;
+    width: 94px;
 
     &:hover {
         background-color: transparent;
@@ -614,6 +616,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
     &__icon {
         max-width: 24px;
+        max-height: 24px;
+        margin-top: 20px;
 
         path {
             fill: #FFFFFF;
@@ -627,6 +631,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         bottom: 0;
         right: 0;
         z-index: -1;
+        height: 94px;
+        width: 94px;
 
         path {
             fill: #535A5E;
