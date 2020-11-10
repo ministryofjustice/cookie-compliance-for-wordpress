@@ -402,7 +402,9 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 -webkit-transition: .4s;
                 transition: .4s;
                 border-radius: 50%;
-                color: white;
+                color: #FFFFFF;
+                border: 11px solid #FFFFFF;
+                z-index: 99999;
             }
 
             &:hover {
