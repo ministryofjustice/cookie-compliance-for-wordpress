@@ -41,7 +41,6 @@
         this.$body = cacheMainElements.$body
         this.$html = cacheMainElements.$html
         this.$cookieSettingsButton = this.$body.find('#js-ccfw-settings-button')
-        this.$GAcheckBox = this.$settingsModal.find('#ccfw-analytics-cookies-toggle')
       },
       bindEvents: function () {
         this.$cookieSettingsButton.on('click', this.showBanner.bind(this))
@@ -88,9 +87,19 @@
         this.$html.addClass("ccfw-cookie-banner-open")
         this.$body.addClass("ccfw-cookie-banner-open")
         if (utilities.checkForCookie(cookie_key_ga_accept)) {
-          this.$GAcheckBox.attr("aria-checked", true);
+          settingsModal.$GAcheckBox.attr("aria-checked", true);
         }
         settingsModal.trapSettingsFocus();
+
+        let pressed = settingsModal.$GAcheckBox.attr("aria-checked") === "true";
+
+        if (pressed) {
+          settingsModal.$gaToggleOnText.show()
+          settingsModal.$gaToggleOffText.hide()
+        } else {
+          settingsModal.$gaToggleOffText.show()
+          settingsModal.$gaToggleOnText.hide()
+        }
       }
     }
 
@@ -155,7 +164,7 @@
       },
       declineAllButton: function() {
         utilities.setCookie(cookie_key_banner_hidden, 'true', 365)
-        utilities.setCookie(cookie_key_ga_accept, 'false', 365)
+        utilities.deleteCookie(cookie_key_ga_accept)
         utilities.hideBanner()
       },
       chooseCookieSettingsButton: function() {
@@ -191,9 +200,6 @@
         utilities.hideSettingsModal()
       },
       toggleAriaPressed: function () {
-        if (utilities.checkForCookie(cookie_key_ga_accept)) {
-          this.$GAcheckBox.attr("aria-checked", true);
-        }
         let pressed = this.$GAcheckBox.attr("aria-checked") === "true";
         this.$GAcheckBox.attr("aria-checked", !pressed);
 
