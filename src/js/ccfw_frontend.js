@@ -164,6 +164,8 @@
         this.$GAcheckBox = this.$settingsModal.find('#ccfw-analytics-cookies-toggle')
         this.$buttonModalClose = this.$settingsModal.find('#ccfw-modal-close')
         this.$body = cacheMainElements.$body
+        this.$gaToggleOnText = this.$settingsModal.find('#ccfw-ga-toggle-on')
+        this.$gaToggleOffText = this.$settingsModal.find('#ccfw-ga-toggle-off')
       },
       bindEvents: function () {
         this.$buttonModalClose.on('click', this.modalDisplay.bind(this))
@@ -177,6 +179,14 @@
       toggleAriaPressed: function () {
         let pressed = this.$GAcheckBox.attr("aria-checked") === "true";
         this.$GAcheckBox.attr("aria-checked", !pressed);
+
+        if (!pressed) {
+          this.$gaToggleOnText.show()
+          this.$gaToggleOffText.hide()
+        } else {
+          this.$gaToggleOffText.show()
+          this.$gaToggleOnText.hide()
+        }
       },
       trapSettingsFocus: function () {
         this.$settingsModal.focus()
