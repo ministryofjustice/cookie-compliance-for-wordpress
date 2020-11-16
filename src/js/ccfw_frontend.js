@@ -185,6 +185,9 @@
         utilities.hideSettingsModal()
       },
       toggleAriaPressed: function () {
+        if (utilities.checkForCookie(cookie_key_ga_accept)) {
+          this.$GAcheckBox.attr("aria-checked", true);
+        }
         let pressed = this.$GAcheckBox.attr("aria-checked") === "true";
         this.$GAcheckBox.attr("aria-checked", !pressed);
       },
