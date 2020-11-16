@@ -41,6 +41,7 @@
         this.$body = cacheMainElements.$body
         this.$html = cacheMainElements.$html
         this.$cookieSettingsButton = this.$body.find('#js-ccfw-settings-button')
+        this.$GAcheckBox = this.$settingsModal.find('#ccfw-analytics-cookies-toggle')
       },
       bindEvents: function () {
         this.$cookieSettingsButton.on('click', this.showBanner.bind(this))
@@ -58,7 +59,7 @@
         document.cookie = name + '=' + value + '; path=/; expires=' + d.toGMTString()
       },
       deleteCookie: function (name) {
-        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
       },
       checkForCookie: function (key) {
         let cookie = this.getCookie(key)
@@ -86,6 +87,9 @@
         this.$el.addClass("ccfw-cookie-banner-open")
         this.$html.addClass("ccfw-cookie-banner-open")
         this.$body.addClass("ccfw-cookie-banner-open")
+        if (utilities.checkForCookie(cookie_key_ga_accept)) {
+          this.$GAcheckBox.attr("aria-checked", true);
+        }
         settingsModal.trapSettingsFocus();
       }
     }

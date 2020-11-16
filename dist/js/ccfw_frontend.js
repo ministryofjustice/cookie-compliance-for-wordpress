@@ -1,1 +1,377 @@
-!function(t){var e={};function n(i){if(e[i])return e[i].exports;var o=e[i]={i:i,l:!1,exports:{}};return t[i].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=t,n.c=e,n.d=function(t,e,i){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:i})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var i=Object.create(null);if(n.r(i),Object.defineProperty(i,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)n.d(i,o,function(e){return t[e]}.bind(null,o));return i},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="/",n(n.s=4)}({4:function(t,e,n){t.exports=n(5)},5:function(t,e){!function(t){"use strict";t((function(){var e={init:function(){this.$el=t("#ccfw-page-banner"),this.$body=t("body"),this.$html=t("html")}},n={init:function(){this.cacheDom(),this.bindEvents()},cacheDom:function(){this.$el=e.$el,this.$settingsModal=this.$el.find("#cookie-popup"),this.$body=e.$body,this.$html=e.$html,this.$cookieSettingsButton=this.$body.find("#js-ccfw-settings-button")},bindEvents:function(){this.$cookieSettingsButton.on("click",this.showBanner.bind(this))},getCookie:function(t){var e=("; "+document.cookie).split("; "+t+"=");if(2===e.length)return e.pop().split(";").shift()},setCookie:function(t,e,n){var i=new Date;i.setTime(i.getTime()+864e5*n),document.cookie=t+"="+e+"; path=/; expires="+i.toGMTString()},deleteCookie:function(t){document.cookie=t+"=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;"},checkForCookie:function(t){return void 0!==this.getCookie(t)},showBanner:function(){this.$el.show(),this.$cookieSettingsButton.hide()},hideBanner:function(){this.$el.hide(),this.$cookieSettingsButton.show()},hideSettingsModal:function(){this.$settingsModal.hide(),this.$body.removeClass("ccfw-modal-open"),this.$el.removeClass("ccfw-cookie-banner-open"),this.$html.removeClass("ccfw-cookie-banner-open"),this.$body.removeClass("ccfw-cookie-banner-open")},showSettingsModal:function(){this.$settingsModal.show(),this.$body.addClass("ccfw-modal-open"),this.$el.addClass("ccfw-cookie-banner-open"),this.$html.addClass("ccfw-cookie-banner-open"),this.$body.addClass("ccfw-cookie-banner-open"),o.trapSettingsFocus()}},i={init:function(){this.cacheDom(),this.bindEvents(),this.bannerDisplay()},cacheDom:function(){this.$el=e.$el,this.$buttonAccept=this.$el.find("#cookie-accept"),this.$buttonDecline=this.$el.find("#cookie-decline"),this.$buttonInfo=this.$el.find("#cookie-more-info")},bindEvents:function(){this.$buttonAccept.on("click",this.acceptAllButton.bind(this)),this.$buttonDecline.on("click",this.declineAllButton.bind(this)),this.$buttonInfo.on("click",this.chooseCookieSettingsButton.bind(this))},bannerDisplay:function(){!1===n.checkForCookie("ccfw_wp_plugin.banner.hidden")?(n.showBanner(),this.trapBannerFocus()):n.hideBanner()},trapBannerFocus:function(){var e=t(".ccfw-banner__buttons"),n=t(".ccfw-banner__buttons #cookie-accept, .ccfw-banner__buttons #cookie-decline, .ccfw-banner__buttons #cookie-more-info"),i=n[0],o=n[n.length-1];e.on("keydown",(function(t){"Tab"===t.key&&(t.shiftKey?document.activeElement===i&&(o.focus(),t.preventDefault()):document.activeElement===o&&(i.focus(),t.preventDefault()))}))},acceptAllButton:function(){n.setCookie("ccfw_wp_plugin.banner.hidden","true",365),n.setCookie("ccfw_wp_plugin.ga.accept","true",365),n.hideBanner()},declineAllButton:function(){n.setCookie("ccfw_wp_plugin.banner.hidden","true",365),n.setCookie("ccfw_wp_plugin.ga.accept","false",365),n.hideBanner()},chooseCookieSettingsButton:function(){n.showSettingsModal()}},o={init:function(){this.cacheDom(),this.bindEvents()},cacheDom:function(){this.$el=e.$el,this.$settingsModal=this.$el.find("#cookie-popup"),this.$buttonAccept=this.$settingsModal.find("#cookie-accept"),this.$buttonDecline=this.$settingsModal.find("#cookie-decline"),this.$buttonInfo=this.$settingsModal.find("#cookie-more-info"),this.$buttonSavePreferences=this.$settingsModal.find("#cookie-save-preferences"),this.$GAcheckBox=this.$settingsModal.find("#ccfw-analytics-cookies-toggle"),this.$buttonModalClose=this.$settingsModal.find("#ccfw-modal-close"),this.$body=e.$body},bindEvents:function(){this.$buttonModalClose.on("click",this.modalDisplay.bind(this)),this.$buttonInfo.on("click",this.trapSettingsFocus.bind(this)),this.$buttonSavePreferences.on("click",this.saveCookiePreferences.bind(this)),this.$GAcheckBox.on("click",this.toggleAriaPressed.bind(this))},modalDisplay:function(){n.hideSettingsModal()},toggleAriaPressed:function(){n.checkForCookie("ccfw_wp_plugin.ga.accept")&&this.$GAcheckBox.attr("aria-checked",!0);var t="true"===this.$GAcheckBox.attr("aria-checked");this.$GAcheckBox.attr("aria-checked",!t)},trapSettingsFocus:function(){this.$settingsModal.focus();var e=t('#cookie-popup a[href], #cookie-popup details, #cookie-popup button, #cookie-popup input[type="checkbox"]'),i=e[0],o=e[e.length-1];this.$el.on("keydown",(function(t){"Escape"===t.key&&n.hideSettingsModal(),"Tab"===t.key&&(t.shiftKey?document.activeElement===i&&(o.focus(),t.preventDefault()):document.activeElement===o&&(i.focus(),t.preventDefault()))}))},saveCookiePreferences:function(){var t="true"===this.$GAcheckBox.attr("aria-checked");!0===t&&n.setCookie("ccfw_wp_plugin.ga.accept","true",365),!1===t&&n.checkForCookie("ccfw_wp_plugin.ga.accept")&&n.deleteCookie("ccfw_wp_plugin.ga.accept"),n.setCookie("ccfw_wp_plugin.banner.hidden","true",365),n.hideBanner(),n.hideSettingsModal()}};e.init(),n.init(),i.init(),o.init()}))}(jQuery)}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/js/ccfw_frontend.js":
+/*!*********************************!*\
+  !*** ./src/js/ccfw_frontend.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+;
+
+(function ($) {
+  'use strict';
+  /**
+   *  Define handlers when you need to maniplate late loading items such as images
+   * */
+  // $(window).on('load', function () {
+  // place code here if you need to manipule a late loading object like images
+  // })
+
+  /**
+   *  Define handlers for when the html/DOM is ready.
+   *  Banner settings use cookies (rather than local storage) to make older browers < IE8 happy
+   * TODO: Target data attributes rather than CSS classes
+   * */
+
+  $(function () {
+    var cookie_key_banner_hidden = 'ccfw_wp_plugin.banner.hidden';
+    var cookie_key_ga_accept = 'ccfw_wp_plugin.ga.accept'; // This is used so much make sure all modules use it to save calls to DOM
+
+    var cacheMainElements = {
+      init: function init() {
+        this.$el = $('#ccfw-page-banner');
+        this.$body = $('body');
+        this.$html = $('html');
+      }
+    };
+    /**
+    *  Helper functions for shared tasks
+    * */
+
+    var utilities = {
+      init: function init() {
+        this.cacheDom();
+        this.bindEvents();
+      },
+      cacheDom: function cacheDom() {
+        this.$el = cacheMainElements.$el;
+        this.$settingsModal = this.$el.find('#cookie-popup');
+        this.$body = cacheMainElements.$body;
+        this.$html = cacheMainElements.$html;
+        this.$cookieSettingsButton = this.$body.find('#js-ccfw-settings-button');
+        this.$GAcheckBox = this.$settingsModal.find('#ccfw-analytics-cookies-toggle');
+      },
+      bindEvents: function bindEvents() {
+        this.$cookieSettingsButton.on('click', this.showBanner.bind(this));
+      },
+      getCookie: function getCookie(name) {
+        var value = '; ' + document.cookie;
+        var parts = value.split('; ' + name + '=');
+
+        if (parts.length === 2) {
+          return parts.pop().split(';').shift();
+        }
+      },
+      setCookie: function setCookie(name, value, days) {
+        var d = new Date();
+        d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days);
+        document.cookie = name + '=' + value + '; path=/; expires=' + d.toGMTString();
+      },
+      deleteCookie: function deleteCookie(name) {
+        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      },
+      checkForCookie: function checkForCookie(key) {
+        var cookie = this.getCookie(key);
+        var bool = cookie === undefined ? false : true;
+        return bool;
+      },
+      showBanner: function showBanner() {
+        this.$el.show();
+        this.$cookieSettingsButton.hide();
+      },
+      hideBanner: function hideBanner() {
+        this.$el.hide();
+        this.$cookieSettingsButton.show();
+      },
+      hideSettingsModal: function hideSettingsModal() {
+        this.$settingsModal.hide();
+        this.$body.removeClass("ccfw-modal-open");
+        this.$el.removeClass("ccfw-cookie-banner-open");
+        this.$html.removeClass("ccfw-cookie-banner-open");
+        this.$body.removeClass("ccfw-cookie-banner-open");
+      },
+      showSettingsModal: function showSettingsModal() {
+        this.$settingsModal.show();
+        this.$body.addClass("ccfw-modal-open");
+        this.$el.addClass("ccfw-cookie-banner-open");
+        this.$html.addClass("ccfw-cookie-banner-open");
+        this.$body.addClass("ccfw-cookie-banner-open");
+
+        if (utilities.checkForCookie(cookie_key_ga_accept)) {
+          this.$GAcheckBox.attr("aria-checked", true);
+        }
+
+        settingsModal.trapSettingsFocus();
+      }
+    };
+    /**
+     *  Banner management and control
+     * */
+
+    var banner = {
+      init: function init() {
+        this.cacheDom();
+        this.bindEvents();
+        this.bannerDisplay();
+      },
+      cacheDom: function cacheDom() {
+        this.$el = cacheMainElements.$el;
+        this.$buttonAccept = this.$el.find('#cookie-accept');
+        this.$buttonDecline = this.$el.find('#cookie-decline');
+        this.$buttonInfo = this.$el.find('#cookie-more-info');
+      },
+      bindEvents: function bindEvents() {
+        this.$buttonAccept.on('click', this.acceptAllButton.bind(this));
+        this.$buttonDecline.on('click', this.declineAllButton.bind(this));
+        this.$buttonInfo.on('click', this.chooseCookieSettingsButton.bind(this));
+      },
+      bannerDisplay: function bannerDisplay() {
+        if (utilities.checkForCookie(cookie_key_banner_hidden) === false) {
+          utilities.showBanner();
+          this.trapBannerFocus();
+        } else {
+          utilities.hideBanner();
+        }
+      },
+      trapBannerFocus: function trapBannerFocus() {
+        var cookieBannerButtons = $('.ccfw-banner__buttons');
+        var focusableEls = $('.ccfw-banner__buttons #cookie-accept, .ccfw-banner__buttons #cookie-decline, .ccfw-banner__buttons #cookie-more-info');
+        var firstFocusableEl = focusableEls[0];
+        var lastFocusableEl = focusableEls[focusableEls.length - 1];
+        cookieBannerButtons.on('keydown', function (e) {
+          var isTabPressed = e.key === 'Tab';
+
+          if (!isTabPressed) {
+            return;
+          }
+
+          if (e.shiftKey)
+            /* shift + tab */
+            {
+              if (document.activeElement === firstFocusableEl) {
+                lastFocusableEl.focus();
+                e.preventDefault();
+              }
+            } else
+            /* tab */
+            {
+              if (document.activeElement === lastFocusableEl) {
+                firstFocusableEl.focus();
+                e.preventDefault();
+              }
+            }
+        });
+      },
+      acceptAllButton: function acceptAllButton() {
+        utilities.setCookie(cookie_key_banner_hidden, 'true', 365);
+        utilities.setCookie(cookie_key_ga_accept, 'true', 365);
+        utilities.hideBanner();
+      },
+      declineAllButton: function declineAllButton() {
+        utilities.setCookie(cookie_key_banner_hidden, 'true', 365);
+        utilities.setCookie(cookie_key_ga_accept, 'false', 365);
+        utilities.hideBanner();
+      },
+      chooseCookieSettingsButton: function chooseCookieSettingsButton() {
+        utilities.showSettingsModal();
+      }
+    };
+    var settingsModal = {
+      init: function init() {
+        this.cacheDom();
+        this.bindEvents();
+      },
+      cacheDom: function cacheDom() {
+        this.$el = cacheMainElements.$el;
+        this.$settingsModal = this.$el.find('#cookie-popup');
+        this.$buttonAccept = this.$settingsModal.find('#cookie-accept');
+        this.$buttonDecline = this.$settingsModal.find('#cookie-decline');
+        this.$buttonInfo = this.$settingsModal.find('#cookie-more-info');
+        this.$buttonSavePreferences = this.$settingsModal.find('#cookie-save-preferences');
+        this.$GAcheckBox = this.$settingsModal.find('#ccfw-analytics-cookies-toggle');
+        this.$buttonModalClose = this.$settingsModal.find('#ccfw-modal-close');
+        this.$body = cacheMainElements.$body;
+      },
+      bindEvents: function bindEvents() {
+        this.$buttonModalClose.on('click', this.modalDisplay.bind(this));
+        this.$buttonInfo.on('click', this.trapSettingsFocus.bind(this));
+        this.$buttonSavePreferences.on('click', this.saveCookiePreferences.bind(this));
+        this.$GAcheckBox.on('click', this.toggleAriaPressed.bind(this));
+      },
+      modalDisplay: function modalDisplay() {
+        utilities.hideSettingsModal();
+      },
+      toggleAriaPressed: function toggleAriaPressed() {
+        if (utilities.checkForCookie(cookie_key_ga_accept)) {
+          this.$GAcheckBox.attr("aria-checked", true);
+        }
+
+        var pressed = this.$GAcheckBox.attr("aria-checked") === "true";
+        this.$GAcheckBox.attr("aria-checked", !pressed);
+      },
+      trapSettingsFocus: function trapSettingsFocus() {
+        this.$settingsModal.focus();
+        /*Trap focus */
+
+        /* Based on Hidde de Vries' solution: https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element */
+
+        var focusableEls = $('#cookie-popup a[href], #cookie-popup details, #cookie-popup button, #cookie-popup input[type="checkbox"]');
+        var firstFocusableEl = focusableEls[0];
+        var lastFocusableEl = focusableEls[focusableEls.length - 1];
+        this.$el.on('keydown', function (e) {
+          // Close banner if user presses escape key
+          if (e.key === 'Escape') {
+            utilities.hideSettingsModal();
+          }
+
+          var isTabPressed = e.key === 'Tab';
+
+          if (!isTabPressed) {
+            return;
+          }
+
+          if (e.shiftKey)
+            /* shift + tab */
+            {
+              if (document.activeElement === firstFocusableEl) {
+                lastFocusableEl.focus();
+                e.preventDefault();
+              }
+            } else
+            /* tab */
+            {
+              if (document.activeElement === lastFocusableEl) {
+                firstFocusableEl.focus();
+                e.preventDefault();
+              }
+            }
+        });
+      },
+      saveCookiePreferences: function saveCookiePreferences() {
+        var analyticsCookiesTurnedOn = this.$GAcheckBox.attr("aria-checked") === "true";
+
+        if (analyticsCookiesTurnedOn === true) {
+          utilities.setCookie(cookie_key_ga_accept, 'true', 365);
+        }
+
+        if (analyticsCookiesTurnedOn === false) {
+          // GA - If present remove GA cookie, otherwise do nothing, default is GA off
+          if (utilities.checkForCookie(cookie_key_ga_accept)) {
+            utilities.deleteCookie(cookie_key_ga_accept);
+          }
+        }
+
+        utilities.setCookie(cookie_key_banner_hidden, 'true', 365);
+        utilities.hideBanner();
+        utilities.hideSettingsModal();
+      }
+    };
+    cacheMainElements.init();
+    utilities.init();
+    banner.init();
+    settingsModal.init();
+  });
+})(jQuery);
+
+/***/ }),
+
+/***/ 2:
+/*!***************************************!*\
+  !*** multi ./src/js/ccfw_frontend.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! /Users/beverleynewing/sites/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/js/ccfw_frontend.js */"./src/js/ccfw_frontend.js");
+
+
+/***/ })
+
+/******/ });
