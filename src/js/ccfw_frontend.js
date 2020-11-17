@@ -33,12 +33,17 @@
     const utilities = {
       init: function () {
         this.cacheDom()
+        this.bindEvents()
       },
       cacheDom: function () {
         this.$el = cacheMainElements.$el
         this.$settingsModal = this.$el.find('#cookie-popup')
         this.$body = cacheMainElements.$body
         this.$html = cacheMainElements.$html
+        this.$cookieSettingsButton = this.$body.find('#js-ccfw-settings-button')
+      },
+      bindEvents: function () {
+        this.$cookieSettingsButton.on('click', this.showBanner.bind(this))
       },
       getCookie: function (name) {
         var value = '; ' + document.cookie
@@ -53,15 +58,20 @@
         document.cookie = name + '=' + value + '; path=/; expires=' + d.toGMTString()
       },
       deleteCookie: function (name) {
-        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
       },
       checkForCookie: function (key) {
         let cookie = this.getCookie(key)
         let bool = cookie === undefined ? false : true
         return bool
       },
+      showBanner: function () {
+        this.$el.show()
+        this.$cookieSettingsButton.hide()
+      },
       hideBanner: function () {
         this.$el.hide()
+        this.$cookieSettingsButton.show()
       },
       hideSettingsModal: function () {
         this.$settingsModal.hide()
@@ -76,7 +86,20 @@
         this.$el.addClass("ccfw-cookie-banner-open")
         this.$html.addClass("ccfw-cookie-banner-open")
         this.$body.addClass("ccfw-cookie-banner-open")
+        if (utilities.checkForCookie(cookie_key_ga_accept)) {
+          settingsModal.$GAcheckBox.attr("aria-checked", true);
+        }
         settingsModal.trapSettingsFocus();
+
+        let pressed = settingsModal.$GAcheckBox.attr("aria-checked") === "true";
+
+        if (pressed) {
+          settingsModal.$gaToggleOnText.show()
+          settingsModal.$gaToggleOffText.hide()
+        } else {
+          settingsModal.$gaToggleOffText.show()
+          settingsModal.$gaToggleOnText.hide()
+        }
       }
     }
 
@@ -95,18 +118,18 @@
         this.$buttonDecline = this.$el.find('#cookie-decline')
         this.$buttonInfo = this.$el.find('#cookie-more-info')
       },
-      bannerDisplay: function () {
-        if (utilities.checkForCookie(cookie_key_banner_hidden) === false) {
-          this.$el.show()
-          this.trapBannerFocus()
-        } else {
-          utilities.hideBanner()
-        }
-      },
       bindEvents: function () {
         this.$buttonAccept.on('click', this.acceptAllButton.bind(this))
         this.$buttonDecline.on('click', this.declineAllButton.bind(this))
         this.$buttonInfo.on('click', this.chooseCookieSettingsButton.bind(this))
+      },
+      bannerDisplay: function () {
+        if (utilities.checkForCookie(cookie_key_banner_hidden) === false) {
+          utilities.showBanner()
+          this.trapBannerFocus()
+        } else {
+          utilities.hideBanner()
+        }
       },
       trapBannerFocus: function () {
         let cookieBannerButtons = $('.ccfw-banner__buttons')
@@ -118,7 +141,6 @@
         cookieBannerButtons.on('keydown', function (e) {
           var isTabPressed = (e.key === 'Tab');
 
-          console.log(focusableEls);
           if (!isTabPressed) {
             return;
           }
@@ -142,6 +164,7 @@
       },
       declineAllButton: function() {
         utilities.setCookie(cookie_key_banner_hidden, 'true', 365)
+        utilities.deleteCookie(cookie_key_ga_accept)
         utilities.hideBanner()
       },
       chooseCookieSettingsButton: function() {

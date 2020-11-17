@@ -568,6 +568,87 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
     }
 }
 
+/* Cookie banner button, for when banner has disappeared */
+
+.ccfw-settings-button {
+    bottom: 0;
+    right: 0;
+    display: none;
+    background: transparent;
+    position: fixed;
+    z-index: 100000;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    text-align: right;
+    padding: 20px 8px 8px 20px;
+    border: 0;
+    height: 94px;
+    width: 94px;
+
+    &:hover {
+        background-color: transparent;
+
+        .ccfw-settings-button__background-triangle path {
+            fill: #1976D2;
+        }
+    }
+
+    &:focus {
+        background: transparent;
+        box-shadow: transparent;
+        outline: none;
+
+        .ccfw-settings-button__background-triangle path {
+            fill: #0D47A1;
+        }
+    }
+
+    &:active {
+        background: transparent;
+        box-shadow: transparent;
+        outline: none;
+        color: #FFFFFF;
+        fill: #FFFFFF;
+        top: initial;
+
+        .ccfw-settings-button__background-triangle path {
+            fill: #403DD0;
+;
+        }
+    }
+
+    &__icon {
+        max-width: 24px;
+        max-height: 24px;
+        margin-top: 20px;
+
+        path {
+            fill: #FFFFFF;
+        }
+    }
+
+    &__background-triangle {
+        position: fixed;
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        height: 94px;
+        width: 94px;
+
+        path {
+            fill: #535A5E;
+        }
+    }
+
+    &__text {
+        font-size: 12px;
+        margin-bottom: 0;
+        color: #FFFFFF;
+    }
+}
+
 .ccfw-cookie-banner-open {
     height: 100%;
 }
