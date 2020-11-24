@@ -68,9 +68,11 @@
       showBanner: function () {
         this.$el.show()
         this.$cookieSettingsButton.hide()
+        this.toggleAriaHidden(this.$el, "hide")
       },
       hideBanner: function () {
         this.$el.hide()
+        this.toggleAriaHidden(this.$el, "unhide")
         this.$cookieSettingsButton.show()
       },
       hideSettingsModal: function () {
@@ -99,6 +101,29 @@
         } else {
           settingsModal.$gaToggleOffText.show()
           settingsModal.$gaToggleOnText.hide()
+        }
+      },
+      toggleAriaHidden: function (elem, state) {
+        var siblings = [];
+        var sibling = elem.parent().children();
+
+        // Loop through each sibling and push to the array
+        while (sibling) {
+          if (sibling !== elem) {
+            siblings.push(sibling);
+          }
+          sibling = sibling.nextSibling
+        }
+
+        if (state === "hide") {
+          siblings.forEach(function (sibling) {
+            sibling.attr("aria-hidden", "true")
+            elem.removeAttr("aria-hidden", "true")
+          })
+        } else {
+          siblings.forEach(function (sibling) {
+            sibling.removeAttr("aria-hidden", "true")
+          })
         }
       }
     }
