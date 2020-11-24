@@ -107,7 +107,6 @@
         var siblings = [];
         var sibling = elem.parent().children();
 
-        // Loop through each sibling and push to the array
         while (sibling) {
           if (sibling !== elem) {
             siblings.push(sibling);
