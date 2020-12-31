@@ -613,7 +613,6 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
         .ccfw-settings-button__background-triangle path {
             fill: #403DD0;
-;
         }
     }
 
@@ -642,7 +641,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         }
     }
 
-    &__text {
+    p.ccfw-settings-button__text {
         font-size: 12px;
         margin-bottom: 0;
         color: #FFFFFF;
