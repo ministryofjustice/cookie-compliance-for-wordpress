@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tasks to carry out on uninstall
  * https://developer.wordpress.org/plugins/plugin-basics/uninstall-methods/
