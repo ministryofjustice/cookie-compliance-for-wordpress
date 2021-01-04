@@ -4,5 +4,14 @@
     "type": "wordpress-plugin",
     "license": "MIT",
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "composer/composer": "*",
+        "squizlabs/php_codesniffer": "*"
+    },
+    "scripts": {
+        "phpcs-config-set" : "phpcs --config-set ignore_warnings_on_exit 1",
+        "phpcs": "phpcs --extensions=php --ignore=*/vendor/* --standard=PSR12 .",
+        "phpcbf": "phpcbf --extensions=php --ignore=*/vendor/* --standard=PSR12 ."
+    }
 }
