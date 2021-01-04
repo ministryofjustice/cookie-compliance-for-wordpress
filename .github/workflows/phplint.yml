@@ -1,0 +1,53 @@
+name: PHP linting and CS Git Action
+
+on: [ push ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      if: steps.composer-cache.outputs.cache-hit != 'true'
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Autocorrect PHP12 code standards violations
+      run: composer phpcbf
+      continue-on-error: true
+      # Attempt to lint code but do not fail if unable
+      
+    - name: Set PHPCS config
+      run : composer phpcs-config-set
+      # Run PHPCS config set to stop it exiting on a warning when linting
+
+    - name: Print lint results and check for errors
+      run : composer phpcs
+      # Fail if error is detected
+
+    - name: GIT add-push linted code
+      run: |
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+        git config pull.rebase false
+        git pull
+        git commit -am "Run automated code lint"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      continue-on-error: true

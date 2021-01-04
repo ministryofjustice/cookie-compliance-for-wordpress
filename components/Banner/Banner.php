@@ -49,11 +49,11 @@ class Banner
     public function actions()
     {
         add_action('wp_loaded', [$this->settings, 'settings'], 1);
-        add_action('wp_head', array( $this, 'disable_google_analytics_on_load' ), 11);
-        add_action('wp_body_open', array( $this, 'cookie_compliance_banner' ), 11);
+        add_action('wp_head', array( $this, 'disableGoogleAnalyticsOnLoad' ), 11);
+        add_action('wp_body_open', array( $this, 'cookieComplianceBanner' ), 11);
     }
 
-    public function disable_google_analytics_on_load()
+    public function disableGoogleAnalyticsOnLoad()
     {
         /**
          * If cookie "ccfw_wp_plugin.ga.accept" not present, disable GA.
@@ -78,7 +78,7 @@ class Banner
         <?php
     }
 
-    public function cookie_compliance_banner()
+    public function cookieComplianceBanner()
     {
         require_once plugin_dir_path(__FILE__) . 'partials/partial-banner.php';
     }
