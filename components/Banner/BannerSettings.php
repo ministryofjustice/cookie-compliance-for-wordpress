@@ -50,7 +50,7 @@ class BannerSettings extends Banner
 
         ?>
         <input type='text' name='ccfw_plugin_settings[banner_title]'
-        placeholder="Add custom cookie banner title" value='<?php echo esc_attr($bannerTitle); ?>'
+        placeholder="Add a custom cookie banner title" value='<?php echo esc_attr($bannerTitle); ?>'
         class="ccfw-component-input">
         <?php
     }
