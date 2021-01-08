@@ -17,6 +17,7 @@ $domainNameStr = ($domainName ? ' on ' . strtoupper($domainName) : '');
 
 $options = get_option('ccfw_plugin_settings');
 $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Are you OK with cookies?';
+$bannerText = !empty($options['banner_text']) ? $options['banner_text'] : 'We use small files called ‘cookies’' . $domainNameStr . ' to give you the best experience on our site.  Some are essential to make the site work, and some help us understand how people use the site so that we can improve your experience. You can choose to turn off the non-essential cookies.  Which cookies are you happy for us to use?';
 ?>
 
 <div class="ccfw-background-grey-overlay"></div>
