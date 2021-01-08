@@ -33,6 +33,8 @@ require_once('components/Analytics/Analytics.php');
 require_once('components/Analytics/AnalyticsSettings.php');
 require_once('components/EssentialCookies/EssentialCookies.php');
 require_once('components/EssentialCookies/EssentialCookiesSettings.php');
+require_once('components/ThirdPartyCookies/ThirdPartyCookies.php');
+require_once('components/ThirdPartyCookies/ThirdPartyCookiesSettings.php');
 
 // Include autoloader
 include_once "load.php";
@@ -45,3 +47,4 @@ new AdminSettings();
 new Banner();
 new Analytics();
 new EssentialCookies();
+new ThirdPartyCookies();

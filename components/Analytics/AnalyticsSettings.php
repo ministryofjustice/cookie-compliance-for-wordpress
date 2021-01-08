@@ -74,7 +74,7 @@ class AnalyticsSettings extends Analytics
     {
         ?>
         <div class="welcome-panel-column">
-            <h4><?php _e('Google Analytics (GA) Tracking ID', 'wp_analytics_page'); ?></h4>
+            <h3><?php _e('Google Analytics (GA) Tracking ID', 'wp_analytics_page'); ?></h3>
             <p><?php _e('Enter your GA tracking ID and save. This enables the banner to disable/enable your GA tracking for visitors.
             <br>More information on where to find you GA code is available on Google Help pages.
             <br> https://support.google.com/analytics/answer/7372977?hl=en ', 'wp_analytics_page'); ?>

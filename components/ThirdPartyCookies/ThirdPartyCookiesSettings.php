@@ -9,11 +9,11 @@
  * @package    cookie-compliance-for-wordpress
  */
 
-namespace CCFW\Components\EssentialCookies;
+namespace CCFW\Components\ThirdPartyCookies;
 
-use CCFW\Components\EssentialCookies;
+use CCFW\Components\ThirdPartyCookies;
 
-class EssentialCookiesSettings extends EssentialCookies
+class ThirdPartyCookiesSettings extends ThirdPartyCookies
 {
     public $helper;
 
@@ -31,9 +31,9 @@ class EssentialCookiesSettings extends EssentialCookies
     public function settingsFields($section)
     {
         add_settings_field(
-            'additional_essential_cookies_id',
-            __('Add additional essential cookies?', 'cookie-compliance-for-wordpress'),
-            [$this, 'setAdditionalEssentialCookiesID'],
+            'additional_third_party_cookies_id',
+            __('Are you using YouTube?', 'cookie-compliance-for-wordpress'),
+            [$this, 'setAdditionalThirdPartyCookiesID'],
             'cookie-compliance-for-wordpress-settings',
             $section
         );
@@ -42,13 +42,13 @@ class EssentialCookiesSettings extends EssentialCookies
     /**
      * Function that collects inputed GA tracking ID and running checks on it.
      */
-    public function setAdditionalEssentialCookiesID()
+    public function setAdditionalThirdPartyCookiesID()
     {
         $options = get_option('ccfw_plugin_settings');
-        $googleAnalyticsID = $options['additional_essential_cookies_id'] ?? '';
+        $googleAnalyticsID = $options['additional_third_party_cookies_id'] ?? '';
 
         ?>
-        <input type='checkbox' name='ccfw_plugin_settings[additional_essential_cookies_id]'
+        <input type='checkbox' name='ccfw_plugin_settings[additional_third_party_cookies_id]'
         class="ccfw-component-input">
         <?php
     }
@@ -57,8 +57,9 @@ class EssentialCookiesSettings extends EssentialCookies
     {
         ?>
         <div class="welcome-panel-column">
-            <h3><?php _e('Essential cookies', 'wp_essential_cookies_page'); ?></h3>
-            <p><?php _e('WordPress cookies are essential cookies, so information about these is added to the modal by default. If there are any others you need to add, tick below.', 'wp_essential_cookies_page'); ?>
+            <h3><?php _e('Third party cookies', 'wp_essential_cookies_page'); ?></h3>
+            <p><?php _e('Third Party cookies are cookies that are set by things like YouTube, which are embedded on our sites.', 'wp_essential_cookies_page'); ?>
+            <p><?php _e('If you are using YouTube, tick the box below, and info about YouTube cookies will be added to the cookie info modal.', 'wp_essential_cookies_page'); ?>
             </p>
         </div>
         <?php
