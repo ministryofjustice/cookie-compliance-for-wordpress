@@ -31,6 +31,8 @@ require_once('components/Banner/Banner.php');
 require_once('components/Banner/BannerSettings.php');
 require_once('components/Analytics/Analytics.php');
 require_once('components/Analytics/AnalyticsSettings.php');
+require_once('components/EssentialCookies/EssentialCookies.php');
+require_once('components/EssentialCookies/EssentialCookiesSettings.php');
 
 // Include autoloader
 include_once "load.php";
@@ -42,3 +44,4 @@ $ccfwHelper = new Helper();
 new AdminSettings();
 new Banner();
 new Analytics();
+new EssentialCookies();
