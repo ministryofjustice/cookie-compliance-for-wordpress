@@ -34,9 +34,7 @@ $bannerText = !empty($options['banner_text']) ? $options['banner_text'] : 'We us
     <div class="ccfw-banner">
         <div class="ccfw-banner__intro">
             <?php _e('<h2 class="ccfw-banner__heading">' . esc_attr($bannerTitle) . '</h2>', 'cookie-compliance-for-wordpress'); ?>
-            <p class="ccfw-banner__info-text">
-                <?php _e('We use small files called ‘cookies’' . $domainNameStr . ' to give you the best experience on our site.  Some are essential to make the site work, and some help us understand how people use the site so that we can improve your experience. You can choose to turn off the non-essential cookies.  Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'); ?>
-            </p>
+            <?php _e('<p class="ccfw-banner__info-text">' . esc_attr($bannerText) . '</p>', 'cookie-compliance-for-wordpress'); ?>
 
             <div class="ccfw-banner__buttons">
                 <button class="ccfw-banner__button" id="cookie-accept" type="submit">
@@ -102,14 +100,14 @@ $bannerText = !empty($options['banner_text']) ? $options['banner_text'] : 'We us
                         <tbody>
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">_ga</th>
-                            <td class="ccfw-banner__table-cell">These help us count how many people visit www.IMB.org.uk
+                            <td class="ccfw-banner__table-cell">These help us count how many people visit <?php echo $domainNameStr; ?>
                                 by tracking if you’ve visited before
                             </td>
                             <td class="ccfw-banner__table-cell">2 years</td>
                         </tr>
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">_gid</th>
-                            <td class="ccfw-banner__table-cell">These help us count how many people visit www.IMB.org.uk
+                            <td class="ccfw-banner__table-cell">These help us count how many people visit <?php echo $domainNameStr; ?>
                                 by tracking if you’ve visited before
                             </td>
                             <td class="ccfw-banner__table-cell">24 hours</td>
