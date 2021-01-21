@@ -13,7 +13,7 @@
 
 $domainName = get_home_url(get_current_blog_id());
 $domainName = parse_url($domainName, PHP_URL_HOST);
-$domainNameStr = ($domainName ? ' on ' . strtoupper($domainName) : '');
+$domainNameStr = ($domainName ? ' on ' . strtolower($domainName) : '');
 
 $options = get_option('ccfw_plugin_settings');
 $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Are you OK with cookies?';
@@ -101,14 +101,14 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
                         <tbody>
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">_ga</th>
-                            <td class="ccfw-banner__table-cell">These help us count how many people visit www.IMB.org.uk
+                            <td class="ccfw-banner__table-cell">These help us count how many people visit <?php echo $domainNameStr; ?>
                                 by tracking if you’ve visited before
                             </td>
                             <td class="ccfw-banner__table-cell">2 years</td>
                         </tr>
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">_gid</th>
-                            <td class="ccfw-banner__table-cell">These help us count how many people visit www.IMB.org.uk
+                            <td class="ccfw-banner__table-cell">These help us count how many people visit <?php echo $domainNameStr; ?>
                                 by tracking if you’ve visited before
                             </td>
                             <td class="ccfw-banner__table-cell">24 hours</td>
