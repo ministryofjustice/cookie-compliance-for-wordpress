@@ -73,7 +73,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
     all: unset;
     // normalise CSS
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     /* 1 */
     font-size: 100%;
     /* 1 */
@@ -173,11 +173,13 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             color: #FFFFFF;
             -webkit-text-fill-color: #FFFFFF;
             border-radius: 5px;
-            font-weight: bold;
+            border: 2px solid transparent;
             box-shadow: none;
             padding: 5px 16px;
             margin-bottom: 18px;
             width: 100%;
+            font-size: 19px;
+            font-family: Arial, sans-serif;
 
             &:hover {
                 background-color: #0D47A1;
@@ -214,6 +216,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 margin-bottom: 16px;
                 text-align: right;
                 padding-right: 0;
+                padding-left: 0;
+                width: auto;
                 @extend .govuk-link;
 
                 &:focus {
@@ -250,6 +254,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 background-color: #E8F1FB;
                 color:#0D47A1;
                 border: 1px solid #1976D2;
+                border-radius: 5px;
                 box-shadow: none;
                 padding: 6px 17px;
                 fill: #0D47A1;
@@ -268,6 +273,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                     box-shadow:
                     0 0 0 2px #FFFFFF,
                     0 0 0 4px #00A0CC;
+                    outline: 2px solid transparent;
                 }
 
                 &:active {
@@ -283,6 +289,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
         &__buttons {
             all: unset;
+            font-family: Arial, sans-serif;
 
             &:after {
                 content: "";
@@ -347,6 +354,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 color: #1976D2;
                 float: right;
                 font-weight: bold;
+                font-size: 18px;
+                font-family: Arial;
             }
         }
 
@@ -374,6 +383,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             box-shadow: none;
             width: 60px;
             height: 32px;
+            border: 2px solid transparent;
 
             &--on-text {
                 font-size: 12px;
@@ -391,7 +401,9 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 right: 8px;
             }
 
-            &:before {
+            &::before {
+                content: '';
+                box-sizing: border-box;
                 position: absolute;
                 text-align: center;
                 height: 22px;
