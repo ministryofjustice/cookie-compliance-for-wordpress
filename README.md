@@ -61,6 +61,6 @@ To add new functionality/new classes, first add your class to the service regist
 
 If functionality is javascript based, this plugin uses the JavaScript Object Literal pattern to encapsulate functions into modules. Edit the JS file in the `src` folder and that will get compiled into the `dist` folder.
 
-## Automated linting and PHP code sniffing
+### Automated linting and PHP code sniffing
 
 We have a Git Action setup that lints, sniffs and then commits the linted PHP code in this plugin when anything is pushed to the repo.
