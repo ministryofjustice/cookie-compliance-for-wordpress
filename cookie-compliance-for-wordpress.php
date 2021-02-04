@@ -29,12 +29,6 @@ require_once('components/AdminSettings/AdminSettings.php');
 require_once('components/Helper/Helper.php');
 require_once('components/Banner/Banner.php');
 require_once('components/Banner/BannerSettings.php');
-require_once('components/Analytics/Analytics.php');
-require_once('components/Analytics/AnalyticsSettings.php');
-require_once('components/EssentialCookies/EssentialCookies.php');
-require_once('components/EssentialCookies/EssentialCookiesSettings.php');
-require_once('components/ThirdPartyCookies/ThirdPartyCookies.php');
-require_once('components/ThirdPartyCookies/ThirdPartyCookiesSettings.php');
 
 // Include autoloader
 include_once "load.php";
@@ -45,6 +39,3 @@ $ccfwHelper = new Helper();
 // Instantiate classes
 new AdminSettings();
 new Banner();
-new Analytics();
-new EssentialCookies();
-new ThirdPartyCookies();

@@ -16,8 +16,9 @@ $domainName = parse_url($domainName, PHP_URL_HOST);
 $domainNameStr = ($domainName ? ' on ' . strtoupper($domainName) : '');
 
 $options = get_option('ccfw_plugin_settings');
-$bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Are you OK with cookies?';
-$bannerText = !empty($options['banner_text']) ? $options['banner_text'] : 'We use small files called ‘cookies’' . $domainNameStr . ' to give you the best experience on our site.  Some are essential to make the site work, and some help us understand how people use the site so that we can improve your experience. You can choose to turn off the non-essential cookies.  Which cookies are you happy for us to use?';
+$isUsingYouTube = !empty($options['is_using_youtube']);
+$isUsingTwitter = !empty($options['is_using_twitter']);
+$isUsingVimeo = !empty($options['is_using_vimeo']);
 ?>
 
 <div class="ccfw-background-grey-overlay"></div>
@@ -33,8 +34,26 @@ $bannerText = !empty($options['banner_text']) ? $options['banner_text'] : 'We us
 <div id="ccfw-page-banner">
     <div class="ccfw-banner">
         <div class="ccfw-banner__intro">
-            <?php _e('<h2 class="ccfw-banner__heading">' . esc_attr($bannerTitle) . '</h2>', 'cookie-compliance-for-wordpress'); ?>
-            <?php _e('<p class="ccfw-banner__info-text">' . esc_attr($bannerText) . '</p>', 'cookie-compliance-for-wordpress'); ?>
+            <?php _e('<h2 class="ccfw-banner__heading">Are you OK with cookies?</h2>', 'cookie-compliance-for-wordpress'); ?>
+            <?php _e('<p class="ccfw-banner__info-text">We use small files called ‘cookies’' . $domainNameStr . ' to give you the best experience on our site.  Some are essential to make the site work, and some help us understand how people use the site so that we can improve your experience. You can choose to turn off the non-essential cookies.  Which cookies are you happy for us to use?</p>', 'cookie-compliance-for-wordpress'); ?>
+
+            <?php if ($isUsingYouTube == "on") {
+                echo "yes youtube boop";
+            } else {
+                echo "no youtube boop";
+            }; ?>
+
+            <?php if ($isUsingTwitter == "on") {
+                echo "yes twitter boop";
+            } else {
+                echo "no twitter boop";
+            }; ?>
+
+            <?php if ($isUsingVimeo == "on") {
+                echo "yes vimeo boop";
+            } else {
+                echo "no vimeo boop";
+            }; ?>
 
             <div class="ccfw-banner__buttons">
                 <button class="ccfw-banner__button" id="cookie-accept" type="submit">
