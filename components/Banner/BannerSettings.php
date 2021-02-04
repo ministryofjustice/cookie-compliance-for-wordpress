@@ -147,7 +147,7 @@ class BannerSettings extends Banner
 
         ?>
         <input type='checkbox' id="is_using_youtube" name='ccfw_plugin_settings[is_using_youtube]' value="1"
-        class="ccfw-component-input" <?php checked( 1, $options['is_using_youtube'], false); ?> />
+        class="ccfw-component-input" <?php checked(1, $options['is_using_youtube'], false); ?> />
         <?php
     }
 
@@ -158,7 +158,7 @@ class BannerSettings extends Banner
 
         ?>
         <input type='checkbox' id="is_using_twitter" name='ccfw_plugin_settings[is_using_twitter]' value="1"
-        class="ccfw-component-input" <?php checked( 1, $options['is_using_twitter'], false); ?> />
+        class="ccfw-component-input" <?php checked(1, $options['is_using_twitter'], false); ?> />
         <?php
     }
 
@@ -169,7 +169,7 @@ class BannerSettings extends Banner
 
         ?>
         <input type='checkbox' id="is_using_vimeo" name='ccfw_plugin_settings[is_using_vimeo]' value="1"
-        class="ccfw-component-input" <?php checked( 1, $options['is_using_vimeo'], false); ?> />
+        class="ccfw-component-input" <?php checked(1, $options['is_using_vimeo'], false); ?> />
         <?php
     }
 
