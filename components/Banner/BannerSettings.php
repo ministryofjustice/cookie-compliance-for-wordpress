@@ -31,20 +31,6 @@ class BannerSettings extends Banner
     public function settingsFields($section)
     {
         add_settings_field(
-            'banner_title',
-            __('Banner title', 'cookie-compliance-for-wordpress'),
-            [$this, 'bannerTitle'],
-            'cookie-compliance-for-wordpress-settings',
-            $section
-        );
-        add_settings_field(
-            'banner_text',
-            __('Banner text', 'cookie-compliance-for-wordpress'),
-            [$this, 'bannerText'],
-            'cookie-compliance-for-wordpress-settings',
-            $section
-        );
-        add_settings_field(
             'ga_analytics_id',
             __('GA ID', 'cookie-compliance-for-wordpress'),
             [$this, 'setGoogleAnalyticsID'],
@@ -72,41 +58,6 @@ class BannerSettings extends Banner
             'cookie-compliance-for-wordpress-settings',
             $section
         );
-    }
-
-    /**
-     * Add custom banner title
-     */
-    public function bannerTitle()
-    {
-
-        $options = get_option('ccfw_plugin_settings');
-        $bannerTitle = $options['banner_title'] ?? '';
-        ?>
-
-        <p>If left empty, the banner title will say: "Are you OK with cookies?"</p>
-        <input type='text' name='ccfw_plugin_settings[banner_title]'
-        value='<?php echo esc_attr($bannerTitle); ?>'
-        class="ccfw-component-input">
-        <?php
-    }
-
-    /**
-     * Add custom banner title
-     */
-    public function bannerText()
-    {
-
-        $options = get_option('ccfw_plugin_settings');
-        $bannerText = $options['banner_text'] ?? '';
-        ?>
-
-        <p>If left empty, the banner text will say:</p>
-        <p style="max-width: 45rem">"We use small files called ‘cookies’' on [your domain name] to give you the best experience on our site. Some are essential to make the site work, and some help us understand how people use the site so that we can improve your experience. You can choose to turn off the non-essential cookies. Which cookies are you happy for us to use?"</p>
-        <input type='text' name='ccfw_plugin_settings[banner_text]'
-        value='<?php echo esc_attr($bannerText); ?>'
-        class="ccfw-component-input">
-        <?php
     }
 
     /**
@@ -146,8 +97,8 @@ class BannerSettings extends Banner
         $isUsingYouTube = $options['is_using_youtube'] ?? 'false';
 
         ?>
-        <input type='checkbox' id="is_using_youtube" name='ccfw_plugin_settings[is_using_youtube]' value="1"
-        class="ccfw-component-input" <?php checked(1, $options['is_using_youtube'], false); ?> />
+        <input type='checkbox' id="is_using_youtube" name='ccfw_plugin_settings[is_using_youtube]' value="yes"
+        class="ccfw-component-input" <?= checked('yes', $options['is_using_youtube'] ?? '') ?> />
         <?php
     }
 
@@ -157,8 +108,8 @@ class BannerSettings extends Banner
         $isUsingYouTube = $options['is_using_twitter'] ?? 'false';
 
         ?>
-        <input type='checkbox' id="is_using_twitter" name='ccfw_plugin_settings[is_using_twitter]' value="1"
-        class="ccfw-component-input" <?php checked(1, $options['is_using_twitter'], false); ?> />
+        <input type='checkbox' id="is_using_twitter" name='ccfw_plugin_settings[is_using_twitter]' value="yes"
+        class="ccfw-component-input" <?= checked( 'yes', $options['is_using_twitter'] ?? ''); ?> />
         <?php
     }
 
@@ -168,8 +119,8 @@ class BannerSettings extends Banner
         $isUsingYouTube = $options['is_using_vimeo'] ?? 'false';
 
         ?>
-        <input type='checkbox' id="is_using_vimeo" name='ccfw_plugin_settings[is_using_vimeo]' value="1"
-        class="ccfw-component-input" <?php checked(1, $options['is_using_vimeo'], false); ?> />
+        <input type='checkbox' id="is_using_vimeo" name='ccfw_plugin_settings[is_using_vimeo]' value="yes"
+        class="ccfw-component-input" <?= checked( 'yes', $options['is_using_vimeo'] ?? 'false') ?> />
         <?php
     }
 
