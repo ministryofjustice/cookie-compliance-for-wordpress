@@ -109,7 +109,7 @@ class BannerSettings extends Banner
 
         ?>
         <input type='checkbox' id="is_using_twitter" name='ccfw_plugin_settings[is_using_twitter]' value="yes"
-        class="ccfw-component-input" <?= checked( 'yes', $options['is_using_twitter'] ?? ''); ?> />
+        class="ccfw-component-input" <?= checked('yes', $options['is_using_twitter'] ?? ''); ?> />
         <?php
     }
 
@@ -120,7 +120,7 @@ class BannerSettings extends Banner
 
         ?>
         <input type='checkbox' id="is_using_vimeo" name='ccfw_plugin_settings[is_using_vimeo]' value="yes"
-        class="ccfw-component-input" <?= checked( 'yes', $options['is_using_vimeo'] ?? 'false') ?> />
+        class="ccfw-component-input" <?= checked('yes', $options['is_using_vimeo'] ?? 'false') ?> />
         <?php
     }
 
