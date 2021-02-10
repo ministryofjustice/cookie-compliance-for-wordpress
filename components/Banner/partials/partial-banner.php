@@ -29,7 +29,7 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
     </svg>
     <p class="ccfw-settings-button__text"><span class="visually-hidden">Cookie</span>Settings</p>
 </button>
-<div id="ccfw-page-banner">
+<div id="ccfw-page-banner" data-nosnippet="true">
     <div class="ccfw-banner">
         <div class="ccfw-banner__intro">
             <?php _e('<h2 class="ccfw-banner__heading">' . esc_attr($bannerTitle) . '</h2>', 'cookie-compliance-for-wordpress'); ?>
