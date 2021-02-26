@@ -322,6 +322,22 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             @extend .govuk-body;
         }
 
+        &__third-party-section-heading {
+            margin-bottom: 16px;
+            @extend .govuk-heading-s;
+        }
+
+        &__third-party-section-text {
+            margin-bottom: 16px;
+            @extend .govuk-body;
+        }
+
+        &__third-party-section-link {
+            margin-bottom: 32px;
+            display: block;
+            @extend .govuk-link;
+        }
+
         &__toggle-header-container {
             position: relative;
             border-top: 1px solid gray;

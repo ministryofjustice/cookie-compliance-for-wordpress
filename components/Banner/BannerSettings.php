@@ -39,21 +39,21 @@ class BannerSettings extends Banner
         );
         add_settings_field(
             'is_using_youtube',
-            __('Are you using YouTube?', 'cookie-compliance-for-wordpress'),
+            __('I am not using YouTube', 'cookie-compliance-for-wordpress'),
             [$this, 'isUsingYouTube'],
             'cookie-compliance-for-wordpress-settings',
             $section
         );
         add_settings_field(
             'is_using_twitter',
-            __('Are you using Twitter?', 'cookie-compliance-for-wordpress'),
+            __('I am not using Twitter', 'cookie-compliance-for-wordpress'),
             [$this, 'isUsingTwitter'],
             'cookie-compliance-for-wordpress-settings',
             $section
         );
         add_settings_field(
             'is_using_vimeo',
-            __('Are you using Vimeo?', 'cookie-compliance-for-wordpress'),
+            __('I am not using Vimeo', 'cookie-compliance-for-wordpress'),
             [$this, 'isUsingVimeo'],
             'cookie-compliance-for-wordpress-settings',
             $section
