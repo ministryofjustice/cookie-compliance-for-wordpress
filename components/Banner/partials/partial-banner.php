@@ -13,7 +13,7 @@
 
 $domainName = get_home_url(get_current_blog_id());
 $domainName = parse_url($domainName, PHP_URL_HOST);
-$domainNameStr = ($domainName ? ' on ' . strtoupper($domainName) : '');
+$domainNameStr = ($domainName ? ' on ' . strtolower($domainName) : '');
 
 $options = get_option('ccfw_plugin_settings');
 $isUsingYouTube = !empty($options['is_using_youtube']);
@@ -31,7 +31,7 @@ $isUsingVimeo = !empty($options['is_using_vimeo']);
     </svg>
     <p class="ccfw-settings-button__text"><span class="visually-hidden">Cookie</span>Settings</p>
 </button>
-<div id="ccfw-page-banner">
+<div id="ccfw-page-banner" data-nosnippet="true">
     <div class="ccfw-banner">
         <div class="ccfw-banner__intro">
             <?php _e('<h2 class="ccfw-banner__heading">Are you OK with cookies?</h2>', 'cookie-compliance-for-wordpress'); ?>

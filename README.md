@@ -1,15 +1,16 @@
 # Cookie Compliance For Wordpress
 WP plugin that once activated, presents the website visitor with a cookie consent banner at the top of the page. This plugin will also generate a custom frontend settings page, allowing a vistor to turn cookie settings on/off.
 
-This plugin currently supports the user turning off:
+# Features
 
-* Google Analytics tracking
+* Managing Google Analytics tracking via the banner toggles
+* Adding your own custom banner text via the WP dashboard
 
 Core Wordpress plugns are considered essential to the functioning of the site so they are not removed.
 
 ## Issues
 
-Raise issues via 
+Raise issues via
 <a href="https://github.com/ministryofjustice/cookie-compliance-for-wordpress/issues">https://github.com/ministryofjustice/cookie-compliance-for-wordpress/issues</a>
 
 ## Installation
@@ -38,7 +39,7 @@ wp_body_open();
 
 This plugin follows
 
-* Standards set by the Wordpress organisation https://codex.wordpress.org/Writing_a_Plugin. 
+* Standards set by the Wordpress organisation https://codex.wordpress.org/Writing_a_Plugin.
 * PHP Framework Interop Group's standards http://www.php-fig.org/
 * JS Standard https://standardjs.com/rules.html
 
@@ -56,10 +57,10 @@ Assests (such as CSS and JS) are compiled in this plugin using Webpack.
 
 This plugin uses OOP PHP and Namespaces (PSR-4 Autoloader).
 
-To add new functionality/new classes, first add your class to the service register array in `/includes/init.php` and then create a corresponding .php file for this class. 
+To add new functionality/new classes, first add your class to the service register array in `/includes/init.php` and then create a corresponding .php file for this class.
 
 If functionality is javascript based, this plugin uses the JavaScript Object Literal pattern to encapsulate functions into modules. Edit the JS file in the `src` folder and that will get compiled into the `dist` folder.
 
-## Testing
+### Automated linting and PHP code sniffing
 
-Javascripts used in this plugin follow the JS Standard format (JS Standard https://standardjs.com/rules.html). Not writing JS in this format, or JS package issues will throw linting errors via GitHub Actions and the deploy will fail.
+We have a Git Action setup that lints, sniffs and then commits the linted PHP code in this plugin when anything is pushed to the repo.
