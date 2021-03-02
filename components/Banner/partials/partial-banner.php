@@ -158,18 +158,16 @@ $isUsingVimeo = !empty($options['is_using_vimeo']);
                             </td>
                             <td class="ccfw-banner__table-cell">When you close your browser</td>
                         </tr>
-
-                        <!-- ADD IN COOKIE BANNER ONES -->
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">ccfw_wp_plugin.banner.hidden</th>
-                            <td class="ccfw-banner__table-cell">This is used to record if you've already interacted with the banner. This stops it from automatically reappearing every time you come to the site.
+                            <td class="ccfw-banner__table-cell">Lets us know you have chosen which cookies are used so we can stop the cookie banner appearing when you return to the site.
                             </td>
                             <td class="ccfw-banner__table-cell">1 year</td>
                         </tr>
 
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">ccfw_wp_plugin.ga.accept</th>
-                            <td class="ccfw-banner__table-cell">This is to record if you've accepted Google Analytics cookies, so we know whether to stop them loading.
+                            <td class="ccfw-banner__table-cell">Lets us know you have accepted Google Analytics cookies so we can stop them loading when you return to the site.
                             </td>
                             <td class="ccfw-banner__table-cell">1 year</td>
                         </tr>
