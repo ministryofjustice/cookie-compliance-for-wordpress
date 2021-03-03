@@ -16,9 +16,9 @@ $domainName = parse_url($domainName, PHP_URL_HOST);
 $domainNameStr = ($domainName ? ' on ' . strtolower($domainName) : '');
 
 $options = get_option('ccfw_plugin_settings');
-$isUsingYouTube = !empty($options['is_using_youtube']);
-$isUsingTwitter = !empty($options['is_using_twitter']);
-$isUsingVimeo = !empty($options['is_using_vimeo']);
+$removeYouTubeCookieContent = !empty($options['remove_youtube_cookie_content']);
+$removeTwitterCookieContent = !empty($options['remove_twitter_cookie_content']);
+$removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
 ?>
 
 <div class="ccfw-background-grey-overlay"></div>
@@ -220,36 +220,39 @@ $isUsingVimeo = !empty($options['is_using_vimeo']);
             <h4 class="ccfw-banner__summary-heading">Third-party cookies</h4>
             <p class="ccfw-banner__summary-text">We have no control over cookies set by third parties. You can turn them off, but not through us. In addition, if you share a link to a page, the service you share it on (for example, Facebook) may set a cookie.</p>
 
-            <details class="ccfw-banner__expanding-section" data-module="govuk-details">
-                <summary class="ccfw-banner__expanding-section-summary">
-                    <span class="ccfw-banner__expanding-section-summary-text govuk-details__summary-text">
-                        See third party cookies
-                    </span>
-                </summary>
+                <?php if (!$removeYouTubeCookieContent || !$removeVimeoCookieContent || !$removeTwitterCookieContent ) { ?>
 
-                <div class="ccfw-banner__expanding-section-text govuk-details__text">
-                    <?php if (!$isUsingYouTube) { ?>
-                        <h5 class="ccfw-banner__third-party-section-heading">YouTube</h5>
-                        <p class="ccfw-banner__third-party-section-text">YouTube videos play in privacy-enhanced mode. This mode may set third-party cookies on your computer when you click on the YouTube video player. These cookies will not be personally identifiable.
-                        </p>
-                        <a href="https://policies.google.com/u/2/privacy?hl=en-GB" class="ccfw-banner__third-party-section-link">Read the YouTube Privacy Policy</a>
-                    <?php } ?>
+                <details class="ccfw-banner__expanding-section" data-module="govuk-details">
+                    <summary class="ccfw-banner__expanding-section-summary">
+                        <span class="ccfw-banner__expanding-section-summary-text govuk-details__summary-text">
+                            See third party cookies
+                        </span>
+                    </summary>
 
-                    <?php if (!$isUsingVimeo) { ?>
-                        <h5 class="ccfw-banner__third-party-section-heading">Vimeo</h5>
-                        <p class="ccfw-banner__third-party-section-text">Vimeo videos set third-party cookies to enable the video to play and collect analytics data. These cookies do not track individuals.
-                        </p>
-                        <a href="https://vimeo.com/cookie_policy" class="ccfw-banner__third-party-section-link">Read the Vimeo Cookie Policy</a>
-                    <?php } ?>
+                    <div class="ccfw-banner__expanding-section-text govuk-details__text">
+                        <?php if (!$removeYouTubeCookieContent) { ?>
+                            <h5 class="ccfw-banner__third-party-section-heading">YouTube</h5>
+                            <p class="ccfw-banner__third-party-section-text">YouTube videos play in privacy-enhanced mode. This mode may set third-party cookies on your computer when you click on the YouTube video player. These cookies will not be personally identifiable.
+                            </p>
+                            <a href="https://policies.google.com/u/2/privacy?hl=en-GB" class="ccfw-banner__third-party-section-link">Read the YouTube Privacy Policy</a>
+                        <?php } ?>
 
-                    <?php if (!$isUsingTwitter) { ?>
-                        <h5 class="ccfw-banner__third-party-section-heading">Twitter</h5>
-                        <p class="ccfw-banner__third-party-section-text">Twitter widgets may add cookies to help analyse usage and remember your session if you are also logged in to your Twitter account.
-                        </p>
-                        <a href="https://twitter.com/en/privacy" class="ccfw-banner__third-party-section-link">Read the Twitter Privacy Policy</a>
-                    <?php } ?>
-                </div>
-            </details>
+                        <?php if (!$removeVimeoCookieContent) { ?>
+                            <h5 class="ccfw-banner__third-party-section-heading">Vimeo</h5>
+                            <p class="ccfw-banner__third-party-section-text">Vimeo videos set third-party cookies to enable the video to play and collect analytics data. These cookies do not track individuals.
+                            </p>
+                            <a href="https://vimeo.com/cookie_policy" class="ccfw-banner__third-party-section-link">Read the Vimeo Cookie Policy</a>
+                        <?php } ?>
+
+                        <?php if (!$removeTwitterCookieContent) { ?>
+                            <h5 class="ccfw-banner__third-party-section-heading">Twitter</h5>
+                            <p class="ccfw-banner__third-party-section-text">Twitter widgets may add cookies to help analyse usage and remember your session if you are also logged in to your Twitter account.
+                            </p>
+                            <a href="https://twitter.com/en/privacy" class="ccfw-banner__third-party-section-link">Read the Twitter Privacy Policy</a>
+                        <?php } ?>
+                    </div>
+                </details>
+            <?php } ?>
 
             <button id="cookie-save-preferences" class="ccfw-banner__button">
                 <?php _e('Save cookie preferences', 'cookie-compliance-for-wordpress'); ?>

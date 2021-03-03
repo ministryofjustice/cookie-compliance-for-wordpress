@@ -496,32 +496,32 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             border-bottom: 4px solid transparent;
 
             &:focus {
-                    color: #0D47A1;
-                    background: #0090B8;
-                    border-bottom: 4px solid #0090B8;
-                    background: #d9eef4;
-                    box-shadow: none;
-                }
+                color: #0D47A1;
+                background: #0090B8;
+                border-bottom: 4px solid #0090B8;
+                background: #d9eef4;
+                box-shadow: none;
+            }
 
-                &:hover {
-                    color: #0D47A1;
-                    -webkit-text-fill-color: #0D47A1;
-                    background-color: transparent;
-                }
+            &:hover {
+                color: #0D47A1;
+                -webkit-text-fill-color: #0D47A1;
+                background-color: transparent;
+            }
 
-                &:active {
-                    color: #403DD0;
-                    border-bottom: 4px solid #0090B8;
-                    background: #d9eef4;
-                }
+            &:active {
+                color: #403DD0;
+                border-bottom: 4px solid #0090B8;
+                background: #d9eef4;
+            }
 
-                &:visited {
-                    color: #7E57C2;
+            &:visited {
+                color: #7E57C2;
 
-                    & .ccfw-banner__expanding-section-summary-text {
-                        text-decoration: underline;
-                    }
+                & .ccfw-banner__expanding-section-summary-text {
+                    text-decoration: underline;
                 }
+            }
         }
 
         &__expanding-section-summary-text {

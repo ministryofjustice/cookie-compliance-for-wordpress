@@ -32,29 +32,29 @@ class BannerSettings extends Banner
     {
         add_settings_field(
             'ga_analytics_id',
-            __('GA ID', 'cookie-compliance-for-wordpress'),
+            __('Enter your Google Analytics ID', 'cookie-compliance-for-wordpress'),
             [$this, 'setGoogleAnalyticsID'],
             'cookie-compliance-for-wordpress-settings',
             $section
         );
         add_settings_field(
-            'is_using_youtube',
-            __('I am not using YouTube', 'cookie-compliance-for-wordpress'),
-            [$this, 'isUsingYouTube'],
+            'remove_youtube_cookie_content',
+            __('Remove YouTube disclaimer from cookie policy', 'cookie-compliance-for-wordpress'),
+            [$this, 'removeYouTubeCookieContent'],
             'cookie-compliance-for-wordpress-settings',
             $section
         );
         add_settings_field(
-            'is_using_twitter',
-            __('I am not using Twitter', 'cookie-compliance-for-wordpress'),
-            [$this, 'isUsingTwitter'],
+            'remove_twitter_cookie_content',
+            __('Remove Twitter disclaimer from cookie policy', 'cookie-compliance-for-wordpress'),
+            [$this, 'removeTwitterCookieContent'],
             'cookie-compliance-for-wordpress-settings',
             $section
         );
         add_settings_field(
-            'is_using_vimeo',
-            __('I am not using Vimeo', 'cookie-compliance-for-wordpress'),
-            [$this, 'isUsingVimeo'],
+            'remove_vimeo_cookie_content',
+            __('Remove Vimeo disclaimer from cookie policy', 'cookie-compliance-for-wordpress'),
+            [$this, 'removeVimeoCookieContent'],
             'cookie-compliance-for-wordpress-settings',
             $section
         );
@@ -91,36 +91,36 @@ class BannerSettings extends Banner
         }
     }
 
-    public function isUsingYouTube()
+    public function removeYouTubeCookieContent()
     {
         $options = get_option('ccfw_plugin_settings');
-        $isUsingYouTube = $options['is_using_youtube'] ?? 'false';
+        $removeYouTubeCookieContent = $options['remove_youtube_cookie_content'] ?? 'false';
 
         ?>
-        <input type='checkbox' id="is_using_youtube" name='ccfw_plugin_settings[is_using_youtube]' value="yes"
-        class="ccfw-component-input" <?= checked('yes', $options['is_using_youtube'] ?? '') ?> />
+        <input type='checkbox' id="remove_youtube_cookie_content" name='ccfw_plugin_settings[remove_youtube_cookie_content]' value="yes"
+        class="ccfw-component-input" <?= checked('yes', $options['remove_youtube_cookie_content'] ?? '') ?> />
         <?php
     }
 
-    public function isUsingTwitter()
+    public function removeTwitterCookieContent()
     {
         $options = get_option('ccfw_plugin_settings');
-        $isUsingYouTube = $options['is_using_twitter'] ?? 'false';
+        $removeTwitterCookieContent = $options['remove_twitter_cookie_content'] ?? 'false';
 
         ?>
-        <input type='checkbox' id="is_using_twitter" name='ccfw_plugin_settings[is_using_twitter]' value="yes"
-        class="ccfw-component-input" <?= checked('yes', $options['is_using_twitter'] ?? ''); ?> />
+        <input type='checkbox' id="remove_twitter_cookie_content" name='ccfw_plugin_settings[remove_twitter_cookie_content]' value="yes"
+        class="ccfw-component-input" <?= checked('yes', $options['remove_twitter_cookie_content'] ?? ''); ?> />
         <?php
     }
 
-    public function isUsingVimeo()
+    public function removeVimeoCookieContent()
     {
         $options = get_option('ccfw_plugin_settings');
-        $isUsingYouTube = $options['is_using_vimeo'] ?? 'false';
+        $removeVimeoCookieContent = $options['remove_vimeo_cookie_content'] ?? 'false';
 
         ?>
-        <input type='checkbox' id="is_using_vimeo" name='ccfw_plugin_settings[is_using_vimeo]' value="yes"
-        class="ccfw-component-input" <?= checked('yes', $options['is_using_vimeo'] ?? 'false') ?> />
+        <input type='checkbox' id="remove_vimeo_cookie_content" name='ccfw_plugin_settings[remove_vimeo_cookie_content]' value="yes"
+        class="ccfw-component-input" <?= checked('yes', $options['remove_vimeo_cookie_content'] ?? 'false') ?> />
         <?php
     }
 

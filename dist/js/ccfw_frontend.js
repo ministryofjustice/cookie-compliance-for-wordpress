@@ -408,7 +408,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/adam/Dev/moj/wp-ppj/web/app/plugins/cookie-compliance-for-wordpress/src/js/ccfw_frontend.js */"./src/js/ccfw_frontend.js");
+module.exports = __webpack_require__(/*! /Users/beverleynewing/sites/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/js/ccfw_frontend.js */"./src/js/ccfw_frontend.js");
 
 
 /***/ })
