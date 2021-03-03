@@ -220,8 +220,7 @@ $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
             <h4 class="ccfw-banner__summary-heading">Third-party cookies</h4>
             <p class="ccfw-banner__summary-text">We have no control over cookies set by third parties. You can turn them off, but not through us. In addition, if you share a link to a page, the service you share it on (for example, Facebook) may set a cookie.</p>
 
-                <?php if (!$removeYouTubeCookieContent || !$removeVimeoCookieContent || !$removeTwitterCookieContent ) { ?>
-
+                <?php if (!$removeYouTubeCookieContent || !$removeVimeoCookieContent || !$removeTwitterCookieContent) { ?>
                 <details class="ccfw-banner__expanding-section" data-module="govuk-details">
                     <summary class="ccfw-banner__expanding-section-summary">
                         <span class="ccfw-banner__expanding-section-summary-text govuk-details__summary-text">
@@ -252,7 +251,7 @@ $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
                         <?php } ?>
                     </div>
                 </details>
-            <?php } ?>
+                <?php } ?>
 
             <button id="cookie-save-preferences" class="ccfw-banner__button">
                 <?php _e('Save cookie preferences', 'cookie-compliance-for-wordpress'); ?>
