@@ -235,14 +235,14 @@ $isUsingVimeo = !empty($options['is_using_vimeo']);
                         <a href="https://policies.google.com/u/2/privacy?hl=en-GB" class="ccfw-banner__third-party-section-link">Read the YouTube Privacy Policy</a>
                     <?php } ?>
 
-                    <?php if (!$isUsingTwitter) { ?>
+                    <?php if (!$isUsingVimeo) { ?>
                         <h5 class="ccfw-banner__third-party-section-heading">Vimeo</h5>
                         <p class="ccfw-banner__third-party-section-text">Vimeo videos set third-party cookies to enable the video to play and collect analytics data. These cookies do not track individuals.
                         </p>
                         <a href="https://vimeo.com/cookie_policy" class="ccfw-banner__third-party-section-link">Read the Vimeo Cookie Policy</a>
                     <?php } ?>
 
-                    <?php if (!$isUsingVimeo) { ?>
+                    <?php if (!$isUsingTwitter) { ?>
                         <h5 class="ccfw-banner__third-party-section-heading">Twitter</h5>
                         <p class="ccfw-banner__third-party-section-text">Twitter widgets may add cookies to help analyse usage and remember your session if you are also logged in to your Twitter account.
                         </p>
