@@ -32,30 +32,30 @@ class BannerSettings extends Banner
     {
         add_settings_field(
             'ga_analytics_id',
-            __('Enter your Google Analytics ID', 'cookie-compliance-for-wordpress'),
+            __('Google Analytics ID', 'cookie-compliance-for-wordpress'),
             [$this, 'setGoogleAnalyticsID'],
-            'cookie-compliance-for-wordpress-settings',
+            'section-add-tracking-id',
             $section
         );
         add_settings_field(
             'remove_youtube_cookie_content',
-            __('Remove YouTube disclaimer from cookie policy', 'cookie-compliance-for-wordpress'),
+            __('YouTube', 'cookie-compliance-for-wordpress'),
             [$this, 'removeYouTubeCookieContent'],
-            'cookie-compliance-for-wordpress-settings',
+            'section-remove-policy-disclaimers',
             $section
         );
         add_settings_field(
             'remove_twitter_cookie_content',
-            __('Remove Twitter disclaimer from cookie policy', 'cookie-compliance-for-wordpress'),
+            __('Twitter', 'cookie-compliance-for-wordpress'),
             [$this, 'removeTwitterCookieContent'],
-            'cookie-compliance-for-wordpress-settings',
+            'section-remove-policy-disclaimers',
             $section
         );
         add_settings_field(
             'remove_vimeo_cookie_content',
-            __('Remove Vimeo disclaimer from cookie policy', 'cookie-compliance-for-wordpress'),
+            __('Vimeo', 'cookie-compliance-for-wordpress'),
             [$this, 'removeVimeoCookieContent'],
-            'cookie-compliance-for-wordpress-settings',
+            'section-remove-policy-disclaimers',
             $section
         );
     }
@@ -70,7 +70,7 @@ class BannerSettings extends Banner
 
         ?>
         <input type='text' name='ccfw_plugin_settings[ga_analytics_id]'
-        placeholder="UA-XXXXXXXXX-X" value='<?php echo sanitize_html_class($googleAnalyticsID); ?>'
+        placeholder="Enter GA ID UA-XXXXXXXXX-X" value='<?php echo sanitize_html_class($googleAnalyticsID); ?>'
         class="ccfw-component-input">
         <?php
 
@@ -124,10 +124,19 @@ class BannerSettings extends Banner
         <?php
     }
 
-    public function settingsSectionCB()
+    public function addTrackingIDSectionIntro()
     {
         ?>
-        <p><?php _e('Make custom changes to your cookie banner.', 'wp_banner_page'); ?></p>
+        <p><?php _e('Enter the tracking ID so that the cookie banner can identify specific trackers from your site.', 'cookie-compliance-for-wordpress'); ?></p>
+        <?php
+    }
+
+    public function policyDisclamierSectionIntro()
+    {
+        ?>
+        <p><?php _e("If you're not using these common third-party trackers on your WordPress site,
+        <br> you can remove the disclamier text set by default. This is done by checking the <br>relevant checkboxes below.
+        This will remove the associated disclaimer text from <br>the cookie banner modal.", 'cookie-compliance-for-wordpress'); ?></p>
         <?php
     }
 }
