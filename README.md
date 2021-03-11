@@ -3,10 +3,8 @@ WP plugin that once activated, presents the website visitor with a cookie consen
 
 # Features
 
-* Managing Google Analytics tracking via the banner toggles
-* Adding your own custom banner text via the WP dashboard
-
-Core Wordpress plugns are considered essential to the functioning of the site so they are not removed.
+* Managing Google Analytics tracking on your website
+* Toggable disclamiers for social media tools such as YouTube and Vimeo
 
 ## Issues
 
@@ -29,9 +27,9 @@ Download this repository, unzip and copy the folder into your Wordpress plugin f
 
 ## Prerequesites
 
-You will need to have a working version of Wordpress to run this plugin and running PHP 7+.
-
-You will need the following code snipped placed after the body tag in your theme.
+* A working version of Wordpress to run this plugin and be running on PHP 7+.
+* Have a Google Analytics account.
+* You will need the following code snipped placed after the body tag in your theme.
 
 ```
 if ( ! function_exists( 'wp_body_open' ) ) {
