@@ -13,6 +13,16 @@ Core Wordpress plugns are considered essential to the functioning of the site so
 Raise issues via
 <a href="https://github.com/ministryofjustice/cookie-compliance-for-wordpress/issues">https://github.com/ministryofjustice/cookie-compliance-for-wordpress/issues</a>
 
+### Using this plugin a subdomain site
+
+This plugin this not compatible with subdomain websites, such as `magistrates.judiciary.uk`, unless you make sure to change your tracking code (such as Google Analytics, to use a subdomain URL rather then leave it to its default, which is a top-level top, eg, `.judiciary.uk`).
+
+#### Steps to change your Google Analytic settings
+
+1. Using Google Tag Manager (GTM), go to Variables and click on your Google Analytics settings.
+2. Under "Variable Configuration", and "Cookie Domain" change from `auto` to the full subdomain address, eg `magistrates.judiciary.uk`.
+3. Save and don't forget to publish.
+
 ## Installation
 
 Download this repository, unzip and copy the folder into your Wordpress plugin file directory.
@@ -49,9 +59,13 @@ Assests (such as CSS and JS) are compiled in this plugin using Webpack.
 
 ### Get started
 
-1. `cd` into plugin root and run `npm install`. This installs all the compiling dependancies. Note, while `/node_modules/` is generated in this procsss it is not tracked or commit by Git. Do not add it to Git.
+#### Compiling assets
 
-2. Once `npm install` has been run successfully, run the `npm run watch` command. This starts Webpack watching your `src` file changes and compiling them on the fly as you edit. See further Webpack commands and configuration in `package.json`.
+In the root directory run:
+
+1. `npm install`. This installs all the compiling dependancies. While `/node_modules/` is generated in this procsss, it is not tracked or commit by Git. Do not add it to Git.
+
+2. For compiling assets while you work run, `npm run watch`. This starts Webpack watching your `src` file changes and compiling them on the fly as you edit. See further Webpack commands and configuration in `package.json`.
 
 ### Add new functionality
 
