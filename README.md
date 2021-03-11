@@ -1,9 +1,9 @@
 # Cookie Compliance For Wordpress
-WP plugin that once activated, presents the website visitor with a cookie consent banner at the top of the page. This plugin will also generate a custom frontend settings page, allowing a vistor to turn cookie settings on/off.
+This WP plugin loads a cookie consent banner at the bottom of the page and provides a vistor with a settings modal, allowing a vistor to turn cookie settings on/off and read cookie disclamiers.
 
 # Features
 
-* Managing Google Analytics tracking on your website
+* Manage Google Analytics tracking on your website
 * Toggable disclamiers for social media tools such as YouTube and Vimeo
 
 ## Issues
