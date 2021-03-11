@@ -13,9 +13,9 @@ Core Wordpress plugns are considered essential to the functioning of the site so
 Raise issues via
 <a href="https://github.com/ministryofjustice/cookie-compliance-for-wordpress/issues">https://github.com/ministryofjustice/cookie-compliance-for-wordpress/issues</a>
 
-### Using this plugin a subdomain site
+### Using this plugin on a site with a subdomain
 
-This plugin this not compatible with subdomain websites, such as `magistrates.judiciary.uk`, unless you make sure to change your tracking code (such as Google Analytics, to use a subdomain URL rather then leave it to its default, which is a top-level top, eg, `.judiciary.uk`).
+This plugin this not compatible with subdomain websites, such as `magistrates.judiciary.uk`, unless you make sure to modify your tracking code (such as Google Analytics, to use a subdomain URL rather then leave it to its default, which is a top-level top, eg, `.judiciary.uk`).
 
 #### Steps to change your Google Analytic settings
 
