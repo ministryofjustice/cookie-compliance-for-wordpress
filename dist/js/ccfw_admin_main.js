@@ -198,9 +198,9 @@ jQuery(function ($) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/beverleynewing/sites/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/js/ccfw_admin_main.js */"./src/js/ccfw_admin_main.js");
-__webpack_require__(/*! /Users/beverleynewing/sites/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/scss/ccfw_frontend.scss */"./src/scss/ccfw_frontend.scss");
-module.exports = __webpack_require__(/*! /Users/beverleynewing/sites/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/scss/ccfw_admin_main.scss */"./src/scss/ccfw_admin_main.scss");
+__webpack_require__(/*! /Users/adam/Dev/moj/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/js/ccfw_admin_main.js */"./src/js/ccfw_admin_main.js");
+__webpack_require__(/*! /Users/adam/Dev/moj/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/scss/ccfw_frontend.scss */"./src/scss/ccfw_frontend.scss");
+module.exports = __webpack_require__(/*! /Users/adam/Dev/moj/wp-jotw-public/web/app/plugins/cookie-compliance-for-wordpress/src/scss/ccfw_admin_main.scss */"./src/scss/ccfw_admin_main.scss");
 
 
 /***/ })

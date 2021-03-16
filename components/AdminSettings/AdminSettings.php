@@ -106,9 +106,16 @@ class AdminSettings
 
                 add_settings_section(
                     'component-tab-' . $key,
-                    $className,
-                    [$this->object, 'settingsSectionCB'],
-                    'cookie-compliance-for-wordpress-settings'
+                    'Add tracking IDs',
+                    [$this->object, 'addTrackingIDSectionIntro'],
+                    'section-add-tracking-id'
+                );
+
+                add_settings_section(
+                    'component-tab-' . $key,
+                    'Remove third-party cookie policy disclamiers',
+                    [$this->object, 'policyDisclamierSectionIntro'],
+                    'section-remove-policy-disclaimers'
                 );
 
                 $this->object->settingsFields('component-tab-' . $key);
@@ -123,8 +130,7 @@ class AdminSettings
         ?>
         <form action='options.php' method='post'>
 
-            <h1>Cookie Compliance</h1>
-            <p><em>Version</em></p>
+            <h1>Cookie Compliance For WordPress</h1>
 
             <?php
             echo '<h2 class="nav-tab-wrapper">';
@@ -134,7 +140,10 @@ class AdminSettings
             echo '</h2>';
 
             settings_fields('ccfwGroupOptionSettings');
-            $this->doSettingsSections('cookie-compliance-for-wordpress-settings');
+
+            $this->doSettingsSections('section-add-tracking-id');
+
+            $this->doSettingsSections('section-remove-policy-disclaimers');
 
             echo '<hr>';
 
@@ -147,7 +156,7 @@ class AdminSettings
     }
 
     /**
-     * Load into text into new tab section
+     * Load new tab section
      */
     public function doSettingsSections($page)
     {
