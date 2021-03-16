@@ -4,7 +4,7 @@ This WP plugin loads a cookie consent banner at the bottom of the page and provi
 # Features
 
 * Manage Google Analytics tracking on your website
-* Toggable disclamiers for social media tools such as YouTube and Vimeo
+* Toggable disclaimers for social media tools such as YouTube and Vimeo
 
 ## Issues
 

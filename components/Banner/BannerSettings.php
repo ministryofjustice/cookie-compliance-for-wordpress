@@ -39,21 +39,21 @@ class BannerSettings extends Banner
         );
         add_settings_field(
             'remove_youtube_cookie_content',
-            __('YouTube', 'cookie-compliance-for-wordpress'),
+            __('Hide information about YouTube from cookie message', 'cookie-compliance-for-wordpress'),
             [$this, 'removeYouTubeCookieContent'],
             'section-remove-policy-disclaimers',
             $section
         );
         add_settings_field(
             'remove_twitter_cookie_content',
-            __('Twitter', 'cookie-compliance-for-wordpress'),
+            __('Hide information about Twitter from cookie message', 'cookie-compliance-for-wordpress'),
             [$this, 'removeTwitterCookieContent'],
             'section-remove-policy-disclaimers',
             $section
         );
         add_settings_field(
             'remove_vimeo_cookie_content',
-            __('Vimeo', 'cookie-compliance-for-wordpress'),
+            __('Hide information about Vimeo from cookie message', 'cookie-compliance-for-wordpress'),
             [$this, 'removeVimeoCookieContent'],
             'section-remove-policy-disclaimers',
             $section
@@ -131,11 +131,11 @@ class BannerSettings extends Banner
         <?php
     }
 
-    public function policyDisclamierSectionIntro()
+    public function policyDisclaimerSectionIntro()
     {
         ?>
         <p><?php _e("If you're not using these common third-party trackers on your WordPress site,
-        <br> you can remove the disclamier text set by default. This is done by checking the <br>relevant checkboxes below.
+        <br> you can remove the disclaimer text set by default. This is done by checking the <br>relevant checkboxes below.
         This will remove the associated disclaimer text from <br>the cookie banner modal.", 'cookie-compliance-for-wordpress'); ?></p>
         <?php
     }

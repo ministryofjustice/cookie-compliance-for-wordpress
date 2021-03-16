@@ -113,8 +113,8 @@ class AdminSettings
 
                 add_settings_section(
                     'component-tab-' . $key,
-                    'Remove third-party cookie policy disclamiers',
-                    [$this->object, 'policyDisclamierSectionIntro'],
+                    'Remove third-party cookie policy disclaimers',
+                    [$this->object, 'policyDisclaimerSectionIntro'],
                     'section-remove-policy-disclaimers'
                 );
 
