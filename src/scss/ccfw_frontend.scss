@@ -321,13 +321,15 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
         &__summary-heading {
             @extend .govuk-heading-s;
-            border-top: 1px solid grey;
-            padding-top: 16px;
         }
 
         &__summary-text {
             max-width: 800px;
             @extend .govuk-body;
+
+            & + .ccfw-banner__button {
+                margin-top: 16px;
+            }
         }
 
         &__third-party-section-heading {
@@ -348,8 +350,11 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
         &__toggle-header-container {
             position: relative;
-            border-top: 1px solid gray;
-            padding-top: 16px;
+
+            &:first-of-type {
+                border-top: 1px solid gray;
+                padding-top: 16px;
+            }
 
             & .ccfw-banner__summary-heading {
                 border-top: none;
@@ -484,10 +489,10 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
         &__expanding-section {
             @extend .govuk-details;
+            padding-bottom: 32px;
+            border-bottom: 1px solid grey;
 
             &:last-of-type {
-                padding-bottom: 32px;
-                border-bottom: 1px solid grey;
             }
         }
 
