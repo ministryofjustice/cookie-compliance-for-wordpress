@@ -72,6 +72,11 @@ class Banner
                 for (var ccfwCookie = 0; ccfwCookie < ccfwCookiesArrayLength; ccfwCookie++) {
                     document.cookie = ccfwCookies[ccfwCookie] + '=; Path=/; domain=.'+ document.domain
                     +'; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+                    // Also remove cookies that start with domains without www
+                    var nonWwwDomain = document.domain.slide(3);
+                    document.cookie = ccfwCookies[ccfwCookie] + '=; Path=/; domain=.'+ nonWwwDomain
+                    +'; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                 };
             };
         </script>
