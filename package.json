@@ -1,9 +1,9 @@
 {
     "name": "cookie-compliance-for-wordpress",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "engines": {
-        "node": "11.10.0",
-        "npm": "6.13.6"
+        "node": "12.18.3",
+        "npm": "7.5.2"
     },
     "description": "WP plugin cookie-compliance-for-wordpress",
     "main": "index.js",

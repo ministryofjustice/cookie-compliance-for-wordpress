@@ -16,7 +16,9 @@ $domainName = parse_url($domainName, PHP_URL_HOST);
 $domainNameStr = ($domainName ? ' on ' . strtolower($domainName) : '');
 
 $options = get_option('ccfw_plugin_settings');
-$bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Are you OK with cookies?';
+$removeYouTubeCookieContent = !empty($options['remove_youtube_cookie_content']);
+$removeTwitterCookieContent = !empty($options['remove_twitter_cookie_content']);
+$removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
 ?>
 
 <div class="ccfw-background-grey-overlay"></div>
@@ -32,10 +34,8 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
 <div id="ccfw-page-banner" data-nosnippet="true">
     <div class="ccfw-banner">
         <div class="ccfw-banner__intro">
-            <?php _e('<h2 class="ccfw-banner__heading">' . esc_attr($bannerTitle) . '</h2>', 'cookie-compliance-for-wordpress'); ?>
-            <p class="ccfw-banner__info-text">
-                <?php _e('We use small files called ‘cookies’' . $domainNameStr . ' to give you the best experience on our site.  Some are essential to make the site work, and some help us understand how people use the site so that we can improve your experience. You can choose to turn off the non-essential cookies.  Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'); ?>
-            </p>
+            <?php _e('<h2 class="ccfw-banner__heading">Are you OK with cookies?</h2>', 'cookie-compliance-for-wordpress'); ?>
+            <?php _e('<p class="ccfw-banner__info-text">We use small files called ‘cookies’ on' . $domainNameStr . '.  Some are essential to make the site work, some help us to understand how we can improve your experience, and some are set by third parties. You can choose to turn off the non-essential cookies. Which cookies are you happy for us to use?</p>', 'cookie-compliance-for-wordpress'); ?>
 
             <div class="ccfw-banner__buttons">
                 <button class="ccfw-banner__button" id="cookie-accept" type="submit">
@@ -78,9 +78,7 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
                 </div>
             </div>
 
-            <p class="ccfw-banner__summary-text">We use Google Analytics to measure how you use the website so we can
-                improve it based on user needs. We do not allow Google Analytics to use or share the data about how you
-                use this site. </p>
+            <p class="ccfw-banner__summary-text">We use Google Analytics to measure how you use the website so we can improve it based on user needs. We do not allow Google Analytics to use or share the data about how you use this site. </p>
 
             <details class="ccfw-banner__expanding-section" data-module="govuk-details">
                 <summary class="ccfw-banner__expanding-section-summary">
@@ -101,22 +99,19 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
                         <tbody>
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">_ga</th>
-                            <td class="ccfw-banner__table-cell">These help us count how many people visit <?php echo $domainNameStr; ?>
-                                by tracking if you’ve visited before
+                            <td class="ccfw-banner__table-cell">These help us count how many people visit <?php echo $domainNameStr; ?> by tracking if you’ve visited before
                             </td>
                             <td class="ccfw-banner__table-cell">2 years</td>
                         </tr>
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">_gid</th>
-                            <td class="ccfw-banner__table-cell">These help us count how many people visit <?php echo $domainNameStr; ?>
-                                by tracking if you’ve visited before
+                            <td class="ccfw-banner__table-cell">These help us count how many people visit <?php echo $domainNameStr; ?> by tracking if you’ve visited before
                             </td>
                             <td class="ccfw-banner__table-cell">24 hours</td>
                         </tr>
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">_gat</th>
-                            <td class="ccfw-banner__table-cell">These help us to manage how we collect analytics when we
-                                have lots of visitors on the site at one time
+                            <td class="ccfw-banner__table-cell">These help us to manage how we collect analytics when we have lots of visitors on the site at one time
                             </td>
                             <td class="ccfw-banner__table-cell">10 minutes</td>
                         </tr>
@@ -163,6 +158,20 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
                             </td>
                             <td class="ccfw-banner__table-cell">When you close your browser</td>
                         </tr>
+                        <tr>
+                            <th scope="row" class="ccfw-banner__table-header">ccfw_wp_plugin.banner.hidden</th>
+                            <td class="ccfw-banner__table-cell">Lets us know you have chosen which cookies are used so we can stop the cookie banner appearing when you return to the site.
+                            </td>
+                            <td class="ccfw-banner__table-cell">1 year</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" class="ccfw-banner__table-header">ccfw_wp_plugin.ga.accept</th>
+                            <td class="ccfw-banner__table-cell">Lets us know you have accepted Google Analytics cookies so we can stop them loading when you return to the site.
+                            </td>
+                            <td class="ccfw-banner__table-cell">1 year</td>
+                        </tr>
+
                         </tbody>
                     </table>
                     <table class="ccfw-banner__table">
@@ -209,58 +218,40 @@ $bannerTitle = !empty($options['banner_title']) ? $options['banner_title'] : 'Ar
             </details>
 
             <h4 class="ccfw-banner__summary-heading">Third-party cookies</h4>
-            <p class="ccfw-banner__summary-text">We embed videos from our official YouTube channel using YouTube’s privacy-enhanced mode. This mode may set cookies on your computer once you click on the YouTube video player, but YouTube will not store personally-identifiable cookie information for playbacks of embedded videos using the privacy-enhanced mode.</p>
-            <p class="ccfw-banner__summary-text">We have no control over cookies set on other websites - you can turn them off, but not through us.</p>
+            <p class="ccfw-banner__summary-text">We have no control over cookies set by third parties. You can turn them off, but not through us. In addition, if you share a link to a page, the service you share it on (for example, Facebook) may set a cookie.</p>
 
-            <details class="ccfw-banner__expanding-section" data-module="govuk-details">
-                <summary class="ccfw-banner__expanding-section-summary">
-                    <span class="ccfw-banner__expanding-section-summary-text govuk-details__summary-text">
-                        See our third party cookies
-                    </span>
-                </summary>
-                <div class="ccfw-banner__expanding-section-text govuk-details__text">
-                    <table class="ccfw-banner__table">
-                        <caption class="ccfw-banner__table-caption">Third party cookies</caption>
-                        <thead>
-                        <tr>
-                            <th scope="col" class="ccfw-banner__table-header">Name</th>
-                            <th scope="col" class="ccfw-banner__table-header">Purpose</th>
-                            <th scope="col" class="ccfw-banner__table-header">Expires</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row" class="ccfw-banner__table-header">PREF*</th>
-                            <td class="ccfw-banner__table-cell">Allows you to view embedded YouTube videos and lets
-                                Youtube count video views.
-                            </td>
-                            <td class="ccfw-banner__table-cell">8 months</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="ccfw-banner__table-header">VISITOR_INFO1_LIVE*</th>
-                            <td class="ccfw-banner__table-cell">Allows you to view embedded YouTube videos and lets
-                                Youtube count video views.
-                            </td>
-                            <td class="ccfw-banner__table-cell">8 months</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="ccfw-banner__table-header">VSC*</th>
-                            <td class="ccfw-banner__table-cell">Allows you to view embedded YouTube videos and lets
-                                Youtube count video views.
-                            </td>
-                            <td class="ccfw-banner__table-cell">When you close your browser</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="ccfw-banner__table-header">remote_sid*</th>
-                            <td class="ccfw-banner__table-cell">Allows you to view embedded YouTube videos and lets
-                                Youtube count video views.
-                            </td>
-                            <td class="ccfw-banner__table-cell">When you close your browser</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </details>
+                <?php if (!$removeYouTubeCookieContent || !$removeVimeoCookieContent || !$removeTwitterCookieContent) { ?>
+                <details class="ccfw-banner__expanding-section" data-module="govuk-details">
+                    <summary class="ccfw-banner__expanding-section-summary">
+                        <span class="ccfw-banner__expanding-section-summary-text govuk-details__summary-text">
+                            See third party cookies
+                        </span>
+                    </summary>
+
+                    <div class="ccfw-banner__expanding-section-text govuk-details__text">
+                        <?php if (!$removeYouTubeCookieContent) { ?>
+                            <h5 class="ccfw-banner__third-party-section-heading">YouTube</h5>
+                            <p class="ccfw-banner__third-party-section-text">YouTube videos play in privacy-enhanced mode. This mode may set third-party cookies on your computer when you click on the YouTube video player. These cookies will not be personally identifiable.
+                            </p>
+                            <a href="https://policies.google.com/u/2/privacy?hl=en-GB" class="ccfw-banner__third-party-section-link">Read the YouTube Privacy Policy</a>
+                        <?php } ?>
+
+                        <?php if (!$removeVimeoCookieContent) { ?>
+                            <h5 class="ccfw-banner__third-party-section-heading">Vimeo</h5>
+                            <p class="ccfw-banner__third-party-section-text">Vimeo videos set third-party cookies to enable the video to play and collect analytics data. These cookies do not track individuals.
+                            </p>
+                            <a href="https://vimeo.com/cookie_policy" class="ccfw-banner__third-party-section-link">Read the Vimeo Cookie Policy</a>
+                        <?php } ?>
+
+                        <?php if (!$removeTwitterCookieContent) { ?>
+                            <h5 class="ccfw-banner__third-party-section-heading">Twitter</h5>
+                            <p class="ccfw-banner__third-party-section-text">Twitter widgets may add cookies to help analyse usage and remember your session if you are also logged in to your Twitter account.
+                            </p>
+                            <a href="https://twitter.com/en/privacy" class="ccfw-banner__third-party-section-link">Read the Twitter Privacy Policy</a>
+                        <?php } ?>
+                    </div>
+                </details>
+                <?php } ?>
 
             <button id="cookie-save-preferences" class="ccfw-banner__button">
                 <?php _e('Save cookie preferences', 'cookie-compliance-for-wordpress'); ?>
