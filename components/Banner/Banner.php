@@ -75,7 +75,7 @@ class Banner
 
                     // Also remove cookies that start with domains without www
                     if(document.domain.includes("www.")){
-                        const nonWwwDomain = document.domain.replace("www.", ".")
+                        const nonWwwDomain = document.domain.replace("www.", "")
                         document.cookie = ccfwCookies[ccfwCookie] + '=; Path=/; domain=.' + nonWwwDomain + '; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                     }
                 };
