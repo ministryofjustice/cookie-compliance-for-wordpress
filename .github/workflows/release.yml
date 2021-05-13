@@ -33,14 +33,13 @@ jobs:
           echo "done!"
 
       - name: "Archive Release"
-          uses: thedoctor0/zip-release@master
-          with:
-            filename: 'release.zip'
-            exclusions: '*.git* .github* /*src/* /*node_modules/* .editorconfig .babelrc package* webpack.mix.js'
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: 'release.zip'
+          exclusions: '*.git* .github* /*src/* /*node_modules/* .editorconfig .babelrc package* webpack.mix.js'
 
       - name: "Upload Release"
-          uses: ncipollo/release-action@v1
-          with:
-            artifacts: "release.zip"
-            token: ${{ secrets.GITHUB_TOKEN }}
-            commit:
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "release.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
