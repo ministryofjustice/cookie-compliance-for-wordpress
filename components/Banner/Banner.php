@@ -65,11 +65,22 @@ class Banner
         global $wp_version, $is_IE;
 
         wp_enqueue_style('CCFWStyle', $this->helper->enqueue('ccfw-frontend.css'));
-        wp_enqueue_script('CCFWScript', $this->helper->enqueue('ccfw-frontend.js'), ['jquery'], $wp_version, true);
+        wp_enqueue_script(
+            'CCFWScript',
+            $this->helper->enqueue('ccfw-frontend.js'),
+            ['jquery'],
+            $wp_version,
+            true
+        );
 
         if ($is_IE) {
             // Fix IE11 banner issues - https://github.com/nuxodin/ie11CustomProperties
-            wp_enqueue_script('CCFWScriptIE11', $this->helper->enqueue('ccfw-ie11CustomProperties.js'), ['jquery'], $wp_version);
+            wp_enqueue_script(
+                'CCFWScriptIE11',
+                $this->helper->enqueue('ccfw-ie11CustomProperties.js'),
+                ['jquery'],
+                $wp_version
+            );
         }
     }
 
@@ -86,7 +97,8 @@ class Banner
         }
 
         // Add module type to allow for JavaScript ES6 Modules
-        $tag = '<script type="module" src="' . esc_url($src) . '"></script><script nomodule src="' . esc_url($src) . '"></script>';
+        $tag = '<script type="module" src="' . esc_url($src) . '"></script><script nomodule src="'
+            . esc_url($src) . '"></script>';
         return $tag;
     }
 

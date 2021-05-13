@@ -88,8 +88,12 @@ class BannerSettings extends Banner
 
     public function settingsSectionCB()
     {
-        echo __("If you're not using these common third-party trackers on your WordPress site,
-        <br> you can remove the disclaimer text set by default. This is done by checking the <br>relevant checkboxes below.
-        This will remove the associated disclaimer text from <br>the cookie banner modal.", 'cookie-compliance-for-wordpress');
+        echo __(
+            "If you're not using these common third-party trackers on your WordPress site,
+        <br> you can remove the disclaimer text set by default. This is done by checking the
+        <br>relevant checkboxes below.
+        This will remove the associated disclaimer text from <br>the cookie banner modal.",
+            'cookie-compliance-for-wordpress'
+        );
     }
 }

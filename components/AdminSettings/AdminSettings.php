@@ -125,8 +125,6 @@ class AdminSettings
             return;
         }
 
-        //echo '<pre>' . print_r($wp_settings_sections[$page], true) . '</pre>';
-
         foreach ((array)$wp_settings_sections[$page] as $key => $section) {
             echo '<div id="' . $key . '" class="ccfw-component-settings-section">';
             if ($section['title']) {
@@ -137,7 +135,7 @@ class AdminSettings
                 call_user_func($section['callback'], $section);
             }
 
-            if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section['id']])) {
+            if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page][$section['id']])) {
                 continue;
             }
 

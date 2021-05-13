@@ -103,7 +103,7 @@ class Helper
         return $this->assetPath() . ltrim($assets[('/' . $type . '/' . $name)], '/');
     }
 
-    public function url_exists($url)
+    public function urlExists($url)
     {
         $headers = get_headers($url);
         return stripos($headers[0], "200 OK") ? true : false;
