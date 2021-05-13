@@ -2,7 +2,6 @@
 
 namespace CCFW\Components\CookieManagement;
 
-
 class CookieManagement
 {
     /**
