@@ -14,7 +14,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with: 'gtm-allowlist'
+        with:
+          ref: 'gtm-allowlist'
       - uses: actions/setup-node@v2.1.5
         with:
           node-version: '14'
