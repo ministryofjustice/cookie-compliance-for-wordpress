@@ -1,4 +1,4 @@
-;(function ($) {
+(function ($) {
   'use strict'
   /**
    *  Define handlers when you need to maniplate late loading items such as images

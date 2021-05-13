@@ -1,0 +1,46 @@
+---
+name: "Pre Release "
+
+on:
+  push:
+    branches:
+      - "gtm-allowlist"
+  workflow_dispatch
+
+jobs:
+  pre-release:
+    name: "Pre Release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+        with: 'gtm-allowlist'
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: '14'
+      - run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Action"
+
+      # B E G I N   P R O C E S S
+      # Require third party libraries
+      - name: "Installing app dependancies"
+        run: npm --silent install
+
+      - name: "Compile assets"
+        run: |
+          npm run production
+          echo "done!"
+
+      - name: "Archive Release"
+          uses: thedoctor0/zip-release@master
+          with:
+            filename: 'release.zip'
+            exclusions: '*.git* .github* /*src/* /*node_modules/* .editorconfig .babelrc package* webpack.mix.js'
+
+      - name: "Upload Release"
+          uses: ncipollo/release-action@v1
+          with:
+            artifacts: "release.zip"
+            token: ${{ secrets.GITHUB_TOKEN }}
+            commit:

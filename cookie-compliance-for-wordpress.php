@@ -27,15 +27,21 @@ defined('ABSPATH') || exit;
 // Plugin components
 require_once('components/AdminSettings/AdminSettings.php');
 require_once('components/Helper/Helper.php');
+require_once('components/General/General.php');
+require_once('components/General/GeneralSettings.php');
 require_once('components/Banner/Banner.php');
 require_once('components/Banner/BannerSettings.php');
+require_once('components/CookieManagement/CookieManagement.php');
+require_once('components/CookieManagement/CookieManagementSettings.php');
 
-// Include autoloader
-include_once "load.php";
+use CCFW\Components\General\General;
+use CCFW\Components\CookieManagement\CookieManagement;
 
 global $ccfwHelper;
 $ccfwHelper = new Helper();
 
 // Instantiate classes
 new AdminSettings();
+new General();
 new Banner();
+new CookieManagement();

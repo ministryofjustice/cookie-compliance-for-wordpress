@@ -5,6 +5,7 @@
 *
 **/
 
+$_govuk-imported-modules: null;
 
 // =========================================================
 // Responsive mixins
@@ -410,7 +411,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             &--on-text {
                 font-size: 12px;
                 position: absolute;
-                top: 5px;
+                top: 8px;
                 left: 7px;
                 color: white;
                 display: none;
@@ -419,11 +420,11 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             &--off-text {
                 font-size: 12px;
                 position: absolute;
-                top: 5px;
+                top: 8px;
                 right: 8px;
             }
 
-            &::before {
+            &:before {
                 content: '';
                 box-sizing: border-box;
                 position: absolute;
@@ -476,7 +477,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 background-color: #FFFFFF;
                 -webkit-transform: translateX(24px);
                 -ms-transform: translateX(24px);
-                transform: translateX(24px);
+                transform: translateX(27px);
             }
 
             &:after {
@@ -618,6 +619,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
     border: 0;
     height: 94px;
     width: 94px;
+    cursor: pointer;
 
     &:hover {
         background-color: transparent;
@@ -675,7 +677,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         }
     }
 
-    p.ccfw-settings-button__text {
+    span.ccfw-settings-button__text {
         font-size: 12px;
         margin-bottom: 0;
         color: #FFFFFF;

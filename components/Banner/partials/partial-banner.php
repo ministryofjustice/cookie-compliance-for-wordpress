@@ -23,20 +23,27 @@ $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
 
 <div class="ccfw-background-grey-overlay"></div>
 <button class="ccfw-settings-button" id="js-ccfw-settings-button">
-    <svg aria-hidden="true" class="ccfw-settings-button__background-triangle" width="94" height="94" viewBox="0 0 94 94" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" class="ccfw-settings-button__background-triangle" width="94" height="94" viewBox="0 0 94 94"
+         xmlns="http://www.w3.org/2000/svg">
         <path d="M0 94H94L0 0V94Z"/>
     </svg>
-    <svg aria-hidden="true" class="ccfw-settings-button__icon" focusable="false" data-prefix="fas" data-icon="cookie-bite" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-cookie-bite fa-w-16 fa-2x">
-        <path fill="currentColor" d="M510.52 255.82c-69.97-.85-126.47-57.69-126.47-127.86-70.17 0-127-56.49-127.86-126.45-27.26-4.14-55.13.3-79.72 12.82l-69.13 35.22a132.221 132.221 0 0 0-57.79 57.81l-35.1 68.88a132.645 132.645 0 0 0-12.82 80.95l12.08 76.27a132.521 132.521 0 0 0 37.16 72.96l54.77 54.76a132.036 132.036 0 0 0 72.71 37.06l76.71 12.15c27.51 4.36 55.7-.11 80.53-12.76l69.13-35.21a132.273 132.273 0 0 0 57.79-57.81l35.1-68.88c12.56-24.64 17.01-52.58 12.91-79.91zM176 368c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm32-160c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm160 128c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z" class=""></path>
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cookie-bite" role="img"
+         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+         class="svg-inline--fa fa-cookie-bite fa-w-16 fa-2x ccfw-settings-button__icon">
+        <path fill="currentColor"
+              d="M510.52 255.82c-69.97-.85-126.47-57.69-126.47-127.86-70.17 0-127-56.49-127.86-126.45-27.26-4.14-55.13.3-79.72 12.82l-69.13 35.22a132.221 132.221 0 0 0-57.79 57.81l-35.1 68.88a132.645 132.645 0 0 0-12.82 80.95l12.08 76.27a132.521 132.521 0 0 0 37.16 72.96l54.77 54.76a132.036 132.036 0 0 0 72.71 37.06l76.71 12.15c27.51 4.36 55.7-.11 80.53-12.76l69.13-35.21a132.273 132.273 0 0 0 57.79-57.81l35.1-68.88c12.56-24.64 17.01-52.58 12.91-79.91zM176 368c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm32-160c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm160 128c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"/>
     </svg>
-    <p class="ccfw-settings-button__text"><span class="visually-hidden">Cookie</span>Settings</p>
+    <span class="ccfw-settings-button__text"><span class="visually-hidden">Cookie</span>Settings</span>
 </button>
 <div id="ccfw-page-banner" data-nosnippet="true">
     <div class="ccfw-banner">
         <div class="ccfw-banner__intro">
-            <?php _e('<h2 class="ccfw-banner__heading">Are you OK with cookies?</h2>', 'cookie-compliance-for-wordpress'); ?>
-            <?php _e('<p class="ccfw-banner__info-text">We use small files called ‘cookies’ on' . $domainNameStr . '.  Some are essential to make the site work, some help us to understand how we can improve your experience, and some are set by third parties. You can choose to turn off the non-essential cookies. Which cookies are you happy for us to use?</p>', 'cookie-compliance-for-wordpress'); ?>
-
+            <h2 class="ccfw-banner__heading">
+                <?php _e('Are you OK with cookies?', 'cookie-compliance-for-wordpress'); ?>
+            </h2>
+            <p class="ccfw-banner__info-text">
+                <?php _e('We use small files called ‘cookies’ on' . $domainNameStr . '.  Some are essential to make the site work, some help us to understand how we can improve your experience, and some are set by third parties. You can choose to turn off the non-essential cookies. Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'); ?>
+            </p>
             <div class="ccfw-banner__buttons">
                 <button class="ccfw-banner__button" id="cookie-accept" type="submit">
                     <?php _e('I am OK with cookies', 'cookie-compliance-for-wordpress'); ?>
@@ -56,7 +63,7 @@ $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
             </div>
         </div>
 
-        <div id="cookie-popup" class="ccfw-banner__modal-container" role="dialog" aria-labelledby="ccfw-banner-title"
+        <div class="ccfw-banner__modal-container" id="cookie-popup" role="dialog" aria-labelledby="ccfw-banner-title"
              aria-modal="true" tabindex="-1">
             <button id="ccfw-modal-close" class="ccfw-banner__button ccfw-banner__button--close">
                 Close
@@ -68,17 +75,20 @@ $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
                 <h4 class="ccfw-banner__toggle-heading" id="ccfw-analytics-cookies">Analytics cookies</h4>
                 <div class="ccfw-banner__toggle-label">
                     <button
-                        role="switch"    aria-labelledby="ccfw-analytics-cookies"
-                        class="ccfw-banner__toggle-slider"
-                        id="ccfw-analytics-cookies-toggle"
-                        aria-checked="false">
+                            role="switch" aria-labelledby="ccfw-analytics-cookies"
+                            class="ccfw-banner__toggle-slider"
+                            id="ccfw-analytics-cookies-toggle"
+                            aria-checked="false">
                         <span class="ccfw-banner__toggle-slider--off-text" aria-hidden="true" id="ccfw-ga-toggle-off">Off</span>
-                        <span class="ccfw-banner__toggle-slider--on-text" aria-hidden="true" id="ccfw-ga-toggle-on">On</span>
+                        <span class="ccfw-banner__toggle-slider--on-text" aria-hidden="true"
+                              id="ccfw-ga-toggle-on">On</span>
                     </button>
                 </div>
             </div>
 
-            <p class="ccfw-banner__summary-text">We use Google Analytics to measure how you use the website so we can improve it based on user needs. We do not allow Google Analytics to use or share the data about how you use this site. </p>
+            <p class="ccfw-banner__summary-text">We use Google Analytics to measure how you use the website so we can
+                improve it based on user needs. We do not allow Google Analytics to use or share the data about how you
+                use this site. </p>
 
             <details class="ccfw-banner__expanding-section" data-module="govuk-details">
                 <summary class="ccfw-banner__expanding-section-summary">
@@ -99,19 +109,22 @@ $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
                         <tbody>
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">_ga</th>
-                            <td class="ccfw-banner__table-cell">These help us count how many people visit <?php echo $domainNameStr; ?> by tracking if you’ve visited before
+                            <td class="ccfw-banner__table-cell">These help us count how many people
+                                visit <?php echo $domainNameStr; ?> by tracking if you’ve visited before
                             </td>
                             <td class="ccfw-banner__table-cell">2 years</td>
                         </tr>
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">_gid</th>
-                            <td class="ccfw-banner__table-cell">These help us count how many people visit <?php echo $domainNameStr; ?> by tracking if you’ve visited before
+                            <td class="ccfw-banner__table-cell">These help us count how many people
+                                visit <?php echo $domainNameStr; ?> by tracking if you’ve visited before
                             </td>
                             <td class="ccfw-banner__table-cell">24 hours</td>
                         </tr>
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">_gat</th>
-                            <td class="ccfw-banner__table-cell">These help us to manage how we collect analytics when we have lots of visitors on the site at one time
+                            <td class="ccfw-banner__table-cell">These help us to manage how we collect analytics when we
+                                have lots of visitors on the site at one time
                             </td>
                             <td class="ccfw-banner__table-cell">10 minutes</td>
                         </tr>
@@ -124,7 +137,8 @@ $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
                 <h4 class="ccfw-banner__toggle-heading">Essential cookies</h4>
                 <p class="ccfw-banner__toggle-heading--always-on">Always on</p>
             </div>
-            <p class="ccfw-banner__summary-text">These cookies will always need to be on because they make our site work.</p>
+            <p class="ccfw-banner__summary-text">These cookies will always need to be on because they make our site
+                work.</p>
 
             <details class="ccfw-banner__expanding-section govuk-details" data-module="govuk-details">
                 <summary class="ccfw-banner__expanding-section-summary govuk-details__summary">
@@ -160,14 +174,16 @@ $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
                         </tr>
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">ccfw_wp_plugin.banner.hidden</th>
-                            <td class="ccfw-banner__table-cell">Lets us know you have chosen which cookies are used so we can stop the cookie banner appearing when you return to the site.
+                            <td class="ccfw-banner__table-cell">Lets us know you have chosen which cookies are used so
+                                we can stop the cookie banner appearing when you return to the site.
                             </td>
                             <td class="ccfw-banner__table-cell">1 year</td>
                         </tr>
 
                         <tr>
                             <th scope="row" class="ccfw-banner__table-header">ccfw_wp_plugin.ga.accept</th>
-                            <td class="ccfw-banner__table-cell">Lets us know you have accepted Google Analytics cookies so we can stop them loading when you return to the site.
+                            <td class="ccfw-banner__table-cell">Lets us know you have accepted Google Analytics cookies
+                                so we can stop them loading when you return to the site.
                             </td>
                             <td class="ccfw-banner__table-cell">1 year</td>
                         </tr>
@@ -218,9 +234,11 @@ $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
             </details>
 
             <h4 class="ccfw-banner__summary-heading">Third-party cookies</h4>
-            <p class="ccfw-banner__summary-text">We have no control over cookies set by third parties. You can turn them off, but not through us. In addition, if you share a link to a page, the service you share it on (for example, Facebook) may set a cookie.</p>
+            <p class="ccfw-banner__summary-text">We have no control over cookies set by third parties. You can turn them
+                off, but not through us. In addition, if you share a link to a page, the service you share it on (for
+                example, Facebook) may set a cookie.</p>
 
-                <?php if (!$removeYouTubeCookieContent || !$removeVimeoCookieContent || !$removeTwitterCookieContent) { ?>
+            <?php if (!$removeYouTubeCookieContent || !$removeVimeoCookieContent || !$removeTwitterCookieContent) { ?>
                 <details class="ccfw-banner__expanding-section" data-module="govuk-details">
                     <summary class="ccfw-banner__expanding-section-summary">
                         <span class="ccfw-banner__expanding-section-summary-text govuk-details__summary-text">
@@ -231,27 +249,36 @@ $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
                     <div class="ccfw-banner__expanding-section-text govuk-details__text">
                         <?php if (!$removeYouTubeCookieContent) { ?>
                             <h5 class="ccfw-banner__third-party-section-heading">YouTube</h5>
-                            <p class="ccfw-banner__third-party-section-text">YouTube videos play in privacy-enhanced mode. This mode may set third-party cookies on your computer when you click on the YouTube video player. These cookies will not be personally identifiable.
+                            <p class="ccfw-banner__third-party-section-text">YouTube videos play in privacy-enhanced
+                                mode. This mode may set third-party cookies on your computer when you click on the
+                                YouTube video player. These cookies will not be personally identifiable.
                             </p>
-                            <a href="https://policies.google.com/u/2/privacy?hl=en-GB" class="ccfw-banner__third-party-section-link">Read the YouTube Privacy Policy</a>
+                            <a href="https://policies.google.com/u/2/privacy?hl=en-GB"
+                               class="ccfw-banner__third-party-section-link">Read the YouTube Privacy Policy</a>
                         <?php } ?>
 
                         <?php if (!$removeVimeoCookieContent) { ?>
                             <h5 class="ccfw-banner__third-party-section-heading">Vimeo</h5>
-                            <p class="ccfw-banner__third-party-section-text">Vimeo videos set third-party cookies to enable the video to play and collect analytics data. These cookies do not track individuals.
+                            <p class="ccfw-banner__third-party-section-text">Vimeo videos set third-party cookies to
+                                enable the video to play and collect analytics data. These cookies do not track
+                                individuals.
                             </p>
-                            <a href="https://vimeo.com/cookie_policy" class="ccfw-banner__third-party-section-link">Read the Vimeo Cookie Policy</a>
+                            <a href="https://vimeo.com/cookie_policy" class="ccfw-banner__third-party-section-link">Read
+                                the Vimeo Cookie Policy</a>
                         <?php } ?>
 
                         <?php if (!$removeTwitterCookieContent) { ?>
                             <h5 class="ccfw-banner__third-party-section-heading">Twitter</h5>
-                            <p class="ccfw-banner__third-party-section-text">Twitter widgets may add cookies to help analyse usage and remember your session if you are also logged in to your Twitter account.
+                            <p class="ccfw-banner__third-party-section-text">Twitter widgets may add cookies to help
+                                analyse usage and remember your session if you are also logged in to your Twitter
+                                account.
                             </p>
-                            <a href="https://twitter.com/en/privacy" class="ccfw-banner__third-party-section-link">Read the Twitter Privacy Policy</a>
+                            <a href="https://twitter.com/en/privacy" class="ccfw-banner__third-party-section-link">Read
+                                the Twitter Privacy Policy</a>
                         <?php } ?>
                     </div>
                 </details>
-                <?php } ?>
+            <?php } ?>
 
             <button id="cookie-save-preferences" class="ccfw-banner__button">
                 <?php _e('Save cookie preferences', 'cookie-compliance-for-wordpress'); ?>

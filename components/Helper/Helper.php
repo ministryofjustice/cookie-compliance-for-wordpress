@@ -22,10 +22,15 @@ class Helper
      * @var array
      */
     public $adminSettings = [];
+    /**
+     * @var string
+     */
+    private $base_path;
 
 
     public function __construct()
     {
+        $this->base_path = 'assets/';
         $this->actions();
     }
 
@@ -58,8 +63,13 @@ class Helper
      */
     public function assetPath()
     {
-        // http://<site-name-here>/app/plugins/cookie-compliance-for-wordpress/dist/
-        return esc_url(plugin_dir_url(dirname(__FILE__, 2)) . 'dist/');
+        // http://<site-name-here>/app/plugins/cookie-compliance-for-wordpress/assets/
+        return esc_url(plugin_dir_url(dirname(__FILE__, 2)) . $this->base_path);
+    }
+
+    public function filePath()
+    {
+        return $this->assetPath();
     }
 
     public function cssPath()
@@ -82,9 +92,21 @@ class Helper
         return $this->assetPath() . 'js/';
     }
 
-    public function filePath()
+    public function enqueue($name)
     {
-        return esc_url(plugin_dir_path(dirname(__FILE__, 2)) . 'dist/');
+        $asset_paths = file_get_contents($this->assetPath() . 'mix-manifest.json');
+        $assets = json_decode($asset_paths, true);
+
+        // find the path
+        $type = substr($name, strpos($name, ".") + 1);
+
+        return $this->assetPath() . ltrim($assets[('/' . $type . '/' . $name)], '/');
+    }
+
+    public function url_exists($url)
+    {
+        $headers = get_headers($url);
+        return stripos($headers[0], "200 OK") ? true : false;
     }
 
     /**

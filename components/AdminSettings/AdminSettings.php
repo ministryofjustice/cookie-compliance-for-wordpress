@@ -22,55 +22,21 @@ class AdminSettings
     {
         global $ccfwHelper;
         $this->helper = $ccfwHelper;
+
         $this->actions();
     }
 
     public function actions()
     {
-        add_filter('script_loader_tag', [$this, 'addTypeAttribute'], 10, 3);
-        add_action('wp_enqueue_scripts', [$this, 'enqueue'], 11);
-        add_action('admin_enqueue_scripts', [$this, 'enqueueAdmin'], 11);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue'], 11);
         add_action('admin_init', [$this, 'settings'], 11);
         add_action('admin_menu', [$this, 'page']);
     }
 
     public function enqueue()
     {
-        global $wp_version;
-
-        $file_existsCSS = file_exists($this->helper->filePath() . 'css/ccfw_frontend.css');
-        $file_existsJS = file_exists($this->helper->filePath() . 'js/ccfw_frontend.js');
-
-        // Cache bust
-        $css_has_changed_hash = $file_existsCSS ? filemtime($this->helper->filePath() . 'css/ccfw_frontend.css') : $wp_version;
-        $js_has_changed_hash = $file_existsJS ? filemtime($this->helper->filePath() . 'js/ccfw_frontend.js') : $wp_version;
-
-        wp_enqueue_style('CCFWPluginStyle', $this->helper->cssPath() . 'ccfw_frontend.css', null, $css_has_changed_hash, false);
-        wp_enqueue_script('CCFWPluginScript', $this->helper->jsPath() . 'ccfw_frontend.js', ['jquery'], $js_has_changed_hash, true);
-
-        global $is_IE;
-
-        if ($is_IE) {
-        // Fix IE11 banner issues - https://github.com/nuxodin/ie11CustomProperties
-            wp_enqueue_script('CCFWPluginScriptIE11', $this->helper->jsPath() . 'ccfw-ie11CustomProperties.js', ['jquery'], $js_has_changed_hash, false);
-        }
-    }
-
-    public function enqueueAdmin()
-    {
-        wp_enqueue_style('CCFWPluginStyleAdmin', $this->helper->cssPath() . 'ccfw_admin_main.css', []);
-        wp_enqueue_script('CCFWPluginScriptAdmin', $this->helper->jsPath() . 'ccfw_admin_main.js', ['jquery']);
-    }
-
-    public function addTypeAttribute($tag, $handle, $src)
-    {
-        if ('CCFWPluginScript' !== $handle) {
-            return $tag;
-        }
-
-        // Add module type to allow for JavaScript ES6 Modules
-        $tag = '<script type="module" src="' . esc_url($src) . '"></script><script nomodule src="' . esc_url($src) . '"></script>';
-        return $tag;
+        wp_enqueue_style('CCFWStyleAdmin', $this->helper->enqueue('ccfw-admin-main.css'));
+        wp_enqueue_script('CCFWScriptAdmin', $this->helper->enqueue('ccfw-admin-main.js'), ['jquery']);
     }
 
     public function page()
@@ -86,17 +52,19 @@ class AdminSettings
 
     public function settings()
     {
-        register_setting('ccfwGroupOptionSettings', 'ccfw_plugin_settings');
+        register_setting(
+            'ccfwGroupOptionSettings',
+            'ccfw_plugin_settings',
+            ['sanitize_callback' => ['CCFW\AdminSettings\Sanitize', 'options']]
+        );
 
         foreach ($this->helper->adminSettings as $key => $class) {
             $this->object = new $class();
-
             $hasSettings = $this->object->hasSettings ?? false;
 
             if ($hasSettings === true) {
                 $thisClass = get_class($this->object);
                 $thisClass = str_replace('\\', '/', $thisClass);
-
                 $className = $this->helper->splitCamelCase(basename($thisClass));
 
                 $this->tabs[] = [
@@ -106,16 +74,9 @@ class AdminSettings
 
                 add_settings_section(
                     'component-tab-' . $key,
-                    'Add tracking IDs',
-                    [$this->object, 'addTrackingIDSectionIntro'],
-                    'section-add-tracking-id'
-                );
-
-                add_settings_section(
-                    'component-tab-' . $key,
-                    'Remove third-party cookie policy disclaimers',
-                    [$this->object, 'policyDisclaimerSectionIntro'],
-                    'section-remove-policy-disclaimers'
+                    $className,
+                    [$this->object, 'settingsSectionCB'],
+                    'ccfwGroupOptionSettings'
                 );
 
                 $this->object->settingsFields('component-tab-' . $key);
@@ -140,10 +101,7 @@ class AdminSettings
             echo '</h2>';
 
             settings_fields('ccfwGroupOptionSettings');
-
-            $this->doSettingsSections('section-add-tracking-id');
-
-            $this->doSettingsSections('section-remove-policy-disclaimers');
+            $this->doSettingsSections('ccfwGroupOptionSettings');
 
             echo '<hr>';
 
@@ -157,6 +115,7 @@ class AdminSettings
 
     /**
      * Load new tab section
+     * @param $page
      */
     public function doSettingsSections($page)
     {
@@ -165,6 +124,8 @@ class AdminSettings
         if (!isset($wp_settings_sections[$page])) {
             return;
         }
+
+        //echo '<pre>' . print_r($wp_settings_sections[$page], true) . '</pre>';
 
         foreach ((array)$wp_settings_sections[$page] as $key => $section) {
             echo '<div id="' . $key . '" class="ccfw-component-settings-section">';
