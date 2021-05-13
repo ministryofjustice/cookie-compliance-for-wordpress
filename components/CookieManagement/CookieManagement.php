@@ -27,7 +27,6 @@ class CookieManagement
         $this->settings = new CookieManagementSettings();
 
         $options = get_option('ccfw_plugin_settings');
-        $this->googleAnalyticsID = $options['ga_analytics_id'] ?? '';
 
         $this->actions();
     }
