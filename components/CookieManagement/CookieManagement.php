@@ -2,6 +2,8 @@
 
 namespace CCFW\Components\CookieManagement;
 
+use WP_REST_Server;
+
 class CookieManagement
 {
     /**
@@ -33,9 +35,27 @@ class CookieManagement
 
     public function actions()
     {
-        add_action('wp_head', [$this, 'disableGoogleAnalyticsOnLoad'], 11);
+        // application routes
+        add_action('rest_api_init', [$this, 'registerAppRoutes']);
 
         // settings section
         add_action('wp_loaded', [$this->settings, 'settings'], 1);
+    }
+
+    public function enqueue()
+    {
+
+    }
+
+    public function registerAppRoutes()
+    {
+        register_rest_route(
+            'ccfw/',
+            '/phrase',
+            [
+                'methods' => WP_REST_Server::READABLE,
+                'callback' => ['CCFW\Components\CookieManagement\Endpoints', 'phrase'],
+            ]
+        );
     }
 }

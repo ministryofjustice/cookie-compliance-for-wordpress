@@ -31,8 +31,10 @@ require_once('components/General/General.php');
 require_once('components/General/GeneralSettings.php');
 require_once('components/Banner/Banner.php');
 require_once('components/Banner/BannerSettings.php');
+// cookie management scripts
 require_once('components/CookieManagement/CookieManagement.php');
 require_once('components/CookieManagement/CookieManagementSettings.php');
+require_once('components/CookieManagement/Endpoints.php');
 
 use CCFW\Components\General\General;
 use CCFW\Components\CookieManagement\CookieManagement;
