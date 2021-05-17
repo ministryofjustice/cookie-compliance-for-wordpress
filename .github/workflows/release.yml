@@ -2,7 +2,9 @@
 name: "Pre Release "
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - gtm-allowlist
 
 jobs:
   pre-release:
