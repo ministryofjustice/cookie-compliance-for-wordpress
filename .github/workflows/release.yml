@@ -1,5 +1,5 @@
 ---
-name: "Create Release"
+name: "Stage a Release"
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   create-release:
-    name: "Pre Release"
+    name: "Publishing latest changes"
     runs-on: "ubuntu-latest"
 
     steps:
@@ -39,15 +39,11 @@ jobs:
 
       - run: echo ${{ steps.versionCheck.outputs.exists }}
 
+      # If tag is already used, cancel the workflow - the operation will fail.
+      # Sleep for 3 to let the cancel operation settle.
       - uses: andymckay/cancel-action@0.2
         if: ${{ steps.versionCheck.outputs.exists == 'true' }}
-
-      - name: 'Getting release notes'
-        id: changelog
-        uses: juliangruber/read-file-action@v1.0.0
-        with:
-          path: ./CHANGELOG
-      - run: echo "${{ steps.changelog.outputs.content }}"
+      - run: sleep 3
 
       # B E G I N   P R O C E S S
       # Require third party libraries
@@ -59,16 +55,23 @@ jobs:
           npm run production
           echo "done!"
 
-      - name: "Archive Release"
+      - name: "Archive (ZIP)"
         uses: thedoctor0/zip-release@master
         with:
-          filename: 'release.zip'
+          filename: ${{ steps.version.outputs.content }}.zip
+          exclusions: '*.git* .github* /*src/* /*node_modules/* .editorconfig .babelrc package* composer* webpack.mix.js VERSION CHANGELOG README*'
+
+      - name: "Archive (TAR)"
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: ${{ steps.version.outputs.content }}.tar.gz
           exclusions: '*.git* .github* /*src/* /*node_modules/* .editorconfig .babelrc package* composer* webpack.mix.js VERSION CHANGELOG README*'
 
       - name: "Upload Release"
         uses: ncipollo/release-action@v1
         if: ${{ steps.versionCheck.outputs.exists == 'false' }}
         with:
-          artifacts: "release.zip"
+          artifacts: ${{ steps.version.outputs.content }}.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.version.outputs.content }}
+          bodyFile: ./CHANGELOG
