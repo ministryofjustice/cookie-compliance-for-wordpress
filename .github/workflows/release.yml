@@ -44,7 +44,7 @@ jobs:
         uses: juliangruber/read-file-action@v1.0.0
         with:
           path: ./CHANGELOG
-      - run: echo ${{ steps.changelog.outputs.content }}
+      - run: echo "${{ steps.changelog.outputs.content }}"
 
       # B E G I N   P R O C E S S
       # Require third party libraries
