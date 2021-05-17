@@ -39,6 +39,9 @@ jobs:
 
       - run: echo ${{ steps.versionCheck.outputs.exists }}
 
+      - uses: andymckay/cancel-action@0.2
+        if: ${{ steps.versionCheck.outputs.exists == 'true' }}
+
       - name: 'Getting release notes'
         id: changelog
         uses: juliangruber/read-file-action@v1.0.0
