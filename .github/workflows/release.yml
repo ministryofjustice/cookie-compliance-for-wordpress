@@ -1,5 +1,5 @@
 ---
-name: "Stage a Release"
+name: "Stage Release"
 
 on:
   push:
@@ -58,20 +58,20 @@ jobs:
       - name: "Archive (ZIP)"
         uses: thedoctor0/zip-release@master
         with:
-          filename: ${{ steps.version.outputs.content }}.zip
+          filename: ${{ github.event.repository.name }}.zip
           exclusions: '*.git* .github* /*src/* /*node_modules/* .editorconfig .babelrc package* composer* webpack.mix.js VERSION CHANGELOG README*'
 
       - name: "Archive (TAR)"
         uses: thedoctor0/zip-release@master
         with:
-          filename: ${{ steps.version.outputs.content }}.tar.gz
+          filename: ${{ github.event.repository.name }}.tar.gz
           exclusions: '*.git* .github* /*src/* /*node_modules/* .editorconfig .babelrc package* composer* webpack.mix.js VERSION CHANGELOG README*'
 
       - name: "Upload Release"
         uses: ncipollo/release-action@v1
         if: ${{ steps.versionCheck.outputs.exists == 'false' }}
         with:
-          artifacts: ${{ steps.version.outputs.content }}.zip
+          artifacts: ${{ github.event.repository.name }}.zip,${{ github.event.repository.name }}.tar.gz
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.version.outputs.content }}
           bodyFile: ./CHANGELOG
