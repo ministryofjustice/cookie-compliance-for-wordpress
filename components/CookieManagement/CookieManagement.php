@@ -44,7 +44,6 @@ class CookieManagement
 
     public function enqueue()
     {
-
     }
 
     public function registerAppRoutes()
