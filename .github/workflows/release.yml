@@ -1,5 +1,5 @@
 ---
-name: "Pre Release "
+name: "Create Release"
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - gtm-allowlist
 
 jobs:
-  pre-release:
+  create-release:
     name: "Pre Release"
     runs-on: "ubuntu-latest"
 
