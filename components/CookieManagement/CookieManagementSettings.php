@@ -48,7 +48,7 @@ class CookieManagementSettings extends CookieManagement
     public function settingsSectionCB()
     {
         echo __(
-            'The UI for Managing Cookies will appear here soon.',
+            'Use this screen to add cookies to the cookie banner.',
             'cookie-compliance-for-wordpress'
         );
     }
