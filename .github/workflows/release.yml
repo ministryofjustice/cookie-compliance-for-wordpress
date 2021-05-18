@@ -4,7 +4,7 @@ name: "Stage Release"
 on:
   push:
     branches:
-      - gtm-allowlist
+      - main
 
 jobs:
   create-release:
@@ -37,7 +37,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: echo ${{ steps.versionCheck.outputs.exists }}
+      - run: echo "Does tag exist? ${{ steps.versionCheck.outputs.exists }}"
 
       # If tag is already used, cancel the workflow - the operation will fail.
       # Sleep for 3 to let the cancel operation settle.

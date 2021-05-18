@@ -36,7 +36,7 @@ class AdminSettings
     public function enqueue()
     {
         wp_enqueue_style('CCFWStyleAdmin', $this->helper->enqueue('ccfw-admin-main.css'));
-        wp_enqueue_script('CCFWScriptAdmin', $this->helper->enqueue('ccfw-admin-main.js'), ['jquery']);
+        wp_enqueue_script('CCFWScriptAdmin', $this->helper->enqueue('ccfw-admin-app.js'), ['jquery']);
     }
 
     public function page()

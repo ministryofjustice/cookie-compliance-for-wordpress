@@ -29,56 +29,20 @@ class CookieManagementSettings extends CookieManagement
     public function settingsFields($section)
     {
         add_settings_field(
-            'tracking_cookies',
-            __('Tracking Cookies', 'cookie-compliance-for-wordpress'),
-            [$this, 'manageTrackingCookies'],
-            'ccfwGroupOptionSettings',
-            $section
-        );
-        add_settings_field(
-            'third_party_cookies',
-            __('Third Party Cookies', 'cookie-compliance-for-wordpress'),
-            [$this, 'manageThirdPartyCookies'],
-            'ccfwGroupOptionSettings',
-            $section
-        );
-        add_settings_field(
-            'essential_cookies',
-            __('Essential Cookies', 'cookie-compliance-for-wordpress'),
-            [$this, 'manageEssentialCookies'],
+            'cookie-management',
+            __('', 'cookie-compliance-for-wordpress'),
+            [$this, 'manageCookies'],
             'ccfwGroupOptionSettings',
             $section
         );
     }
 
-    public function manageTrackingCookies()
+    /**
+     * Drops the cookie management application UI container
+     */
+    public function manageCookies()
     {
-        $options = get_option('ccfw_plugin_settings');
-        $cookies = $options['tracking_cookies'] ?? '';
-
-        ?>
-        /** functionality coming soon **/
-        <?php
-    }
-
-    public function manageThirdPartyCookies()
-    {
-        $options = get_option('ccfw_plugin_settings');
-        $cookies = $options['third_party_cookies'] ?? '';
-
-        ?>
-        /** functionality coming soon **/
-        <?php
-    }
-
-    public function manageEssentialCookies()
-    {
-        $options = get_option('ccfw_plugin_settings');
-        $cookies = $options['essential_cookies'] ?? '';
-
-        ?>
-        /** functionality coming soon **/
-        <?php
+        echo '<div id="ccfw-cookie-management"></div>';
     }
 
     public function settingsSectionCB()

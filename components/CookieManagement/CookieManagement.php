@@ -44,6 +44,14 @@ class CookieManagement
 
     public function enqueue()
     {
+        wp_enqueue_style('ccfw-cm-main-style', $this->helper->enqueue('main.css'));
+        wp_enqueue_script(
+            'ccfw-cm-main-script',
+            $this->helper->enqueue('main.js'),
+            ['jquery'],
+            false,
+            true
+        );
     }
 
     public function registerAppRoutes()

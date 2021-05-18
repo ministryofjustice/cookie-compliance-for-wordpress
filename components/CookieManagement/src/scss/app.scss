@@ -1,0 +1,87 @@
+#component-tab-2 {
+    .form-table th {
+        width: 0
+    }
+}
+
+#ccfw-cookie-management {
+
+    .ccfw-section {
+        padding: 0 30px 20px;
+        margin-bottom: 25px;
+        border: 1px #cccccc solid;
+        background-color: #fbfbfb;
+        max-width: 900px;
+
+
+        .ccfw-group {
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dcdcdc;
+
+            &:last-child {
+                padding-bottom: 0;
+                margin-bottom: 0;
+                border-bottom: none;
+            }
+
+            &__heading {
+                display: inline-block;
+                font-size: 1.05rem;
+                font-weight: 600;
+                margin-right: 15px;
+
+                span {
+                    color: #0b0c0c;
+
+                }
+            }
+
+            .ccfw-cookie-row {
+                padding: 6px 6px 2px;
+                background-color: #f1f1f1;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                margin-bottom: 6px;
+                width: 96%;
+                position:relative;
+
+                input {
+                    margin-right: 5px
+                }
+
+                .ccfw-cookie-remove {
+                    position: absolute;
+                    right: -15px;
+                }
+
+                &:hover {
+                    background-color: #ffffbf;
+                }
+            }
+        }
+
+        button {
+            background: transparent;
+            border: transparent;
+            position: relative;
+            cursor: pointer;
+            border-radius: 3px;
+            width: 28px;
+            height: 28px;
+
+            svg {
+                position: absolute;
+                top: -2px;
+                left: 6px;
+            }
+
+            &.ccfw-section-remove {
+                float: right;
+                margin-top: 24px;
+            }
+        }
+    }
+
+
+}
