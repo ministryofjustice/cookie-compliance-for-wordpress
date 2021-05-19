@@ -1,7 +1,13 @@
 const CCFW = {
     appContainer: 'ccfw-cookie-management',
     sectionId: 'ccfw-section-selects',
-    sections: {}
+    sections: {},
+    cookieRow: {
+        name: '',
+        description: '',
+        expiry: ''
+    },
+    debug: 0
 }
 
 const makeDebugContainer = () => {
@@ -24,12 +30,20 @@ const removeSection = (section) => {
     outputDebugInfo();
 }
 
-const addGroup = (section, groupName) => {
-    CCFW.sections[section][slugify(groupName)] = {
-        name: groupName
+const addGroup = (section, group) => {
+    let slug = slugify(group);
+    CCFW.sections[section][slug] = {
+        name: group
     };
 
-    CCFW.sections[section][slugify(groupName)].cookies = [];
+    // init cookie row with id row_0
+    CCFW.sections[section][slug].cookies = {
+        row_0: {
+            name: '',
+            description: '',
+            expiry: ''
+        }
+    };
 
     // what have we got?
     outputDebugInfo();
@@ -42,16 +56,27 @@ const addGroupAllowlistID = (section, groupName, allowlistID) => {
     outputDebugInfo();
 }
 
-const addCookieRow = (section, groupName, row) => {
-    CCFW.sections[section][slugify(groupName)].cookies.push(row);
+const addCookie = (section, group, row) => {
+    CCFW.sections[section][slugify(group)].cookies[row] = {
+        name: '',
+        description: '',
+        expiry: ''
+    };
+
+    outputDebugInfo();
 }
 
-const removeCookieRow = (section, groupName, name) => {
-    let cookies = CCFW.sections[section][slugify(groupName)].cookies;
-    CCFW.sections[section][slugify(groupName)].cookies = cookies.filter(function( obj ) {
-        return obj.field !== name;
-    });
+const updateCookie = (section, group, row, name, text) => {
+    CCFW.sections[section][slugify(group)].cookies[row][name] = text;
+    outputDebugInfo();
 }
+
+const removeCookie = (section, group, row) => {
+    delete CCFW.sections[section][slugify(group)].cookies[row];
+    outputDebugInfo();
+}
+
+const rowExists = (section, group, row) => CCFW.sections[section][slugify(group)].cookies.hasOwnProperty(row);
 
 const capitalize = (s) => {
     if (typeof s !== 'string') return ''
@@ -76,8 +101,12 @@ const App = {
         allowlistID: addGroupAllowlistID
     },
     cookies: {
-        add: addCookieRow,
-        remove: removeCookieRow
+        add: addCookie,
+        update: updateCookie,
+        remove: removeCookie,
+        row: {
+            exists: rowExists
+        }
     }
 }
 

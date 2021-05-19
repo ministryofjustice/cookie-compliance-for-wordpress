@@ -82,7 +82,6 @@ function saveGroup () {
     let name = group.find('input').val();
     let nameSlugged = slugify(name);
     let sectionName = section.data('id');
-    let addRowButton
 
     if (!name) {
         console.warn('Group name was empty.');
@@ -99,10 +98,11 @@ function saveGroup () {
     group.html(groupHeading(name + ' ' + Icon.success(18)));
     group.append(Input('gtm-allowlist-id', 'GTM allow list ID'));
     group.append(Button('ccfw-' + nameSlugged + '-allowlist-save', Icon.check(18)));
-    group.append(Button('ccfw-cookie-add', Icon.add(20), 'Add cookie'));
+    group.append(Button('ccfw-cookie-row-add', Icon.add(20), 'Add cookie'));
 
     // drop first cookie row
     group.append(Cookies());
+    App.cookies.add(sectionName, name, 'row_0');
 
     // move input and header below the row
     section.append(Group(sectionName));
@@ -112,9 +112,10 @@ function saveGroup () {
     allowlistIDSaveListener(nameSlugged);
     rowAddListener(group);
     rowRemoveListener(group);
+    rowSaveListener();
 }
 
-function saveAllowListID() {
+function saveAllowListID () {
     let section = $(this).closest('div.ccfw-section');
     let group = $(this).closest('div.ccfw-group');
     let input = group.find('input[name=gtm-allowlist-id]');
@@ -139,17 +140,24 @@ const allowlistIDSaveListener = (group) => {
 };
 
 const rowAddListener = () => {
-    let element = $('.ccfw-cookie-add');
+    let element = $('.ccfw-cookie-row-add');
     element.off('click', addRow);
     element.on('click', addRow);
 };
 
 const rowRemoveListener = () => {
     let element = $('.ccfw-cookie-remove');
+    element.off('click', removeRow);
     element.on('click', removeRow);
 };
 
-function deleteSection() {
+const rowSaveListener = () => {
+    let element = $('.ccfw-cookie-row input');
+    element.off('keyup', saveCookieData);
+    element.on('keyup', saveCookieData);
+};
+
+function deleteSection () {
     let section = $(this).parent('div').data('id');
     let confirm = window.confirm('\nAre you sure you want to remove ' + section + ' cookies?');
 
@@ -175,37 +183,68 @@ const hideShowSectionSelect = () => {
 
 const Cookies = () => {
     let container = element('div', { 'class': 'ccfw-cookie-container' });
-    container.append(Row);
+    container.append(Row(0));
     return container;
 };
 
-function addRow() {
-    $(this).siblings('.ccfw-cookie-container').append(Row());
-    $('#' + CCFW.appContainer).on('keyup', 'button', saveCookieData);
+function addRow () {
+    let container = $(this).siblings('.ccfw-cookie-container');
+    let count = container.find('.ccfw-cookie-row').length;
+    let section = $(this).closest('div.ccfw-section').data('id');
+    let group = $(this).closest('div.ccfw-group').data('id');
+    let validId = false;
+
+    // manage row counts and ID's
+    while (validId === false) {
+        if (App.cookies.row.exists(section, group, 'row_' + count)) {
+            count++;
+        } else {
+            validId = true;
+            break;
+        }
+    }
+
+    container.append(Row(count));
+
+    App.cookies.add(section, group, 'row_' + count);
+    rowSaveListener();
+    rowRemoveListener();
 }
 
-function saveCookieData() {
-    let section = $(this).closest('div.ccfw-section');
-    let group = $(this).closest('div.ccfw-group');
-    let allowlistID = input.val();
-    let type = $(this).prop('name');
+function saveCookieData () {
+    let input = $(this);
+    let section = input.closest('div.ccfw-section').data('id');
+    let group = input.closest('div.ccfw-group').data('id');
+    let row = input.parent().data('id');
+    let name = input.prop('name');
+    let value = input.val();
 
-    App.cookies.add()
+    App.cookies.update(section, group, row, name, value);
 }
 
-function removeRow() {
-    let section = $(this).closest('div.ccfw-section');
-    let group = $(this).closest('div.ccfw-group');
-    let name = $(this).parent().find('input[name=cookie-name]').val();
+function removeRow () {
+    let section = $(this).closest('div.ccfw-section').data('id');
+    let group = $(this).closest('div.ccfw-group').data('id');
+    let row = $(this).parent();
+    let rowId = row.data('id');
 
-    App.cookies.remove(section.data('id'), group.data('id'), name);
+    App.cookies.remove(section, group, rowId);
+
+    row.remove();
 }
 
-const Row = () => {
+const locationData = (ele) => {
+    return {
+        section: ele.closest('div.ccfw-section').data('id'),
+        group: ele.closest('div.ccfw-group').data('id')
+    };
+}
+
+const Row = (id) => {
     // markup
-    let row = element('div', { 'class': 'ccfw-cookie-row' });
+    let row = element('div', { 'class': 'ccfw-cookie-row' }).data('id', 'row_' + id);
 
-    row.append(Input('cookie-name', 'Name'));
+    row.append(Input('name', 'Name'));
     row.append(Input('description', 'Description'));
     row.append(Input('expiry', 'Expiry'));
     row.append(Button('ccfw-cookie-remove', Icon.crossArrow(30)));
@@ -213,14 +252,4 @@ const Row = () => {
     return row;
 };
 
-/**
- * Helpers
- */
-const Rows = {
-    add: Row(),
-    remove: {},
-    cache: {}, // local storage - leave until last
-    save: {} // clear local storage after save
-};
-
-export { Init, Rows };
+export { Init };
