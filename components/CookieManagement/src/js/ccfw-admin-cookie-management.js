@@ -1,9 +1,11 @@
-import { CCFW } from './modules/global';
-import { Icon, IconsAll } from './modules/icons';
+import { CCFW, makeDebugContainer } from './modules/global';
+import { IconsAll } from './modules/icons';
 import { Init } from './modules/markup';
 
 jQuery(function ($) {
     let appContainer = $('#' + CCFW.appContainer);
+
+    makeDebugContainer();
 
     appContainer.html(Init());
 

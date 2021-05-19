@@ -4,6 +4,15 @@
     }
 }
 
+#debugging {
+    float: right;
+    padding: 20px;
+    border: 1px #cccccc solid;
+    background-color: #fbfbfb;
+    min-width: 30%;
+    margin-top: -80px;
+}
+
 #ccfw-cookie-management {
 
     .ccfw-section {
@@ -11,7 +20,7 @@
         margin-bottom: 25px;
         border: 1px #cccccc solid;
         background-color: #fbfbfb;
-        max-width: 900px;
+        max-width: 50%;
 
 
         .ccfw-group {
@@ -19,17 +28,29 @@
             margin-bottom: 20px;
             border-bottom: 1px solid #dcdcdc;
 
+            > input {
+                line-height: 1;
+                min-height: 25px;
+                margin: 0 3px 5px 25px;
+                border-color: #9b0b0b;
+
+                .complete {
+                    border-color: inherit;
+                }
+            }
+
             &:last-child {
                 padding-bottom: 0;
                 margin-bottom: 0;
                 border-bottom: none;
             }
 
-            &__heading {
+            &__heading, &__allowlist {
                 display: inline-block;
                 font-size: 1.05rem;
                 font-weight: 600;
                 margin-right: 15px;
+                margin-bottom: 10px;
 
                 span {
                     color: #0b0c0c;
@@ -37,17 +58,38 @@
                 }
             }
 
+            &__allowlist {
+                font-size: 0.8rem;
+            }
+
+            .ccfw-cookie-add {
+                min-width: 143px;
+                float: right;
+                margin-right: 2.5%;
+                border: 1px solid #ccc;
+                background-color: #e1e1e1;
+
+                svg {
+                    top: 3px;
+                    left: 5px;
+                }
+
+                &:hover {
+                    background-color: #f1f2f2;
+                }
+            }
+
             .ccfw-cookie-row {
-                padding: 6px 6px 2px;
+                padding: 6px;
                 background-color: #f1f1f1;
                 border: 1px solid #ccc;
                 border-radius: 4px;
                 margin-bottom: 6px;
                 width: 96%;
-                position:relative;
+                position: relative;
 
                 input {
-                    margin-right: 5px
+                    margin-right: 6px
                 }
 
                 .ccfw-cookie-remove {
@@ -57,6 +99,10 @@
 
                 &:hover {
                     background-color: #ffffbf;
+                }
+
+                &__description {
+                    min-width:300px
                 }
             }
         }
