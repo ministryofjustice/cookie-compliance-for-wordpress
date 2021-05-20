@@ -6,8 +6,19 @@ import { Icon } from './icons';
 'use strict';
 
 const Init = () => {
+    jQuery('#' + CCFW.appContainer).on('focus blur', 'input', onInputFocus);
     return SectionSelect();
 };
+
+function onInputFocus(event) {
+    let group = $(this).closest('.ccfw-group');
+    console.log(event.type);
+    if (event.type === 'focusin') {
+        group.removeClass('ccfw-group__full-opacity');
+    } else {
+        group.addClass('ccfw-group__full-opacity');
+    }
+}
 
 // create a new top level category i.e.
 const SectionSelect = (options) => {
@@ -106,8 +117,12 @@ function saveGroup () {
     group.append(Button('ccfw-cookie-row-add', Icon.add(20), 'Add cookie'));
 
     // drop first cookie row
-    group.append(Cookies());
+    let cookies = Cookies();
+    group.append(cookies.container);
     App.cookies.add(sectionName, name, 'row_0');
+
+    // focus on name for simplicity
+    cookies.row.find('input[name="name"]').focus();
 
     // move input and header below the row
     section.append(Group(sectionName));
@@ -188,8 +203,11 @@ const hideShowSectionSelect = () => {
 
 const Cookies = () => {
     let container = element('div', { 'class': 'ccfw-cookie-container' });
-    container.append(Row(0));
-    return container;
+    let row = Row(0);
+
+    container.append(row);
+
+    return { container, row };
 };
 
 function addRow () {
@@ -209,7 +227,10 @@ function addRow () {
         }
     }
 
-    container.append(Row(count));
+    let row = Row(count);
+    container.append(row);
+    // focus on name for simplicity
+    row.find('input[name="name"]').focus();
 
     App.cookies.add(section, group, 'row_' + count);
     rowSaveListener();

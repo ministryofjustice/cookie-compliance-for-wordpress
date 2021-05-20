@@ -65,9 +65,9 @@ class Banner
     {
         global $wp_version, $is_IE;
 
-        wp_enqueue_style('CCFWStyle', $this->helper->enqueue('ccfw-frontend.css'));
+        wp_enqueue_style('ccfw-style', $this->helper->enqueue('ccfw-frontend.css'));
         wp_enqueue_script(
-            'CCFWScript',
+            'ccfw-style',
             $this->helper->enqueue('ccfw-frontend.js'),
             ['jquery'],
             $wp_version,
@@ -77,7 +77,7 @@ class Banner
         if ($is_IE) {
             // Fix IE11 banner issues - https://github.com/nuxodin/ie11CustomProperties
             wp_enqueue_script(
-                'CCFWScriptIE11',
+                'ccfw-script-ie11',
                 $this->helper->enqueue('ccfw-ie11CustomProperties.js'),
                 ['jquery'],
                 $wp_version

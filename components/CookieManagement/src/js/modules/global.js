@@ -56,8 +56,8 @@ const addGroup = (section, group) => {
     outputDebugInfo();
 }
 
-const addGroupAllowlistID = (section, groupName, allowlistID) => {
-    CCFW.sections[section][slugify(groupName)].allowlistID = allowlistID;
+const addGroupAllowlistID = (section, group, allowlistID) => {
+    CCFW.sections[section][slugify(group)].allowlistID = allowlistID;
 
     // what have we got?
     outputDebugInfo();

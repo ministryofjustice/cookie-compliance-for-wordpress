@@ -1,8 +1,8 @@
 import { element } from './element'
 
-const Select = (name, options, callback) => {
+const Select = (name, options,  callback) => {
     let select = element('select', {name: name, id: name});
-    select.append(Option());
+    select.append(Option('-- Create an item --'));
 
     options.forEach((name) => {
         select.append(Option(name));
@@ -13,7 +13,7 @@ const Select = (name, options, callback) => {
 }
 
 const Option = (value) => {
-    let name = value || '-- Create a section --';
+    let name = value || '-- Create an item --';
     value = value || '';
     return element('option', {value: value.toLowerCase()}).text(name);
 }

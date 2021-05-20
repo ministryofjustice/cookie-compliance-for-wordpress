@@ -30,6 +30,10 @@
                 transition: opacity .3s ease-in-out;
                 opacity: 0.2;
 
+                &:not(.ccfw-group__full-opacity) {
+                    opacity: 1;
+                }
+
                 &:last-child {
                     opacity: 1;
                 }
@@ -52,7 +56,7 @@
                 }
             }
 
-            &:hover {
+            &:hover, &__full-opacity {
                 opacity: 1;
             }
 
