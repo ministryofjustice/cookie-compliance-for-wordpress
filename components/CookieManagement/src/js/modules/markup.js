@@ -88,6 +88,11 @@ function saveGroup () {
         return;
     }
 
+    if (App.group.exists(sectionName, nameSlugged)) {
+        alert('The group "' + name + '" already exists. Please chose another name.');
+        return;
+    }
+
     // store the value
     App.group.add(sectionName, name);
 

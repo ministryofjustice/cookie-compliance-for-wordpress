@@ -19,8 +19,15 @@ function outputDebugInfo(){
     debugging.innerHTML = JSON.stringify(CCFW.sections, undefined, 4);
 }
 
+const beforeLeave = () => {
+    window.onbeforeunload = function() {
+        return "Changes have been made to cookie content. Are you sure you want to leave?";
+    };
+}
+
 const addSection = (section) => {
     CCFW.sections[section] = {};
+    beforeLeave();
     outputDebugInfo();
 }
 
@@ -76,6 +83,7 @@ const removeCookie = (section, group, row) => {
     outputDebugInfo();
 }
 
+const groupExists = (section, group) => CCFW.sections[section].hasOwnProperty(group);
 const rowExists = (section, group, row) => CCFW.sections[section][slugify(group)].cookies.hasOwnProperty(row);
 
 const capitalize = (s) => {
@@ -97,7 +105,7 @@ const App = {
     },
     group: {
         add: addGroup,
-        remove: {},
+        exists: groupExists,
         allowlistID: addGroupAllowlistID
     },
     cookies: {

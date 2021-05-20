@@ -25,6 +25,16 @@
         background-color: #fbfbfb;
         max-width: 50%;
 
+        &:hover {
+            .ccfw-group {
+                transition: opacity .3s ease-in-out;
+                opacity: 0.2;
+
+                &:last-child {
+                    opacity: 1;
+                }
+            }
+        }
 
         .ccfw-group {
             padding-bottom: 15px;
@@ -40,6 +50,10 @@
                 .complete {
                     border-color: inherit;
                 }
+            }
+
+            &:hover {
+                opacity: 1;
             }
 
             &:last-child {
@@ -88,7 +102,7 @@
                 }
 
                 &__description {
-                    min-width:300px
+                    min-width: 300px
                 }
             }
 
