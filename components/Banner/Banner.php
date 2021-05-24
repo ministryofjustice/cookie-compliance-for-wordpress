@@ -16,6 +16,7 @@ use CCFW\Components\Helper\Debug;
 class Banner
 {
     use Debug;
+
     /**
      * @var string
      */
