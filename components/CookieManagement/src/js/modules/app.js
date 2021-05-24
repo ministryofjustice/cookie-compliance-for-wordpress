@@ -10,8 +10,13 @@ const Init = () => {
     let select = SectionSelect();
     // grab existing cookies and load them into sections
     App.cookies.get();
-    // shall we populate the UI?
-    // todo: create a module that takes existing data and rebuilds the UI
+
+
+    /**
+     * shall we populate the UI?
+     * todo: create a module that takes existing data and rebuilds the UI
+     */
+
 
     // listen out for focus and blur events
     listener.form.input.focusBlur(inputFocus);
@@ -288,7 +293,7 @@ const locationData = (ele) => {
 
 // intercept save changes button, if on the management tab
 function formSubmit (event) {
-    event.preventDefault();
+    //event.preventDefault();
     window.onbeforeunload = null;
     // grab data and send to the server, and
     // stop page warning from appearing, if success
@@ -299,7 +304,7 @@ function formSubmit (event) {
         console.log('AJAX POST done! Good things have happened here.');
     }
 
-    return false;
+    //return false;
 }
 
 const Row = (id) => {

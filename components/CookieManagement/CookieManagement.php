@@ -54,32 +54,34 @@ class CookieManagement
 
     public function getCookies()
     {
-        $cookies = $this->settings->options();
-
-        echo json_encode($cookies['cookie-management'] ?? new stdClass());
+        echo json_encode(get_option('ccfw_cookie_management_data'));
         exit;
     }
 
     public function storeCookies()
     {
-        $data = $_POST;
-        $cookies_options = $data['payload'];
-
-        // add the data to the app options
-        $cookies = $this->settings->options();
-
-        $cookies['cookie-management'] = $cookies_options;
-
         // prepare response
         $response = new stdClass();
         $response->update = 'fail';
-        $response->reason = 'Could not save data to DB.';
+        $response->reason = 'Your access level has prevented an update on this occasion.';
 
-        if (update_option('ccfw_component_settings', $cookies)) {
-            $response->update = 'success';
-            $response->reason = $_POST['action'];
+        if (current_user_can('manage_options')) {
+            $data = $_POST;
+            $cookies_options = $data['payload'];
+
+            $response->update = 'probable-success';
+            $response->reason = 'The update had no effect, this could be because supplied data has not changed.';
+
+            if (update_option('ccfw_cookie_management_data', $cookies_options)) {
+                $response->update = 'success';
+                $response->reason = $_POST['action'];
+            }
+
+            echo json_encode($response);
+            exit;
         }
 
+        http_response_code(500);
         echo json_encode($response);
         exit;
     }

@@ -14,11 +14,10 @@ function sendCookies (data) {
         jQuery('.ccfw-ajax').fadeOut('fast', function(){
             $(this).removeClass('active');
         }); //animation
-    }).fail(() => {
-
+    }).fail((data) => {
+        data = JSON.parse(data);
+        console.log(data.reason)
     });
-
-    return success;
 }
 
 function getCookies () {
@@ -26,7 +25,7 @@ function getCookies () {
         url: ajaxurl,
         data: { action: 'ccfw_cookie_get' }
     }).done((data) => {
-        CCFW.sections = JSON.parse(data);
+        CCFW.sections = JSON.parse(data) || {};
 
         if (Object.keys(CCFW.sections).length > 0) {
             CCFW.sectionsLock = true;
