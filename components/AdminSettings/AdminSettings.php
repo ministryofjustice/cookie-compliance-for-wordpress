@@ -9,10 +9,14 @@
  * @package    cookie-compliance-for-wordpress
  */
 
-namespace CCFW\Components;
+namespace CCFW\Components\AdminSettings;
+
+use CCFW\Components\Helper\Debug;
 
 class AdminSettings
 {
+    use Debug;
+
     public $helper;
     public $tabs = [];
     public $content = [];
@@ -35,8 +39,8 @@ class AdminSettings
 
     public function enqueue()
     {
-        wp_enqueue_style('CCFWStyleAdmin', $this->helper->enqueue('ccfw-admin-main.css'));
-        wp_enqueue_script('CCFWScriptAdmin', $this->helper->enqueue('ccfw-admin-app.js'), ['jquery']);
+        wp_enqueue_style('ccfw-style-admin', $this->helper->enqueue('ccfw-admin-main.css'));
+        wp_enqueue_script('ccfw-script-admin', $this->helper->enqueue('ccfw-admin-app.js'), ['jquery']);
     }
 
     public function page()
@@ -53,9 +57,9 @@ class AdminSettings
     public function settings()
     {
         register_setting(
-            'ccfwGroupOptionSettings',
-            'ccfw_plugin_settings',
-            ['sanitize_callback' => ['CCFW\AdminSettings\Sanitize', 'options']]
+            'ccfwComponentSettings',
+            'ccfw_component_settings',
+            ['sanitize_callback' => ['CCFW\Components\AdminSettings\Sanitize', 'options']]
         );
 
         foreach ($this->helper->adminSettings as $key => $class) {
@@ -76,7 +80,7 @@ class AdminSettings
                     'component-tab-' . $key,
                     $className,
                     [$this->object, 'settingsSectionCB'],
-                    'ccfwGroupOptionSettings'
+                    'ccfwComponentSettings'
                 );
 
                 $this->object->settingsFields('component-tab-' . $key);
@@ -89,7 +93,7 @@ class AdminSettings
     public function content()
     {
         ?>
-        <form action='options.php' method='post'>
+        <form action="options.php" method="post" name="ccfw-form" id="ccfw-form">
 
             <h1>Cookie Compliance For WordPress</h1>
 
@@ -100,14 +104,13 @@ class AdminSettings
             }
             echo '</h2>';
 
-            settings_fields('ccfwGroupOptionSettings');
-            $this->doSettingsSections('ccfwGroupOptionSettings');
+            settings_fields('ccfwComponentSettings');
+            $this->doSettingsSections('ccfwComponentSettings');
 
             echo '<hr>';
 
             submit_button();
             ?>
-
 
         </form>
         <?php
@@ -132,7 +135,9 @@ class AdminSettings
             }
 
             if ($section['callback']) {
+                echo '<p class="section-heading-description">';
                 call_user_func($section['callback'], $section);
+                echo '</p>';
             }
 
             if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page][$section['id']])) {

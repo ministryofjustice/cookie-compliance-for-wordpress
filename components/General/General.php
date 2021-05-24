@@ -26,7 +26,7 @@ class General
 
         $this->settings = new GeneralSettings();
 
-        $options = get_option('ccfw_plugin_settings');
+        $options = get_option('ccfw_component_settings');
         $this->googleAnalyticsID = $options['ga_analytics_id'] ?? '';
 
         $this->actions();

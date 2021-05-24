@@ -1,4 +1,5 @@
 import { CCFW, App, capitalize, slugify } from './global';
+import { listener } from './listeners';
 import { element, groupHeading, groupAllowlistConfirm } from './element';
 import { Select, Option, Input, Button } from './form';
 import { Icon } from './icons';
@@ -6,17 +7,40 @@ import { Icon } from './icons';
 'use strict';
 
 const Init = () => {
-    jQuery('#' + CCFW.appContainer).on('focus blur', 'input', onInputFocus);
-    return SectionSelect();
+    let select = SectionSelect();
+    // grab existing cookies and load them into sections
+    App.cookies.get();
+    // shall we populate the UI?
+    // todo: create a module that takes existing data and rebuilds the UI
+
+    // listen out for focus and blur events
+    listener.form.input.focusBlur(inputFocus);
+    // listen out for changes on the debug checkbox
+    listener.debug();
+    // listen out for submissions on the page
+    listener.form.submit(formSubmit);
+
+    select.append(appInfoButton());
+
+    headingCookieIcon();
+
+    // initialise with the select element
+    return select;
 };
 
-function onInputFocus(event) {
+const appInfoButton = () => {
+    let tooltip = 'Please select an option from the dropdown to create a cookie section. The section will ' +
+        'allow you to define groups of cookies.';
+
+    return Button('app-info', Icon.info(), null, tooltip);
+};
+
+function inputFocus (event) {
     let group = $(this).closest('.ccfw-group');
-    console.log(event.type);
     if (event.type === 'focusin') {
-        group.removeClass('ccfw-group__full-opacity');
+        group.removeClass('ccfw-group__active-opacity');
     } else {
-        group.addClass('ccfw-group__full-opacity');
+        group.addClass('ccfw-group__active-opacity');
     }
 }
 
@@ -38,35 +62,57 @@ const SectionSelect = (options) => {
 };
 
 function Section () {
-    let select = $(this);
-    let section = select.val();
-    let container = element('div', { id: 'ccfw-section__' + section, 'class': 'ccfw-section' }).data('id', section);
-    let buttonRemove = element('button', {
-        type: 'button',
-        id: 'ccfw-' + section + '-section-remove',
-        'class': 'ccfw-section-remove',
-        title: 'Removes the ' + section + ' section and all related cookies'
-    });
+    // confirm with a warning if the section lock is on
+    let confirmed = true;
+    if (CCFW.sectionsLock) {
+        // is debug on?
+        let checkbox = jQuery('#' + CCFW.debug.checkbox);
+        let isChecked = checkbox.is(':checked');
+        let message = 'If you continue the current available data will be overwritten.\n\n' +
+            'Would you like to proceed?\n\n' +
+            'Click Cancel to review your data, or OK to erase and start again.'
 
-    // store the section
-    App.section.add(section);
+        confirmed = window.confirm(message);
 
-    buttonRemove.append(Icon.bin());
-    container.append(buttonRemove);
-    container.append(element('h2').text(capitalize(section) + ' Cookies'));
+        if (confirmed) {
+            CCFW.sections = {};
+            CCFW.sectionsLock = false;
+        } else if (!isChecked) {
+            checkbox.click();
+        }
+    }
 
-    // Group
-    container.append(Group(section));
+    if (confirmed) {
+        let select = $(this);
+        let section = select.val();
+        let container = element('div', { id: 'ccfw-section__' + section, 'class': 'ccfw-section' }).data('id', section);
+        let buttonRemove = element('button', {
+            type: 'button',
+            id: 'ccfw-' + section + '-section-remove',
+            'class': 'ccfw-section-remove',
+            title: 'Removes the ' + section + ' section and all related cookies'
+        });
 
-    // add to the page
-    $('#' + CCFW.appContainer).prepend(container);
+        // store the section
+        App.section.add(section);
 
-    // listeners
-    groupSaveListener(section);
-    $('#ccfw-' + section + '-section-remove').on('click', deleteSection);
+        buttonRemove.append(Icon.bin());
+        container.append(buttonRemove);
+        container.append(element('h2').text(capitalize(section) + ' Cookies'));
 
-    select.find('option[value=' + section + ']').remove();
-    hideShowSectionSelect();
+        // Group
+        container.append(Group(section));
+
+        // add to the page
+        $('#' + CCFW.appContainer).prepend(container);
+
+        // listeners
+        listener.group.save(section, saveGroup);
+        $('#ccfw-' + section + '-section-remove').on('click', deleteSection);
+
+        select.find('option[value=' + section + ']').remove();
+        hideShowSectionSelect();
+    }
 }
 
 const Group = (section) => {
@@ -128,54 +174,25 @@ function saveGroup () {
     section.append(Group(sectionName));
 
     // listeners
-    groupSaveListener(sectionName);
-    allowlistIDSaveListener(nameSlugged);
-    rowAddListener(group);
-    rowRemoveListener(group);
-    rowSaveListener();
+    listener.group.save(sectionName, saveGroup);
+    listener.group.allowlist(nameSlugged, saveAllowListID);
+    listener.row.add(addRow);
+    listener.row.remove(removeRow);
+    listener.row.save(saveCookieData);
 }
 
 function saveAllowListID () {
-    let section = $(this).closest('div.ccfw-section');
+    let closest = locationData($(this));
     let group = $(this).closest('div.ccfw-group');
     let input = group.find('input[name=gtm-allowlist-id]');
     let allowlistID = input.val();
 
-    App.group.allowlistID(section.data('id'), group.data('id'), allowlistID);
+    App.group.allowlistID(closest.section, closest.group, allowlistID);
 
     group.find('.ccfw-group__heading').after(groupAllowlistConfirm(allowlistID));
     input.next('button').remove();
     input.remove();
 }
-
-const groupSaveListener = (section) => {
-    let element = $('.ccfw-' + section + '-group-save');
-    element.off('click', saveGroup);
-    element.on('click', saveGroup);
-};
-
-const allowlistIDSaveListener = (group) => {
-    let element = $('.ccfw-' + group + '-allowlist-save');
-    element.on('click', saveAllowListID);
-};
-
-const rowAddListener = () => {
-    let element = $('.ccfw-cookie-row-add');
-    element.off('click', addRow);
-    element.on('click', addRow);
-};
-
-const rowRemoveListener = () => {
-    let element = $('.ccfw-cookie-remove');
-    element.off('click', removeRow);
-    element.on('click', removeRow);
-};
-
-const rowSaveListener = () => {
-    let element = $('.ccfw-cookie-row input');
-    element.off('keyup', saveCookieData);
-    element.on('keyup', saveCookieData);
-};
 
 function deleteSection () {
     let section = $(this).parent('div').data('id');
@@ -188,7 +205,7 @@ function deleteSection () {
         App.section.remove(section);
 
         // add option to the select
-        $('#' + CCFW.sectionId).append(Option(capitalize(section)));
+        $('#' + CCFW.sectionId + ' select').append(Option(capitalize(section)));
         hideShowSectionSelect();
     }
 }
@@ -213,13 +230,12 @@ const Cookies = () => {
 function addRow () {
     let container = $(this).siblings('.ccfw-cookie-container');
     let count = container.find('.ccfw-cookie-row').length;
-    let section = $(this).closest('div.ccfw-section').data('id');
-    let group = $(this).closest('div.ccfw-group').data('id');
+    let closest = locationData($(this));
     let validId = false;
 
     // manage row counts and ID's
     while (validId === false) {
-        if (App.cookies.row.exists(section, group, 'row_' + count)) {
+        if (App.cookies.row.exists(closest.section, closest.group, 'row_' + count)) {
             count++;
         } else {
             validId = true;
@@ -232,38 +248,58 @@ function addRow () {
     // focus on name for simplicity
     row.find('input[name="name"]').focus();
 
-    App.cookies.add(section, group, 'row_' + count);
-    rowSaveListener();
-    rowRemoveListener();
+    App.cookies.add(closest.section, closest.group, 'row_' + count);
+    listener.row.save(saveCookieData);
+    listener.row.remove(removeRow);
 }
 
 function saveCookieData () {
     let input = $(this);
-    let section = input.closest('div.ccfw-section').data('id');
-    let group = input.closest('div.ccfw-group').data('id');
+    let closest = locationData(input);
     let row = input.parent().data('id');
     let name = input.prop('name');
     let value = input.val();
 
-    App.cookies.update(section, group, row, name, value);
+    App.cookies.update(closest.section, closest.group, row, name, value);
 }
 
 function removeRow () {
-    let section = $(this).closest('div.ccfw-section').data('id');
-    let group = $(this).closest('div.ccfw-group').data('id');
+    let closest = locationData($(this));
     let row = $(this).parent();
     let rowId = row.data('id');
 
-    App.cookies.remove(section, group, rowId);
+    App.cookies.remove(closest.section, closest.group, rowId);
 
     row.remove();
 }
+
+const headingCookieIcon = () => {
+    jQuery('h2:contains(Cookie Management Settings)').css({
+        marginBottom: '1.68em'
+    }).prepend(Icon.cookie(28));
+};
 
 const locationData = (ele) => {
     return {
         section: ele.closest('div.ccfw-section').data('id'),
         group: ele.closest('div.ccfw-group').data('id')
     };
+};
+
+// intercept save changes button, if on the management tab
+function formSubmit (event) {
+    event.preventDefault();
+    window.onbeforeunload = null;
+    // grab data and send to the server, and
+    // stop page warning from appearing, if success
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
+
+    // processing here:
+    if (App.form.post(CCFW.sections)) {
+        console.log('AJAX POST done! Good things have happened here.');
+    }
+
+    return false;
 }
 
 const Row = (id) => {
@@ -278,4 +314,4 @@ const Row = (id) => {
     return row;
 };
 
-export { Init };
+export { Init, appInfoButton, headingCookieIcon };

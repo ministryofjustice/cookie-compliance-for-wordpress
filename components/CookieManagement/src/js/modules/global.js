@@ -1,21 +1,43 @@
+import { IconsAll } from './icons';
+import { ajax } from './ajax';
+
 const CCFW = {
     appContainer: 'ccfw-cookie-management',
-    sectionId: 'ccfw-section-selects',
+    sectionId: 'ccfw-section-select-container',
     sections: {},
+    sectionsLock: false, // lock the sections dropdown so we don't overwrite data
     cookieRow: {
         name: '',
         description: '',
         expiry: ''
     },
-    debug: 0
+    debug: {
+        container: 'debugging',
+        preContainer: 'debug-settings',
+        active: false,
+        checkbox: 'cookie-management-debug'
+    }
 }
 
 const makeDebugContainer = () => {
-    jQuery('#' + CCFW.appContainer).before('<pre id ="debugging"/>');
+    let debugContainer = jQuery('<div/>').attr({id: CCFW.debug.container});
+    let iconsContainer = jQuery('<div/>').attr({'class': CCFW.debug.container + '-icons'});
+    iconsContainer.append(IconsAll);
+
+    debugContainer.append(iconsContainer);
+    debugContainer.append('<pre id ="' + CCFW.debug.preContainer + '"/>');
+
+    jQuery('#' + CCFW.appContainer).before(debugContainer);
+
+    outputDebugInfo();
 }
 
-function outputDebugInfo(){
-    let debugging = document.getElementById("debugging");
+const outputDebugInfo = () => {
+    if (!CCFW.debug.active) {
+        return;
+    }
+
+    let debugging = document.getElementById(CCFW.debug.preContainer);
     debugging.innerHTML = JSON.stringify(CCFW.sections, undefined, 4);
 }
 
@@ -74,7 +96,7 @@ const addCookie = (section, group, row) => {
 }
 
 const updateCookie = (section, group, row, name, text) => {
-    CCFW.sections[section][slugify(group)].cookies[row][name] = text;
+    CCFW.sections[section][slugify(group)].cookies[row][name] = text.trim();
     outputDebugInfo();
 }
 
@@ -114,8 +136,12 @@ const App = {
         remove: removeCookie,
         row: {
             exists: rowExists
-        }
+        },
+        get: () => ajax.get()
+    },
+    form: {
+        post: (data) => ajax.post(data)
     }
 }
 
-export { CCFW, App, capitalize, slugify, makeDebugContainer }
+export { CCFW, App, capitalize, slugify, makeDebugContainer, outputDebugInfo }

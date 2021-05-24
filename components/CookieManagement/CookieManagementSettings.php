@@ -21,6 +21,11 @@ class CookieManagementSettings extends CookieManagement
         $this->helper = $ccfwHelper;
     }
 
+    public function options()
+    {
+        return get_option('ccfw_component_settings');
+    }
+
     public function settings()
     {
         $this->helper->initSettings($this);
@@ -32,7 +37,23 @@ class CookieManagementSettings extends CookieManagement
             'cookie-management',
             __('', 'cookie-compliance-for-wordpress'),
             [$this, 'manageCookies'],
-            'ccfwGroupOptionSettings',
+            'ccfwComponentSettings',
+            $section
+        );
+
+        add_settings_field(
+            'cookie-management-debug',
+            __('', 'cookie-compliance-for-wordpress'),
+            [$this, 'toggleDebug'],
+            'ccfwComponentSettings',
+            $section
+        );
+
+        add_settings_field(
+            'cookie-management-banner',
+            __('', 'cookie-compliance-for-wordpress'),
+            [$this, 'manageCookiesBanner'],
+            'ccfwComponentSettings',
             $section
         );
     }
@@ -45,11 +66,36 @@ class CookieManagementSettings extends CookieManagement
         echo '<div id="ccfw-cookie-management"></div>';
     }
 
+    /**
+     * Display a decorative banner
+     */
+    public function toggleDebug()
+    {
+        $options = get_option('ccfw_component_settings');
+        $is_checked = $options['cookie_management_debug'] ?? 'no';
+
+        ?>
+        <input type='checkbox' id="cookie-management-debug"
+               name='ccfw_component_settings[cookie_management_debug]'
+               value="yes"
+               class="ccfw-component-input" <?= checked('yes', $is_checked) ?>
+        />
+        <label for="cookie-management-debug">Display developer information?</label>
+        <?php
+    }
+
+    /**
+     * Display a decorative banner
+     */
+    public function manageCookiesBanner()
+    {
+        echo '<div id="ccfw-cookie-management-banner">
+                <img src="' . esc_url(plugins_url('/src/image/cookie-graphic.png', __FILE__)) . '" />
+              </div>';
+    }
+
     public function settingsSectionCB()
     {
-        echo __(
-            'Use this screen to add cookies to the cookie banner.',
-            'cookie-compliance-for-wordpress'
-        );
+        echo '';
     }
 }

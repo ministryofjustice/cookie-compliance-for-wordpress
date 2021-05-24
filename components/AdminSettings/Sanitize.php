@@ -1,6 +1,6 @@
 <?php
 
-namespace CCFW\AdminSettings;
+namespace CCFW\Components\AdminSettings;
 
 class Sanitize
 {
@@ -12,24 +12,24 @@ class Sanitize
      * @param array $options
      * @return array
      */
-    public function options(array $options): array
+    public function options(array $options)
     {
         // catch analytics section updates
         if (isset($options['gtm_analytics_id'])) {
-            self::gtm($options);
+            $options = self::gtm($options);
         }
 
         return $options;
     }
 
-    private static function gtm(&$options)
+    public static function gtm($options)
     {
         // Remove whitespace, tabs & line ends.
         $options['gtm_analytics_id'] = preg_replace('/\s+/', '', $options['gtm_analytics_id']);
 
         // Run a few basic checks (mainly for devs in case of C&P typos)
         // Check it is a GTM ID (not GA for example)
-        $fatalError = false;
+        self::$fatal = false;
         if (!preg_match('/^GTM-/', $options['gtm_analytics_id'])) {
             self::$fatal++;
             self::notice(
@@ -69,9 +69,9 @@ class Sanitize
         }
 
         add_settings_error(
-            'moj_es_settings',
-            'moj-es' . $code,
-            __($notice, 'wp-moj-elasticsearch'),
+            'ccfw_settings',
+            'ccfw-' . $code,
+            __($notice, 'cookie-compliance-for-wordpress'),
             $type
         );
     }

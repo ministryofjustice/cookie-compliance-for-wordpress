@@ -2,12 +2,11 @@
 
 namespace CCFW\Components\CookieManagement;
 
-use WP_REST_Server;
+use stdClass;
 
 class CookieManagement
 {
     /**
-     * @var Helper
      */
     public $helper;
 
@@ -28,15 +27,14 @@ class CookieManagement
 
         $this->settings = new CookieManagementSettings();
 
-        $options = get_option('ccfw_plugin_settings');
-
         $this->actions();
     }
 
     public function actions()
     {
         // application routes
-        add_action('rest_api_init', [$this, 'registerAppRoutes']);
+        add_action('wp_ajax_ccfw_cookie_get', [$this, 'getCookies']);
+        add_action('wp_ajax_ccfw_cookie_store', [$this, 'storeCookies']);
 
         // settings section
         add_action('wp_loaded', [$this->settings, 'settings'], 1);
@@ -54,15 +52,35 @@ class CookieManagement
         );
     }
 
-    public function registerAppRoutes()
+    public function getCookies()
     {
-        register_rest_route(
-            'ccfw/',
-            '/phrase',
-            [
-                'methods' => WP_REST_Server::READABLE,
-                'callback' => ['CCFW\Components\CookieManagement\Endpoints', 'phrase'],
-            ]
-        );
+        $cookies = $this->settings->options();
+
+        echo json_encode($cookies['cookie-management'] ?? new stdClass());
+        exit;
+    }
+
+    public function storeCookies()
+    {
+        $data = $_POST;
+        $cookies_options = $data['payload'];
+
+        // add the data to the app options
+        $cookies = $this->settings->options();
+
+        $cookies['cookie-management'] = $cookies_options;
+
+        // prepare response
+        $response = new stdClass();
+        $response->update = 'fail';
+        $response->reason = 'Could not save data to DB.';
+
+        if (update_option('ccfw_component_settings', $cookies)) {
+            $response->update = 'success';
+            $response->reason = $_POST['action'];
+        }
+
+        echo json_encode($response);
+        exit;
     }
 }

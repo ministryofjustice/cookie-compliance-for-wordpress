@@ -58,7 +58,6 @@ class Helper
     }
 
     /**
-     * @param $path | the path to the assets directory in the given component
      * @return string
      */
     public function assetPath()

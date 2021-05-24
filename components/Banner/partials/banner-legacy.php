@@ -15,10 +15,11 @@ $domainName = get_home_url(get_current_blog_id());
 $domainName = parse_url($domainName, PHP_URL_HOST);
 $domainNameStr = ($domainName ? ' on ' . strtolower($domainName) : '');
 
-$options = get_option('ccfw_plugin_settings');
+$options = get_option('ccfw_component_settings');
 $removeYouTubeCookieContent = !empty($options['remove_youtube_cookie_content']);
 $removeTwitterCookieContent = !empty($options['remove_twitter_cookie_content']);
 $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
+
 ?>
 
 <div class="ccfw-background-grey-overlay"></div>

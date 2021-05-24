@@ -32,7 +32,7 @@ class GeneralSettings extends General
             'ga_analytics_id',
             __('Google Analytics ID', 'cookie-compliance-for-wordpress'),
             [$this, 'setGoogleAnalyticsID'],
-            'ccfwGroupOptionSettings',
+            'ccfwComponentSettings',
             $section
         );
     }
@@ -42,29 +42,14 @@ class GeneralSettings extends General
      */
     public function setGoogleAnalyticsID()
     {
-        $options = get_option('ccfw_plugin_settings');
+        $options = get_option('ccfw_component_settings');
         $googleAnalyticsID = $options['ga_analytics_id'] ?? '';
 
         ?>
-        <input type='text' name='ccfw_plugin_settings[ga_analytics_id]'
+        <input type='text' name='ccfw_component_settings[ga_analytics_id]'
         placeholder="Enter GA ID UA-XXXXXXXXX-X" value='<?php echo sanitize_html_class($googleAnalyticsID); ?>'
         class="ccfw-component-input">
         <?php
-
-        // Run a few basic checks
-        // Check if empty string, stop rest of checks.
-        if ($googleAnalyticsID === '') {
-            return;
-        }
-
-        // Remove whitespace, tabs & line ends.
-        $googleAnalyticsID = preg_replace('/\s+/', '', $googleAnalyticsID);
-
-        // Basic check that it is a GA ID
-        if (!preg_match('/^UA-/', $googleAnalyticsID)) {
-            echo '<div class="notice notice-error settings-error" style="margin-left: 0;">
-            GA ID might be invalid. ID must start with UA-.</div>';
-        }
     }
 
     public function settingsSectionCB()

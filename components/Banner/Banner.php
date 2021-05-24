@@ -9,12 +9,13 @@
  * @package    cookie-compliance-for-wordpress
  */
 
-namespace CCFW\Components;
+namespace CCFW\Components\Banner;
 
-use CCFW\Components\BannerSettings as Settings;
+use CCFW\Components\Helper\Debug;
 
 class Banner
 {
+    use Debug;
     /**
      * @var string
      */
@@ -34,8 +35,8 @@ class Banner
      * @var string
      */
     public $googleAnalyticsID;
+
     /**
-     * @var Helper
      */
     private $helper;
 
@@ -45,9 +46,9 @@ class Banner
         global $ccfwHelper;
         $this->helper = $ccfwHelper;
 
-        $this->settings = new Settings();
+        $this->settings = new BannerSettings();
 
-        $options = get_option('ccfw_plugin_settings');
+        $options = get_option('ccfw_component_settings');
         $this->googleAnalyticsID = $options['ga_analytics_id'] ?? '';
 
         $this->actions();
@@ -58,7 +59,7 @@ class Banner
         add_action('wp_loaded', [$this->settings, 'settings'], 1);
         add_filter('script_loader_tag', [$this, 'addTypeAttribute'], 10, 3);
         add_action('wp_enqueue_scripts', [$this, 'enqueue'], 11);
-        add_action('wp_body_open', [$this, 'cookieComplianceBanner'], 11);
+        add_action('wp_body_open', [$this, 'render'], 11);
     }
 
     public function enqueue()
@@ -85,6 +86,27 @@ class Banner
         }
     }
 
+    public function render()
+    {
+        $options = get_option('ccfw_component_settings');
+        $path = 'partials/';
+
+        // backwards compat.
+        $cookies = $options['ccfw-cookies'] ?? false;
+        if ($this->cookieObjectEmpty($cookies)) {
+            require_once($path . 'banner-legacy.php');
+            return;
+        }
+
+        // drop the customised cookie banner
+        require_once($path . 'banner.php');
+    }
+
+    private function cookieObjectEmpty($cookies)
+    {
+        return empty($cookies);
+    }
+
     /**
      * @param $tag
      * @param $handle
@@ -93,7 +115,7 @@ class Banner
      */
     public function addTypeAttribute($tag, $handle, $src)
     {
-        if ('CCFWScript' !== $handle) {
+        if ('ccfw-script' !== $handle) {
             return $tag;
         }
 
@@ -101,10 +123,5 @@ class Banner
         $tag = '<script type="module" src="' . esc_url($src) . '"></script><script nomodule src="'
             . esc_url($src) . '"></script>';
         return $tag;
-    }
-
-    public function cookieComplianceBanner()
-    {
-        require_once plugin_dir_path(__FILE__) . 'partials/partial-banner.php';
     }
 }

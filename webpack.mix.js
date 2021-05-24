@@ -7,7 +7,9 @@ mix_.setPublicPath('./assets')
     // admin scripts
     .js([
         src + 'js/ccfw-admin-main.js',
-        'components/CookieManagement/' + src + 'js/ccfw-admin-cookie-management.js'
+        'components/CookieManagement/' + src + 'js/ccfw-admin-cookie-management.js',
+        'components/CookieManagement/' + src + 'js/polyfill.js',
+        './node_modules/tippy.js/dist/tippy.esm.js',
     ], 'js/ccfw-admin-app.js')
     .js(src + 'js/ie11CustomProperties.js', 'js/ccfw-ie11CustomProperties.js')
     .sass(src + 'scss/ccfw-frontend.scss', 'css/ccfw-frontend.css')

@@ -2,14 +2,16 @@ import { element } from './element'
 
 const Select = (name, options,  callback) => {
     let select = element('select', {name: name, id: name});
-    select.append(Option('-- Create an item --'));
+    let selectContainer = element('div', { id: name});
+    select.append(Option('Create a section'));
 
     options.forEach((name) => {
         select.append(Option(name));
     });
 
     select.on('change', callback);
-    return select;
+    selectContainer.html(select);
+    return selectContainer;
 }
 
 const Option = (value) => {
@@ -26,11 +28,15 @@ const Input = (name, defaultText) => {
         'class': 'ccfw-cookie-row__' + name
     })
 }
-const Button = (className, icon, text) => {
+const Button = (className, icon, text, title) => {
     let button = element('button', { type: 'button', 'class': className });
 
     if (text) {
         button.append(text)
+    }
+
+    if (title) {
+        button.attr('title', title)
     }
 
     if (icon) {
