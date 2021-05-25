@@ -29,9 +29,9 @@ class GeneralSettings extends General
     public function settingsFields($section)
     {
         add_settings_field(
-            'ga_analytics_id',
-            __('Google Analytics ID', 'cookie-compliance-for-wordpress'),
-            [$this, 'setGoogleAnalyticsID'],
+            'gtm_id',
+            __('Google Tag Manager ID', 'cookie-compliance-for-wordpress'),
+            [$this, 'setGtmId'],
             'ccfwComponentSettings',
             $section
         );
@@ -40,14 +40,14 @@ class GeneralSettings extends General
     /**
      * Function that collects inputed GA tracking ID and running checks on it.
      */
-    public function setGoogleAnalyticsID()
+    public function setGtmId()
     {
         $options = get_option('ccfw_component_settings');
-        $googleAnalyticsID = $options['ga_analytics_id'] ?? '';
+        $googleAnalyticsID = $options['gtm_id'] ?? '';
 
         ?>
-        <input type='text' name='ccfw_component_settings[ga_analytics_id]'
-        placeholder="Enter GA ID UA-XXXXXXXXX-X" value='<?php echo sanitize_html_class($googleAnalyticsID); ?>'
+        <input type='text' name='ccfw_component_settings[gtm_id]'
+        placeholder="GTM-XXXXXXX" value='<?php echo sanitize_html_class($googleAnalyticsID); ?>'
         class="ccfw-component-input">
         <?php
     }
@@ -55,7 +55,7 @@ class GeneralSettings extends General
     public function settingsSectionCB()
     {
         echo __(
-            'Enter the tracking ID so that the cookie banner can identify specific trackers from your site.',
+            'Enter the tracking GTM ID so that the cookie banner can identify specific trackers from your site.',
             'cookie-compliance-for-wordpress'
         );
     }

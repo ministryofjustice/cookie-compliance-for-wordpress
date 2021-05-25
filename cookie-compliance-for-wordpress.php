@@ -47,6 +47,6 @@ $ccfwHelper = new Helper();
 
 // Instantiate classes
 new AdminSettings();
+new CookieManagement();
 new General();
 new Banner();
-new CookieManagement();

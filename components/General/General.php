@@ -19,6 +19,11 @@ class General
      */
     public $hasSettings = true;
 
+    /**
+     * @var string
+     */
+    private $googleTagManagerID;
+
     public function __construct()
     {
         global $ccfwHelper;
@@ -27,48 +32,31 @@ class General
         $this->settings = new GeneralSettings();
 
         $options = get_option('ccfw_component_settings');
-        $this->googleAnalyticsID = $options['ga_analytics_id'] ?? '';
+        $this->googleTagManagerID = $options['gtm_id'] ?? '';
 
         $this->actions();
     }
 
     public function actions()
     {
-        add_action('wp_head', [$this, 'disableGoogleAnalyticsOnLoad'], 11);
+        add_action('init', [$this, 'setGTMIDCookie']);
 
         // settings section
         add_action('wp_loaded', [$this->settings, 'settings'], 1);
     }
 
-    public function disableGoogleAnalyticsOnLoad()
+    /**
+     * Drop GTM ID on the front end
+     */
+    public function setGTMIDCookie()
     {
-        /**
-         * If cookie "ccfw_wp_plugin.ga.accept" not present, disable GA.
-         * Also check if any previous GA cookies are hanging around
-         * without an explicit "ccfw_wp_plugin.ga.accept" cookie present.
-         * If they are, remove.
-         */
-        ?>
-        <script>
-            var ccfwGACookieNotPresent = document.cookie.indexOf('ccfw_wp_plugin.ga.accept=') == -1 ? true : false;
-            window['ga-disable-<?= $this->googleAnalyticsID ?>'] = ccfwGACookieNotPresent;
-
-            if (ccfwGACookieNotPresent) {
-                var ccfwCookies = ['_ga', '_gid', '_gat_<?= $this->googleAnalyticsID ?>'];
-                var ccfwCookiesArrayLength = ccfwCookies.length;
-                for (var ccfwCookie = 0; ccfwCookie < ccfwCookiesArrayLength; ccfwCookie++) {
-                    document.cookie = ccfwCookies[ccfwCookie] + '=; Path=/; domain=.' + document.domain
-                        + '; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-
-                    // Also remove cookies that start with domains without www
-                    if (document.domain.includes('www.')) {
-                        const nonWwwDomain = document.domain.replace('www.', '');
-                        document.cookie = ccfwCookies[ccfwCookie] + '=; Path=/; domain=.'
-                            + nonWwwDomain + '; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                    }
-                }
+        // We only want to display GTM code when an ID has been entered.
+        if (!empty($this->googleTagManagerID)) {
+            $gtm_id = $_COOKIE['ccfw_gtm_id'] ?? null;
+            if (!$gtm_id || ($this->googleTagManagerID !== $gtm_id)) {
+                setcookie('ccfw_gtm_id', $this->googleTagManagerID, time() + 31556926);
+                $_COOKIE['ccfw_gtm_id'] = $this->googleTagManagerID;
             }
-        </script>
-        <?php
+        }
     }
 }

@@ -73,7 +73,7 @@ class AdminSettings
 
                 $this->tabs[] = [
                     'key' => $key,
-                    'class' => str_replace(' Settings', '', $className)
+                    'title' => str_replace(' Settings', '', $className)
                 ];
 
                 add_settings_section(
@@ -100,7 +100,7 @@ class AdminSettings
             <?php
             echo '<h2 class="nav-tab-wrapper">';
             foreach ($this->tabs as $tab) {
-                echo '<a href="#component-tab-' . $tab['key'] . '" class="nav-tab">' . $tab['class'] . '</a>';
+                echo '<a href="#component-tab-' . $tab['key'] . '" class="nav-tab ' . sanitize_title($tab['title']) . '">' . $tab['title'] . '</a>';
             }
             echo '</h2>';
 
@@ -129,7 +129,7 @@ class AdminSettings
         }
 
         foreach ((array)$wp_settings_sections[$page] as $key => $section) {
-            echo '<div id="' . $key . '" class="ccfw-component-settings-section">';
+            echo '<div id="' . $key . '" class="ccfw-component-settings-section ' . sanitize_title($section['title']) . '">';
             if ($section['title']) {
                 echo "<h2>{$section['title']}</h2>\n";
             }

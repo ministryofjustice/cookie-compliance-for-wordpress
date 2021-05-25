@@ -100,6 +100,11 @@ const updateCookie = (section, group, row, name, text) => {
     outputDebugInfo();
 }
 
+const updateDescription = (section, group, text) => {
+    CCFW.sections[section][slugify(group)].description = text.trim();
+    outputDebugInfo();
+}
+
 const removeCookie = (section, group, row) => {
     delete CCFW.sections[section][slugify(group)].cookies[row];
     outputDebugInfo();
@@ -128,7 +133,10 @@ const App = {
     group: {
         add: addGroup,
         exists: groupExists,
-        allowlistID: addGroupAllowlistID
+        allowlistID: addGroupAllowlistID,
+        description: {
+            save: updateDescription
+        }
     },
     cookies: {
         add: addCookie,

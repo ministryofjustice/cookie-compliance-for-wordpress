@@ -144,6 +144,7 @@ function saveGroup () {
     let name = group.find('input').val();
     let nameSlugged = slugify(name);
     let sectionName = section.data('id');
+    let descriptionContainer = '';
 
     if (!name) {
         console.warn('Group name was empty.');
@@ -165,7 +166,12 @@ function saveGroup () {
     group.html(groupHeading(name + ' ' + Icon.success(18)));
     group.append(Input('gtm-allowlist-id', 'GTM allow list ID'));
     group.append(Button('ccfw-' + nameSlugged + '-allowlist-save', Icon.check(18)));
-    group.append(Button('ccfw-cookie-row-add', Icon.add(20), 'Add cookie'));
+
+    // create description elements and drop in the end of groups
+    descriptionContainer = element('div', {'class': 'ccfw-group__description'});
+    descriptionContainer.append(Input('ccfw-group-description', 'Enter ' + name + ' group blurb'));
+    descriptionContainer.append(Button('ccfw-cookie-row-add', Icon.add(20), 'Add cookie'));
+    group.append(descriptionContainer);
 
     // drop first cookie row
     let cookies = Cookies();
@@ -181,6 +187,7 @@ function saveGroup () {
     // listeners
     listener.group.save(sectionName, saveGroup);
     listener.group.allowlist(nameSlugged, saveAllowListID);
+    listener.group.description.save(saveDescription);
     listener.row.add(addRow);
     listener.row.remove(removeRow);
     listener.row.save(saveCookieData);
@@ -223,6 +230,14 @@ const hideShowSectionSelect = () => {
     }
 };
 
+function saveDescription () {
+    let input = $(this);
+    let closest = locationData(input);
+    let value = input.val();
+
+    App.group.description.save(closest.section, closest.group, value);
+}
+
 const Cookies = () => {
     let container = element('div', { 'class': 'ccfw-cookie-container' });
     let row = Row(0);
@@ -233,7 +248,7 @@ const Cookies = () => {
 };
 
 function addRow () {
-    let container = $(this).siblings('.ccfw-cookie-container');
+    let container = $(this).parent().siblings('.ccfw-cookie-container');
     let count = container.find('.ccfw-cookie-row').length;
     let closest = locationData($(this));
     let validId = false;
@@ -291,20 +306,29 @@ const locationData = (ele) => {
     };
 };
 
-// intercept save changes button, if on the management tab
+/**
+ * Intercept 'Save Changes' submit button
+ * @param event
+ * @return {boolean}
+ */
 function formSubmit (event) {
-    //event.preventDefault();
+    if (CCFW.sectionsLock) {
+        // nothing to do while lock is active
+        return true;
+    }
+
+    // let's go!
+    // release the unload barrier
     window.onbeforeunload = null;
+
     // grab data and send to the server, and
     // stop page warning from appearing, if success
-    $('html, body').animate({ scrollTop: 0 }, 'fast');
+    $('html, body').animate({ scrollTop: 30 }, 'fast');
 
     // processing here:
     if (App.form.post(CCFW.sections)) {
-        console.log('AJAX POST done! Good things have happened here.');
+        console.log('AJAX POST done! Good things happen here.');
     }
-
-    //return false;
 }
 
 const Row = (id) => {
@@ -313,8 +337,8 @@ const Row = (id) => {
 
     row.append(Input('name', 'Name'));
     row.append(Input('description', 'Description'));
-    row.append(Input('expiry', 'Expiry'));
-    row.append(Button('ccfw-cookie-remove', Icon.crossArrow(30)));
+    row.append(Input('expiry', 'Expiry or URL'));
+    row.append(Button('ccfw-cookie-row-remove', Icon.crossArrow(30)));
 
     return row;
 };

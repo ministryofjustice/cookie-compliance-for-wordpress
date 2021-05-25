@@ -69,8 +69,16 @@ class Banner
 
         wp_enqueue_style('ccfw-style', $this->helper->enqueue('ccfw-frontend.css'));
         wp_enqueue_script(
-            'ccfw-style',
+            'ccfw-script-legacy',
             $this->helper->enqueue('ccfw-frontend.js'),
+            ['jquery'],
+            $wp_version,
+            true
+        );
+
+        wp_enqueue_script(
+            'ccfw-script',
+            $this->helper->enqueue('ccfw-cookie-manage.js'),
             ['jquery'],
             $wp_version,
             true
@@ -89,11 +97,10 @@ class Banner
 
     public function render()
     {
-        $options = get_option('ccfw_component_settings');
+        $cookies = get_option('ccfw_cookie_management_data');
         $path = 'partials/';
 
         // backwards compat.
-        $cookies = $options['ccfw-cookies'] ?? false;
         if ($this->cookieObjectEmpty($cookies)) {
             require_once($path . 'banner-legacy.php');
             return;
@@ -105,7 +112,11 @@ class Banner
 
     private function cookieObjectEmpty($cookies)
     {
-        return empty($cookies);
+        if (!is_array($cookies) || count($cookies) === 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

@@ -18,7 +18,7 @@ const rowAdd = (callback) => {
 };
 
 const rowRemove = (callback) => {
-    let element = jQuery('.ccfw-cookie-remove');
+    let element = jQuery('.ccfw-cookie-row-remove');
     element.off('click', callback);
     element.on('click', callback);
 };
@@ -29,6 +29,10 @@ const rowSave = (callback) => {
     element.on('keyup', callback);
 };
 
+const descriptionSave = (callback) => {
+    let element = jQuery('.ccfw-group__description input');
+    element.on('keyup', callback);
+};
 
 ///////////////////////////////////////
 //  D E B U G G I N G
@@ -38,7 +42,7 @@ const debugToggle = () => {
     element.on('change', toggleDebug);
 };
 
-function toggleDebug() {
+function toggleDebug () {
     let checked = $(this).is(':checked');
     let container = $('#' + CCFW.debug.container);
 
@@ -48,19 +52,22 @@ function toggleDebug() {
             makeDebugContainer();
         }
         container.fadeIn();
-    }
-    else {
+    } else {
         CCFW.debug.active = false;
         container.fadeOut();
     }
 }
+
 ///////////////////////////////////////
 ///////////////////////////////////////
 
 const listener = {
     group: {
         save: (section, callback) => groupSave(section, callback),
-        allowlist: (group, callback) => allowlistIDSave(group, callback)
+        allowlist: (group, callback) => allowlistIDSave(group, callback),
+        description: {
+            save: (callback) => descriptionSave(callback)
+        }
     },
     row: {
         add: (callback) => rowAdd(callback),
@@ -68,12 +75,12 @@ const listener = {
         remove: (callback) => rowRemove(callback)
     },
     form: {
-        submit: (callback) => { jQuery('#ccfw-form').on('submit', callback) },
+        submit: (callback) => jQuery('#ccfw-form').on('submit', callback),
         input: {
             focusBlur: (callback) => jQuery('#' + CCFW.appContainer).on('focus blur', 'input', callback)
         }
     },
     debug: () => debugToggle()
-}
+};
 
-export { listener }
+export { listener };
