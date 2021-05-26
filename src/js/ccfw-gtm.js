@@ -88,14 +88,23 @@ const CCFW = {
 const ccfwGTM = () => {
     if (CCFW.canRun(CCFW.gtmID)) {
         window.dataLayer = [];
+
         // INIT - use existing list if present
-        let allowedList = CCFW.storage.allowed.get();
-        if (Array.isArray(allowedList)) {
-            console.log('Allowed List', allowedList);
-            window.dataLayer = [{
-                'gtm.allowlist': allowedList
-            }];
+        let allowedList = CCFW.storage.allowed.get() || []; // default to empty array
+        let ccfwAlwaysNeeded = ['e', 'jsm']; // custom events
+        let ccfwTriggers = [];
+        let ccfwVariables = [];
+
+        if (allowedList.indexOf('ua') !== -1) {
+            ccfwTriggers = ccfwAlwaysNeeded.concat('cl', 'sdl', 'evl', 'jel', 'tl');
+            ccfwVariables = ['k', 'v', 'c', 'ctv', 'v', 'd', 'vis', 'f', 'j', 'r', 'u'];
         }
+        allowedList = allowedList.concat(ccfwTriggers, ccfwVariables);
+
+        window.dataLayer = [{
+            'gtm.allowlist': allowedList
+        }];
+
 
         // Drop GTM code
         (function (w, d, s, l, i) {
