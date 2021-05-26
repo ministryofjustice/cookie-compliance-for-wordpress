@@ -73,10 +73,16 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
             <!--Sections -->
             <?php
             foreach ($ccfw_cookies
-
             as $section => $groups):
+
             echo '<div class="ccfw-banner__section">';
-            if ($section === 'marketing') {
+
+            $ccfw_buttons_allowed_in = [
+                'marketing',
+                'analytics'
+            ];
+
+            if (in_array($section, $ccfw_buttons_allowed_in)) {
                 ?>
 
                 <!-- Section heading and universal switch -->
@@ -113,7 +119,7 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
                 <div class="ccfw-banner__group">
                     <h3 class="ccfw-banner__toggle-heading"
                         id="ccfw-<?= $slug ?>-cookies"><?= $group['name'] ?></h3>
-                    <?php if ($section === 'marketing') : ?>
+                    <?php if (in_array($section, $ccfw_buttons_allowed_in)) : ?>
 
                         <div class="ccfw-banner__toggle-label">
                             <button
@@ -156,6 +162,10 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
                                 <tbody>
                                 <?php
                                 foreach ($group['cookies'] as $cookie):
+                                    // manage URLs
+                                    if (strpos($cookie['expiry'], 'http') === 0) {
+                                        $cookie['expiry'] = '<a href="' . $cookie['expiry'] . '" class="ccfw-banner__third-party-section-link">Read the ' . $cookie['name'] . ' policy</a>';
+                                    }
                                     ?>
                                     <tr>
                                         <th scope="row"

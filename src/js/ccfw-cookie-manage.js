@@ -23,7 +23,7 @@ ccfwGTM();
 
         console.log(CCFW.storage.time.get());
 
-        //CCFW.storage.clear('ccfw-gtm-allowed');
+        //CCFW.storage.clear('ccfw-banner-visibility');
 
         /**
          * clearStorage checks if 1 year has past since the user first set their choices.
