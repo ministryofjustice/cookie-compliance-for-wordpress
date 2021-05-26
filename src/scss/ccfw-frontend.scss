@@ -106,7 +106,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         width: 90%;
         height: 90%;
         border-top: 0;
-        padding: 8px;
+        padding: 18px 8px;
         position: fixed;
         z-index: 100000;
         display: block;
@@ -115,7 +115,11 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         box-sizing: border-box;
         margin: auto auto;
 
-        @include respond-to('extra-extra-small') {
+        @include respond-to('extra-small') {
+            padding: 30px 25px;
+        }
+
+        @include respond-to('small') {
             padding: 42px 32px;
             top: 10%;
             left: 10%;
@@ -183,7 +187,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         }
 
         &__save-preferences {
-            padding-top:30px;
+            padding-top: 30px;
             border-top: 1px solid grey;
         }
 
@@ -343,6 +347,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         &__summary-text {
             max-width: 800px;
             @extend .govuk-body;
+            font-size: 16px;
 
             & + .ccfw-banner__button {
                 margin-top: 16px;

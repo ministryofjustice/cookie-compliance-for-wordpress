@@ -66,15 +66,16 @@ import { CCFW } from './ccfw-gtm';
                 // get allowed
                 let allowList = CCFW.storage.allowed.get() || [];
                 $('.' + CCFW.selector.toggles).each(function(key, element){
-                    let toggle = $(element);
-                    let allowed = toggle.data('allowlist');
+                    let allowed = $(element).data('allowlist');
 
                     if (allowList.indexOf(allowed) !== -1) {
-                        $('#ccfw-' + allowed + '-toggle-on').show();
-                        $('#ccfw-' + allowed + '-toggle-off').hide();
+                        $(element).attr('aria-checked', true);
+                        $('#ccfw-' + allowed + '-toggle-on').removeAttr('aria-hidden').show();
+                        $('#ccfw-' + allowed + '-toggle-off').attr('aria-hidden', 'true').hide();
                     } else {
-                        $('#ccfw-' + allowed + '-toggle-off').show();
-                        $('#ccfw-' + allowed + '-toggle-on').hide();
+                        $(element).attr('aria-checked', false);
+                        $('#ccfw-' + allowed + '-toggle-off').removeAttr('aria-hidden').show();
+                        $('#ccfw-' + allowed + '-toggle-on').attr('aria-hidden', 'true').hide();
                     }
                 });
             },
@@ -92,11 +93,11 @@ import { CCFW } from './ccfw-gtm';
                 if (state === 'hide') {
                     siblings.forEach((sibling) => {
                         sibling.attr('aria-hidden', 'true');
-                        elem.removeAttr('aria-hidden', 'true');
+                        elem.removeAttr('aria-hidden');
                     });
                 } else {
                     siblings.forEach((sibling) => {
-                        sibling.removeAttr('aria-hidden', 'true');
+                        sibling.removeAttr('aria-hidden');
                     });
                 }
             }

@@ -1,5 +1,31 @@
 @import 'loader.scss';
 
+$breakpoints: (
+        'extra-extra-small': (min-width: 420px),
+        'extra-small': (min-width: 641px),
+        'small': (min-width: 767px),
+        'medium': (min-width: 992px),
+        'large': (min-width: 1200px)
+) !default;
+
+@mixin respond-to($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+
+        @media #{inspect(map-get($breakpoints, $breakpoint))} {
+            @content;
+        }
+    } @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        +"Available breakpoints are: #{map-keys($breakpoints)}.";
+    }
+}
+
+#ccfw-form {
+    h1 {
+        line-height: 2rem;
+    }
+}
+
 .ccfw-component-settings-section {
     padding: 10px;
 
@@ -31,15 +57,27 @@
         padding: 0 20px;
         border: 1px #cccccc solid;
         background-color: #fbfbfb;
-        min-width: 30%;
-        max-width: 35%;
-        max-height: 78vh;
+        max-width: 85vw;
+        width: 80%;
+        max-height: 200px;
         margin-top: -65px;
+        margin-bottom: 30px;
         overflow: scroll;
-        position: absolute;
+        position: static;
         top: 20px;
-        right: 20px;
+        margin-left: 0;
         z-index: 2;
+
+        @include respond-to('extra-extra-small') {
+            margin-left: -25px;
+        }
+        @include respond-to('medium') {
+            position: absolute;
+            max-width: 35%;
+            max-height: 78vh;
+            margin-left: auto;
+            right: 20px;
+        }
 
         .debugging-icons {
             padding-bottom: 20px;
@@ -81,7 +119,14 @@
             margin-bottom: 25px;
             border: 1px #cccccc solid;
             background-color: #fbfbfb;
-            max-width: 50%;
+            max-width: 88%;
+
+            @include respond-to('medium') {
+                width: 65%;
+            }
+            @include respond-to('large') {
+                width: 50%;
+            }
 
             &:hover {
                 .ccfw-group {
@@ -106,12 +151,20 @@
                 > input {
                     line-height: 1;
                     min-height: 25px;
-                    margin: 0 3px 5px 25px;
+                    margin: 0 3px 5px 0;
                     border-color: #9b0b0b;
 
                     .complete {
                         border-color: inherit;
                     }
+
+                    @include respond-to('extra-small') {
+                        margin-left: 15px;
+                    }
+                    @include respond-to('small') {
+                        margin-left: 25px;
+                    }
+
                 }
 
                 &:hover, &__full-opacity {
@@ -133,12 +186,21 @@
 
                     span {
                         color: #0b0c0c;
+                        display: block;
 
+                        @include respond-to('extra-extra-small') {
+                            display: inline-block;
+                        }
                     }
                 }
 
                 &__allowlist {
                     font-size: 0.8rem;
+                    width: 60%;
+
+                    @include respond-to('small') {
+                        width: 30%;
+                    }
                 }
 
                 &__description {
@@ -155,11 +217,39 @@
                     position: relative;
 
                     &__ccfw-group-description {
-                        width: 60%;
+                        width: 50%;
+
+                        @include respond-to('extra-extra-small') {
+                            width: 60%;
+                        }
                     }
 
                     input {
-                        margin-right: 6px
+                        margin-right: 0;
+                        margin-bottom: 4px;
+                        width: 85%;
+
+                        @include respond-to('extra-extra-small') {
+                            margin-left: 4px;
+                        }
+                        @include respond-to('extra-small') {
+                            margin-left: 6px;
+                            margin-bottom: 0;
+                        }
+                        @include respond-to('small') {
+                            margin-left: 6px;
+                            margin-bottom: 0;
+                            width: 22%;
+                        }
+                        @include respond-to('medium') {
+                            &:first-child {
+                                margin-left: 0;
+                            }
+                        }
+
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
                     }
 
                     &:hover {
@@ -167,12 +257,27 @@
                     }
 
                     &-add {
-                        min-width: 143px;
+                        min-width: 111px;
                         float: right;
-                        margin-right: 2.5%;
+                        margin-right: -1%;
                         border: 1px solid #ccc;
                         background-color: #e1e1e1;
                         line-height: 1rem;
+                        text-align: right;
+                        margin-top: 11px;
+
+                        @include respond-to('extra-extra-small') {
+                            min-width: 143px;
+                            margin-right: 1.5%;
+                            text-align: center;
+                        }
+
+                        @include respond-to('extra-small') {
+                            min-width: 143px;
+                            margin-right: 2.5%;
+                            text-align: center;
+                            margin-top: 0;
+                        }
 
                         svg {
                             top: 3px;
@@ -190,7 +295,14 @@
                     }
 
                     &__description {
-                        min-width: 300px
+                        @include respond-to('small') {
+                            min-width: 50%;
+                        }
+                    }
+
+                    .form-table td input[type="text"], .form-table td select, .form-table td textarea, .form-table span.description {
+                        width: 100%;
+                        display: inline-block;
                     }
                 }
             }
@@ -215,6 +327,15 @@
                 float: right;
                 margin-top: 24px;
             }
+        }
+    }
+
+    .form-table td input[type="text"], .form-table td select, .form-table td textarea, .form-table span.description {
+        width: 80%;
+        display: inline-block;
+
+        @include respond-to('small') {
+            width: inherit;
         }
     }
 }

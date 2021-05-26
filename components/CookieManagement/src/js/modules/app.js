@@ -52,7 +52,7 @@ function inputFocus (event) {
 // create a new top level category i.e.
 const SectionSelect = (options) => {
     let defaultOptions = [
-        'Marketing',
+        'Analytics',
         'Third-party',
         'Essential'
     ];

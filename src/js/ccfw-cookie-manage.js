@@ -12,6 +12,12 @@ ccfwGTM();
             allowedIds.push($(element).data('allowlist'));
         });
 
+        /**
+         * Cache all available allowlist identifiers
+         * @type {[]}
+         */
+        CCFW.allowedIds = allowedIds;
+
         $('.' + CCFW.selector.toggles).on('click', togglesChange);
 
 
@@ -19,9 +25,10 @@ ccfwGTM();
 
         //CCFW.storage.clear('ccfw-gtm-allowed');
 
+        /**
+         * clearStorage checks if 1 year has past since the user first set their choices.
+         */
         CCFW.clearStorage();
-
-        CCFW.allowedIds = allowedIds;
 
         console.log(allowedIds);
     });

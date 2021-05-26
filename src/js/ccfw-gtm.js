@@ -122,19 +122,22 @@ const togglesChange = function (e) {
     let allowed = toggle.data('allowlist');
     let allowList = CCFW.storage.allowed.get() || [];
     let pressed = toggle.attr('aria-checked') === 'true';
-
     toggle.attr('aria-checked', !pressed);
+
+    if (allowed === 'all') {
+        allowList = toggleAll(pressed);
+    }
 
     if (pressed) {
         allowList = allowList.filter(item => item !== allowed);
-        $('#ccfw-' + allowed + '-toggle-off').show();
-        $('#ccfw-' + allowed + '-toggle-on').hide();
+        $('#ccfw-' + allowed + '-toggle-off').removeAttr('aria-hidden').show();
+        $('#ccfw-' + allowed + '-toggle-on').attr('aria-hidden', 'true').hide();
     } else {
         if (allowList.indexOf(allowed) === -1) {
             allowList.push(allowed);
         }
-        $('#ccfw-' + allowed + '-toggle-on').show();
-        $('#ccfw-' + allowed + '-toggle-off').hide();
+        $('#ccfw-' + allowed + '-toggle-on').removeAttr('aria-hidden').show();
+        $('#ccfw-' + allowed + '-toggle-off').attr('aria-hidden', 'true').hide();
     }
 
     CCFW.listItem.set(allowList);
@@ -142,6 +145,36 @@ const togglesChange = function (e) {
 
     return false;
 };
+
+/**
+ * @param remove acknowledges that we are removing all allowed ids
+ */
+function toggleAll(remove) {
+    let allowList = CCFW.storage.allowed.get() || [];
+
+    if (remove) {
+        allowList = [];
+    }
+
+    $('.' + CCFW.selector.toggles).each(function(key, element){
+        let allowed = $(element).data('allowlist');
+
+        if (remove) {
+            $(element).attr('aria-checked', false);
+            $('#ccfw-' + allowed + '-toggle-off').removeAttr('aria-hidden').show();
+            $('#ccfw-' + allowed + '-toggle-on').attr('aria-hidden', 'true').hide();
+        } else {
+            if (allowList.indexOf(allowed) === -1) {
+                allowList.push(allowed);
+            }
+            $(element).attr('aria-checked', true);
+            $('#ccfw-' + allowed + '-toggle-on').removeAttr('aria-hidden').show();
+            $('#ccfw-' + allowed + '-toggle-off').attr('aria-hidden', 'true').hide();
+        }
+    });
+
+    return allowList;
+}
 
 const toggleAriaHidden = (elem, state) => {
     let siblings = [];
