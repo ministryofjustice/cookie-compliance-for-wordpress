@@ -89,17 +89,19 @@ const ccfwGTM = () => {
     if (CCFW.canRun(CCFW.gtmID)) {
         window.dataLayer = [];
 
-        // INIT - use existing list if present
+        // INIT
+        // use existing list if present
+        // default to empty array if not
         let allowedList = CCFW.storage.allowed.get() || []; // default to empty array
-        let ccfwAlwaysNeeded = ['e', 'jsm']; // custom events
+        let ccfwAlwaysNeeded = ['v', 'e', 'jsm']; // custom events and dataLayer access
         let ccfwTriggers = [];
         let ccfwVariables = [];
 
         if (allowedList.indexOf('ua') !== -1) {
-            ccfwTriggers = ccfwAlwaysNeeded.concat('cl', 'sdl', 'evl', 'jel', 'tl');
-            ccfwVariables = ['k', 'v', 'c', 'ctv', 'v', 'd', 'vis', 'f', 'j', 'r', 'u'];
+            ccfwTriggers = ccfwTriggers.concat('cl', 'sdl', 'evl', 'jel', 'tl');
+            ccfwVariables = ['c', 'ctv', 'd', 'vis', 'gas', 'f', 'j', 'r', 'u'];
         }
-        allowedList = allowedList.concat(ccfwTriggers, ccfwVariables);
+        allowedList = allowedList.concat(ccfwAlwaysNeeded, ccfwTriggers, ccfwVariables);
 
         window.dataLayer = [{
             'gtm.allowlist': allowedList
@@ -184,28 +186,5 @@ function toggleAll(remove) {
 
     return allowList;
 }
-
-const toggleAriaHidden = (elem, state) => {
-    let siblings = [];
-    let sibling = elem.parent().children();
-
-    while (sibling) {
-        if (sibling !== elem) {
-            siblings.push(sibling);
-        }
-        sibling = sibling.nextSibling;
-    }
-
-    if (state === 'hide') {
-        siblings.forEach((sibling) => {
-            sibling.attr('aria-hidden', 'true');
-            elem.removeAttr('aria-hidden', 'true');
-        });
-    } else {
-        siblings.forEach((sibling) => {
-            sibling.removeAttr('aria-hidden', 'true');
-        });
-    }
-};
 
 export { CCFW, ccfwGTM, togglesChange };
