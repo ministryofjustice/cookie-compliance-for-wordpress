@@ -18,21 +18,21 @@ const CCFW = {
     },
     storage: {
         time: {
-            get: () => JSON.parse(localStorage.getItem('ccfw-time')),
-            set: () => localStorage.setItem(
+            get: () => JSON.parse(window.localStorage.getItem('ccfw-time')),
+            set: () => window.localStorage.setItem(
                 'ccfw-time',
                 JSON.stringify(new Date(new Date().setFullYear(new Date().getFullYear() + 1)).getTime())
             )
         },
         allowed: {
-            get: () => JSON.parse(localStorage.getItem('ccfw-gtm-allowed')),
-            set: (value) => localStorage.setItem('ccfw-gtm-allowed', JSON.stringify(value))
+            get: () => JSON.parse(window.localStorage.getItem('ccfw-gtm-allowed')),
+            set: (value) => window.localStorage.setItem('ccfw-gtm-allowed', JSON.stringify(value))
         },
         bannerHidden: {
-            get: () => JSON.parse(localStorage.getItem('ccfw-banner-hidden')),
-            set: (value) => localStorage.setItem('ccfw-banner-hidden', JSON.stringify(value))
+            get: () => JSON.parse(window.localStorage.getItem('ccfw-banner-hidden')),
+            set: (value) => window.localStorage.setItem('ccfw-banner-hidden', JSON.stringify(value))
         },
-        clear: (key) => localStorage.removeItem(key)
+        clear: (key) => window.localStorage.removeItem(key)
     },
     listItem: {
         set: (value) => {

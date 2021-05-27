@@ -21,8 +21,8 @@ const ccfwGtmRunning = ccfwGTM();
 
             $('.' + CCFW.selector.toggles).on('click', togglesChange);
 
-            CCFW.storage.clear('ccfw-banner-visibility');
-            CCFW.storage.clear('ccfw-gtm-allowed');
+            //CCFW.storage.clear('ccfw-banner-visibility');
+            //CCFW.storage.clear('ccfw-gtm-allowed');
 
             /**
              * clearStorage checks if 1 year has past since the user first set their choices.
