@@ -124,7 +124,7 @@ import { CCFW } from './ccfw-gtm';
                 this.$buttonInfo.on('click', this.chooseCookieSettingsButton.bind(this));
             },
             bannerDisplay: function () {
-                if (!CCFW.storage.bannerDisplay.get()) {
+                if (!CCFW.storage.bannerHidden.get()) {
                     utilities.showBanner();
                     this.trapBannerFocus();
                 } else {
@@ -156,9 +156,17 @@ import { CCFW } from './ccfw-gtm';
                 });
             },
             acceptAllButton: function () {
+                CCFW.listItem.set(
+                    CCFW.toggleAll(false)
+                );
+                CCFW.storage.bannerHidden.set(true);
                 utilities.hideBanner();
             },
             declineAllButton: function () {
+                CCFW.listItem.set(
+                    CCFW.toggleAll(true)
+                );
+                CCFW.storage.bannerHidden.set(true);
                 utilities.hideBanner();
             },
             chooseCookieSettingsButton: function () {
@@ -219,7 +227,7 @@ import { CCFW } from './ccfw-gtm';
                 });
             },
             saveCookiePreferences: function () {
-                CCFW.storage.bannerDisplay.set('true');
+                CCFW.storage.bannerHidden.set('true');
                 CCFW.storage.time.set();
                 utilities.hideBanner()
                 utilities.hideSettingsModal()

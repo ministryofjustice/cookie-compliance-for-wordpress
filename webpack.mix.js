@@ -1,7 +1,8 @@
 const mix_ = require('laravel-mix');
 const src = 'src/';
 
-mix_.setPublicPath('./assets')
+mix_.setPublicPath('./assets');
+mix_
     // Mix .js() is configured to use babel-preset-env with polyfills. See .babelrc
     .js(src + 'js/ccfw-frontend.js', 'js/')
     .js(src + 'js/ccfw-cookie-manage.js', 'js/')
@@ -15,6 +16,12 @@ mix_.setPublicPath('./assets')
     .js(src + 'js/ie11CustomProperties.js', 'js/')
     .sass(src + 'scss/ccfw-frontend.scss', 'css/ccfw-frontend.css')
     .sass(src + 'scss/ccfw-admin-main.scss', 'css/ccfw-admin-main.css');
+
+
+// legacy scripts
+mix_.js(src + 'js/ccfw-frontend-legacy.js', 'js/')
+    .sass(src + 'scss/ccfw-frontend-legacy.scss', 'css/ccfw-frontend-legacy.css')
+
 
 if (mix_.inProduction()) {
     mix_.version();

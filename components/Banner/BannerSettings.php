@@ -32,6 +32,16 @@ class BannerSettings extends Banner
 
     public function settingsFields($section)
     {
+        if ($this->cookieObjectEmpty()) {
+            add_settings_field(
+                'ga_analytics_id',
+                __('Google Analytics ID', 'cookie-compliance-for-wordpress'),
+                [$this, 'setGoogleAnalyticsID'],
+                'ccfwComponentSettings',
+                $section
+            );
+        }
+
         add_settings_field(
             'remove_youtube_cookie_content',
             __('Hide information about YouTube from cookie message', 'cookie-compliance-for-wordpress'),
@@ -57,11 +67,40 @@ class BannerSettings extends Banner
         );
     }
 
+    /**
+     * Function that collects inputed GA tracking ID and running checks on it.
+     */
+    public function setGoogleAnalyticsID()
+    {
+        $options = get_option('ccfw_plugin_settings');
+        $googleAnalyticsID = $options['ga_analytics_id'] ?? '';
+
+        ?>
+        <input type='text' name='ccfw_plugin_settings[ga_analytics_id]'
+               placeholder="Enter GA ID UA-XXXXXXXXX-X" value='<?php echo sanitize_html_class($googleAnalyticsID); ?>'
+               class="ccfw-component-input">
+        <?php
+
+        // Run a few basic checks
+
+        // Check if empty string, stop rest of checks.
+        if ($googleAnalyticsID === '') {
+            return;
+        }
+
+        // Remove whitespace, tabs & line ends.
+        $googleAnalyticsID = preg_replace('/\s+/', '', $googleAnalyticsID);
+
+        // Basic check that it is a GA ID
+        if (!preg_match('/^UA-/', $googleAnalyticsID)) {
+            echo '<div class="notice notice-error settings-error" style="margin-left: 0;">
+            GA ID might be invalid. ID must start with UA-.</div>';
+        }
+    }
+
     public function removeYouTubeCookieContent()
     {
         $options = get_option('ccfw_component_settings');
-
-        echo $this->debug('Options', $options);
 
         ?>
         <input type='checkbox' id="remove_youtube_cookie_content"

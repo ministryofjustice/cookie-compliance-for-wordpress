@@ -1,35 +1,35 @@
 import { CCFW, ccfwGTM, togglesChange } from './ccfw-gtm';
 
-ccfwGTM();
+const ccfwGtmRunning = ccfwGTM();
 
 (function ($) {
     $(function ($) {
-        const toggleButtons = $('.ccfw-banner__toggle-slider');
-        const allowedIds = [];
+        if (ccfwGtmRunning) {
+            const toggleButtons = $('.ccfw-banner__toggle-slider');
+            const allowedIds = [];
 
-        // collect ids
-        toggleButtons.each(function(key, element){
-            allowedIds.push($(element).data('allowlist'));
-        });
+            // collect ids
+            toggleButtons.each(function (key, element) {
+                allowedIds.push($(element).data('allowlist'));
+            });
 
-        /**
-         * Cache all available allowlist identifiers
-         * @type {[]}
-         */
-        CCFW.allowedIds = allowedIds;
+            /**
+             * Cache all available allowlist identifiers
+             * @type {[]}
+             */
+            CCFW.allowedIds = allowedIds;
 
-        $('.' + CCFW.selector.toggles).on('click', togglesChange);
+            $('.' + CCFW.selector.toggles).on('click', togglesChange);
 
+            CCFW.storage.clear('ccfw-banner-visibility');
+            CCFW.storage.clear('ccfw-gtm-allowed');
 
-        console.log(CCFW.storage.time.get());
+            /**
+             * clearStorage checks if 1 year has past since the user first set their choices.
+             */
+            CCFW.clearStorage();
 
-        //CCFW.storage.clear('ccfw-banner-visibility');
-
-        /**
-         * clearStorage checks if 1 year has past since the user first set their choices.
-         */
-        CCFW.clearStorage();
-
-        console.log(allowedIds);
+            console.log(allowedIds);
+        }
     });
 })(jQuery);

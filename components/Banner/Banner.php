@@ -67,22 +67,34 @@ class Banner
     {
         global $wp_version, $is_IE;
 
-        wp_enqueue_style('ccfw-style', $this->helper->enqueue('ccfw-frontend.css'));
-        wp_enqueue_script(
-            'ccfw-script-legacy',
-            $this->helper->enqueue('ccfw-frontend.js'),
-            ['jquery'],
-            $wp_version,
-            true
-        );
+        // backwards compat.
+        if ($this->cookieObjectEmpty()) {
+            wp_enqueue_style('ccfw-style', $this->helper->enqueue('ccfw-frontend-legacy.css'));
+            wp_enqueue_script(
+                'ccfw-script-frontend',
+                $this->helper->enqueue('ccfw-frontend-legacy.js'),
+                ['jquery'],
+                $wp_version,
+                true
+            );
+        } else {
+            wp_enqueue_style('ccfw-style', $this->helper->enqueue('ccfw-frontend.css'));
+            wp_enqueue_script(
+                'ccfw-script-frontend',
+                $this->helper->enqueue('ccfw-frontend.js'),
+                ['jquery'],
+                $wp_version,
+                true
+            );
+            wp_enqueue_script(
+                'ccfw-script',
+                $this->helper->enqueue('ccfw-cookie-manage.js'),
+                ['jquery'],
+                $wp_version,
+                true
+            );
+        }
 
-        wp_enqueue_script(
-            'ccfw-script',
-            $this->helper->enqueue('ccfw-cookie-manage.js'),
-            ['jquery'],
-            $wp_version,
-            true
-        );
 
         if ($is_IE) {
             // Fix IE11 banner issues - https://github.com/nuxodin/ie11CustomProperties
@@ -97,11 +109,10 @@ class Banner
 
     public function render()
     {
-        $cookies = get_option('ccfw_cookie_management_data');
         $path = 'partials/';
 
         // backwards compat.
-        if ($this->cookieObjectEmpty($cookies)) {
+        if ($this->cookieObjectEmpty()) {
             require_once($path . 'banner-legacy.php');
             return;
         }
@@ -110,8 +121,9 @@ class Banner
         require_once($path . 'banner.php');
     }
 
-    private function cookieObjectEmpty($cookies)
+    public function cookieObjectEmpty()
     {
+        $cookies = get_option('ccfw_cookie_management_data');
         if (!is_array($cookies) || count($cookies) === 0) {
             return true;
         }

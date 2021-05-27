@@ -127,7 +127,7 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
                                     class="ccfw-banner__toggle-slider"
                                     id="ccfw-<?= $slug ?>-cookies-toggle"
                                     aria-checked="false"
-                                    data-allowlist="<?= $group['allowlistID'] ?>">
+                                    data-allowlist="<?= $group['allowlistID'] ?? 'no-allowlist-id' ?>">
 
                                 <span class="ccfw-banner__toggle-slider--off-text toggle-off"
                                       aria-hidden="true"

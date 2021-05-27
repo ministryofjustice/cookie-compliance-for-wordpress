@@ -28,9 +28,9 @@ const CCFW = {
             get: () => JSON.parse(localStorage.getItem('ccfw-gtm-allowed')),
             set: (value) => localStorage.setItem('ccfw-gtm-allowed', JSON.stringify(value))
         },
-        bannerDisplay: {
-            get: () => JSON.parse(localStorage.getItem('ccfw-banner-visibility')),
-            set: (value) => localStorage.setItem('ccfw-banner-visibility', JSON.stringify(value))
+        bannerHidden: {
+            get: () => JSON.parse(localStorage.getItem('ccfw-banner-hidden')),
+            set: (value) => localStorage.setItem('ccfw-banner-hidden', JSON.stringify(value))
         },
         clear: (key) => localStorage.removeItem(key)
     },
@@ -79,9 +79,39 @@ const CCFW = {
 
         if (now > stored) { // a year has past
             CCFW.storage.clear('ccfw-gtm-allowed');
-            CCFW.storage.clear('ccfw-banner-visibility');
+            CCFW.storage.clear('ccfw-banner-hidden');
             CCFW.storage.clear('ccfw-time');
         }
+    },
+
+    /**
+     * @param remove acknowledges that we are removing all allowed ids
+     */
+    toggleAll: function (remove) {
+        let allowList = CCFW.storage.allowed.get() || [];
+
+        if (remove) {
+            allowList = [];
+        }
+
+        $('.' + CCFW.selector.toggles).each(function (key, element) {
+            let allowed = $(element).data('allowlist');
+
+            if (remove) {
+                $(element).attr('aria-checked', false);
+                $('#ccfw-' + allowed + '-toggle-off').removeAttr('aria-hidden').show();
+                $('#ccfw-' + allowed + '-toggle-on').attr('aria-hidden', 'true').hide();
+            } else {
+                if (allowList.indexOf(allowed) === -1) {
+                    allowList.push(allowed);
+                }
+                $(element).attr('aria-checked', true);
+                $('#ccfw-' + allowed + '-toggle-on').removeAttr('aria-hidden').show();
+                $('#ccfw-' + allowed + '-toggle-off').attr('aria-hidden', 'true').hide();
+            }
+        });
+
+        return allowList;
     }
 };
 
@@ -107,7 +137,6 @@ const ccfwGTM = () => {
             'gtm.allowlist': allowedList
         }];
 
-
         // Drop GTM code
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -122,10 +151,12 @@ const ccfwGTM = () => {
                 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', CCFW.gtmID);
+        return true;
     } else {
         console.warn('CCFW GTM:', 'The GTM ID wasn\'t assigned or, does not exist.');
+        return false;
     }
-}
+};
 
 const togglesChange = function (e) {
     e.preventDefault();
@@ -136,7 +167,7 @@ const togglesChange = function (e) {
     toggle.attr('aria-checked', !pressed);
 
     if (allowed === 'all') {
-        allowList = toggleAll(pressed);
+        allowList = CCFW.toggleAll(pressed);
     }
 
     if (pressed) {
@@ -156,35 +187,5 @@ const togglesChange = function (e) {
 
     return false;
 };
-
-/**
- * @param remove acknowledges that we are removing all allowed ids
- */
-function toggleAll(remove) {
-    let allowList = CCFW.storage.allowed.get() || [];
-
-    if (remove) {
-        allowList = [];
-    }
-
-    $('.' + CCFW.selector.toggles).each(function(key, element){
-        let allowed = $(element).data('allowlist');
-
-        if (remove) {
-            $(element).attr('aria-checked', false);
-            $('#ccfw-' + allowed + '-toggle-off').removeAttr('aria-hidden').show();
-            $('#ccfw-' + allowed + '-toggle-on').attr('aria-hidden', 'true').hide();
-        } else {
-            if (allowList.indexOf(allowed) === -1) {
-                allowList.push(allowed);
-            }
-            $(element).attr('aria-checked', true);
-            $('#ccfw-' + allowed + '-toggle-on').removeAttr('aria-hidden').show();
-            $('#ccfw-' + allowed + '-toggle-off').attr('aria-hidden', 'true').hide();
-        }
-    });
-
-    return allowList;
-}
 
 export { CCFW, ccfwGTM, togglesChange };
