@@ -6,8 +6,8 @@ import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 
 
-jQuery(function ($) {
-    let appContainer = $('#' + CCFW.appContainer);
+jQuery(function () {
+    let appContainer = jQuery('#' + CCFW.appContainer);
     appContainer.html(Init());
 
     /**
@@ -27,7 +27,7 @@ jQuery(function ($) {
     });
 
     // shall we debug?
-    if ($('#' + CCFW.debug.checkbox).is(':checked')) {
+    if (jQuery('#' + CCFW.debug.checkbox).is(':checked')) {
         CCFW.debug.active = true;
         makeDebugContainer();
     }

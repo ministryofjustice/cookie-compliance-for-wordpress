@@ -43,8 +43,8 @@ const debugToggle = () => {
 };
 
 function toggleDebug () {
-    let checked = $(this).is(':checked');
-    let container = $('#' + CCFW.debug.container);
+    let checked = jQuery(this).is(':checked');
+    let container = jQuery('#' + CCFW.debug.container);
 
     if (checked) {
         CCFW.debug.active = true;

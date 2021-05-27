@@ -41,7 +41,7 @@ const appInfoButton = () => {
 };
 
 function inputFocus (event) {
-    let group = $(this).closest('.ccfw-group');
+    let group = jQuery(this).closest('.ccfw-group');
     if (event.type === 'focusin') {
         group.removeClass('ccfw-group__active-opacity');
     } else {
@@ -88,7 +88,7 @@ function Section () {
     }
 
     if (confirmed) {
-        let select = $(this);
+        let select = jQuery(this);
         let section = select.val();
         let container = element('div', { id: 'ccfw-section__' + section, 'class': 'ccfw-section' }).data('id', section);
         let buttonRemove = element('button', {
@@ -109,11 +109,11 @@ function Section () {
         container.append(Group(section));
 
         // add to the page
-        $('#' + CCFW.appContainer).prepend(container);
+        jQuery('#' + CCFW.appContainer).prepend(container);
 
         // listeners
         listener.group.save(section, saveGroup);
-        $('#ccfw-' + section + '-section-remove').on('click', deleteSection);
+        jQuery('#ccfw-' + section + '-section-remove').on('click', deleteSection);
 
         select.find('option[value=' + section + ']').remove();
         hideShowSectionSelect();
@@ -139,8 +139,8 @@ const Group = (section) => {
 };
 
 function saveGroup () {
-    let section = $(this).closest('div.ccfw-section');
-    let group = $(this).closest('div.ccfw-group');
+    let section = jQuery(this).closest('div.ccfw-section');
+    let group = jQuery(this).closest('div.ccfw-group');
     let name = group.find('input').val();
     let nameSlugged = slugify(name);
     let sectionName = section.data('id');
@@ -194,8 +194,8 @@ function saveGroup () {
 }
 
 function saveAllowListID () {
-    let closest = locationData($(this));
-    let group = $(this).closest('div.ccfw-group');
+    let closest = locationData(jQuery(this));
+    let group = jQuery(this).closest('div.ccfw-group');
     let input = group.find('input[name=gtm-allowlist-id]');
     let allowlistID = input.val();
 
@@ -207,31 +207,31 @@ function saveAllowListID () {
 }
 
 function deleteSection () {
-    let section = $(this).parent('div').data('id');
+    let section = jQuery(this).parent('div').data('id');
     let confirm = window.confirm('\nAre you sure you want to remove ' + section + ' cookies?');
 
     if (confirm) {
         // remove the section
-        $('#ccfw-section__' + section).remove();
+        jQuery('#ccfw-section__' + section).remove();
 
         App.section.remove(section);
 
         // add option to the select
-        $('#' + CCFW.sectionId + ' select').append(Option(capitalize(section)));
+        jQuery('#' + CCFW.sectionId + ' select').append(Option(capitalize(section)));
         hideShowSectionSelect();
     }
 }
 
 const hideShowSectionSelect = () => {
-    if ($('#' + CCFW.sectionId + ' option').length > 1) {
-        $('#' + CCFW.sectionId).show();
+    if (jQuery('#' + CCFW.sectionId + ' option').length > 1) {
+        jQuery('#' + CCFW.sectionId).show();
     } else {
-        $('#' + CCFW.sectionId).hide();
+        jQuery('#' + CCFW.sectionId).hide();
     }
 };
 
 function saveDescription () {
-    let input = $(this);
+    let input = jQuery(this);
     let closest = locationData(input);
     let value = input.val();
 
@@ -248,9 +248,9 @@ const Cookies = () => {
 };
 
 function addRow () {
-    let container = $(this).parent().siblings('.ccfw-cookie-container');
+    let container = jQuery(this).parent().siblings('.ccfw-cookie-container');
     let count = container.find('.ccfw-cookie-row').length;
-    let closest = locationData($(this));
+    let closest = locationData(jQuery(this));
     let validId = false;
 
     // manage row counts and ID's
@@ -274,7 +274,7 @@ function addRow () {
 }
 
 function saveCookieData () {
-    let input = $(this);
+    let input = jQuery(this);
     let closest = locationData(input);
     let row = input.parent().data('id');
     let name = input.prop('name');
@@ -284,8 +284,8 @@ function saveCookieData () {
 }
 
 function removeRow () {
-    let closest = locationData($(this));
-    let row = $(this).parent();
+    let closest = locationData(jQuery(this));
+    let row = jQuery(this).parent();
     let rowId = row.data('id');
 
     App.cookies.remove(closest.section, closest.group, rowId);
@@ -323,7 +323,7 @@ function formSubmit (event) {
 
     // grab data and send to the server, and
     // stop page warning from appearing, if success
-    $('html, body').animate({ scrollTop: 30 }, 'fast');
+    jQuery('html, body').animate({ scrollTop: 30 }, 'fast');
 
     // processing here:
     if (App.form.post(CCFW.sections)) {

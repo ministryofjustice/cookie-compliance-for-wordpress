@@ -12,7 +12,7 @@ function sendCookies (data) {
     }).done(() => {
         // hide whirligig
         jQuery('.ccfw-ajax').fadeOut('fast', function(){
-            $(this).removeClass('active');
+            jQuery(this).removeClass('active');
         }); //animation
     }).fail((data) => {
         data = JSON.parse(data);
