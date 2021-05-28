@@ -47,7 +47,8 @@ $ccfw_ccfw_gtm_id = $ccfw_ccfw_gtm_id['gtm_id'] ?? 'null';
                     . $ccfw_domain_name
                     . '.  Some are essential to make the site work, some help us to understand how we can improve your'
                     . ' experience, and some are set by third parties. You can choose to turn off the non-essential'
-                    . ' cookies. Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'
+                    . ' cookies. Which cookies are you happy for us to use?',
+                    'cookie-compliance-for-wordpress'
                 ); ?>
             </p>
             <div class="ccfw-banner__buttons">
@@ -86,125 +87,123 @@ $ccfw_ccfw_gtm_id = $ccfw_ccfw_gtm_id['gtm_id'] ?? 'null';
 
             <!--Sections -->
             <?php
-            foreach ($ccfw_cookies
+            foreach ($ccfw_cookies as $section => $groups) {
+                echo '<div class="ccfw-banner__section">';
 
-            as $section => $groups) {
-            echo '<div class="ccfw-banner__section">';
+                $ccfw_buttons_allowed_in = [
+                    'marketing',
+                    'analytics'
+                ];
 
-            $ccfw_buttons_allowed_in = [
-                'marketing',
-                'analytics'
-            ];
+                if (in_array($section, $ccfw_buttons_allowed_in)) {
+                    ?>
 
-            if (in_array($section, $ccfw_buttons_allowed_in)) {
-                ?>
-
-                <!-- Section heading and universal switch -->
-                <div class="ccfw-banner__toggle-header-container">
-                    <h4 class="ccfw-banner__toggle-heading"
-                        id="ccfw-<?= $section ?>-cookies"><?= ucfirst($section) ?> cookies</h4>
-                    <div class="ccfw-banner__toggle-label">
-                        <button
-                                role="switch" aria-labelledby="ccfw-<?= $section ?>-cookies"
-                                class="ccfw-banner__toggle-slider"
-                                id="ccfw-<?= $section ?>-cookies-toggle"
-                                aria-checked="false"
-                                data-allowlist="all"
-                                type="button"
-                        >
-                                    <span class="ccfw-banner__toggle-slider--off-text toggle-off" aria-hidden="true"
-                                          id="ccfw-all-toggle-off">Off</span>
-                            <span class="ccfw-banner__toggle-slider--on-text toggle-on" aria-hidden="true"
-                                  id="ccfw-all-toggle-on">On</span>
-                        </button>
-                    </div>
-                </div>
-
-                <?php
-            } else {
-                ?>
-                <div class="ccfw-banner__toggle-header-container">
-                    <h4 class="ccfw-banner__toggle-heading"><?= ucfirst($section) ?> cookies</h4>
-                    <?= ($section === 'essential') ? '<p class="ccfw-banner__toggle-heading--always-on">Always on</p>' : '' ?>
-                </div>
-                <?php
-            }
-
-            foreach ($groups as $slug => $group) { ?>
-                <div class="ccfw-banner__group">
-                    <h3 class="ccfw-banner__toggle-heading"
-                        id="ccfw-<?= $slug ?>-cookies"><?= $group['name'] ?></h3>
-                    <?php if (in_array($section, $ccfw_buttons_allowed_in)) { ?>
-
+                    <!-- Section heading and universal switch -->
+                    <div class="ccfw-banner__toggle-header-container">
+                        <h4 class="ccfw-banner__toggle-heading"
+                            id="ccfw-<?= $section ?>-cookies"><?= ucfirst($section) ?> cookies</h4>
                         <div class="ccfw-banner__toggle-label">
                             <button
-                                    role="switch" aria-labelledby="ccfw-<?= $slug ?>-cookies"
+                                    role="switch" aria-labelledby="ccfw-<?= $section ?>-cookies"
                                     class="ccfw-banner__toggle-slider"
-                                    id="ccfw-<?= $slug ?>-cookies-toggle"
+                                    id="ccfw-<?= $section ?>-cookies-toggle"
                                     aria-checked="false"
-                                    data-allowlist="<?= $group['allowlistID'] ?? 'no-allowlist-id' ?>"
+                                    data-allowlist="all"
                                     type="button"
                             >
-
-                                    <span class="ccfw-banner__toggle-slider--off-text toggle-off"
-                                          aria-hidden="true"
-                                          id="ccfw-<?= $group['allowlistID'] ?>-toggle-off">Off</span>
-
-                                <span class="ccfw-banner__toggle-slider--on-text toggle-on"
-                                      aria-hidden="true"
-                                      id="ccfw-<?= $group['allowlistID'] ?>-toggle-on">On</span>
+                                        <span class="ccfw-banner__toggle-slider--off-text toggle-off" aria-hidden="true"
+                                              id="ccfw-all-toggle-off">Off</span>
+                                <span class="ccfw-banner__toggle-slider--on-text toggle-on" aria-hidden="true"
+                                      id="ccfw-all-toggle-on">On</span>
                             </button>
                         </div>
+                    </div>
 
-                    <?php }
-                    echo (isset($group['description'])) ? '<p class="ccfw-banner__summary-text">' .
-                        $group['description'] . '</p>' : '' ?>
+                    <?php
+                } else {
+                    ?>
+                    <div class="ccfw-banner__toggle-header-container">
+                        <h4 class="ccfw-banner__toggle-heading"><?= ucfirst($section) ?> cookies</h4>
+                        <?= ($section === 'essential') ? '<p class="ccfw-banner__toggle-heading--always-on">Always on</p>' : '' ?>
+                    </div>
+                    <?php
+                }
 
-                    <details class="ccfw-banner__expanding-section" data-module="govuk-details">
-                        <summary class="ccfw-banner__expanding-section-summary">
-                                    <span class="ccfw-banner__expanding-section-summary-text">
-                                        See our <?= $group['name'] ?> cookies
-                                    </span>
-                        </summary>
-                        <div class="ccfw-banner__expanding-section-text">
-                            <table class="ccfw-banner__table">
-                                <caption class="ccfw-banner__table-caption"><?= $group['name'] ?></caption>
-                                <thead>
-                                <tr>
-                                    <th scope="col" class="ccfw-banner__table-header">Name</th>
-                                    <th scope="col" class="ccfw-banner__table-header">Purpose</th>
-                                    <th scope="col" class="ccfw-banner__table-header">Expires</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                                foreach ($group['cookies'] as $cookie) {
-                                    // manage URLs
-                                    if (strpos($cookie['expiry'], 'http') === 0) {
-                                        $cookie['expiry'] = '<a href="'
-                                            . $cookie['expiry']
-                                            . '" class="ccfw-banner__third-party-section-link">Read the '
-                                            . $cookie['name']
-                                            . ' policy</a>';
-                                    }
-                                    ?>
+                foreach ($groups as $slug => $group) { ?>
+                    <div class="ccfw-banner__group">
+                        <h3 class="ccfw-banner__toggle-heading"
+                            id="ccfw-<?= $slug ?>-cookies"><?= $group['name'] ?></h3>
+                        <?php if (in_array($section, $ccfw_buttons_allowed_in)) { ?>
+
+                            <div class="ccfw-banner__toggle-label">
+                                <button
+                                        role="switch" aria-labelledby="ccfw-<?= $slug ?>-cookies"
+                                        class="ccfw-banner__toggle-slider"
+                                        id="ccfw-<?= $slug ?>-cookies-toggle"
+                                        aria-checked="false"
+                                        data-allowlist="<?= $group['allowlistID'] ?? 'no-allowlist-id' ?>"
+                                        type="button"
+                                >
+
+                                        <span class="ccfw-banner__toggle-slider--off-text toggle-off"
+                                              aria-hidden="true"
+                                              id="ccfw-<?= $group['allowlistID'] ?>-toggle-off">Off</span>
+
+                                    <span class="ccfw-banner__toggle-slider--on-text toggle-on"
+                                          aria-hidden="true"
+                                          id="ccfw-<?= $group['allowlistID'] ?>-toggle-on">On</span>
+                                </button>
+                            </div>
+
+                        <?php }
+                        echo (isset($group['description'])) ? '<p class="ccfw-banner__summary-text">' .
+                            $group['description'] . '</p>' : '' ?>
+
+                        <details class="ccfw-banner__expanding-section" data-module="govuk-details">
+                            <summary class="ccfw-banner__expanding-section-summary">
+                                        <span class="ccfw-banner__expanding-section-summary-text">
+                                            See our <?= $group['name'] ?> cookies
+                                        </span>
+                            </summary>
+                            <div class="ccfw-banner__expanding-section-text">
+                                <table class="ccfw-banner__table">
+                                    <caption class="ccfw-banner__table-caption"><?= $group['name'] ?></caption>
+                                    <thead>
                                     <tr>
-                                        <th scope="row"
-                                            class="ccfw-banner__table-header"><?= $cookie['name'] ?></th>
-                                        <td class="ccfw-banner__table-cell"><?= $cookie['description'] ?></td>
-                                        <td class="ccfw-banner__table-cell"><?= $cookie['expiry'] ?></td>
+                                        <th scope="col" class="ccfw-banner__table-header">Name</th>
+                                        <th scope="col" class="ccfw-banner__table-header">Purpose</th>
+                                        <th scope="col" class="ccfw-banner__table-header">Expires</th>
                                     </tr>
+                                    </thead>
+                                    <tbody>
                                     <?php
-                                } ?>
+                                    foreach ($group['cookies'] as $cookie) {
+                                        // manage URLs
+                                        if (strpos($cookie['expiry'], 'http') === 0) {
+                                            $cookie['expiry'] = '<a href="'
+                                                . $cookie['expiry']
+                                                . '" class="ccfw-banner__third-party-section-link">Read the '
+                                                . $cookie['name']
+                                                . ' policy</a>';
+                                        }
+                                        ?>
+                                        <tr>
+                                            <th scope="row"
+                                                class="ccfw-banner__table-header"><?= $cookie['name'] ?></th>
+                                            <td class="ccfw-banner__table-cell"><?= $cookie['description'] ?></td>
+                                            <td class="ccfw-banner__table-cell"><?= $cookie['expiry'] ?></td>
+                                        </tr>
+                                        <?php
+                                    } ?>
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </details>
-                </div>
-                <?php
-            }
-            ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+                    <?php
+                }
+                ?>
         </div>
         <?php
         }
