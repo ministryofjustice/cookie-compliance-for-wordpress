@@ -134,7 +134,6 @@ $ccfw_ccfw_gtm_id = $ccfw_ccfw_gtm_id['gtm_id'] ?? 'null';
                         <h3 class="ccfw-banner__toggle-heading"
                             id="ccfw-<?= $slug ?>-cookies"><?= $group['name'] ?></h3>
                         <?php if (in_array($section, $ccfw_buttons_allowed_in)) { ?>
-
                             <div class="ccfw-banner__toggle-label">
                                 <button
                                         role="switch" aria-labelledby="ccfw-<?= $slug ?>-cookies"
@@ -205,9 +204,9 @@ $ccfw_ccfw_gtm_id = $ccfw_ccfw_gtm_id['gtm_id'] ?? 'null';
                 }
                 ?>
         </div>
-        <?php
-        }
-        ?>
+                <?php
+            }
+            ?>
         <div class="ccfw-banner__save-preferences">
             <button type="submit" id="cookie-save-preferences" class="ccfw-banner__button">
                 <?php _e('Save cookie preferences', 'cookie-compliance-for-wordpress'); ?>
