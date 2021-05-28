@@ -4,7 +4,8 @@
  * First step; define some settings
  */
 const CCFW = {
-    gtmID: ('; ' + document.cookie).split('; ccfw_gtm_id=').pop().split(';').shift(),
+    gtm: ('; ' + document.cookie).split('; ccfw_gtm_id=').pop().split(';').shift(),
+    gtmID: document.getElementById('ccfw-page-banner').getAttribute('data-gtm-id'),
     canRun: (id) => id.startsWith('GTM') || false,
     allowedIds: [],
     selector: {

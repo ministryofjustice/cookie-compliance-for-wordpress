@@ -53,6 +53,7 @@ class General
         // We only want to display GTM code when an ID has been entered.
         if (!empty($this->googleTagManagerID)) {
             $gtm_id = $_COOKIE['ccfw_gtm_id'] ?? null;
+
             if (!$gtm_id || ($this->googleTagManagerID !== $gtm_id)) {
                 setcookie('ccfw_gtm_id', $this->googleTagManagerID, time() + 31556926);
                 $_COOKIE['ccfw_gtm_id'] = $this->googleTagManagerID;

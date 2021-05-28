@@ -72,7 +72,7 @@ class BannerSettings extends Banner
      */
     public function setGoogleAnalyticsID()
     {
-        $options = get_option('ccfw_plugin_settings');
+        $options = get_option('ccfw_component_settings');
         $googleAnalyticsID = $options['ga_analytics_id'] ?? '';
 
         ?>

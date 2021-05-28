@@ -11,15 +11,17 @@
  * @package    cookie-compliance-for-wordpress
  */
 
-$domainName = get_home_url(get_current_blog_id());
-$domainName = parse_url($domainName, PHP_URL_HOST);
-$domainNameStr = ($domainName ? strtolower($domainName) : '');
+$ccfw_domain_name = parse_url(get_home_url(get_current_blog_id()), PHP_URL_HOST);
+$ccfw_domain_name = ($ccfw_domain_name ? strtolower($ccfw_domain_name) : '');
 
 $ccfw_cookies = get_option('ccfw_cookie_management_data');
+
+$ccfw_ccfw_gtm_id = get_option('ccfw_component_settings');
+$ccfw_ccfw_gtm_id = $ccfw_ccfw_gtm_id['gtm_id'] ?? 'null';
 ?>
 
 <div class="ccfw-background-grey-overlay"></div>
-<button class="ccfw-settings-button" id="js-ccfw-settings-button">
+<button type="button" class="ccfw-settings-button" id="js-ccfw-settings-button">
     <svg aria-hidden="true" class="ccfw-settings-button__background-triangle" width="94" height="94" viewBox="0 0 94 94"
          xmlns="http://www.w3.org/2000/svg">
         <path d="M0 94H94L0 0V94Z"/>
@@ -33,14 +35,20 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
     <span class="ccfw-settings-button__text"><span class="visually-hidden">Cookie</span>Settings</span>
 </button>
 
-<div id="ccfw-page-banner" data-nosnippet="true">
+<div id="ccfw-page-banner" data-nosnippet="true" data-gtm-id="<?= $ccfw_ccfw_gtm_id ?>">
     <div class="ccfw-banner">
         <div class="ccfw-banner__intro">
             <h2 class="ccfw-banner__heading">
                 <?php _e('Are you OK with cookies?', 'cookie-compliance-for-wordpress'); ?>
             </h2>
             <p class="ccfw-banner__info-text">
-                <?php _e('We use small files called ‘cookies’ on' . $domainNameStr . '.  Some are essential to make the site work, some help us to understand how we can improve your experience, and some are set by third parties. You can choose to turn off the non-essential cookies. Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'); ?>
+                <?php _e(
+                    'We use small files called ‘cookies’ on'
+                    . $ccfw_domain_name
+                    . '.  Some are essential to make the site work, some help us to understand how we can improve your'
+                    . ' experience, and some are set by third parties. You can choose to turn off the non-essential'
+                    . ' cookies. Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'
+                ); ?>
             </p>
             <div class="ccfw-banner__buttons">
                 <button class="ccfw-banner__button" id="cookie-accept" type="submit">
@@ -51,11 +59,17 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
                     <?php _e('Only use essential cookies', 'cookie-compliance-for-wordpress'); ?>
                 </button>
 
-                <button class="ccfw-banner-button ccfw-banner__button--expand-options" id="cookie-more-info">
+                <button type="button" class="ccfw-banner-button ccfw-banner__button--expand-options"
+                        id="cookie-more-info">
                     <?php _e('Choose which cookies we use', 'cookie-compliance-for-wordpress'); ?>
                     <svg class="ccfw-banner__button--arrow" width="20" height="20" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.0516 1.86827C10.4659 1.28249 9.51612 1.28249 8.93033 1.86827C8.34454 2.45406 8.34454 3.40381 8.93033 3.98959L11.0516 1.86827ZM17.0621 10L18.1227 11.0607C18.7085 10.4749 18.7085 9.52513 18.1227 8.93934L17.0621 10ZM8.93033 16.0104C8.34454 16.5962 8.34454 17.5459 8.93033 18.1317C9.51612 18.7175 10.4659 18.7175 11.0516 18.1317L8.93033 16.0104ZM8.93033 3.98959L16.0014 11.0607L18.1227 8.93934L11.0516 1.86827L8.93033 3.98959ZM16.0014 8.93934L8.93033 16.0104L11.0516 18.1317L18.1227 11.0607L16.0014 8.93934Z"/>
+                        <path d="M11.0516 1.86827C10.4659 1.28249 9.51612 1.28249 8.93033 1.86827C8.34454 2.45406
+                        8.34454 3.40381 8.93033 3.98959L11.0516 1.86827ZM17.0621 10L18.1227 11.0607C18.7085 10.4749
+                        18.7085 9.52513 18.1227 8.93934L17.0621 10ZM8.93033 16.0104C8.34454 16.5962 8.34454 17.5459
+                        8.93033 18.1317C9.51612 18.7175 10.4659 18.7175 11.0516 18.1317L8.93033 16.0104ZM8.93033
+                        3.98959L16.0014 11.0607L18.1227 8.93934L11.0516 1.86827L8.93033 3.98959ZM16.0014 8.93934L8.93033
+                        16.0104L11.0516 18.1317L18.1227 11.0607L16.0014 8.93934Z"/>
                     </svg>
                 </button>
             </div>
@@ -64,7 +78,7 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
 
         <div class="ccfw-banner__modal-container" id="cookie-popup" role="dialog" aria-labelledby="ccfw-banner-title"
              aria-modal="true" tabindex="-1">
-            <button id="ccfw-modal-close" class="ccfw-banner__button ccfw-banner__button--close">
+            <button type="button" id="ccfw-modal-close" class="ccfw-banner__button ccfw-banner__button--close">
                 Close
             </button>
 
@@ -73,8 +87,8 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
             <!--Sections -->
             <?php
             foreach ($ccfw_cookies
-            as $section => $groups):
 
+            as $section => $groups) {
             echo '<div class="ccfw-banner__section">';
 
             $ccfw_buttons_allowed_in = [
@@ -96,9 +110,10 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
                                 id="ccfw-<?= $section ?>-cookies-toggle"
                                 aria-checked="false"
                                 data-allowlist="all"
+                                type="button"
                         >
-                                <span class="ccfw-banner__toggle-slider--off-text toggle-off" aria-hidden="true"
-                                      id="ccfw-all-toggle-off">Off</span>
+                                    <span class="ccfw-banner__toggle-slider--off-text toggle-off" aria-hidden="true"
+                                          id="ccfw-all-toggle-off">Off</span>
                             <span class="ccfw-banner__toggle-slider--on-text toggle-on" aria-hidden="true"
                                   id="ccfw-all-toggle-on">On</span>
                         </button>
@@ -115,11 +130,11 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
                 <?php
             }
 
-            foreach ($groups as $slug => $group): ?>
+            foreach ($groups as $slug => $group) { ?>
                 <div class="ccfw-banner__group">
                     <h3 class="ccfw-banner__toggle-heading"
                         id="ccfw-<?= $slug ?>-cookies"><?= $group['name'] ?></h3>
-                    <?php if (in_array($section, $ccfw_buttons_allowed_in)) : ?>
+                    <?php if (in_array($section, $ccfw_buttons_allowed_in)) { ?>
 
                         <div class="ccfw-banner__toggle-label">
                             <button
@@ -127,11 +142,13 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
                                     class="ccfw-banner__toggle-slider"
                                     id="ccfw-<?= $slug ?>-cookies-toggle"
                                     aria-checked="false"
-                                    data-allowlist="<?= $group['allowlistID'] ?? 'no-allowlist-id' ?>">
+                                    data-allowlist="<?= $group['allowlistID'] ?? 'no-allowlist-id' ?>"
+                                    type="button"
+                            >
 
-                                <span class="ccfw-banner__toggle-slider--off-text toggle-off"
-                                      aria-hidden="true"
-                                      id="ccfw-<?= $group['allowlistID'] ?>-toggle-off">Off</span>
+                                    <span class="ccfw-banner__toggle-slider--off-text toggle-off"
+                                          aria-hidden="true"
+                                          id="ccfw-<?= $group['allowlistID'] ?>-toggle-off">Off</span>
 
                                 <span class="ccfw-banner__toggle-slider--on-text toggle-on"
                                       aria-hidden="true"
@@ -139,15 +156,15 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
                             </button>
                         </div>
 
-                    <?php endif;
+                    <?php }
                     echo (isset($group['description'])) ? '<p class="ccfw-banner__summary-text">' .
                         $group['description'] . '</p>' : '' ?>
 
                     <details class="ccfw-banner__expanding-section" data-module="govuk-details">
                         <summary class="ccfw-banner__expanding-section-summary">
-                                <span class="ccfw-banner__expanding-section-summary-text">
-                                    See our <?= $group['name'] ?> cookies
-                                </span>
+                                    <span class="ccfw-banner__expanding-section-summary-text">
+                                        See our <?= $group['name'] ?> cookies
+                                    </span>
                         </summary>
                         <div class="ccfw-banner__expanding-section-text">
                             <table class="ccfw-banner__table">
@@ -161,10 +178,14 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
                                 </thead>
                                 <tbody>
                                 <?php
-                                foreach ($group['cookies'] as $cookie):
+                                foreach ($group['cookies'] as $cookie) {
                                     // manage URLs
                                     if (strpos($cookie['expiry'], 'http') === 0) {
-                                        $cookie['expiry'] = '<a href="' . $cookie['expiry'] . '" class="ccfw-banner__third-party-section-link">Read the ' . $cookie['name'] . ' policy</a>';
+                                        $cookie['expiry'] = '<a href="'
+                                            . $cookie['expiry']
+                                            . '" class="ccfw-banner__third-party-section-link">Read the '
+                                            . $cookie['name']
+                                            . ' policy</a>';
                                     }
                                     ?>
                                     <tr>
@@ -173,23 +194,23 @@ $ccfw_cookies = get_option('ccfw_cookie_management_data');
                                         <td class="ccfw-banner__table-cell"><?= $cookie['description'] ?></td>
                                         <td class="ccfw-banner__table-cell"><?= $cookie['expiry'] ?></td>
                                     </tr>
-                                <?php
-                                endforeach; ?>
+                                    <?php
+                                } ?>
 
                                 </tbody>
                             </table>
                         </div>
                     </details>
                 </div>
-            <?php
-            endforeach;
+                <?php
+            }
             ?>
         </div>
         <?php
-        endforeach;
+        }
         ?>
         <div class="ccfw-banner__save-preferences">
-            <button id="cookie-save-preferences" class="ccfw-banner__button">
+            <button type="submit" id="cookie-save-preferences" class="ccfw-banner__button">
                 <?php _e('Save cookie preferences', 'cookie-compliance-for-wordpress'); ?>
             </button>
         </div>

@@ -20,6 +20,8 @@ $removeYouTubeCookieContent = !empty($options['remove_youtube_cookie_content']);
 $removeTwitterCookieContent = !empty($options['remove_twitter_cookie_content']);
 $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
 
+$ccfw_ccfw_gtm_id = get_option('ccfw_plugin_settings');
+$ccfw_ccfw_gtm_id = $options['gtm_id'] ?? '';
 ?>
 
 <div class="ccfw-background-grey-overlay"></div>
@@ -36,7 +38,7 @@ $removeVimeoCookieContent = !empty($options['remove_vimeo_cookie_content']);
     </svg>
     <span class="ccfw-settings-button__text"><span class="visually-hidden">Cookie</span>Settings</span>
 </button>
-<div id="ccfw-page-banner" data-nosnippet="true">
+<div id="ccfw-page-banner" data-nosnippet="true" data-gtmid="<?= $ccfw_ccfw_gtm_id ?>">
     <div class="ccfw-banner">
         <div class="ccfw-banner__intro">
             <h2 class="ccfw-banner__heading">
