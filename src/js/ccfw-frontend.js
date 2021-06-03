@@ -159,6 +159,7 @@ import { CCFW } from './ccfw-gtm';
                 CCFW.listItem.set(
                     CCFW.toggleAll(false)
                 );
+                CCFW.storage.time.set();
                 CCFW.storage.bannerHidden.set(true);
                 utilities.hideBanner();
             },
