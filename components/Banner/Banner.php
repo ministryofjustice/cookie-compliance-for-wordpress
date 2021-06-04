@@ -47,7 +47,7 @@ class Banner
         global $ccfwHelper;
         $this->helper = $ccfwHelper;
 
-        $this->settings = new BannerSettings();
+        $this->settings = new LegacyBannerSettings();
 
         $options = get_option('ccfw_component_settings');
         $this->googleAnalyticsID = $options['ga_analytics_id'] ?? '';
