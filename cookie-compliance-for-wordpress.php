@@ -32,7 +32,7 @@ require_once('components/Helper/Helper.php');
 require_once('components/General/General.php');
 require_once('components/General/GeneralSettings.php');
 require_once('components/Banner/Banner.php');
-require_once('components/Banner/BannerSettings.php');
+require_once('components/Banner/LegacyBannerSettings.php');
 // cookie management scripts
 require_once('components/CookieManagement/CookieManagement.php');
 require_once('components/CookieManagement/CookieManagementSettings.php');

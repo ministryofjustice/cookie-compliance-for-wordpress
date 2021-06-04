@@ -13,7 +13,7 @@ namespace CCFW\Components\Banner;
 
 use CCFW\Components\Helper\Debug;
 
-class BannerSettings extends Banner
+class LegacyBannerSettings extends Banner
 {
     use Debug;
 
@@ -32,15 +32,15 @@ class BannerSettings extends Banner
 
     public function settingsFields($section)
     {
-        if ($this->cookieObjectEmpty()) {
-            add_settings_field(
-                'ga_analytics_id',
-                __('Google Analytics ID', 'cookie-compliance-for-wordpress'),
-                [$this, 'setGoogleAnalyticsID'],
-                'ccfwComponentSettings',
-                $section
-            );
-        }
+
+        add_settings_field(
+            'ga_analytics_id',
+            __('Google Analytics ID', 'cookie-compliance-for-wordpress'),
+            [$this, 'setGoogleAnalyticsID'],
+            'ccfwComponentSettings',
+            $section
+        );
+
 
         add_settings_field(
             'remove_youtube_cookie_content',
@@ -76,7 +76,7 @@ class BannerSettings extends Banner
         $googleAnalyticsID = $options['ga_analytics_id'] ?? '';
 
         ?>
-        <input type='text' name='ccfw_plugin_settings[ga_analytics_id]'
+        <input type='text' name='ccfw_component_settings[ga_analytics_id]'
                placeholder="Enter GA ID UA-XXXXXXXXX-X" value='<?php echo sanitize_html_class($googleAnalyticsID); ?>'
                class="ccfw-component-input">
         <?php
