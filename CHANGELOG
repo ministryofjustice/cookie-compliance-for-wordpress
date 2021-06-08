@@ -1,5 +1,5 @@
 An all new upgrade bringing functionality to manage cookies and content more deeply.
 
-This release give more control to the plugins admin user, notably:
+This release offers control to the plugins admin user via a Cookie Management UI. The UI brings
+intelligent CRUD capabilities for easy management of Google Tag Manager tags and cookies.
 
--
