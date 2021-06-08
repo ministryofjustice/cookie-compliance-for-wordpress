@@ -36,3 +36,4 @@ Thumbs.db
 node_modules/
 vendor/
 dist/
+assets/
