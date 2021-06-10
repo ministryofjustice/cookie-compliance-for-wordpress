@@ -62,7 +62,7 @@ const icon = (type, size, colour) => {
             colour = colour || '#984e0a';
             break;
         default:
-            return '<b style="color:darkred">Error:</b> <b>Icon not found for<em> ' + type + '</em></b>';
+            return '<b style="color:darkred">Error:</b> <b>Icon not found for <em>' + type + '</em></b>';
     }
 
     return '<svg ' +

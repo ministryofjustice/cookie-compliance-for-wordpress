@@ -1,4 +1,5 @@
 import { CCFW, App, capitalize, slugify } from './global';
+import { Builder } from './build';
 import { listener } from './listeners';
 import { element, groupHeading, groupAllowlistConfirm } from './element';
 import { Select, Option, Input, Button } from './form';
@@ -8,15 +9,10 @@ import { Icon } from './icons';
 
 const Init = () => {
     let select = SectionSelect();
-    // grab existing cookies and load them into sections
     App.cookies.get();
 
-
-    /**
-     * shall we populate the UI?
-     * todo: create a module that takes existing data and rebuilds the UI
-     */
-
+    // recreate UI
+    Builder.init();
 
     // listen out for focus and blur events
     listener.form.input.focusBlur(inputFocus);
@@ -52,9 +48,9 @@ function inputFocus (event) {
 // create a new top level category i.e.
 const SectionSelect = (options) => {
     let defaultOptions = [
-        'Analytics',
         'Third-party',
-        'Essential'
+        'Essential',
+        'Marketing'
     ];
 
     if (options) {
@@ -69,7 +65,7 @@ const SectionSelect = (options) => {
 function Section () {
     // confirm with a warning if the section lock is on
     let confirmed = true;
-    if (CCFW.sectionsLock) {
+    if (CCFW.sectionsLoaded) {
         // is debug on?
         let checkbox = jQuery('#' + CCFW.debug.checkbox);
         let isChecked = checkbox.is(':checked');
@@ -81,7 +77,7 @@ function Section () {
 
         if (confirmed) {
             CCFW.sections = {};
-            CCFW.sectionsLock = false;
+            CCFW.sectionsLoaded = false;
         } else if (!isChecked) {
             checkbox.click();
         }
@@ -312,7 +308,7 @@ const locationData = (ele) => {
  * @return {boolean}
  */
 function formSubmit (event) {
-    if (CCFW.sectionsLock) {
+    if (CCFW.sectionsLoaded) {
         // nothing to do while lock is active
         return true;
     }

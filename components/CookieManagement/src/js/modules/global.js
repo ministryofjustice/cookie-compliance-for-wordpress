@@ -5,7 +5,7 @@ const CCFW = {
     appContainer: 'ccfw-cookie-management',
     sectionId: 'ccfw-section-select-container',
     sections: {},
-    sectionsLock: false, // lock the sections dropdown so we don't overwrite data
+    sectionsLoaded: false, // locks the sections dropdown so we don't overwrite data
     cookieRow: {
         name: '',
         description: '',

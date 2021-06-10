@@ -28,7 +28,7 @@ function getCookies () {
         CCFW.sections = JSON.parse(data) || {};
 
         if (Object.keys(CCFW.sections).length > 0) {
-            CCFW.sectionsLock = true;
+            CCFW.sectionsLoaded = true;
         }
 
         outputDebugInfo();

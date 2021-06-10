@@ -74,7 +74,7 @@ class CookieManagement
 
             if (update_option('ccfw_cookie_management_data', $cookies_options)) {
                 $response->update = 'success';
-                $response->reason = $_POST['action'];
+                $response->reason = $data['action'];
             }
 
             echo json_encode($response);
