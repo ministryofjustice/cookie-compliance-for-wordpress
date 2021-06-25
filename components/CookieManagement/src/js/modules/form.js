@@ -1,7 +1,8 @@
 import { element } from './element'
+import { App, CCFW } from './global';
 
 const Select = (name, options,  callback) => {
-    let select = element('select', {name: name, id: name});
+    let select = element('select', {name: name, id: name + '-select'});
     let selectContainer = element('div', { id: name});
     select.append(Option('Create a section'));
 
@@ -45,5 +46,23 @@ const Button = (className, icon, text, title) => {
 
     return button;
 }
+/**
+ * Intercept 'Save Changes' submit button
+ * @param event
+ * @return {boolean}
+ */
+function Submit (event) {
+    // release the unload barrier
+    window.onbeforeunload = null;
 
-export { Select, Option, Input, Button }
+    // grab data and send to the server, and
+    // stop page warning from appearing, if success
+    jQuery('html, body').animate({ scrollTop: 30 }, 'fast');
+
+    // processing here:
+    if (App.form.post(CCFW.sections)) {
+        console.log('AJAX POST done! Good things happen here.');
+    }
+}
+
+export { Select, Option, Input, Button, Submit }

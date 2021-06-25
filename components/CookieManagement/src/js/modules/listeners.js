@@ -1,4 +1,4 @@
-import { CCFW, makeDebugContainer } from './global';
+import { CCFW } from './global';
 
 const groupSave = (section, callback) => {
     let element = jQuery('.ccfw-' + section + '-group-save');
@@ -49,7 +49,7 @@ function toggleDebug () {
     if (checked) {
         CCFW.debug.active = true;
         if (container.length === 0) {
-            makeDebugContainer();
+            CCFW.debug.make();
         }
         container.fadeIn();
     } else {

@@ -1,11 +1,11 @@
-import { CCFW } from './global';
+import { App, CCFW } from './global';
 
-/**
- * shall we populate the UI?
- * todo: create a module that takes existing data and rebuilds the UI
- */
 const Builder = {
     init: () => {
+        // get pre-saved app cookies
+        App.cookies.get();
+
+        // wait for the cookies to arrive
         let interval = setInterval(() => {
             if (CCFW.sectionsLoaded) {
                 clearInterval(interval);
@@ -14,39 +14,37 @@ const Builder = {
         }, 100);
     },
     load: () => {
-        // first level: section
-        let indent = '----> ';
+        CCFW.building = true;
+
+        // first: sections
         for (const [section, groups] of Object.entries(CCFW.sections)) {
-            console.log(`Section: ${section}`);
+            // CREATE A SECTION
+            CCFW.create.section(section);
 
-            /**
-             * CREATE THE SECTION
-             */
+            // second: groups
+            for (const [slug, group] of Object.entries(groups)) {
+                // CREATE A GROUP
+                CCFW.create.group({
+                    section: section,
+                    group: group.name,
+                    description: group.description,
+                    id: group.allowlistID,
+                });
 
-            // second level: group
-            for (const [group, data] of Object.entries(groups)) {
-                console.log(indent + 'Group: ' + data.name);
-                console.log(indent + indent + 'Description: ' + data.description);
-                console.log(indent + indent + 'ID: ' + data.allowlistID);
-                console.log(indent + indent + 'Cookies: ');
-
-                /**
-                 * CREATE THE GROUP
-                 */
-
-                // third level: cookie definitions
-                for (const [cookie, row] of Object.entries(data.cookies)) {
-                    console.log(indent + indent + indent + cookie);
-                    console.log(indent + indent + indent + indent + 'Name: ' + row.name);
-                    console.log(indent + indent + indent + indent + 'Description: ' + row.description);
-                    console.log(indent + indent + indent + indent + 'Expiry: ' + row.expiry);
-
-                    /**
-                     * CREATE THE COOKIE ROW
-                     */
+                // third: cookies
+                for (const [cookie, row] of Object.entries(group.cookies)) {
+                    // CREATE A COOKIE ROW
+                    CCFW.create.cookie(cookie.replace('row_', ''), {
+                        section: section,
+                        group: group.name,
+                        row: row
+                    });
                 }
             }
         }
+
+        // app build is now complete
+        CCFW.building = false;
     }
 };
 

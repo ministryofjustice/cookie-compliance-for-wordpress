@@ -104,15 +104,15 @@ $ccfw_ccfw_gtm_id = $ccfw_ccfw_gtm_id['gtm_id'] ?? 'null';
                             id="ccfw-<?= $section ?>-cookies"><?= ucfirst($section) ?> cookies</h4>
                         <div class="ccfw-banner__toggle-label">
                             <button
-                                    role="switch" aria-labelledby="ccfw-<?= $section ?>-cookies"
-                                    class="ccfw-banner__toggle-slider"
-                                    id="ccfw-<?= $section ?>-cookies-toggle"
-                                    aria-checked="false"
-                                    data-allowlist="all"
-                                    type="button"
+                                role="switch" aria-labelledby="ccfw-<?= $section ?>-cookies"
+                                class="ccfw-banner__toggle-slider"
+                                id="ccfw-<?= $section ?>-cookies-toggle"
+                                aria-checked="false"
+                                data-allowlist="all"
+                                type="button"
                             >
-                                        <span class="ccfw-banner__toggle-slider--off-text toggle-off" aria-hidden="true"
-                                              id="ccfw-all-toggle-off">Off</span>
+                                <span class="ccfw-banner__toggle-slider--off-text toggle-off" aria-hidden="true"
+                                      id="ccfw-all-toggle-off">Off</span>
                                 <span class="ccfw-banner__toggle-slider--on-text toggle-on" aria-hidden="true"
                                       id="ccfw-all-toggle-on">On</span>
                             </button>
