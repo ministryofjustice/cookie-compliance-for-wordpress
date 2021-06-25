@@ -13,7 +13,7 @@ mix_
         'components/CookieManagement/' + src + 'js/polyfill.js',
         './node_modules/tippy.js/dist/tippy.esm.js',
     ], 'js/ccfw-admin-app.js')
-    .js(src + 'js/ie11CustomProperties.js', 'js/')
+    .js(src + 'js/ie11CustomProperties.js', 'js/ccfw-ie11CustomProperties.js')
     .sass(src + 'scss/ccfw-frontend.scss', 'css/ccfw-frontend.css')
     .sass(src + 'scss/ccfw-admin-main.scss', 'css/ccfw-admin-main.css');
 

@@ -45,7 +45,7 @@ $ccfw_ccfw_gtm_id = $options['gtm_id'] ?? '';
                 <?php _e('Are you OK with cookies?', 'cookie-compliance-for-wordpress'); ?>
             </h2>
             <p class="ccfw-banner__info-text">
-                <?php _e('We use small files called ‘cookies’ on' . $domainNameStr . '.  Some are essential to make the site work, some help us to understand how we can improve your experience, and some are set by third parties. You can choose to turn off the non-essential cookies. Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'); ?>
+                <?php _e('We use small files called ‘cookies’ on ' . $domainName . '.  Some are essential to make the site work, some help us to understand how we can improve your experience, and some are set by third parties. You can choose to turn off the non-essential cookies. Which cookies are you happy for us to use?', 'cookie-compliance-for-wordpress'); ?>
             </p>
             <div class="ccfw-banner__buttons">
                 <button class="ccfw-banner__button" id="cookie-accept" type="submit">

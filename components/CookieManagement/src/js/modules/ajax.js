@@ -1,4 +1,4 @@
-import { CCFW, outputDebugInfo } from './global';
+import { CCFW } from './global';
 
 function sendCookies (data) {
     jQuery.ajax({
@@ -28,10 +28,10 @@ function getCookies () {
         CCFW.sections = JSON.parse(data) || {};
 
         if (Object.keys(CCFW.sections).length > 0) {
-            CCFW.sectionsLock = true;
+            CCFW.sectionsLoaded = true;
         }
 
-        outputDebugInfo();
+        CCFW.debug.output();
     });
 }
 

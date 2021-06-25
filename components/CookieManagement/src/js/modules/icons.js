@@ -9,7 +9,7 @@
  *       - copy the path, and
  *       - name an entry smiley
  * 2. Add the new smiley to the switch in the Icon function. we do this to define it's default state.
- * 3. Create a helper for the new smiley icon in the helpers object
+ * 3. Create a helper for the new smiley icon in the Helper object
  *
  * Nb. Icons must be registered in this module. If a new icon is omitted from the switch statement in
  * the Icon function, Icon will return an error string.
@@ -34,47 +34,6 @@ const iconSVGPaths = {
     cookie: '<path d="M23.999 12.149c-.049 3.834-1.893 7.223-4.706 9.378-1.993 1.53-4.485 2.449-7.198 2.473-6.464.057-12.051-5.107-12.095-12 3.966 1.066 7.682-1.993 6-6 4.668.655 6.859-2.389 6.077-6 6.724.064 11.999 5.542 11.922 12.149zm-15.576-4.123c-.065 3.393-2.801 5.868-6.182 6.166 1.008 4.489 5.015 7.807 9.759 7.807 5.262 0 9.576-4.072 9.97-9.229.369-4.818-2.755-9.357-7.796-10.534-.277 2.908-2.381 5.357-5.751 5.79zm5.077 8.974c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm-5.5-2.853c1.104 0 2 .896 2 2s-.896 2-2 2-2-.896-2-2 .896-2 2-2zm10-2.147c1.104 0 2 .896 2 2s-.896 2-2 2-2-.896-2-2 .896-2 2-2zm-5 0c.552 0 1 .448 1 1s-.448 1-1 1-1-.448-1-1 .448-1 1-1zm2.5-5c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm-12.5 0c.552 0 1 .448 1 1s-.448 1-1 1-1-.448-1-1 .448-1 1-1zm-1.5-4c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm6-2c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm-3.5-1c.552 0 1 .448 1 1s-.448 1-1 1-1-.448-1-1 .448-1 1-1z"/>'
 };
 
-const icon = (type, size, colour) => {
-    // default size if not defined
-    size = size || 24;
-
-    // set default colours and maybe sizes...
-    switch (type) {
-        case 'add':
-        case 'check':
-        case 'success':
-            colour = colour || '#149414';
-            break;
-        case 'cross':
-        case 'crossArrow':
-        case 'error':
-        case 'bin':
-            colour = colour || '#CC0000';
-            break;
-        case 'warning':
-            colour = colour || '#FFA500';
-            break;
-        case 'info':
-        case 'save':
-            colour = colour || '#195e9f';
-            break;
-        case 'cookie':
-            colour = colour || '#984e0a';
-            break;
-        default:
-            return '<b style="color:darkred">Error:</b> <b>Icon not found for<em> ' + type + '</em></b>';
-    }
-
-    return '<svg ' +
-        'xmlns="http://www.w3.org/2000/svg" ' +
-        'class="ccfw-icon ccfw-icon__' + type + '" ' +
-        'width="' + size + '" ' +
-        'height="' + size + '" ' +
-        'fill="' + colour + '" ' +
-        'viewBox="0 0 24 24">' + iconSVGPaths[type] + ' ' +
-        '</svg>';
-}
-
 /**
  * Helper object
  * Allows for simple, multiple use
@@ -93,15 +52,64 @@ const Icon = {
     cookie: (size, colour) => icon('cookie', size, colour)
 };
 
+const icon = (type, size, colour) => {
+    // default size if not defined
+    size = size || 24;
+
+    // default colours...
+    switch (type) {
+        // GREEN
+        case 'add':
+        case 'check':
+        case 'success':
+            colour = colour || '#149414';
+            break;
+        // RED
+        case 'cross':
+        case 'crossArrow':
+        case 'error':
+        case 'bin':
+            colour = colour || '#CC0000';
+            break;
+        // ORANGE
+        case 'warning':
+            colour = colour || '#FFA500';
+            break;
+        // BLUE
+        case 'info':
+        case 'save':
+            colour = colour || '#195e9f';
+            break;
+        // BROWN
+        case 'cookie':
+            colour = colour || '#984e0a';
+            break;
+        default:
+            return '<b style="color:darkred">Error:</b> <b>Icon not found for <em>' + type + '</em></b>';
+    }
+
+    return '<svg ' +
+        'xmlns="http://www.w3.org/2000/svg" ' +
+        'class="ccfw-icon ccfw-icon__' + type + '" ' +
+        'width="' + size + '" ' +
+        'height="' + size + '" ' +
+        'fill="' + colour + '" ' +
+        'viewBox="0 0 24 24">' + iconSVGPaths[type] + ' ' +
+        '</svg>';
+}
+
 /**
  * Display a list of available Icons
+ *
+ * Uses a multiple operator to display a set number of icons per row
  * @return {string}
  * @constructor
  */
-const IconsAll = () => {
+const IconsAll = (iconsPerLine) => {
     let html = '<h3>Available icons</h3>';
-    Object.entries(Icon).forEach((item) => {
-        html += item[1]() + ' &nbsp; '
+    iconsPerLine = iconsPerLine || 8;
+    Object.entries(Icon).forEach((item, index) => {
+        html += item[1]() + ((index + 1) % iconsPerLine === 0 ? '<br><br>' : ' &nbsp; ')
     })
 
     return html;

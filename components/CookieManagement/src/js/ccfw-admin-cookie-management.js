@@ -1,5 +1,5 @@
-import { CCFW, makeDebugContainer } from './modules/global';
-import { Init } from './modules/app';
+import { Launch } from './modules/app';
+import { Icon } from './modules/icons';
 
 // tooltips (with aria)
 import tippy from 'tippy.js';
@@ -7,15 +7,18 @@ import 'tippy.js/dist/tippy.css';
 
 
 jQuery(function () {
-    let appContainer = jQuery('#' + CCFW.appContainer);
-    appContainer.html(Init());
+    // FIRE!
+    Launch();
 
     /**
-     * additional app related interactions below
+     * The app is now visible on the front end
+     * ... additional app interactions can be added below
      */
 
-    // whirligig
-    appContainer.prepend('<div class="ccfw-ajax"> <div class="loader"> </div> </div>');
+    // aesthetic: prepend a cookie icon to section title
+    jQuery('h2:contains(Cookie Management Settings)').css({
+        marginBottom: '1.68em'
+    }).prepend(Icon.cookie(28));
 
     // tippy tooltips on app-info class elements
     tippy('.app-info', {
@@ -25,10 +28,4 @@ jQuery(function () {
         content: (reference) => reference.getAttribute('title'),
         offset: [-18, 10]
     });
-
-    // shall we debug?
-    if (jQuery('#' + CCFW.debug.checkbox).is(':checked')) {
-        CCFW.debug.active = true;
-        makeDebugContainer();
-    }
 });

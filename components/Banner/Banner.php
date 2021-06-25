@@ -47,7 +47,7 @@ class Banner
         global $ccfwHelper;
         $this->helper = $ccfwHelper;
 
-        $this->settings = new BannerSettings();
+        $this->settings = new LegacyBannerSettings();
 
         $options = get_option('ccfw_component_settings');
         $this->googleAnalyticsID = $options['ga_analytics_id'] ?? '';
@@ -61,6 +61,10 @@ class Banner
         add_filter('script_loader_tag', [$this, 'addTypeAttribute'], 10, 3);
         add_action('wp_enqueue_scripts', [$this, 'enqueue'], 11);
         add_action('wp_body_open', [$this, 'render'], 11);
+
+        if ($this->cookieObjectEmpty()) {
+            add_action('wp_head', array($this, 'disableGoogleAnalyticsOnLoad'), 11);
+        }
     }
 
     public function enqueue()
@@ -147,5 +151,36 @@ class Banner
         $tag = '<script type="module" src="' . esc_url($src) . '"></script><script nomodule src="'
             . esc_url($src) . '"></script>';
         return $tag;
+    }
+
+    public function disableGoogleAnalyticsOnLoad()
+    {
+        /**
+         * If cookie "ccfw_wp_plugin.ga.accept" not present, disable GA.
+         * Also check if any previous GA cookies are hanging around
+         * without an explicit "ccfw_wp_plugin.ga.accept" cookie present.
+         * If they are, remove.
+         */
+        ?>
+        <script>
+            var ccfwPluginGACookieNotPresent = document.cookie.indexOf('ccfw_wp_plugin.ga.accept=') == -1 ? true : false;
+            window['ga-disable-<?php echo $this->googleAnalyticsID; ?>'] = ccfwPluginGACookieNotPresent;
+
+            if (ccfwPluginGACookieNotPresent) {
+                var ccfwCookies = ['_ga', '_gid', '_gat_<?php echo $this->googleAnalyticsID; ?>'];
+                var ccfwCookiesArrayLength = ccfwCookies.length;
+                for (var ccfwCookie = 0; ccfwCookie < ccfwCookiesArrayLength; ccfwCookie++) {
+                    document.cookie = ccfwCookies[ccfwCookie] + '=; Path=/; domain=.'+ document.domain
+                        +'; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+                    // Also remove cookies that start with domains without www
+                    if(document.domain.includes("www.")){
+                        const nonWwwDomain = document.domain.replace("www.", "")
+                        document.cookie = ccfwCookies[ccfwCookie] + '=; Path=/; domain=.' + nonWwwDomain + '; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                    }
+                };
+            };
+        </script>
+        <?php
     }
 }
