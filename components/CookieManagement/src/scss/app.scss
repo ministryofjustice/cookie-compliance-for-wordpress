@@ -94,8 +94,12 @@ $breakpoints: (
         padding-bottom: 40px;
         position: relative;
 
-        #ccfw-section-select-container select {
-            margin-right: 10px;
+        #ccfw-section-select-container {
+            margin-bottom: 30px;
+
+            select {
+                margin-right: 10px;
+            }
         }
 
         .ccfw-ajax {

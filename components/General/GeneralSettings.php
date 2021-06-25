@@ -47,16 +47,23 @@ class GeneralSettings extends General
 
         ?>
         <input type='text' name='ccfw_component_settings[gtm_id]'
-        placeholder="GTM-XXXXXXX" value='<?php echo sanitize_html_class($googleAnalyticsID); ?>'
-        class="ccfw-component-input">
+               placeholder="GTM-XXXXXXX" value='<?php echo sanitize_html_class($googleAnalyticsID); ?>'
+               class="ccfw-component-input">
         <?php
     }
 
     public function settingsSectionCB()
     {
-        echo __(
-            'Enter the tracking GTM ID so that the cookie banner can identify specific trackers from your site.',
-            'cookie-compliance-for-wordpress'
-        );
+        $paras = [
+            'Cookie Compliance For WordPress uses GTM <em>blocklist</em> functionality to control <br>cookie deployment ' .
+            'and consent on the front end.',
+            'To get started you will need to integrate Google Tag Manager. By default, no tags will fire until ' .
+            'they <br>have been configured in the Cookie Management tab.',
+            'Enter a GTM ID so the cookie banner can begin to manage cookies for your site'
+        ];
+
+        echo '<p>' . __($paras[0], 'cookie-compliance-for-wordpress') . '</p>';
+        echo '<p>' . __($paras[1], 'cookie-compliance-for-wordpress') . '</p>';
+        echo '<p><strong>' . __($paras[2], 'cookie-compliance-for-wordpress') . '</strong></p>';
     }
 }

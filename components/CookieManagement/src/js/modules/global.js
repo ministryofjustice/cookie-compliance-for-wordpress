@@ -99,7 +99,7 @@ const CCFW = {
             container.append(group);
 
             // add to the page
-            jQuery('#' + CCFW.appContainer).prepend(container);
+            jQuery('#' + CCFW.appContainer).append(container);
 
             if (!CCFW.building) {
                 // focus on the group name input
@@ -297,7 +297,7 @@ const CCFW = {
             };
         },
         appInfoButton: () => {
-            let tooltip = 'Please select an option from the dropdown to create a cookie section. The section will ' +
+            let tooltip = 'Choose an option from the dropdown to create a cookie section. The section will ' +
                 'allow you to define groups of cookies.';
 
             return Button('app-info', Icon.info(), null, tooltip);
