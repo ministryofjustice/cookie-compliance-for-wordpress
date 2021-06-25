@@ -131,7 +131,10 @@ class AdminSettings
         foreach ((array)$wp_settings_sections[$page] as $key => $section) {
             echo '<div id="' . $key . '" class="ccfw-component-settings-section ' . sanitize_title($section['title']) . '">';
             if ($section['title']) {
-                echo "<h2>{$section['title']}</h2>\n";
+                $title_search = ['General Settings'];
+                $title_modify = ['Introduction'];
+                $title = str_replace($title_search, $title_modify, $section['title']);
+                echo "<h2>{$title}</h2>\n";
             }
 
             if ($section['callback']) {

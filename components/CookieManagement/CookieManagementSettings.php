@@ -96,6 +96,9 @@ class CookieManagementSettings extends CookieManagement
 
     public function settingsSectionCB()
     {
-        echo '';
+        echo 'Marketing cookies require a <strong>GTM ID</strong>. ' .
+            'Available ID\'s can be discovered on the ' .
+            '<a target="_blank" href="https://developers.google.com/tag-manager/web/restrict">' .
+            'GTM Restrict tag deployment</a> page.';
     }
 }
