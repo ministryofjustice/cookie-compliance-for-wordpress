@@ -55,13 +55,12 @@ function Submit (event) {
     // release the unload barrier
     window.onbeforeunload = null;
 
-    // grab data and send to the server, and
-    // stop page warning from appearing, if success
+    // go to the top of the page for smoothness
     jQuery('html, body').animate({ scrollTop: 30 }, 'fast');
 
-    // processing here:
+    // send data to the server
     if (App.form.post(CCFW.sections)) {
-        console.log('AJAX POST done! Good things happen here.');
+        console.log('AJAX POST done! Good things have happened here.');
     }
 }
 

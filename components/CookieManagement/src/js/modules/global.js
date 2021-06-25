@@ -28,8 +28,8 @@ const CCFW = {
             }
         },
         make: () => {
-            let debugContainer = jQuery('<div/>').attr({ id: CCFW.debug.container });
-            let iconsContainer = jQuery('<div/>').attr({ 'class': CCFW.debug.container + '-icons' });
+            let debugContainer = element('div',{ id: CCFW.debug.container });
+            let iconsContainer = element('div',{ 'class': CCFW.debug.container + '-icons' });
             iconsContainer.append(IconsAll(8));
 
             debugContainer.append(iconsContainer);
@@ -61,8 +61,6 @@ const CCFW = {
             let target = CCFW.building ? '#' + CCFW.sectionId + '-select' : this;
             let select = jQuery(target);
             let section = CCFW.building ? name : select.val();
-
-            console.log('Section name: ', section);
 
             let container = element('div', {
                 id: 'ccfw-section__' + section,
@@ -102,6 +100,11 @@ const CCFW = {
 
             // add to the page
             jQuery('#' + CCFW.appContainer).prepend(container);
+
+            if (!CCFW.building) {
+                // focus on the group name input
+                group.find('input[name="ccfw-group__input"]').focus();
+            }
 
             // listeners
             listener.group.save(section, CCFW.create.group);
@@ -204,17 +207,17 @@ const CCFW = {
                 cookie.find('input[name="name"]').val(data.row.name);
                 cookie.find('input[name="description"]').val(data.row.description);
                 cookie.find('input[name="expiry"]').val(data.row.expiry);
+            } else {
+                // focus on name for simplicity
+                cookie.find('input[name="name"]').focus();
             }
 
-            // focus on name for simplicity
-            cookie.find('input[name="name"]').focus();
 
             App.cookies.add(closest.section, closest.group, 'row_' + count);
             listener.row.save(CCFW.save.cookieData);
             listener.row.remove(CCFW.manage.removeRow);
         },
         cookieRow: (id) => {
-            console.log('row_' + id);
             // markup
             let row = element('div', { 'class': 'ccfw-cookie-row' }).data('id', 'row_' + id);
 
@@ -390,6 +393,7 @@ const addGroup = (section, group) => {
 const addGroupAllowlistID = (section, group, allowlistID) => {
     // ignore whilst building
     if (CCFW.building) { return false; }
+    beforeLeave();
     CCFW.sections[section][slugify(group)].allowlistID = allowlistID;
 
     // what have we got?
