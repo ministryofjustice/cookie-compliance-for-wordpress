@@ -89,6 +89,7 @@ const CCFW = {
      * @param remove acknowledges that we are removing all allowed ids
      */
     toggleAll: function (remove) {
+        let $ = jQuery;
         let allowList = CCFW.storage.allowed.get() || [];
 
         if (remove) {
@@ -115,6 +116,11 @@ const CCFW = {
         return allowList;
     },
     manageAll: (allowList, allowed, pressed) => {
+        if (!allowList) {
+            return;
+        }
+
+        let $ = jQuery;
         let totalAllowed = $('.' + CCFW.selector.toggles).length - 1;
 
         if (allowed !== 'all') {
