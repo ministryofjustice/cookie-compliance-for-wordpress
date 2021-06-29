@@ -190,7 +190,7 @@ const ccfwGTM = () => {
 
 const togglesChange = function (e) {
     e.preventDefault();
-    let toggle = $(this);
+    let toggle = jQuery(this);
     let allowed = toggle.data('allowlist');
     let allowList = CCFW.storage.allowed.get() || [];
     let pressed = toggle.attr('aria-checked') === 'true';
@@ -202,14 +202,14 @@ const togglesChange = function (e) {
 
     if (pressed) {
         allowList = allowList.filter(item => item !== allowed);
-        $('#ccfw-' + allowed + '-toggle-off').removeAttr('aria-hidden').show();
-        $('#ccfw-' + allowed + '-toggle-on').attr('aria-hidden', 'true').hide();
+        jQuery('#ccfw-' + allowed + '-toggle-off').removeAttr('aria-hidden').show();
+        jQuery('#ccfw-' + allowed + '-toggle-on').attr('aria-hidden', 'true').hide();
     } else {
         if (allowList.indexOf(allowed) === -1) {
             allowList.push(allowed);
         }
-        $('#ccfw-' + allowed + '-toggle-on').removeAttr('aria-hidden').show();
-        $('#ccfw-' + allowed + '-toggle-off').attr('aria-hidden', 'true').hide();
+        jQuery('#ccfw-' + allowed + '-toggle-on').removeAttr('aria-hidden').show();
+        jQuery('#ccfw-' + allowed + '-toggle-off').attr('aria-hidden', 'true').hide();
     }
 
     allowList = CCFW.manageAll(allowList, allowed, pressed);
