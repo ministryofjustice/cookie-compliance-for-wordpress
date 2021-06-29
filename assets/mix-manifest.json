@@ -1,0 +1,10 @@
+{
+    "/js/ccfw-frontend.js": "/js/ccfw-frontend.js",
+    "/js/ccfw-cookie-manage.js": "/js/ccfw-cookie-manage.js",
+    "/js/ccfw-admin-app.js": "/js/ccfw-admin-app.js",
+    "/js/ccfw-ie11CustomProperties.js": "/js/ccfw-ie11CustomProperties.js",
+    "/js/ccfw-frontend-legacy.js": "/js/ccfw-frontend-legacy.js",
+    "/css/ccfw-frontend-legacy.css": "/css/ccfw-frontend-legacy.css",
+    "/css/ccfw-admin-main.css": "/css/ccfw-admin-main.css",
+    "/css/ccfw-frontend.css": "/css/ccfw-frontend.css"
+}
