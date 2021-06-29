@@ -5,7 +5,6 @@ import { CCFW } from './ccfw-gtm';
 
     /**
      *  Define handlers for when the html/DOM is ready.
-     *  Banner settings use cookies (rather than local storage) to make older browsers < IE8 happy
      * TODO: Target data attributes rather than CSS classes
      * */
     $(function ($) {
@@ -239,5 +238,6 @@ import { CCFW } from './ccfw-gtm';
         utilities.init();
         banner.init();
         settingsModal.init();
+        CCFW.manageAll(CCFW.storage.allowed.get(), 'init', true)
     });
 })(jQuery);

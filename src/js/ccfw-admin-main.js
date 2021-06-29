@@ -30,6 +30,13 @@ jQuery(function ($) {
         return (window.location.pathname + window.location.search);
     }
 
+    function _ccfwSwitchTab(e) {
+        e.preventDefault();
+
+        setTab($(this).attr('href'));
+        return false;
+    }
+
     function setTab (tab) {
         let tabId, refererPath, anchors = $('.nav-tab-wrapper a');
 
@@ -58,19 +65,14 @@ jQuery(function ($) {
 
     // only run JS on our settings page
     if ($('.settings_page_cookie-compliance-for-wordpress-settings').length > 0) {
-        $('.nav-tab-wrapper').on('click', 'a', function (e) {
-            e.preventDefault();
-
-            setTab($(this).attr('href'));
-            return false;
-        });
+        $('.nav-tab-wrapper').on('click', 'a', _ccfwSwitchTab);
+        $('.ccfw-inline-tab-link').on('click', _ccfwSwitchTab);
 
         // set the tab
         let ccfwTabSelected = ccfwQString('ccfw-tab');
         setTab(ccfwTabSelected ? '#' + ccfwTabSelected : null);
     }
 });
-
 
 // polyfill Object.entries
 if (!Object.entries) {

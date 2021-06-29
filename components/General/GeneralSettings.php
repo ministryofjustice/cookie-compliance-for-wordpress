@@ -58,7 +58,8 @@ class GeneralSettings extends General
             'Cookie Compliance For WordPress uses GTM <em>blocklist</em> functionality to control <br>cookie deployment ' .
             'and consent on the front end.',
             'To get started you will need to integrate Google Tag Manager. By default, no tags will fire until ' .
-            'they <br>have been configured in the Cookie Management tab.',
+            'they <br>have been configured in the ' .
+            '<a href="#component-tab-1" class="ccfw-inline-tab-link">Cookie Management tab</a>.',
             'Enter a GTM ID so the cookie banner can begin to manage cookies for your site'
         ];
 

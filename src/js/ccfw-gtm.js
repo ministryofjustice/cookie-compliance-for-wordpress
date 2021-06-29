@@ -113,6 +113,35 @@ const CCFW = {
         });
 
         return allowList;
+    },
+    manageAll: (allowList, allowed, pressed) => {
+        let totalAllowed = $('.' + CCFW.selector.toggles).length - 1;
+
+        if (allowed !== 'all') {
+            if (pressed) {
+                allowList = allowList.filter(item => item !== 'all');
+                $('#ccfw-all-toggle-off').removeAttr('aria-hidden').show();
+                $('#ccfw-all-toggle-on').attr('aria-hidden', 'true').hide();
+                if (allowList.length === 0) {
+                    $('button[data-allowlist="all"]').attr('aria-checked', false);
+                }
+            }
+
+            if (allowList.length > 0) {
+                $('button[data-allowlist="all"]').attr('aria-checked', true);
+            }
+
+            if (totalAllowed === allowList.length) {
+                if (allowList.indexOf('all') === -1) {
+                    allowList.push('all');
+                }
+                $('#ccfw-all-toggle-on').removeAttr('aria-hidden').show();
+                $('#ccfw-all-toggle-off').attr('aria-hidden', 'true').hide();
+                $('button[data-allowlist="all"]').attr('aria-checked', true);
+            }
+        }
+
+        return allowList;
     }
 };
 
@@ -183,8 +212,9 @@ const togglesChange = function (e) {
         $('#ccfw-' + allowed + '-toggle-off').attr('aria-hidden', 'true').hide();
     }
 
+    allowList = CCFW.manageAll(allowList, allowed, pressed);
+
     CCFW.listItem.set(allowList);
-    console.log(allowList);
 
     return false;
 };

@@ -77,7 +77,7 @@ const CCFW = {
             // store the section
             App.section.add(section);
 
-            buttonRemove.append(Icon.bin());
+            buttonRemove.append(Icon.bin('20'));
             container.append(buttonRemove);
             container.append(element('h2').text(capitalize(section) + ' Cookies'));
 
