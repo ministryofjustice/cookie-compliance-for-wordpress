@@ -43,13 +43,18 @@ $breakpoints: (
     }
 
     #ccfw-cookie-management-banner {
-        max-width: 750px;
+        max-width: 705px;
+        margin-bottom:15px;
 
         img {
             width: 100%;
             height: auto;
-            margin-left: -35px;
-            margin-bottom: -35px;
+            margin-left: -25px;
+
+            @include respond-to('extra-extra-small') {
+                margin-left: -230px;
+                margin-bottom: -50px;
+            }
         }
     }
 

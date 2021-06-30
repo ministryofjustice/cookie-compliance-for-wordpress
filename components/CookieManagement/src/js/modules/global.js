@@ -121,7 +121,7 @@ const CCFW = {
             let nameSlugged = slugify(name);
             let sectionName = section.data('id');
             let descriptionContainer = '';
-            let allowList = Input('gtm-allowlist-id', 'GTM allow list ID');
+            let allowList = (sectionName === 'marketing' ? Input('gtm-allowlist-id', 'GTM allow list ID') : null);
             let description = Input('ccfw-group-description', 'Enter ' + name + ' group blurb');
 
             if (!name) {
@@ -142,8 +142,10 @@ const CCFW = {
 
             // update heading
             group.html(groupHeading(name + ' ' + Icon.success(18)));
-            group.append(allowList);
-            group.append(Button('ccfw-' + nameSlugged + '-allowlist-save', Icon.check(18)));
+            if (allowList) {
+                group.append(allowList);
+                group.append(Button('ccfw-' + nameSlugged + '-allowlist-save', Icon.check(18)));
+            }
 
             // create description elements and drop in the end of groups
             descriptionContainer = element('div', { 'class': 'ccfw-group__description' });
@@ -438,7 +440,16 @@ const removeCookie = (section, group, row) => {
 };
 
 const groupExists = (section, group) => CCFW.sections[section].hasOwnProperty(group);
-const rowExists = (section, group, row) => CCFW.sections[section][slugify(group)].cookies.hasOwnProperty(row);
+const rowExists = (section, group, row) => {
+    group = slugify(group);
+    // it's possible to save a group without a cookie defined
+    // if that happened and cookies doesn't exist, define it here.
+    if (!CCFW.sections[section][group].cookies) {
+        CCFW.sections[section][group].cookies = {};
+    }
+
+    return CCFW.sections[section][group].cookies.hasOwnProperty(row);
+}
 
 const capitalize = (s) => {
     if (typeof s !== 'string') return '';

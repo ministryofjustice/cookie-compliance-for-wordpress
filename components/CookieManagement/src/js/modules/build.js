@@ -21,6 +21,10 @@ const Builder = {
             // CREATE A SECTION
             CCFW.create.section(section);
 
+            if (!groups) {
+                continue;
+            }
+
             // second: groups
             for (const [slug, group] of Object.entries(groups)) {
                 // CREATE A GROUP
@@ -30,6 +34,10 @@ const Builder = {
                     description: group.description,
                     id: group.allowlistID,
                 });
+
+                if (!group.cookies) {
+                    continue;
+                }
 
                 // third: cookies
                 for (const [cookie, row] of Object.entries(group.cookies)) {

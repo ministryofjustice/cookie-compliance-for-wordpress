@@ -33,6 +33,7 @@ class CookieManagementSettings extends CookieManagement
 
     public function settingsFields($section)
     {
+
         add_settings_field(
             'cookie-management',
             __('', 'cookie-compliance-for-wordpress'),
@@ -45,14 +46,6 @@ class CookieManagementSettings extends CookieManagement
             'cookie-management-debug',
             __('', 'cookie-compliance-for-wordpress'),
             [$this, 'toggleDebug'],
-            'ccfwComponentSettings',
-            $section
-        );
-
-        add_settings_field(
-            'cookie-management-banner',
-            __('', 'cookie-compliance-for-wordpress'),
-            [$this, 'manageCookiesBanner'],
             'ccfwComponentSettings',
             $section
         );
@@ -82,16 +75,6 @@ class CookieManagementSettings extends CookieManagement
         />
         <label for="cookie-management-debug">Display developer information?</label>
         <?php
-    }
-
-    /**
-     * Display a decorative banner
-     */
-    public function manageCookiesBanner()
-    {
-        echo '<div id="ccfw-cookie-management-banner">
-                <img src="' . esc_url(plugins_url('/src/image/cookie-graphic.png', __FILE__)) . '" />
-              </div>';
     }
 
     public function settingsSectionCB()

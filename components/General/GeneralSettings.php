@@ -35,6 +35,14 @@ class GeneralSettings extends General
             'ccfwComponentSettings',
             $section
         );
+        add_settings_field(
+            'cookie-management-banner',
+            __('', 'cookie-compliance-for-wordpress'),
+            [$this, 'manageCookiesBanner'],
+            'ccfwComponentSettings',
+            $section
+        );
+
     }
 
     /**
@@ -50,6 +58,16 @@ class GeneralSettings extends General
                placeholder="GTM-XXXXXXX" value='<?php echo sanitize_html_class($googleAnalyticsID); ?>'
                class="ccfw-component-input">
         <?php
+    }
+
+    /**
+     * Display a decorative banner
+     */
+    public function manageCookiesBanner()
+    {
+        echo '<div id="ccfw-cookie-management-banner">
+                <img src="' . esc_url(plugins_url('/src/image/cookie-graphic.png', __FILE__)) . '" />
+              </div>';
     }
 
     public function settingsSectionCB()
