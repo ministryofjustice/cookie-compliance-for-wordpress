@@ -5,31 +5,16 @@ const ccfwGtmRunning = ccfwGTM();
 (function ($) {
     $(function ($) {
         if (ccfwGtmRunning) {
-            const toggleButtons = $('.ccfw-banner__toggle-slider');
-            const allowedIds = [];
-
-            // collect ids
-            toggleButtons.each(function (key, element) {
-                allowedIds.push($(element).data('allowlist'));
+            // cache all available allowlist identifiers
+            $('.ccfw-banner__toggle-slider').each(function (key, element) {
+                CCFW.allowedIds.push($(element).data('allowlist'));
             });
 
-            /**
-             * Cache all available allowlist identifiers
-             * @type {[]}
-             */
-            CCFW.allowedIds = allowedIds;
-
+            // setup a listener on each toggle button
             $('.' + CCFW.selector.toggles).on('click', togglesChange);
 
-            //CCFW.storage.clear('ccfw-banner-visibility');
-            //CCFW.storage.clear('ccfw-gtm-allowed');
-
-            /**
-             * clearStorage checks if 1 year has past since the user first set their choices.
-             */
+            // clearStorage; performs clear if 1 year has past since the user first set their choices.
             CCFW.clearStorage();
-
-            console.log(allowedIds);
         }
     });
 })(jQuery);

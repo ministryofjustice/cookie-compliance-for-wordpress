@@ -69,7 +69,7 @@ const CCFW = {
      * @private
      */
     jqTarget: function (event) {
-        return $(event.target);
+        return jQuery(event.target);
     },
     /**
      * Runs on load
@@ -95,49 +95,53 @@ const CCFW = {
             allowList = [];
         }
 
-        $('.' + CCFW.selector.toggles).each(function (key, element) {
-            let allowed = $(element).data('allowlist');
+        jQuery('.' + CCFW.selector.toggles).each(function (key, element) {
+            let allowed = jQuery(element).data('allowlist');
 
             if (remove) {
-                $(element).attr('aria-checked', false);
-                $('#ccfw-' + allowed + '-toggle-off').removeAttr('aria-hidden').show();
-                $('#ccfw-' + allowed + '-toggle-on').attr('aria-hidden', 'true').hide();
+                jQuery(element).attr('aria-checked', false);
+                jQuery('#ccfw-' + allowed + '-toggle-off').removeAttr('aria-hidden').show();
+                jQuery('#ccfw-' + allowed + '-toggle-on').attr('aria-hidden', 'true').hide();
             } else {
                 if (allowList.indexOf(allowed) === -1) {
                     allowList.push(allowed);
                 }
-                $(element).attr('aria-checked', true);
-                $('#ccfw-' + allowed + '-toggle-on').removeAttr('aria-hidden').show();
-                $('#ccfw-' + allowed + '-toggle-off').attr('aria-hidden', 'true').hide();
+                jQuery(element).attr('aria-checked', true);
+                jQuery('#ccfw-' + allowed + '-toggle-on').removeAttr('aria-hidden').show();
+                jQuery('#ccfw-' + allowed + '-toggle-off').attr('aria-hidden', 'true').hide();
             }
         });
 
         return allowList;
     },
     manageAll: (allowList, allowed, pressed) => {
-        let totalAllowed = $('.' + CCFW.selector.toggles).length - 1;
+        if (!allowList) {
+            return;
+        }
+
+        let totalAllowed = jQuery('.' + CCFW.selector.toggles).length - 1;
 
         if (allowed !== 'all') {
             if (pressed) {
                 allowList = allowList.filter(item => item !== 'all');
-                $('#ccfw-all-toggle-off').removeAttr('aria-hidden').show();
-                $('#ccfw-all-toggle-on').attr('aria-hidden', 'true').hide();
+                jQuery('#ccfw-all-toggle-off').removeAttr('aria-hidden').show();
+                jQuery('#ccfw-all-toggle-on').attr('aria-hidden', 'true').hide();
                 if (allowList.length === 0) {
-                    $('button[data-allowlist="all"]').attr('aria-checked', false);
+                    jQuery('button[data-allowlist="all"]').attr('aria-checked', false);
                 }
             }
 
             if (allowList.length > 0) {
-                $('button[data-allowlist="all"]').attr('aria-checked', true);
+                jQuery('button[data-allowlist="all"]').attr('aria-checked', true);
             }
 
             if (totalAllowed === allowList.length) {
                 if (allowList.indexOf('all') === -1) {
                     allowList.push('all');
                 }
-                $('#ccfw-all-toggle-on').removeAttr('aria-hidden').show();
-                $('#ccfw-all-toggle-off').attr('aria-hidden', 'true').hide();
-                $('button[data-allowlist="all"]').attr('aria-checked', true);
+                jQuery('#ccfw-all-toggle-on').removeAttr('aria-hidden').show();
+                jQuery('#ccfw-all-toggle-off').attr('aria-hidden', 'true').hide();
+                jQuery('button[data-allowlist="all"]').attr('aria-checked', true);
             }
         }
 
