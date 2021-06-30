@@ -42,7 +42,6 @@ class GeneralSettings extends General
             'ccfwComponentSettings',
             $section
         );
-
     }
 
     /**
