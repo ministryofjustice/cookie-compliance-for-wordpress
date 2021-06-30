@@ -89,7 +89,7 @@ const CCFW = {
                 'class': 'ccfw-' + section + '-group-save',
                 title: 'Create a group'
             });
-            buttonSave.append(Icon.save(22));
+            buttonSave.append(Icon.add(22));
 
             group.append(groupHeading());
             groupAction.append(Input('ccfw-group__input'));
@@ -319,7 +319,7 @@ const CCFW = {
                 'class': 'ccfw-' + section + '-group-save',
                 title: 'Create a group'
             });
-            buttonSave.append(Icon.save(22));
+            buttonSave.append(Icon.add(22));
 
             group.append(groupHeading());
             groupAction.append(Input('ccfw-group__input'));
