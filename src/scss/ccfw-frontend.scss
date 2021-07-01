@@ -5,16 +5,17 @@
 *
 **/
 
+$_govuk-imported-modules: null;
 
 // =========================================================
 // Responsive mixins
 // =========================================================
 
 $breakpoints: ('extra-extra-small': (min-width: 420px),
-'extra-small': (min-width: 641px),
-'small': (min-width: 767px),
-'medium': (min-width: 992px),
-'large': (min-width: 1200px)) !default;
+        'extra-small': (min-width: 641px),
+        'small': (min-width: 767px),
+        'medium': (min-width: 992px),
+        'large': (min-width: 1200px)) !default;
 
 // The extra-extra small is for the cookie tables
 /// Mixin to manage responsive breakpoints
@@ -31,7 +32,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         }
     }
 
-    // If the key doesn't exist in the map
+        // If the key doesn't exist in the map
     @else {
         @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
         +"Available breakpoints are: #{map-keys($breakpoints)}.";
@@ -51,7 +52,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
 .visually-hidden {
     position: absolute !important;
-    height: 1px; width: 1px;
+    height: 1px;
+    width: 1px;
     overflow: hidden;
     clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
     clip: rect(1px, 1px, 1px, 1px);
@@ -104,21 +106,26 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         width: 90%;
         height: 90%;
         border-top: 0;
-        padding: 8px;
+        padding: 18px 8px;
         position: fixed;
         z-index: 100000;
         display: block;
         background: #FFFFFF;
         overflow-y: scroll;
         box-sizing: border-box;
+        margin: auto auto;
 
-        @include respond-to('extra-extra-small') {
-            padding: 32px;
+        @include respond-to('extra-small') {
+            padding: 30px 25px;
+        }
+
+        @include respond-to('small') {
+            padding: 42px 32px;
             top: 10%;
             left: 10%;
             right: 10%;
             bottom: 10%;
-            width: 80%;
+            width: 55%;
             height: 80%;
         }
 
@@ -135,6 +142,17 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         margin: 0 auto;
         max-width: 960px;
         display: block;
+
+        &__section {
+            &:last-child {
+                border-bottom: 1px solid grey;
+                margin-bottom: 30px;
+            }
+        }
+
+        &__group {
+            padding: 20px 15px 30px;
+        }
 
         &__heading {
             @extend .govuk-heading-m;
@@ -168,6 +186,11 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             }
         }
 
+        &__save-preferences {
+            padding-top: 30px;
+            border-top: 1px solid grey;
+        }
+
         &__button {
             background-color: #1976D2;
             color: #FFFFFF;
@@ -187,9 +210,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
             &:focus {
                 background-color: #0D47A1;
-                box-shadow:
-                    0 0 0 2px #FFFFFF,
-                    0 0 0 4px #00A0CC;
+                box-shadow: 0 0 0 2px #FFFFFF,
+                0 0 0 4px #00A0CC;
                 outline: none;
             }
 
@@ -211,7 +233,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 background: none;
                 border: 0;
                 text-decoration: underline;
-                color:#1D70B8;
+                color: #1D70B8;
                 -webkit-text-fill-color: #1976D2;
                 margin-bottom: 16px;
                 text-align: right;
@@ -253,7 +275,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 font-family: inherit;
                 font-size: 19px;
                 background-color: #E8F1FB;
-                color:#0D47A1;
+                color: #0D47A1;
                 border: 1px solid #1976D2;
                 border-radius: 5px;
                 box-shadow: none;
@@ -271,14 +293,13 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 }
 
                 &:focus, &:active {
-                    box-shadow:
-                    0 0 0 2px #FFFFFF,
+                    box-shadow: 0 0 0 2px #FFFFFF,
                     0 0 0 4px #00A0CC;
                     outline: 2px solid transparent;
                 }
 
                 &:active {
-                    background-color:#403DD0;
+                    background-color: #403DD0;
                 }
 
                 @include respond-to('extra-small') {
@@ -326,9 +347,16 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         &__summary-text {
             max-width: 800px;
             @extend .govuk-body;
+            font-size: 16px;
 
             & + .ccfw-banner__button {
                 margin-top: 16px;
+            }
+
+            &:before {
+                content: "";
+                display: block;
+                clear: both;
             }
         }
 
@@ -353,7 +381,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
             &:first-of-type {
                 border-top: 1px solid gray;
-                padding-top: 16px;
+                border-bottom: 1px solid gray;
+                padding-top: 1px;
             }
 
             & .ccfw-banner__summary-heading {
@@ -370,6 +399,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         &__toggle-heading {
             float: left;
             width: 65%;
+            margin: 15px 0;
             @extend .govuk-heading-s;
 
             &--always-on {
@@ -378,6 +408,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 font-weight: bold;
                 font-size: 18px;
                 font-family: Arial;
+                margin: 16px 0;
             }
         }
 
@@ -387,6 +418,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             width: 65px;
             height: 34px;
             right: 0;
+            margin-top: 10px;
         }
 
         &__toggle-slider {
@@ -410,7 +442,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             &--on-text {
                 font-size: 12px;
                 position: absolute;
-                top: 5px;
+                top: 8px;
                 left: 7px;
                 color: white;
                 display: none;
@@ -419,11 +451,11 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             &--off-text {
                 font-size: 12px;
                 position: absolute;
-                top: 5px;
+                top: 8px;
                 right: 8px;
             }
 
-            &::before {
+            &:before {
                 content: '';
                 box-sizing: border-box;
                 position: absolute;
@@ -447,17 +479,15 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
             &:focus {
                 background-color: #0D47A1;
-                box-shadow:
-                    0 0 0 2px #FFFFFF,
-                    0 0 0 4px #00A0CC;
+                box-shadow: 0 0 0 2px #FFFFFF,
+                0 0 0 4px #00A0CC;
                 outline: none;
                 color: #FFFFFF;
             }
 
             &:active {
                 background-color: #403DD0;
-                box-shadow:
-                0 0 0 2px #FFFFFF,
+                box-shadow: 0 0 0 2px #FFFFFF,
                 0 0 0 4px #00A0CC;
                 outline-offset: 2px;
             }
@@ -476,7 +506,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 background-color: #FFFFFF;
                 -webkit-transform: translateX(24px);
                 -ms-transform: translateX(24px);
-                transform: translateX(24px);
+                transform: translateX(27px);
             }
 
             &:after {
@@ -488,9 +518,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
 
         &__expanding-section {
-            @extend .govuk-details;
-            padding-bottom: 32px;
-            border-bottom: 1px solid grey;
+            /*@extend .govuk-details;*/
 
             &:last-of-type {
             }
@@ -591,7 +619,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         left: 0;
         z-index: 9999;
         opacity: 1;
-        background: rgba( 0, 0, 0, 0.6 );
+        background: rgba(0, 0, 0, 0.6);
     }
 
     footer {
@@ -618,6 +646,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
     border: 0;
     height: 94px;
     width: 94px;
+    cursor: pointer;
 
     &:hover {
         background-color: transparent;
@@ -675,7 +704,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         }
     }
 
-    p.ccfw-settings-button__text {
+    span.ccfw-settings-button__text {
         font-size: 12px;
         margin-bottom: 0;
         color: #FFFFFF;

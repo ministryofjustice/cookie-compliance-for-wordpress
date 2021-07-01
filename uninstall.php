@@ -19,4 +19,6 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 delete_option('ccfw_plugin_settings');
 
 // for site options in Multisite
-delete_site_option('ccfw_plugin_settings');
+if (is_multisite()) {
+    delete_site_option('ccfw_plugin_settings');
+}

@@ -8,10 +8,10 @@
     "description": "WP plugin cookie-compliance-for-wordpress",
     "main": "index.js",
     "scripts": {
-        "dev": "NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "production": "NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "dev": "cross-env NODE_ENV=development webpack --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "cross-env NODE_ENV=development webpack --watch --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "hot": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "production": "cross-env NODE_ENV=production webpack --progress --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "repository": {
         "type": "git",
@@ -27,19 +27,19 @@
     "homepage": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress/#readme",
     "author": "MoJ",
     "devDependencies": {
-        "@babel/preset-react": "^7.10.4",
-        "copy-webpack-plugin": "^6.0.3",
-        "cross-env": "^6.0.3",
-        "laravel-mix": "^5.0.5",
-        "laravel-mix-imagemin": "^1.0.3",
-        "laravel-mix-svg": "^0.4.1",
-        "node-sass": "^4.14.1",
-        "resolve-url-loader": "^3.1.2",
-        "sass": "^1.26.10",
-        "sass-loader": "^7.3.1",
-        "vue-template-compiler": "^2.6.11"
+        "@babel/polyfill": "^7.12.1",
+        "copy-webpack-plugin": "^8.1.1",
+        "cross-env": "^7.0.3",
+        "laravel-mix": "^6.0.19",
+        "laravel-mix-glob": "^1.1.9",
+        "postcss": "^8.2.15",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.32.13",
+        "sass-loader": "^11.1.0",
+        "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "govuk-frontend": "^3.8.0"
+        "govuk-frontend": "^3.11.0",
+        "tippy.js": "^6.3.1"
     }
 }
