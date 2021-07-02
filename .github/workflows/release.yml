@@ -1,5 +1,5 @@
 ---
-name: "Stage Release"
+name: "Code Release"
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   create-release:
-    name: "Publishing latest changes"
+    name: "Compile and Release"
     runs-on: "ubuntu-latest"
 
     steps:
@@ -27,7 +27,7 @@ jobs:
         uses: juliangruber/read-file-action@v1.0.0
         with:
           path: ./VERSION
-      - run: echo ${{ steps.version.outputs.content }}
+      - run: echo "Version ${{ steps.version.outputs.content }}"
 
       - name: 'Checking version is valid'
         uses: mukunku/tag-exists-action@v1.0.0

@@ -64,8 +64,9 @@ class GeneralSettings extends General
      */
     public function manageCookiesBanner()
     {
+        $image = plugins_url('/assets/image/cookie-graphic.png', CCFW_PLUGIN_DIR . '/cookie-compliance-for-wordpress.php');
         echo '<div id="ccfw-cookie-management-banner">
-                <img src="' . esc_url(plugins_url('/src/image/cookie-graphic.png', __FILE__)) . '" />
+                <img src="' . esc_url($image) . '" />
               </div>';
     }
 
