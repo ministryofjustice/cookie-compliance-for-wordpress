@@ -178,7 +178,9 @@ const CCFW = {
 
             // update values if building
             if (CCFW.building) {
-                allowList.val(data.id);
+                if (allowList) {
+                    allowList.val(data.id);
+                }
                 description.val(data.description);
             }
         },

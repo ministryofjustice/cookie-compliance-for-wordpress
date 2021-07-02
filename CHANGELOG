@@ -1,7 +1,6 @@
-An all new upgrade bringing functionality to manage cookies and content more deeply.
+Further testing of the application uncovered an error where a value was trying to be assigned to the `allowlist` var
+in `global.js` (line 181) even when it was equal to null. This occurred on sections that do not contain an ID input field.
 
-This release offers control to the plugins admin user via a Cookie Management UI. The UI brings
-intelligent CRUD capabilities for easy management of Google Tag Manager tags and cookies.
+This release fixes and satisfies the following bug:
 
-- Include assets directory (during release artifact distribution work)
-
+-  global.js?2d9b:181 Uncaught TypeError: Cannot read property 'val' of null
