@@ -27,19 +27,19 @@
     "homepage": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress/#readme",
     "author": "MoJ",
     "devDependencies": {
-        "@babel/polyfill": "^7.12.1",
-        "copy-webpack-plugin": "^8.1.1",
+        "@babel/preset-env": "^7.14.7",
+        "copy-webpack-plugin": "^9.0.1",
         "cross-env": "^7.0.3",
-        "laravel-mix": "^6.0.19",
-        "laravel-mix-glob": "^1.1.9",
-        "postcss": "^8.2.15",
+        "laravel-mix": "^6.0.25",
+        "postcss": "^8.3.5",
         "resolve-url-loader": "^4.0.0",
-        "sass": "^1.32.13",
-        "sass-loader": "^11.1.0",
-        "vue-template-compiler": "^2.6.12"
+        "sass": "^1.35.1",
+        "sass-loader": "^12.1.0",
+        "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
-        "govuk-frontend": "^3.11.0",
+        "@babel/core": "^7.14.6",
+        "govuk-frontend": "^3.13.0",
         "tippy.js": "^6.3.1"
     }
 }

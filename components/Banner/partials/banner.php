@@ -214,4 +214,3 @@ $ccfw_ccfw_gtm_id = $ccfw_ccfw_gtm_id['gtm_id'] ?? 'null';
         </div>
     </div>
 </div>
-</div>

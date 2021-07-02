@@ -24,6 +24,8 @@ namespace CCFW\Components;
 // Do not allow access outside of WP to plugin
 defined('ABSPATH') || exit;
 
+define('CCFW_PLUGIN_DIR', __DIR__);
+
 require_once('components/Helper/Debug.php');
 // Plugin components
 require_once('components/AdminSettings/AdminSettings.php');
