@@ -93,7 +93,7 @@ class Helper
 
     public function enqueue($name)
     {
-        $asset_paths = file_get_contents($this->assetPath() . 'mix-manifest.json');
+        $asset_paths = file_get_contents(CCFW_PLUGIN_DIR . '/assets/mix-manifest.json');
         $assets = json_decode($asset_paths, true);
 
         // find the path
