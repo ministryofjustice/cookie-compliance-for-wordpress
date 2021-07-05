@@ -1,6 +1,5 @@
-Further testing of the application uncovered an error where a value was trying to be assigned to the `allowlist` var
-in `global.js` (line 181) even when it was equal to null. This occurred on sections that do not contain an ID input field.
+Fixes an issue were the application has HTTP 403 forbidden error preventing non-authenticated files reads on local system file.
 
-This release fixes and satisfies the following bug:
-
--  global.js?2d9b:181 Uncaught TypeError: Cannot read property 'val' of null
+Errors were as follows:
+- Warning: file_get_contents(<url>app/plugins/cookie-compliance-for-wordpress/assets/mix-manifest.json): failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden in /app/plugins/cookie-compliance-for-wordpress/components/Helper/Helper.php on line 96
+- Notice: Trying to access array offset on value of type null in app/plugins/cookie-compliance-for-wordpress/components/Helper/Helper.php on line 102
