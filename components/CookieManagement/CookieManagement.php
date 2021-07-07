@@ -55,7 +55,7 @@ class CookieManagement
     public function getCookies()
     {
         echo json_encode(get_option('ccfw_cookie_management_data'));
-        exit;
+        wp_die();
     }
 
     public function storeCookies()
@@ -78,11 +78,10 @@ class CookieManagement
             }
 
             echo json_encode($response);
-            exit;
+            wp_die();
         }
 
-        http_response_code(500);
         echo json_encode($response);
-        exit;
+        wp_die();
     }
 }

@@ -13,10 +13,14 @@ function sendCookies (data) {
         // hide whirligig
         jQuery('.ccfw-ajax').fadeOut('fast', function(){
             jQuery(this).removeClass('active');
-        }); //animation
+        });
+
+        // all done, acknowledge sections are stored and submit the page again
+        CCFW.sectionsStored = true;
+        jQuery('#submit').click();
+
     }).fail((data) => {
-        data = JSON.parse(data);
-        console.log(data.reason)
+        console.log(data);
     });
 }
 

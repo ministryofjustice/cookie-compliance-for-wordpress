@@ -1,5 +1,9 @@
-Fixes an issue were the application has HTTP 403 forbidden error preventing non-authenticated files reads on local system file.
+The Submit function in form.js has been refactored.
 
-Errors were as follows:
-- Warning: file_get_contents(<url>app/plugins/cookie-compliance-for-wordpress/assets/mix-manifest.json): failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden in /app/plugins/cookie-compliance-for-wordpress/components/Helper/Helper.php on line 96
-- Notice: Trying to access array offset on value of type null in app/plugins/cookie-compliance-for-wordpress/components/Helper/Helper.php on line 102
+**Background**
+When the save button has been clicked on the front end, the Submit function in form.js is called. The default action of the page is to send a form POST and refresh the page. The operation in Submit attempted to send an AJAX POST request before that happened but in some instances, was cut short by the page refresh and prevented the save operation from being successful.
+
+**Solution**
+Ideally the AJAX operation should be synchronous as opposed to asynchronous to prevent the page refresh happening before the operation has completed. However, as we are working in the window context, setting the async flag on the XMLHttpRequest request to `false` causes a deprecation warning stating that the flag is to be removed in later versions of XMLHttpRequest.open. See the spec for further details: https://xhr.spec.whatwg.org/#the-open()-method
+
+Regardless of this limitation, we still need to link the original save button request (click) with the AJAX store operation to keep the front end operation fluid. To achieve this the done() method of the jQuery ajax request sets a completed flag and then programmatically resubmits the form. This occurs only if there is data to store, i.e. the sections have changed.

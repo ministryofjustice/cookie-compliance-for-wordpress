@@ -8,7 +8,9 @@ const CCFW = {
     appContainer: 'ccfw-cookie-management',
     sectionId: 'ccfw-section-select-container',
     sections: {},
+    sectionsStored: false, // lets us know that sections have been saved
     sectionsLoaded: false, // locks the sections dropdown so we don't overwrite data
+    sectionsChanged: false, // flags if sections data has changed in the view
     building: false, // indicate the application is building the front end
     cookieRow: {
         name: '',
@@ -346,14 +348,17 @@ const CCFW = {
             }
 
             return Select(CCFW.sectionId, defaultOptions.reverse(), CCFW.create.section);
+        },
+        beforeUnload: (event) => {
+            event.preventDefault();
+            return event.returnValue = "Changes have been made to cookie content. Are you sure you want to leave?";
         }
     }
 };
 
 const beforeLeave = () => {
-    window.onbeforeunload = function () {
-        return 'Changes have been made to cookie content. Are you sure you want to leave?';
-    };
+    CCFW.sectionsChanged = true;
+    addEventListener("beforeunload", CCFW.manage.beforeUnload, {capture: true});
 };
 
 const addSection = (section) => {
