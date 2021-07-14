@@ -1,4 +1,5 @@
 import { CCFW } from './global';
+import { Builder } from './build';
 
 const groupSave = (section, callback) => {
     let element = jQuery('.ccfw-' + section + '-group-save');
@@ -6,9 +7,15 @@ const groupSave = (section, callback) => {
     element.on('click', callback);
 };
 
-const allowlistIDSave = (group, callback) => {
-    let element = jQuery('.ccfw-' + group + '-allowlist-save');
+const groupRemove = (callback) => {
+    let element = jQuery('.ccfw-group-remove');
+    element.off('click', callback);
     element.on('click', callback);
+};
+
+const allowlistIDSave = (callback) => {
+    let element = jQuery('.ccfw-cookie-row__gtm-allowlist-id');
+    element.on('keyup', callback);
 };
 
 const rowAdd = (callback) => {
@@ -41,6 +48,15 @@ const debugToggle = () => {
     let element = jQuery('#' + CCFW.debug.checkbox);
     element.on('change', toggleDebug);
 };
+const debugImportObject = () => {
+    let element = jQuery('.' + CCFW.debug.import.textarea);
+    element.on('keypress', CCFW.manage.readonly);
+    element.on('keyup', importObjectDebug);
+};
+const debugCopyObject = () => {
+    let element = jQuery('#' + CCFW.debug.preContainer).find('pre');
+    element.on('click', copyObjectDebug);
+};
 
 function toggleDebug () {
     let checked = jQuery(this).is(':checked');
@@ -58,13 +74,47 @@ function toggleDebug () {
     }
 }
 
+const importObjectDebug = () => {
+    let content = jQuery('.' + CCFW.debug.import.textarea).val();
+
+    if (CCFW.manage.isJson(content)) {
+        let json = JSON.parse(content);
+
+        /////////
+        // could extend to check if the object matches expected sections
+        /////////
+
+        if (json) {
+            CCFW.sections = json;
+            Builder.load();
+
+            CCFW.debug.output();
+        }
+    }
+};
+
+function copyObjectDebug () {
+    let pre = jQuery(this);
+    let content = pre.text();
+    let input = jQuery('<input>');
+    jQuery('body').append(input);
+    input.val(content).select();
+    document.execCommand('copy');
+    input.remove();
+    pre.addClass('copied');
+    setTimeout(() => pre.removeClass('copied'), 500);
+}
+
 ///////////////////////////////////////
 ///////////////////////////////////////
 
 const listener = {
     group: {
         save: (section, callback) => groupSave(section, callback),
-        allowlist: (group, callback) => allowlistIDSave(group, callback),
+        remove: (callback) => groupRemove(callback),
+        allowlist: {
+            save: (callback) => allowlistIDSave(callback)
+        },
         description: {
             save: (callback) => descriptionSave(callback)
         }
@@ -80,7 +130,11 @@ const listener = {
             focusBlur: (callback) => jQuery('#' + CCFW.appContainer).on('focus blur', 'input', callback)
         }
     },
-    debug: () => debugToggle()
+    debug: {
+        toggle: () => debugToggle(),
+        import: () => debugImportObject(),
+        copy: () => debugCopyObject()
+    }
 };
 
 export { listener };

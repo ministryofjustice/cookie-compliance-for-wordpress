@@ -54,6 +54,12 @@ const Button = (className, icon, text, title) => {
  * @return {boolean}
  */
 function Submit (event) {
+    // perform a check for valid GTM allowlist ID's
+    if (!CCFW.manage.allowlistIdsValid()) {
+        event.preventDefault();
+        return false;
+    }
+
     if (CCFW.sectionsChanged) {
         // release the unload barrier
         removeEventListener('beforeunload', CCFW.manage.beforeUnload, { capture: true });

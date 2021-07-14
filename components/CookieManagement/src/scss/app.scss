@@ -88,6 +88,38 @@ $breakpoints: (
             padding-bottom: 20px;
             border-bottom: 1px solid #cccccc;
         }
+
+        #ccfw-import-container {
+            .ccfw-import-cookie-object {
+                width: 100%;
+                min-height: 100px;
+                margin-bottom: 18px;
+
+                @include respond-to('medium') {
+                    min-height: 50vh;
+                }
+            }
+        }
+
+        pre {
+            position:relative;
+            background-color: white;
+            transition: background-color .3s;
+            cursor: copy;
+
+            &.copied {
+                background-color: #f8ee89;
+
+                &:before {
+                    content: 'copied!';
+                    position: absolute;
+                    right:10px;
+                    top:5px;
+                    color: #cc0001
+                }
+
+            }
+        }
     }
 
     h2 > .ccfw-icon__cookie {
@@ -161,7 +193,10 @@ $breakpoints: (
                     line-height: 1;
                     min-height: 25px;
                     margin: 0 3px 5px 0;
-                    border-color: #9b0b0b;
+
+                    &.ccfw-form-input-invalid {
+                        border-color: #9b0b0b;
+                    }
 
                     .complete {
                         border-color: inherit;
@@ -190,7 +225,7 @@ $breakpoints: (
                     display: inline-block;
                     font-size: 1.05rem;
                     font-weight: 600;
-                    margin-right: 15px;
+                    margin-right: 0;
                     margin-bottom: 10px;
 
                     span {
@@ -208,7 +243,7 @@ $breakpoints: (
                     width: 60%;
 
                     @include respond-to('small') {
-                        width: 30%;
+                        width: 20%;
                     }
                 }
 
@@ -330,6 +365,16 @@ $breakpoints: (
                 position: absolute;
                 top: -2px;
                 left: 6px;
+            }
+
+            &.ccfw-group-remove {
+                svg {
+                    top: -3px;
+                    transition: fill .2s;
+                    &:hover {
+                        fill: #CC0000
+                    }
+                }
             }
 
             &.ccfw-section-remove {

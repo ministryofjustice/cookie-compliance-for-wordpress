@@ -1,9 +1,19 @@
-The Submit function in form.js has been refactored.
+Background
+-----------
+The cookie banner requires the user to click a green tick to accept the tag type (GTM allowlist ID). This can be missed and cause difficulty for the user.
 
-**Background**
-When the save button has been clicked on the front end, the Submit function in form.js is called. The default action of the page is to send a form POST and refresh the page. The operation in Submit attempted to send an AJAX POST request before that happened but in some instances, was cut short by the page refresh and prevented the save operation from being successful.
+Also, the user may not be aware that the GTM Allowlist ID field is empty.
 
-**Solution**
-Ideally the AJAX operation should be synchronous as opposed to asynchronous to prevent the page refresh happening before the operation has completed. However, as we are working in the window context, setting the async flag on the XMLHttpRequest request to `false` causes a deprecation warning stating that the flag is to be removed in later versions of XMLHttpRequest.open. See the spec for further details: https://xhr.spec.whatwg.org/#the-open()-method
+Solution
+-----------
+The GTM allowlist ID is now validated and accepted at the point of saving the cookie banner settings.
 
-Regardless of this limitation, we still need to link the original save button request (click) with the AJAX store operation to keep the front end operation fluid. To achieve this the done() method of the jQuery ajax request sets a completed flag and then programmatically resubmits the form. This occurs only if there is data to store, i.e. the sections have changed.
+Other Enhancements
+------------------
+- Developer Information Panel -> data import feature
+ - Click to copy sections object to clipboard
+ - When sections are empty, display textarea to accept paste from clipboard (import data)
+ - The import function will only accept JSON
+- Remove groups
+ - Rubbish bin button provided at the group level
+ - Confirmation box is presented to the user before removal
