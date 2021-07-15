@@ -15,7 +15,7 @@ const Launch = () => {
     // listen out for focus and blur events
     listener.form.input.focusBlur(CCFW.manage.inputFocus);
     // listen out for changes on the debug checkbox
-    listener.debug();
+    listener.debug.toggle();
     // listen out for submissions on the page
     listener.form.submit(Submit);
 
