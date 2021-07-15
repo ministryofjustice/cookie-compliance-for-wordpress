@@ -1,7 +1,8 @@
-import { Icon, IconsAll } from './icons';
+import { Helper } from './helper';
 import { ajax } from './ajax';
-import { element, groupHeading } from './element';
 import { listener } from './listeners';
+import { Icon, IconsAll } from './icons';
+import { element, groupHeading } from './element';
 import { Button, Input, Option, Select } from './form';
 
 const CCFW = {
@@ -34,14 +35,14 @@ const CCFW = {
             }
         },
         make: () => {
-            let debugContainer = element('div',{ id: CCFW.debug.container });
-            let iconsContainer = element('div',{ 'class': CCFW.debug.container + '-icons' });
-            iconsContainer.append(IconsAll(8));
+            let debug = element('div',{ id: CCFW.debug.container });
+            let icons = element('div',{ 'class': CCFW.debug.container + '-icons' });
+            icons.append(IconsAll(8));
 
-            debugContainer.append(iconsContainer);
-            debugContainer.append('<div id ="' + CCFW.debug.preContainer + '"/>');
+            debug.append(icons);
+            debug.append('<div id ="' + CCFW.debug.preContainer + '"/>');
 
-            jQuery('#' + CCFW.appContainer).before(debugContainer);
+            jQuery('#' + CCFW.appContainer).before(debug);
 
             CCFW.debug.output();
         },
@@ -53,28 +54,22 @@ const CCFW = {
             let sections = JSON.stringify(CCFW.sections, undefined, 4);
 
             if (sections.length < 5) {
-                let objImport = element('div', {id: CCFW.debug.import.container });
+                let imports = element('div', {id: CCFW.debug.import.container });
 
-                objImport.append('<h3>Import Cookies</h3>');
-                objImport.append(element('textarea', {
+                imports.append('<h3>Import cookies</h3>');
+                imports.append(element('textarea', {
                     'class': CCFW.debug.import.textarea
                 }));
 
-                jQuery('#' + CCFW.debug.preContainer).html(objImport);
+                jQuery('#' + CCFW.debug.preContainer).html(imports);
 
                 listener.debug.import();
             } else {
                 let debugging = document.getElementById(CCFW.debug.preContainer);
-                debugging.innerHTML = "<pre>" + sections + "</pre>";
+                debugging.innerHTML = "<pre> " + sections + " </pre>";
                 listener.debug.copy();
             }
         }
-    },
-    alert: (message) => {
-        alert(message);
-    },
-    confirm: (message) => {
-        return window.confirm(message);
     },
     create: {
         app: () => {
@@ -158,7 +153,7 @@ const CCFW = {
             }
 
             if (!CCFW.building && App.group.exists(sectionName, nameSlugged)) {
-                CCFW.alert('The group "' + name + '" already exists. Please chose another name.');
+                Helper.alert('The group "' + name + '" already exists. Please chose another name.');
                 return;
             }
 
@@ -270,6 +265,8 @@ const CCFW = {
 
             // remove error class if present
             input.removeClass('ccfw-form-input-invalid');
+            // remove warning icon
+            input.next('svg.ccfw-icon__warning').remove();
 
             App.group.allowlistId.save(closest, input.val());
         },
@@ -298,7 +295,7 @@ const CCFW = {
         },
         deleteSection: function () {
             let section = jQuery(this).parent('div').data('id');
-            let confirm = CCFW.confirm('\nAre you sure you want to remove ' + section + ' cookies?');
+            let confirm = Helper.confirm('\nAre you sure you want to remove ' + section + ' cookies?');
 
             if (confirm) {
                 // remove the section
@@ -333,7 +330,7 @@ const CCFW = {
         },
         removeGroup: function () {
             let closest = CCFW.manage.locationData(jQuery(this));
-            let confirm = CCFW.confirm('\nAre you sure you want to remove the ' + closest.group + ' group from ' +
+            let confirm = Helper.confirm('\nAre you sure you want to remove the ' + closest.group + ' group from ' +
                 closest.section + ' cookies?');
 
             if (confirm) {
@@ -388,17 +385,22 @@ const CCFW = {
             event.preventDefault();
             return event.returnValue = "Changes have been made to cookie content. Are you sure you want to leave?";
         },
+        /**
+         * Validate all GTM allowlist IDs
+         * @return {boolean}
+         */
         allowlistIdsValid: () => {
             let success = true;
-            console.log("Checking IDs....");
 
             for (const [section, groups] of Object.entries(CCFW.sections)) {
                 // only marketing cookies have IDs
                 if (section === 'marketing') {
                     for (const [group, groupObject] of Object.entries(groups)) {
                         if (!validId(section, group)) {
-                            jQuery('#ccfw-section__' + section + ' .ccfw-group__' + group + ' .ccfw-cookie-row__gtm-allowlist-id').addClass('ccfw-form-input-invalid');
-                            CCFW.alert('The ' + groupObject.name + ' group has an invalid GTM Allowlist ID.');
+                            let input = jQuery('#ccfw-section__' + section + ' .ccfw-group__' + group + ' .ccfw-cookie-row__gtm-allowlist-id');
+                            input.after(Icon.warning(18));
+                            input.addClass('ccfw-form-input-invalid');
+                            Helper.alert('The ' + groupObject.name + ' group has an invalid GTM Allowlist ID.');
                             success = false;
                         }
                     }
@@ -406,48 +408,6 @@ const CCFW = {
             }
 
             return success;
-        },
-        readonly: (evt) => {
-            let clipboardKeys = {
-                winInsert : 45,
-                winDelete : 46,
-                SelectAll : 97,
-                macCopy : 99,
-                macPaste : 118,
-                macCut : 120,
-                redo : 121,
-                undo : 122
-            }
-            // Simulate readonly but allow all clipboard, undo and redo action keys
-            let charCode = evt.which;
-            // Accept ctrl+v, ctrl+c, ctrl+z, ctrl+insert, shift+insert, shift+del and ctrl+a
-            if (
-                evt.ctrlKey && charCode == clipboardKeys.redo ||		/* ctrl+y redo			*/
-                evt.ctrlKey && charCode == clipboardKeys.undo ||		/* ctrl+z undo			*/
-                evt.ctrlKey && charCode == clipboardKeys.macCut ||		/* ctrl+x mac cut		*/
-                evt.ctrlKey && charCode == clipboardKeys.macPaste ||		/* ctrl+v mac paste		*/
-                evt.ctrlKey && charCode == clipboardKeys.macCopy ||		/* ctrl+c mac copy		*/
-                evt.shiftKey && evt.keyCode == clipboardKeys.winInsert ||	/* shift+ins windows paste	*/
-                evt.shiftKey && evt.keyCode == clipboardKeys.winDelete ||	/* shift+del windows cut	*/
-                evt.ctrlKey && evt.keyCode == clipboardKeys.winInsert  ||	/* ctrl+ins windows copy	*/
-                evt.ctrlKey && charCode == clipboardKeys.SelectAll		/* ctrl+a select all		*/
-            ){ return 0; }
-            // Shun all remaining keys simulating readonly textarea
-            let theEvent = evt || window.event;
-            let key = theEvent.keyCode || theEvent.which;
-            key = String.fromCharCode(key);
-            let regex = /[]|\./;
-            if(!regex.test(key)) {
-                theEvent.returnValue = false;
-                theEvent.preventDefault();
-            }
-        },
-        isJson: (str) => {
-            try {
-                return [null, JSON.parse(str)];
-            } catch (err) {
-                // return [err];
-            }
         }
     }
 };
