@@ -85,8 +85,9 @@ const importObjectDebug = () => {
         /////////
 
         CCFW.sections = json;
-        Builder.load();
+        CCFW.sectionsChanged = true; // signal that section data has changed.
 
+        Builder.load();
         CCFW.debug.output();
     }
 };

@@ -313,6 +313,10 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             all: unset;
             font-family: Arial, sans-serif;
 
+            * {
+                box-sizing: border-box;
+            }
+
             &:after {
                 content: "";
                 display: block;

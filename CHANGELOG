@@ -11,9 +11,9 @@ The GTM allowlist ID is now validated and accepted at the point of saving the co
 Other Enhancements
 ------------------
 - Developer Information Panel -> data import feature
- - Click to copy sections object to clipboard
- - When sections are empty, display textarea to accept paste from clipboard (import data)
- - The import function will only accept JSON
+  - Click to copy sections object to clipboard
+  - When sections are empty, display `textarea` to accept paste from clipboard (import data)
+  - The import function will only accept JSON
 - Remove groups
- - Rubbish bin button provided at the group level
- - Confirmation box is presented to the user before removal
+  - Rubbish bin button provided at the group level
+  - Confirmation box is presented to the user before removal
