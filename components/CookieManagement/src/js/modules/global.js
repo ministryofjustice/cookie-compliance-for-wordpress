@@ -398,7 +398,11 @@ const CCFW = {
                     for (const [group, groupObject] of Object.entries(groups)) {
                         if (!validId(section, group)) {
                             let input = jQuery('#ccfw-section__' + section + ' .ccfw-group__' + group + ' .ccfw-cookie-row__gtm-allowlist-id');
-                            input.after(Icon.warning(18));
+
+                            if (input.siblings('.ccfw-icon__warning').length === 0) {
+                                input.after(Icon.warning(18));
+                            }
+
                             input.addClass('ccfw-form-input-invalid');
                             Helper.alert('The ' + groupObject.name + ' group has an invalid GTM Allowlist ID.');
                             success = false;
