@@ -1,9 +1,20 @@
 import { CCFW } from './global';
-import { Builder } from './build';
 import { Helper } from './helper';
 
 const groupSave = (section, callback) => {
     let element = jQuery('.ccfw-' + section + '-group-save');
+    element.off('click', callback);
+    element.on('click', callback);
+};
+
+const groupEdit = (callback) => {
+    let element = jQuery('.ccfw-group-name-change');
+    element.off('click', callback);
+    element.on('click', callback);
+};
+
+const groupNameSave = (callback) => {
+    let element = jQuery('.ccfw-group__name-save');
     element.off('click', callback);
     element.on('click', callback);
 };
@@ -16,6 +27,7 @@ const groupRemove = (callback) => {
 
 const allowlistIDSave = (callback) => {
     let element = jQuery('.ccfw-cookie-row__gtm-allowlist-id');
+    element.off('keyup', callback);
     element.on('keyup', callback);
 };
 
@@ -39,6 +51,7 @@ const rowSave = (callback) => {
 
 const descriptionSave = (callback) => {
     let element = jQuery('.ccfw-group__description input');
+    element.off('keyup', callback);
     element.on('keyup', callback);
 };
 
@@ -49,10 +62,10 @@ const debugToggle = () => {
     let element = jQuery('#' + CCFW.debug.checkbox);
     element.on('change', toggleDebug);
 };
-const debugImportObject = () => {
+const debugImportObject = (callback) => {
     let element = jQuery('.' + CCFW.debug.import.textarea);
     element.on('keypress', Helper.readonly);
-    element.on('keyup', importObjectDebug);
+    element.on('keyup', callback);
 };
 const debugCopyObject = () => {
     let element = jQuery('#' + CCFW.debug.preContainer).find('pre');
@@ -75,30 +88,17 @@ function toggleDebug () {
     }
 }
 
-const importObjectDebug = () => {
-    let content = jQuery('.' + CCFW.debug.import.textarea).val();
-    let json = Helper.isJson(content); // returns the object
-
-    if (json) {
-        /////////
-        // could extend the check to detect if the object matches expected sections
-        /////////
-
-        CCFW.sections = json;
-        CCFW.sectionsChanged = true; // signal that section data has changed.
-
-        Builder.load();
-        CCFW.debug.output();
-    }
-};
-
 ///////////////////////////////////////
 ///////////////////////////////////////
 
 const listener = {
     group: {
         save: (section, callback) => groupSave(section, callback),
+        edit: (callback) => groupEdit(callback),
         remove: (callback) => groupRemove(callback),
+        name: {
+            save: (callback) => groupNameSave(callback)
+        },
         allowlist: {
             save: (callback) => allowlistIDSave(callback)
         },
@@ -119,8 +119,15 @@ const listener = {
     },
     debug: {
         toggle: () => debugToggle(),
-        import: () => debugImportObject(),
+        import: (callback) => debugImportObject(callback),
         copy: () => debugCopyObject()
+    },
+    remove: {
+        group: {
+            name: {
+                save: () => jQuery('.ccfw-group__name-save').off('click')
+            }
+        }
     }
 };
 

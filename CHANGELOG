@@ -17,3 +17,10 @@ Other Enhancements
 - Remove groups
   - Rubbish bin button provided at the group level
   - Confirmation box is presented to the user before removal
+- Rename groups
+  - Edit icon now present that produces an input field and submit button when click
+  - Groups are updated in position to maintain order integrity
+
+Security
+--------
+HTML code is now removed from input fields.

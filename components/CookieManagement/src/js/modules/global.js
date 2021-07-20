@@ -2,8 +2,9 @@ import { Helper } from './helper';
 import { ajax } from './ajax';
 import { listener } from './listeners';
 import { Icon, IconsAll } from './icons';
-import { element, groupHeading } from './element';
+import { element, groupHeading, groupName } from './element';
 import { Button, Input, Option, Select } from './form';
+import { Builder } from './build';
 
 const CCFW = {
     appContainer: 'ccfw-cookie-management',
@@ -35,8 +36,8 @@ const CCFW = {
             }
         },
         make: () => {
-            let debug = element('div',{ id: CCFW.debug.container });
-            let icons = element('div',{ 'class': CCFW.debug.container + '-icons' });
+            let debug = element('div', { id: CCFW.debug.container });
+            let icons = element('div', { 'class': CCFW.debug.container + '-icons' });
             icons.append(IconsAll(8));
 
             debug.append(icons);
@@ -54,7 +55,7 @@ const CCFW = {
             let sections = JSON.stringify(CCFW.sections, undefined, 4);
 
             if (sections.length < 5) {
-                let imports = element('div', {id: CCFW.debug.import.container });
+                let imports = element('div', { id: CCFW.debug.import.container });
 
                 imports.append('<h3>Import cookies</h3>');
                 imports.append(element('textarea', {
@@ -63,10 +64,10 @@ const CCFW = {
 
                 jQuery('#' + CCFW.debug.preContainer).html(imports);
 
-                listener.debug.import();
+                listener.debug.import(debugImportObject);
             } else {
                 let debugging = document.getElementById(CCFW.debug.preContainer);
-                debugging.innerHTML = "<pre> " + sections + " </pre>";
+                debugging.innerHTML = '<pre>' + sections + '</pre>';
                 listener.debug.copy();
             }
         }
@@ -165,8 +166,9 @@ const CCFW = {
             group.addClass('ccfw-group__' + nameSlugged);
 
             // update heading
-            group.html(groupHeading(name + ' ' + Icon.success(18)));
-            group.append(Button('ccfw-group-remove', Icon.bin(16, 'grey')));
+            group.html(groupHeading(name));
+            group.append(Button('ccfw-group-name-change', Icon.edit(16, 'grey'), '', 'Edit the ' + name + ' group name'));
+            group.append(Button('ccfw-group-remove', Icon.bin(16, 'grey'), '', 'Remove ' + name + ' from the ' + sectionName + ' section'));
             if (allowList) {
                 group.append(allowList);
             }
@@ -194,6 +196,7 @@ const CCFW = {
 
             // listeners
             listener.group.save(sectionName, CCFW.create.group);
+            listener.group.edit(CCFW.manage.editGroup);
             listener.group.remove(CCFW.manage.removeGroup);
             listener.group.allowlist.save(CCFW.save.allowListId);
             listener.group.description.save(CCFW.save.description);
@@ -219,7 +222,7 @@ const CCFW = {
             // manage row counts and ID's
             if (!CCFW.building) {
                 while (validId === false) {
-                    if (App.cookies.row.exists(closest.section, closest.group, 'row_' + count)) {
+                    if (App.cookies.row.exists(closest.section, closest.group.id, 'row_' + count)) {
                         count++;
                     } else {
                         validId = true;
@@ -241,8 +244,7 @@ const CCFW = {
                 cookie.find('input[name="name"]').focus();
             }
 
-
-            App.cookies.add(closest.section, closest.group, 'row_' + count);
+            App.cookies.add(closest.section, closest.group.id, 'row_' + count);
             listener.row.save(CCFW.save.cookieData);
             listener.row.remove(CCFW.manage.removeRow);
         },
@@ -268,13 +270,13 @@ const CCFW = {
             // remove warning icon
             input.next('svg.ccfw-icon__warning').remove();
 
-            App.group.allowlistId.save(closest, input.val());
+            App.group.allowlistId.save(closest, input.val().replace(/(<([^>]+)>)/gi, ""));
         },
         description: function () {
             let input = jQuery(this);
             let closest = CCFW.manage.locationData(input);
 
-            App.group.description.save(closest, input.val());
+            App.group.description.save(closest, input.val().replace(/(<([^>]+)>)/gi, ""));
         },
         cookieData: function () {
             let input = jQuery(this);
@@ -282,7 +284,7 @@ const CCFW = {
             let row = input.parent().data('id');
             let name = input.prop('name');
 
-            App.cookies.update(closest.section, closest.group, row, name, input.val());
+            App.cookies.update(closest.section, closest.group.id, row, name, input.val().replace(/(<([^>]+)>)/gi, ""));
         }
     },
     manage: {
@@ -319,7 +321,10 @@ const CCFW = {
         locationData: (ele) => {
             return {
                 section: ele.closest('div.ccfw-section').data('id'),
-                group: ele.closest('div.ccfw-group').data('id')
+                group: {
+                    id: ele.closest('div.ccfw-group').data('id'),
+                    name: ele.closest('div.ccfw-group').find('.ccfw-group__heading span').text().trim()
+                }
             };
         },
         appInfoButton: () => {
@@ -328,16 +333,74 @@ const CCFW = {
 
             return Button('app-info', Icon.info(), null, tooltip);
         },
+        editGroup: function () {
+            let closest = CCFW.manage.locationData(jQuery(this));
+            let group = jQuery('.ccfw-group__' + closest.group.id + ' .ccfw-group__heading')
+            let edit = element('span', {'class': 'ccfw-group__name'});
+            let input = element('input', {
+                type: 'text',
+                name: 'ccfw-group__name-input',
+                value: closest.group.name,
+                'class': 'ccfw-group__name-input'
+            });
+
+            // clean up IU
+            jQuery(this).remove();
+            group.find('> span').remove();
+
+            edit.append(input);
+            edit.append(Button('ccfw-group__name-save', Icon.check('22')));
+            group.append(edit);
+
+            listener.group.name.save(CCFW.manage.updateGroupName);
+        },
+        updateGroupName: function() {
+            let button = jQuery(this);
+            let closest = CCFW.manage.locationData(button);
+            let name = button.siblings('input').val().replace(/(<([^>]+)>)/gi, "");
+            let slugged = slugify(name);
+            let group = button.closest('div.ccfw-group');
+            let groupObj = App.group.get(closest.section, closest.group.id);
+            let update = element('span');
+
+            // change the name on the object
+            groupObj.name = name;
+            // run an update on the section object
+            Helper.group.update(closest, slugged, groupObj);
+
+            // remove and update if the slug has changed
+            if (slugged !== closest.group.id) {
+                App.group.remove(closest.section, closest.group.id);
+
+                // update
+                group.data('id', slugged)
+                    .removeClass('ccfw-group__' + closest.group.id)
+                    .addClass('ccfw-group__' + slugged);
+            }
+
+            // restore UI
+            button.parent().remove();
+            update.append(groupName(name));
+            group.find('.ccfw-group__heading').append(update).after(
+                Button('ccfw-group-name-change', Icon.edit(16, 'grey'), '', 'Edit the ' + name + ' group name')
+            );
+
+            // reassign the listener
+            listener.group.edit(CCFW.manage.editGroup);
+
+            // all done, update the debug panel
+            CCFW.debug.output();
+        },
         removeGroup: function () {
             let closest = CCFW.manage.locationData(jQuery(this));
-            let confirm = Helper.confirm('\nAre you sure you want to remove the ' + closest.group + ' group from ' +
+            let confirm = Helper.confirm('\nAre you sure you want to remove the ' + closest.group.name + ' group from ' +
                 closest.section + ' cookies?');
 
             if (confirm) {
                 // remove the group
-                jQuery('.ccfw-group__' + closest.group).remove();
+                jQuery('.ccfw-group__' + closest.group.id).remove();
 
-                App.group.remove(closest.section, closest.group);
+                App.group.remove(closest.section, closest.group.id);
             }
         },
         removeRow: function () {
@@ -345,7 +408,7 @@ const CCFW = {
             let row = jQuery(this).parent();
             let rowId = row.data('id');
 
-            App.cookies.remove(closest.section, closest.group, rowId);
+            App.cookies.remove(closest.section, closest.group.id, rowId);
 
             row.remove();
         },
@@ -383,7 +446,7 @@ const CCFW = {
         },
         beforeUnload: (event) => {
             event.preventDefault();
-            return event.returnValue = "Changes have been made to cookie content. Are you sure you want to leave?";
+            return event.returnValue = 'Changes have been made to cookie content. Are you sure you want to leave?';
         },
         /**
          * Validate all GTM allowlist IDs
@@ -418,7 +481,24 @@ const CCFW = {
 
 const beforeLeave = () => {
     CCFW.sectionsChanged = true;
-    addEventListener("beforeunload", CCFW.manage.beforeUnload, {capture: true});
+    addEventListener('beforeunload', CCFW.manage.beforeUnload, { capture: true });
+};
+
+const debugImportObject = () => {
+    let content = jQuery('.' + CCFW.debug.import.textarea).val();
+    let json = Helper.isJson(content); // returns the object
+
+    if (json) {
+        /////////
+        // could extend the check to detect if the object matches expected sections
+        /////////
+
+        CCFW.sections = json;
+        beforeLeave();
+
+        Builder.load();
+        CCFW.debug.output();
+    }
 };
 
 const addSection = (section) => {
@@ -436,6 +516,8 @@ const removeSection = (section) => {
     beforeLeave();
     CCFW.debug.output();
 };
+
+const getGroup = (section, group) => CCFW.sections[section][group]
 
 const addGroup = (section, group) => {
     // ignore whilst building
@@ -457,7 +539,18 @@ const addGroup = (section, group) => {
 
     // refresh the view
     CCFW.debug.output();
-};
+}
+
+const updateGroup = (section, group, object) => {
+    // ignore whilst building
+    if (CCFW.building) { return false; }
+    beforeLeave();
+
+    CCFW.sections[section][group] = object;
+
+    // refresh the view
+    CCFW.debug.output();
+}
 
 const removeGroup = (section, group) => {
     // ignore whilst building
@@ -488,12 +581,11 @@ const updateCookie = (section, group, row, name, text) => {
     CCFW.debug.output();
 };
 
-
 const updateAllowlistId = (data, id) => {
     // ignore whilst building
     if (CCFW.building) { return false; }
     beforeLeave();
-    CCFW.sections[data.section][slugify(data.group)].allowlistID = id.trim();
+    CCFW.sections[data.section][slugify(data.group.id)].allowlistID = id.trim();
 
     // refresh the view
     CCFW.debug.output();
@@ -503,7 +595,7 @@ const updateDescription = (data, text) => {
     // ignore whilst building
     if (CCFW.building) { return false; }
     beforeLeave();
-    CCFW.sections[data.section][slugify(data.group)].description = text.trim();
+    CCFW.sections[data.section][slugify(data.group.id)].description = text.trim();
     CCFW.debug.output();
 };
 
@@ -553,8 +645,10 @@ const App = {
         remove: removeSection
     },
     group: {
+        get: getGroup,
         add: addGroup,
         remove: removeGroup,
+        update: updateGroup,
         exists: groupExists,
         allowlistId: {
             save: updateAllowlistId

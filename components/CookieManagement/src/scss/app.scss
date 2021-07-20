@@ -44,7 +44,7 @@ $breakpoints: (
 
     #ccfw-cookie-management-banner {
         max-width: 705px;
-        margin-bottom:15px;
+        margin-bottom: 15px;
 
         img {
             width: 100%;
@@ -102,7 +102,7 @@ $breakpoints: (
         }
 
         pre {
-            position:relative;
+            position: relative;
             background-color: white;
             transition: background-color .3s;
             cursor: copy;
@@ -113,8 +113,8 @@ $breakpoints: (
                 &:before {
                     content: 'copied!';
                     position: absolute;
-                    right:10px;
-                    top:5px;
+                    right: 10px;
+                    top: 5px;
                     color: #cc0001
                 }
 
@@ -236,6 +236,7 @@ $breakpoints: (
                             display: inline-block;
                         }
                     }
+
                 }
 
                 &__allowlist {
@@ -244,6 +245,15 @@ $breakpoints: (
 
                     @include respond-to('small') {
                         width: 20%;
+                    }
+                }
+
+                &__name {
+                    margin-right: 25px;
+
+                    &-input {
+                        line-height: 1;
+                        min-height: 25px;
                     }
                 }
 
@@ -362,15 +372,26 @@ $breakpoints: (
             height: 28px;
 
             svg {
+                transition: fill 0.2s;
                 position: absolute;
                 top: -2px;
                 left: 6px;
             }
 
+            &.ccfw-group-name-change {
+                svg {
+                    left: 8px;
+
+                    &:hover {
+                        fill: #dd9a18
+                    }
+                }
+            }
+
             &.ccfw-group-remove {
                 svg {
-                    top: -3px;
-                    transition: fill .2s;
+                    left: 3px;
+
                     &:hover {
                         fill: #CC0000
                     }
