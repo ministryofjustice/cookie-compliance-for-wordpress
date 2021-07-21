@@ -349,7 +349,7 @@ const CCFW = {
             group.find('> span').remove();
 
             edit.append(input);
-            edit.append(Button('ccfw-group__name-save', Icon.check('22')));
+            edit.append(Button('ccfw-group__name-save', Icon.check('20')));
             group.append(edit);
 
             listener.group.name.save(CCFW.manage.updateGroupName);

@@ -27,7 +27,7 @@
     "homepage": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress/#readme",
     "author": "MoJ",
     "devDependencies": {
-        "@babel/preset-env": "^7.14.7",
+        "@babel/preset-env": "^7.14.8",
         "copy-webpack-plugin": "^9.0.1",
         "cross-env": "^7.0.3",
         "laravel-mix": "^6.0.25",
@@ -38,7 +38,7 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
-        "@babel/core": "^7.14.6",
+        "@babel/core": "^7.14.8",
         "govuk-frontend": "^3.13.0",
         "tippy.js": "^6.3.1"
     }
