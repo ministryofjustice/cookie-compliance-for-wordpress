@@ -1,4 +1,5 @@
 import { CCFW } from './global';
+import { Helper } from './helper';
 
 const groupSave = (section, callback) => {
     let element = jQuery('.ccfw-' + section + '-group-save');
@@ -6,9 +7,28 @@ const groupSave = (section, callback) => {
     element.on('click', callback);
 };
 
-const allowlistIDSave = (group, callback) => {
-    let element = jQuery('.ccfw-' + group + '-allowlist-save');
+const groupEdit = (callback) => {
+    let element = jQuery('.ccfw-group-name-change');
+    element.off('click', callback);
     element.on('click', callback);
+};
+
+const groupNameSave = (callback) => {
+    let element = jQuery('.ccfw-group__name-save');
+    element.off('click', callback);
+    element.on('click', callback);
+};
+
+const groupRemove = (callback) => {
+    let element = jQuery('.ccfw-group-remove');
+    element.off('click', callback);
+    element.on('click', callback);
+};
+
+const allowlistIDSave = (callback) => {
+    let element = jQuery('.ccfw-cookie-row__gtm-allowlist-id');
+    element.off('keyup', callback);
+    element.on('keyup', callback);
 };
 
 const rowAdd = (callback) => {
@@ -31,6 +51,7 @@ const rowSave = (callback) => {
 
 const descriptionSave = (callback) => {
     let element = jQuery('.ccfw-group__description input');
+    element.off('keyup', callback);
     element.on('keyup', callback);
 };
 
@@ -40,6 +61,15 @@ const descriptionSave = (callback) => {
 const debugToggle = () => {
     let element = jQuery('#' + CCFW.debug.checkbox);
     element.on('change', toggleDebug);
+};
+const debugImportObject = (callback) => {
+    let element = jQuery('.' + CCFW.debug.import.textarea);
+    element.on('keypress', Helper.readonly);
+    element.on('keyup', callback);
+};
+const debugCopyObject = () => {
+    let element = jQuery('#' + CCFW.debug.preContainer).find('pre');
+    element.on('click', Helper.copyText);
 };
 
 function toggleDebug () {
@@ -64,7 +94,14 @@ function toggleDebug () {
 const listener = {
     group: {
         save: (section, callback) => groupSave(section, callback),
-        allowlist: (group, callback) => allowlistIDSave(group, callback),
+        edit: (callback) => groupEdit(callback),
+        remove: (callback) => groupRemove(callback),
+        name: {
+            save: (callback) => groupNameSave(callback)
+        },
+        allowlist: {
+            save: (callback) => allowlistIDSave(callback)
+        },
         description: {
             save: (callback) => descriptionSave(callback)
         }
@@ -80,7 +117,18 @@ const listener = {
             focusBlur: (callback) => jQuery('#' + CCFW.appContainer).on('focus blur', 'input', callback)
         }
     },
-    debug: () => debugToggle()
+    debug: {
+        toggle: () => debugToggle(),
+        import: (callback) => debugImportObject(callback),
+        copy: () => debugCopyObject()
+    },
+    remove: {
+        group: {
+            name: {
+                save: () => jQuery('.ccfw-group__name-save').off('click')
+            }
+        }
+    }
 };
 
 export { listener };
