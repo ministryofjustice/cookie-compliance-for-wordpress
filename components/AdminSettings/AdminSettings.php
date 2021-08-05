@@ -35,7 +35,7 @@ class AdminSettings
         add_action('admin_enqueue_scripts', [$this, 'enqueue'], 11);
         add_action('admin_init', [$this, 'settings'], 11);
         add_action('admin_menu', [$this, 'page']);
-        add_filter( 'option_page_capability_ccfwComponentSettings', [$this, 'settingsCapability']);
+        add_filter('option_page_capability_ccfwComponentSettings', [$this, 'settingsCapability']);
     }
 
     public function enqueue()
@@ -160,7 +160,8 @@ class AdminSettings
         return $this->helper->adminSettings;
     }
 
-   public function settingsCapability(){
+    public function settingsCapability()
+    {
         return 'edit_theme_options';
     }
 }
