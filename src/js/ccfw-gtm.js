@@ -157,15 +157,12 @@ const ccfwGTM = () => {
         // use existing list if present
         // default to empty array if not
         let allowedList = CCFW.storage.allowed.get() || []; // default to empty array
-        let ccfwAlwaysNeeded = ['v', 'e', 'jsm']; // custom events and dataLayer access
-        let ccfwTriggers = [];
-        let ccfwVariables = [];
 
-        if (allowedList.indexOf('ua') !== -1) {
-            ccfwTriggers = ccfwTriggers.concat('cl', 'sdl', 'evl', 'jel', 'tl');
-            ccfwVariables = ['c', 'ctv', 'd', 'vis', 'gas', 'f', 'j', 'r', 'u'];
-        }
-        allowedList = allowedList.concat(ccfwAlwaysNeeded, ccfwTriggers, ccfwVariables);
+        //Always allow variables and triggers - https://developers.google.com/tag-manager/web/restrict
+        let ccfwTriggers = ['evl', 'cl', 'fsl', 'hl', 'jel', 'lcl', 'sdl', 'tl', 'ytl'];
+        let ccfwVariables = ['k', 'v', 'c', 'ctv', 'e', 'jsm', 'dpg', 'd', 'vis', 'gas', 'f', 'j', 'smm', 'r', 'remm', 'u'];
+
+        allowedList = allowedList.concat(ccfwTriggers, ccfwVariables);
 
         window.dataLayer = [{
             'gtm.allowlist': allowedList
