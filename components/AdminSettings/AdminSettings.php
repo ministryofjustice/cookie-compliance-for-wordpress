@@ -35,6 +35,7 @@ class AdminSettings
         add_action('admin_enqueue_scripts', [$this, 'enqueue'], 11);
         add_action('admin_init', [$this, 'settings'], 11);
         add_action('admin_menu', [$this, 'page']);
+        add_filter('option_page_capability_ccfwComponentSettings', [$this, 'settingsCapability']);
     }
 
     public function enqueue()
@@ -48,7 +49,7 @@ class AdminSettings
         add_options_page(
             'Cookie Compliance for WP Settings',
             'Cookie Compliance For WP',
-            'manage_options',
+            'edit_theme_options',
             'cookie-compliance-for-wordpress-settings',
             [$this, 'content']
         );
@@ -157,5 +158,10 @@ class AdminSettings
     public function getSettings()
     {
         return $this->helper->adminSettings;
+    }
+
+    public function settingsCapability()
+    {
+        return 'edit_theme_options';
     }
 }

@@ -65,7 +65,7 @@ class CookieManagement
         $response->update = 'fail';
         $response->reason = 'Your access level has prevented an update on this occasion.';
 
-        if (current_user_can('manage_options')) {
+        if (current_user_can('edit_theme_options')) {
             $data = $_POST;
             $cookies_options = $data['payload'];
 
