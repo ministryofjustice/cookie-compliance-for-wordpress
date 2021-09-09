@@ -52,7 +52,7 @@ $ccfw_ccfw_gtm_id = $ccfw_ccfw_gtm_id['gtm_id'] ?? 'null';
                 ); ?>
             </p>
             <div class="ccfw-banner__buttons">
-                <button class="ccfw-banner__button" id="cookie-accept" type="submit">
+                <button class="ccfw-banner__button" id="cookie-accept" type="submit" aria-label="I am OK with cookies. Page will reload.">
                     <?php _e('I am OK with cookies', 'cookie-compliance-for-wordpress'); ?>
                 </button>
 
@@ -208,7 +208,7 @@ $ccfw_ccfw_gtm_id = $ccfw_ccfw_gtm_id['gtm_id'] ?? 'null';
             }
             ?>
         <div class="ccfw-banner__save-preferences">
-            <button type="submit" id="cookie-save-preferences" class="ccfw-banner__button">
+            <button type="submit" id="cookie-save-preferences" class="ccfw-banner__button" aria-label="Save cookie preferences. Page will reload.">>
                 <?php _e('Save cookie preferences', 'cookie-compliance-for-wordpress'); ?>
             </button>
         </div>
