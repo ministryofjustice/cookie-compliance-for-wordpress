@@ -161,6 +161,8 @@ import { CCFW } from './ccfw-gtm';
                 CCFW.storage.time.set();
                 CCFW.storage.bannerHidden.set(true);
                 utilities.hideBanner();
+                window.location.reload(false);
+                return false;
             },
             declineAllButton: function () {
                 CCFW.listItem.set(
@@ -231,6 +233,8 @@ import { CCFW } from './ccfw-gtm';
                 CCFW.storage.time.set();
                 utilities.hideBanner()
                 utilities.hideSettingsModal()
+                window.location.reload(false);
+                return false;
             }
         };
 
