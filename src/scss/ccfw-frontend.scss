@@ -89,8 +89,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
     left: 0;
     width: 100%;
     display: none;
-    border-top: 2px solid black; // no var for improved IE ux
-    background-color: #FFFFFF; // no var for improved IE ux
+    border-top: 2px solid govuk-colour("black"); // no var for improved IE ux
+    background-color: govuk-colour("white"); // no var for improved IE ux
     padding: 18px 10px 0 10px;
     position: fixed;
     z-index: 9999;
@@ -110,7 +110,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         position: fixed;
         z-index: 100000;
         display: block;
-        background: #FFFFFF;
+        background: govuk-colour("white");
         overflow-y: scroll;
         box-sizing: border-box;
         margin: auto auto;
@@ -145,7 +145,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
         &__section {
             &:last-child {
-                border-bottom: 1px solid grey;
+                border-bottom: 1px solid $govuk-border-colour;
                 margin-bottom: 30px;
             }
         }
@@ -188,13 +188,13 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
         &__save-preferences {
             padding-top: 30px;
-            border-top: 1px solid grey;
+            border-top: 1px solid $govuk-border-colour;
         }
 
         &__button {
-            background-color: #1976D2;
-            color: #FFFFFF;
-            -webkit-text-fill-color: #FFFFFF;
+            background-color: $govuk-button-colour;
+            color: govuk-colour("white");
+            -webkit-text-fill-color: govuk-colour("white");
             border-radius: 5px;
             border: 2px solid transparent;
             box-shadow: none;
@@ -204,20 +204,19 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             font-size: 19px;
             font-family: Arial, sans-serif;
 
-            &:hover {
-                background-color: #0D47A1;
+            &:hover,
+            &:active {
+                background-color: govuk-tint($govuk-button-colour, 25);
             }
 
             &:focus {
-                background-color: #0D47A1;
-                box-shadow: 0 0 0 2px #FFFFFF,
-                0 0 0 4px #00A0CC;
+                background-color: $govuk-focus-colour;
+                box-shadow: 0 0 0 2px govuk-colour("white"),
+                0 0 0 4px govuk-colour("black");;
                 outline: none;
             }
-
             &:active {
-                background-color: #403DD0;
-                outline: 2px solid #00A0CC;
+                outline: 2px solid $govuk-focus-colour;
                 outline-offset: 2px;
             }
 
