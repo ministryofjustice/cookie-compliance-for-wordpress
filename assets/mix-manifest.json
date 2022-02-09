@@ -1,12 +1,12 @@
 {
-    "/js/ccfw-frontend.js": "/js/ccfw-frontend.js?id=f56db12c9923f384415e989ccda0069f",
-    "/js/ccfw-cookie-manage.js": "/js/ccfw-cookie-manage.js?id=9c886d07458ecfde9a4a47d4570eefac",
-    "/js/ccfw-admin-app.js": "/js/ccfw-admin-app.js?id=a0926f24cda24aaed93276e571060d91",
-    "/js/ccfw-ie11CustomProperties.js": "/js/ccfw-ie11CustomProperties.js?id=76c70d392e2e369a9b33c67bd60a32d0",
-    "/js/ccfw-frontend-legacy.js": "/js/ccfw-frontend-legacy.js?id=acb4c327aade276098916314d7c60455",
-    "/css/ccfw-frontend-legacy.css": "/css/ccfw-frontend-legacy.css?id=83c305900fe21064f9f3f3e492b19542",
-    "/css/ccfw-admin-main.css": "/css/ccfw-admin-main.css?id=cd190c800e624a9cba519ebd77b8a988",
-    "/css/ccfw-frontend.css": "/css/ccfw-frontend.css?id=17a49f1b473074167fc703c99a49ba96",
-    "/image/cookie-graphic.png": "/image/cookie-graphic.png?id=582fb258b874b5a9d27ccebb12a5f564",
-    "/image/cookie.png": "/image/cookie.png?id=4a834ae3168f7717e64e589c9f819fd9"
+    "/js/ccfw-frontend.js": "/js/ccfw-frontend.js?id=f56db12c9923f384415e",
+    "/js/ccfw-cookie-manage.js": "/js/ccfw-cookie-manage.js?id=9c886d07458ecfde9a4a",
+    "/js/ccfw-admin-app.js": "/js/ccfw-admin-app.js?id=d98a9863c51f3de7a2b5",
+    "/js/ccfw-ie11CustomProperties.js": "/js/ccfw-ie11CustomProperties.js?id=76c70d392e2e369a9b33",
+    "/js/ccfw-frontend-legacy.js": "/js/ccfw-frontend-legacy.js?id=acb4c327aade27609891",
+    "/css/ccfw-frontend-legacy.css": "/css/ccfw-frontend-legacy.css?id=79a662f9a20af0a0fdba",
+    "/css/ccfw-admin-main.css": "/css/ccfw-admin-main.css?id=cd190c800e624a9cba51",
+    "/css/ccfw-frontend.css": "/css/ccfw-frontend.css?id=b31188cc2fc33bca4a70",
+    "/image/cookie-graphic.png": "/image/cookie-graphic.png?id=582fb258b874b5a9d27c",
+    "/image/cookie.png": "/image/cookie.png?id=4a834ae3168f7717e64e"
 }
