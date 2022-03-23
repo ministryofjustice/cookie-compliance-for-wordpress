@@ -44,10 +44,10 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 // =========================================================
 
 :root {
-    --light: #f3f2f1;
+    --light: #F3F2F1;
     --dark: #005C2C;
-    --xDark: black;
-    --focus: #ffdd00;
+    --xDark: #0B0C0C;
+    --focus: #FD0;
 }
 
 .visually-hidden {
@@ -89,8 +89,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
     left: 0;
     width: 100%;
     display: none;
-    border-top: 2px solid black; // no var for improved IE ux
-    background-color: #FFFFFF; // no var for improved IE ux
+    border-top: 2px solid govuk-colour("black"); // no var for improved IE ux
+    background-color: govuk-colour("white"); // no var for improved IE ux
     padding: 18px 10px 0 10px;
     position: fixed;
     z-index: 9999;
@@ -110,7 +110,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         position: fixed;
         z-index: 100000;
         display: block;
-        background: #FFFFFF;
+        background: govuk-colour("white");
         overflow-y: scroll;
         box-sizing: border-box;
         margin: auto auto;
@@ -145,7 +145,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
         &__section {
             &:last-child {
-                border-bottom: 1px solid grey;
+                border-bottom: 1px solid $govuk-border-colour;
                 margin-bottom: 30px;
             }
         }
@@ -188,13 +188,13 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
         &__save-preferences {
             padding-top: 30px;
-            border-top: 1px solid grey;
+            border-top: 1px solid $govuk-border-colour;
         }
 
         &__button {
-            background-color: #1976D2;
-            color: #FFFFFF;
-            -webkit-text-fill-color: #FFFFFF;
+            background-color: govuk-colour("green");
+            color: govuk-colour("white");
+            -webkit-text-fill-color: govuk-colour("white");
             border-radius: 5px;
             border: 2px solid transparent;
             box-shadow: none;
@@ -204,21 +204,26 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             font-size: 19px;
             font-family: Arial, sans-serif;
 
-            &:hover {
-                background-color: #0D47A1;
+            &:hover,
+            &:active {
+                background-color: govuk-shade(govuk-colour("green"), 20%);
             }
 
             &:focus {
-                background-color: #0D47A1;
-                box-shadow: 0 0 0 2px #FFFFFF,
-                0 0 0 4px #00A0CC;
+                background-color: $govuk-focus-colour;
+                box-shadow:
+                        0 0 0 3px govuk-colour("black");
                 outline: none;
+                color: $govuk-text-colour;
+                -webkit-text-fill-color: $govuk-text-colour;
             }
-
-            &:active {
-                background-color: #403DD0;
-                outline: 2px solid #00A0CC;
-                outline-offset: 2px;
+            
+            &:focus:hover,
+            &:active:hover {
+                outline: 4px solid $govuk-focus-colour;
+                background-color: govuk-shade(govuk-colour("green"), 20%);
+                color: govuk-colour("white");
+                -webkit-text-fill-color: govuk-colour("white");
             }
 
             @include respond-to('extra-small') {
@@ -233,8 +238,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 background: none;
                 border: 0;
                 text-decoration: underline;
-                color: #1D70B8;
-                -webkit-text-fill-color: #1976D2;
+                color: $govuk-link-colour;
+                -webkit-text-fill-color: $govuk-link-colour;
                 margin-bottom: 16px;
                 text-align: right;
                 padding-right: 0;
@@ -242,28 +247,26 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 width: auto;
                 @extend .govuk-link;
 
+                &:focus:hover,
                 &:focus {
-                    color: #0D47A1;
-                    background: #0090B8;
-                    border-bottom: 4px solid #0090B8;
-                    background: #d9eef4;
+                    color: $govuk-text-colour;
+                    -webkit-text-fill-color: $govuk-text-colour;
+                    background: $govuk-focus-colour;
+                    border-bottom: 4px solid $govuk-text-colour;
                     box-shadow: none;
+                    outline: none;
                 }
 
                 &:hover {
-                    color: #0D47A1;
-                    -webkit-text-fill-color: #0D47A1;
                     background-color: transparent;
+                    color: $govuk-link-hover-colour;
+                    -webkit-text-fill-color: $govuk-link-hover-colour;
                 }
 
                 &:active {
-                    color: #403DD0;
-                    border-bottom: 4px solid #0090B8;
-                    background: #d9eef4;
-                }
-
-                &:visited {
-                    color: #7E57C2;
+                    color: $govuk-link-active-colour;
+                    border-bottom: 4px solid $govuk-link-active-colour;
+                    background: $govuk-focus-colour;
                 }
             }
 
@@ -274,32 +277,36 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             &--expand-options {
                 font-family: inherit;
                 font-size: 19px;
-                background-color: #E8F1FB;
-                color: #0D47A1;
-                border: 1px solid #1976D2;
+                background-color: govuk-colour("light-grey");
+                color: $govuk-text-colour;
+                border: 1px solid govuk-colour("black");
                 border-radius: 5px;
                 box-shadow: none;
                 padding: 6px 17px;
-                fill: #0D47A1;
+                fill: $govuk-text-colour;
                 width: 100%;
                 margin-bottom: 18px;
 
                 &:focus, &:hover {
-                    color: #FFFFFF;
-                    -webkit-text-fill-color: #FFFFFF;
-                    background-color: #0D47A1;
-                    fill: #FFFFFF;
-                    border: 1px solid #0D47A1;
+                    color: govuk-colour("black");
+                    -webkit-text-fill-color: govuk-colour("black");
+                    background-color: govuk-shade(govuk-colour("light-grey"), 10%);
+                    fill: govuk-colour("black");
+                    border: 1px solid govuk-shade(govuk-colour("light-grey"), 40%);
                 }
 
-                &:focus, &:active {
-                    box-shadow: 0 0 0 2px #FFFFFF,
-                    0 0 0 4px #00A0CC;
+                &:focus:not(:hover) {
+                    box-shadow:
+                            0 0 0 3px govuk-colour("black");
                     outline: 2px solid transparent;
+                    background-color: $govuk-focus-colour;
                 }
 
-                &:active {
-                    background-color: #403DD0;
+                &:active:hover,
+                &:focus:hover {
+                    box-shadow:
+                            0 0 0 3px $govuk-focus-colour;
+                    outline: 2px solid transparent;
                 }
 
                 @include respond-to('extra-small') {
@@ -351,8 +358,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         &__summary-text {
             max-width: 800px;
             @extend .govuk-body;
-            font-size: 16px;
-
+        
             & + .ccfw-banner__button {
                 margin-top: 16px;
             }
@@ -384,9 +390,8 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             position: relative;
 
             &:first-of-type {
-                border-top: 1px solid gray;
-                border-bottom: 1px solid gray;
-                padding-top: 1px;
+                border-top: 1px solid $govuk-border-colour;
+                padding-top: 16px;
             }
 
             & .ccfw-banner__summary-heading {
@@ -407,7 +412,9 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             @extend .govuk-heading-s;
 
             &--always-on {
-                color: #1976D2;
+                color: govuk-colour("blue");
+                padding: 3px 6px 1px;
+                border: 2px solid;
                 float: right;
                 font-weight: bold;
                 font-size: 18px;
@@ -432,9 +439,9 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #1976D2;
-            -webkit-text-fill-color: #FFFFFF;
-            color: #FFFFFF;
+            background-color: govuk-colour("green");
+            -webkit-text-fill-color: govuk-colour("white");
+            color: govuk-colour("white");;
             -webkit-transition: .4s;
             transition: .4s;
             border-radius: 34px;
@@ -448,7 +455,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 position: absolute;
                 top: 8px;
                 left: 7px;
-                color: white;
+                color: govuk-colour("white");
                 display: none;
             }
 
@@ -468,36 +475,49 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 width: 22px;
                 left: 3px;
                 top: 3px;
-                background-color: #FFFFFF;
+                background-color: govuk-colour("white");
                 -webkit-transition: .4s;
                 transition: .4s;
                 border-radius: 50%;
-                color: #FFFFFF;
-                border: 11px solid #FFFFFF;
+                color: govuk-colour("white");
+                border: 11px solid govuk-colour("white");
                 z-index: 99999;
             }
 
             &:hover {
-                background-color: #0D47A1;
+                background-color: govuk-shade(govuk-colour("green"), 20%);
             }
 
             &:focus {
-                background-color: #0D47A1;
-                box-shadow: 0 0 0 2px #FFFFFF,
-                0 0 0 4px #00A0CC;
+                background-color: $govuk-focus-colour;
+                box-shadow:
+                        0 0 0 2px govuk-colour("white"),
+                        0 0 0 4px govuk-colour("black");
                 outline: none;
-                color: #FFFFFF;
+                color: $govuk-text-colour;
+                -webkit-text-fill-color: $govuk-text-colour;
+
+                &:before {
+                    border-color: $govuk-text-colour;
+                }
             }
 
             &:active {
-                background-color: #403DD0;
-                box-shadow: 0 0 0 2px #FFFFFF,
-                0 0 0 4px #00A0CC;
+                background-color: $govuk-focus-colour;
+                box-shadow:
+                        0 0 0 2px govuk-colour("white"),
+                        0 0 0 4px govuk-colour("black");
                 outline-offset: 2px;
             }
 
             &[aria-checked=false] {
-                background-color: #535A5E;
+                background-color: govuk-colour("dark-grey");
+                color: govuk-colour("white");
+                -webkit-text-fill-color: govuk-colour("white");
+
+                &:before {
+                    border-color: govuk-colour("white");
+                }
             }
 
             &[aria-checked=true]:after {
@@ -507,10 +527,10 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             }
 
             &[aria-checked=true]:before {
-                background-color: #FFFFFF;
+                background-color: govuk-colour("white");
                 -webkit-transform: translateX(24px);
                 -ms-transform: translateX(24px);
-                transform: translateX(27px);
+                transform: translateX(24px);
             }
 
             &:after {
@@ -524,41 +544,11 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         &__expanding-section {
             /*@extend .govuk-details;*/
 
-            &:last-of-type {
-            }
         }
 
         &__expanding-section-summary {
             @extend .govuk-details__summary;
             border-bottom: 4px solid transparent;
-
-            &:focus {
-                color: #0D47A1;
-                background: #0090B8;
-                border-bottom: 4px solid #0090B8;
-                background: #d9eef4;
-                box-shadow: none;
-            }
-
-            &:hover {
-                color: #0D47A1;
-                -webkit-text-fill-color: #0D47A1;
-                background-color: transparent;
-            }
-
-            &:active {
-                color: #403DD0;
-                border-bottom: 4px solid #0090B8;
-                background: #d9eef4;
-            }
-
-            &:visited {
-                color: #7E57C2;
-
-                & .ccfw-banner__expanding-section-summary-text {
-                    text-decoration: underline;
-                }
-            }
         }
 
         &__expanding-section-summary-text {
@@ -639,6 +629,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 .ccfw-settings-button {
     bottom: 0;
     right: 0;
+    cursor: pointer;
     display: none;
     background: transparent;
     position: fixed;
@@ -656,30 +647,24 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         background-color: transparent;
 
         .ccfw-settings-button__background-triangle path {
-            fill: #1976D2;
+            fill: #0B0C0C;
         }
     }
 
+    &:active,
     &:focus {
         background: transparent;
         box-shadow: transparent;
         outline: none;
-
-        .ccfw-settings-button__background-triangle path {
-            fill: #0D47A1;
-        }
-    }
-
-    &:active {
-        background: transparent;
-        box-shadow: transparent;
-        outline: none;
-        color: #FFFFFF;
-        fill: #FFFFFF;
+        color: #0B0C0C;
+        fill: #0B0C0C;
         top: initial;
 
         .ccfw-settings-button__background-triangle path {
-            fill: #403DD0;
+            fill: #FD0;
+        }
+        .ccfw-settings-button__icon path {
+            fill: #0B0C0C;
         }
     }
 
@@ -689,7 +674,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         margin-top: 20px;
 
         path {
-            fill: #FFFFFF;
+            fill: #FFF;
         }
     }
 
@@ -704,14 +689,13 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         width: 94px;
 
         path {
-            fill: #535A5E;
+            fill: #505A5F;
         }
     }
 
     span.ccfw-settings-button__text {
         font-size: 12px;
         margin-bottom: 0;
-        color: #FFFFFF;
     }
 }
 
