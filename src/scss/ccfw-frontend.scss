@@ -200,7 +200,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
             box-shadow: none;
             padding: 5px 16px;
             margin-bottom: 18px;
-            width: 100%;
+            width: calc(100% - 52px);
             font-size: 19px;
             font-family: Arial, sans-serif;
 
@@ -284,7 +284,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 box-shadow: none;
                 padding: 6px 17px;
                 fill: $govuk-text-colour;
-                width: 100%;
+                width: calc(100% - 54px);
                 margin-bottom: 18px;
 
                 &:focus, &:hover {
