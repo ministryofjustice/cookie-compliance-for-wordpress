@@ -12,7 +12,7 @@ class Sanitize
      * @param array $options
      * @return array
      */
-    public function options(array $options)
+    public static function options(array $options)
     {
         // catch analytics section updates
         if (isset($options['gtm_analytics_id'])) {
