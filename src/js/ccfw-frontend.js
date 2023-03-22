@@ -170,6 +170,9 @@ import { CCFW } from './ccfw-gtm';
                 );
                 CCFW.storage.bannerHidden.set(true);
                 utilities.hideBanner();
+                clearOurCookies(CCFW.storage.allowed.get());
+                window.location.reload(false);
+                return false;
             },
             chooseCookieSettingsButton: function () {
                 utilities.showSettingsModal();
@@ -231,8 +234,9 @@ import { CCFW } from './ccfw-gtm';
             saveCookiePreferences: function () {
                 CCFW.storage.bannerHidden.set('true');
                 CCFW.storage.time.set();
-                utilities.hideBanner()
-                utilities.hideSettingsModal()
+                utilities.hideBanner();
+                utilities.hideSettingsModal();
+                clearOurCookies(CCFW.storage.allowed.get());
                 window.location.reload(false);
                 return false;
             }
@@ -245,3 +249,38 @@ import { CCFW } from './ccfw-gtm';
         CCFW.manageAll(CCFW.storage.allowed.get(), 'init', true)
     });
 })(jQuery);
+
+function clearOurCookies(allowList) {
+    // Function to clear our cookies if consent withdrawn
+    if (!allowList.includes("ua")) {
+        //Google analytics
+        killCookie("_ga");
+        killCookie("_gid");
+        killCookie("_gat");
+    }
+    if (!allowList.includes("html")) {
+        //Facebook cookies
+        killCookie("fr");
+        killCookie("tr");
+        killCookie("_fbc");
+        killCookie("_fbp");
+        killCookie("PSUK_source");
+    }
+    if (!allowList.includes("gclidw")) {
+        //Google conversion linker cookies
+        killCookie("_gcl_au");
+        killCookie("_gcl_dc");
+        killCookie("_gcl_aw");
+    }
+}
+
+function killCookie(name) {
+    // kills cookies of name for our domains
+    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;";
+    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=" + location.host; // e.g. magistrates.judiciary.uk
+    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=." + location.host; // e.g. .magistrates.judiciary.uk
+    let domain = location.host.split(".");
+    if (domain.length >= 3) domain[0] = "";
+    domain = domain.join(".");
+    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=" + domain; // e.g. .judiciary.uk
+}
