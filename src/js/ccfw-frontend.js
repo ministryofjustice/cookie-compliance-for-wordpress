@@ -254,9 +254,9 @@ function clearOurCookies(allowList) {
     // Function to clear our cookies if consent withdrawn
     if (!allowList.includes("ua")) {
         //Google analytics
-        killCookie("_ga");
+        killCookieAndRelated("_ga");
         killCookie("_gid");
-        killCookie("_gat");
+        killCookieAndRelated("_gat");
     }
     if (!allowList.includes("html")) {
         //Facebook cookies
@@ -274,6 +274,22 @@ function clearOurCookies(allowList) {
     }
 }
 
+function killCookieAndRelated(name) {
+    //function for killing all cookies which start with <name>
+    // e.g. _ga will kill of _ga and _ga_123ABC
+    killCookie(name);
+    const cookies = document.cookie.split(";"); // array of cookies
+    for (i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (!cookie) continue;
+        let eqPos = cookie.indexOf("=");
+        let fullname = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        if (fullname.substring(0,name.length) == name) {
+            killCookie(fullname);
+        }
+    }
+}
+
 function killCookie(name) {
     // kills cookies of name for our domains
     document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;";
@@ -283,4 +299,9 @@ function killCookie(name) {
     if (domain.length >= 3) domain[0] = "";
     domain = domain.join(".");
     document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=" + domain; // e.g. .judiciary.uk
+
+    //finally a few items which might be unnecessary as these are mostly wordpress login for editors and are essential cookies
+    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=jotwpublic.prod.wp.dsd.io";
+    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=.jotwpublic.prod.wp.dsd.io";
+    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=.dsd.io";
 }
