@@ -279,7 +279,7 @@ function killCookieAndRelated(name) {
     // e.g. _ga will kill of _ga and _ga_123ABC
     killCookie(name);
     const cookies = document.cookie.split(";"); // array of cookies
-    for (i = 0; i < cookies.length; i++) {
+    for (var i = 0; i < cookies.length; i++) {
         let cookie = cookies[i].trim();
         if (!cookie) continue;
         let eqPos = cookie.indexOf("=");
