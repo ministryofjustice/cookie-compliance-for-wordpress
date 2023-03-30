@@ -299,9 +299,4 @@ function killCookie(name) {
     if (domain.length >= 3) domain[0] = "";
     domain = domain.join(".");
     document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=" + domain; // e.g. .judiciary.uk
-
-    //finally a few items which might be unnecessary as these are mostly wordpress login for editors and are essential cookies
-    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=jotwpublic.prod.wp.dsd.io";
-    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=.jotwpublic.prod.wp.dsd.io";
-    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=.dsd.io";
 }
