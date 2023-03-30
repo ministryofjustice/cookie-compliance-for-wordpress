@@ -170,6 +170,9 @@ import { CCFW } from './ccfw-gtm';
                 );
                 CCFW.storage.bannerHidden.set(true);
                 utilities.hideBanner();
+                clearOurCookies(CCFW.storage.allowed.get());
+                window.location.reload(false);
+                return false;
             },
             chooseCookieSettingsButton: function () {
                 utilities.showSettingsModal();
@@ -231,8 +234,9 @@ import { CCFW } from './ccfw-gtm';
             saveCookiePreferences: function () {
                 CCFW.storage.bannerHidden.set('true');
                 CCFW.storage.time.set();
-                utilities.hideBanner()
-                utilities.hideSettingsModal()
+                utilities.hideBanner();
+                utilities.hideSettingsModal();
+                clearOurCookies(CCFW.storage.allowed.get());
                 window.location.reload(false);
                 return false;
             }
@@ -245,3 +249,54 @@ import { CCFW } from './ccfw-gtm';
         CCFW.manageAll(CCFW.storage.allowed.get(), 'init', true)
     });
 })(jQuery);
+
+function clearOurCookies(allowList) {
+    // Function to clear our cookies if consent withdrawn
+    if (!allowList.includes("ua")) {
+        //Google analytics
+        killCookieAndRelated("_ga");
+        killCookie("_gid");
+        killCookieAndRelated("_gat");
+    }
+    if (!allowList.includes("html")) {
+        //Facebook cookies
+        killCookie("fr");
+        killCookie("tr");
+        killCookie("_fbc");
+        killCookie("_fbp");
+        killCookie("PSUK_source");
+    }
+    if (!allowList.includes("gclidw")) {
+        //Google conversion linker cookies
+        killCookie("_gcl_au");
+        killCookie("_gcl_dc");
+        killCookie("_gcl_aw");
+    }
+}
+
+function killCookieAndRelated(name) {
+    //function for killing all cookies which start with <name>
+    // e.g. _ga will kill of _ga and _ga_123ABC
+    killCookie(name);
+    const cookies = document.cookie.split(";"); // array of cookies
+    for (var i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (!cookie) continue;
+        let eqPos = cookie.indexOf("=");
+        let fullname = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        if (fullname.substring(0,name.length) == name) {
+            killCookie(fullname);
+        }
+    }
+}
+
+function killCookie(name) {
+    // kills cookies of name for our domains
+    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;";
+    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=" + location.host; // e.g. magistrates.judiciary.uk
+    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=." + location.host; // e.g. .magistrates.judiciary.uk
+    let domain = location.host.split(".");
+    if (domain.length >= 3) domain[0] = "";
+    domain = domain.join(".");
+    document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=" + domain; // e.g. .judiciary.uk
+}
