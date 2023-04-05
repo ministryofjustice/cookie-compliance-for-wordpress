@@ -17,10 +17,6 @@ import { CCFW } from './ccfw-gtm';
                 this.$html = $('html');
             }
         };
-
-        console.log("ABC");
-        console.log(cacheMainElements.$notEl);
-
         /**
          *  Helper functions for shared tasks
          * */

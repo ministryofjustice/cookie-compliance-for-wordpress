@@ -22,6 +22,7 @@
         const cacheMainElements = {
             init: function () {
                 this.$el = $('#ccfw-page-banner')
+                this.$notEl = $('#ccfw-page-banner ~ *'); // everything after the cookie popup = the whole page
                 this.$body = $('body')
                 this.$html = $('html')
             }
@@ -37,6 +38,7 @@
             },
             cacheDom: function () {
                 this.$el = cacheMainElements.$el
+                this.$notEl = cacheMainElements.$notEl;
                 this.$settingsModal = this.$el.find('#cookie-popup')
                 this.$body = cacheMainElements.$body
                 this.$html = cacheMainElements.$html
@@ -79,6 +81,7 @@
                 this.$el.removeClass("ccfw-cookie-banner-open")
                 this.$html.removeClass("ccfw-cookie-banner-open")
                 this.$body.removeClass("ccfw-cookie-banner-open")
+                this.$notEl.removeAttr("aria-hidden");
             },
             showSettingsModal: function () {
                 this.$settingsModal.show()
@@ -86,6 +89,7 @@
                 this.$el.addClass("ccfw-cookie-banner-open")
                 this.$html.addClass("ccfw-cookie-banner-open")
                 this.$body.addClass("ccfw-cookie-banner-open")
+                this.$notEl.attr('aria-hidden', 'true');
                 if (utilities.checkForCookie(cookie_key_ga_accept)) {
                     settingsModal.$GAcheckBox.attr("aria-checked", true);
                 }
