@@ -89,12 +89,10 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
     left: 0;
     width: 100%;
     display: none;
-    border-top: 2px solid govuk-colour("black"); // no var for improved IE ux
+    border-bottom: 1px solid govuk-colour("black"); // no var for improved IE ux
     background-color: govuk-colour("white"); // no var for improved IE ux
     padding: 18px 10px 0 10px;
-    position: fixed;
     z-index: 9999;
-    overflow-y: scroll;
     box-sizing: border-box;
 
     &.ccfw-cookie-banner-open {
