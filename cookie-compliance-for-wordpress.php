@@ -8,7 +8,7 @@
  * Plugin Name:       Cookie Compliance for WordPress
  * Plugin URI:        https://github.com/ministryofjustice/cookie-compliance-for-wordpress
  * Description:       Presents users with cookie compliance field when they first visit the website.
- * Version:           3.3.5
+ * Version:           3.4.0
  * Requires at least: 5.2.3
  * Requires PHP:      7.0
  * Author:            Ministry of Justice
