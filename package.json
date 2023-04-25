@@ -2,8 +2,8 @@
     "name": "cookie-compliance-for-wordpress",
     "version": "2.0.6",
     "engines": {
-        "node": "12.18.3",
-        "npm": "7.5.2"
+        "node": "*",
+        "npm": "*"
     },
     "description": "WP plugin cookie-compliance-for-wordpress",
     "main": "index.js",
@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "@babel/core": "^7.14.8",
-        "govuk-frontend": "^3.13.0",
+        "govuk-frontend": "^4.6.0",
         "tippy.js": "^6.3.1"
     }
 }

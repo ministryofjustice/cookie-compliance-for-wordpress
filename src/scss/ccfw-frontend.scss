@@ -243,6 +243,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 padding-right: 0;
                 padding-left: 0;
                 width: auto;
+                cursor: pointer;
                 @extend .govuk-link;
 
                 &:focus:hover,
