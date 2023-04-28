@@ -243,6 +243,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
                 padding-right: 0;
                 padding-left: 0;
                 width: auto;
+                cursor: pointer;
                 @extend .govuk-link;
 
                 &:focus:hover,
@@ -694,10 +695,10 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
     span.ccfw-settings-button__text {
         font-size: 12px;
         margin-bottom: 0;
+    }
 
-        &:hover {
-            text-decoration: underline;
-        }
+    &:hover span.ccfw-settings-button__text {
+        text-decoration: underline;
     }
 }
 
