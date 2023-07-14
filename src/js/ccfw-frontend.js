@@ -108,34 +108,9 @@ import { CCFW } from './ccfw-gtm';
             bannerDisplay: function () {
                 if (!CCFW.storage.bannerHidden.get()) {
                     utilities.showBanner();
-                    this.trapBannerFocus();
                 } else {
                     utilities.hideBanner();
                 }
-            },
-            trapBannerFocus: function () {
-                let buttons = $('.ccfw-banner__buttons');
-                let focusable = $('#cookie-accept, #cookie-decline, #cookie-more-info');
-                let first = focusable[0];
-                let last = focusable[focusable.length - 1];
-
-                buttons.find('button').eq(0).focus();
-                buttons.on('keydown', function (e) {
-                    if (e.key !== 'Tab') {
-                        return;
-                    }
-                    if (e.shiftKey) /* shift + tab */ {
-                        if (document.activeElement === first) {
-                            last.focus();
-                            e.preventDefault();
-                        }
-                    } else /* tab */ {
-                        if (document.activeElement === last) {
-                            first.focus();
-                            e.preventDefault();
-                        }
-                    }
-                });
             },
             acceptAllButton: function () {
                 CCFW.listItem.set(
