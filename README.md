@@ -34,7 +34,7 @@ wp_body_open();
 
 ## Coding guidelines
 
-This plugin follows
+This plugin follows:
 
 * Standards set by the Wordpress organisation https://codex.wordpress.org/Writing_a_Plugin.
 * PHP Framework Interop Group's standards http://www.php-fig.org/
