@@ -242,7 +242,7 @@ function killCookieAndRelated(name) {
         if (!cookie) continue;
         let eqPos = cookie.indexOf("=");
         let fullname = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        if (fullname.substring(0,name.length) == name) {
+        if (fullname.substring(0,name.length + 1) == name + "_") {
             killCookie(fullname);
         }
     }
