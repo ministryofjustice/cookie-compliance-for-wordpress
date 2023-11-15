@@ -213,6 +213,7 @@ function clearOurCookies(allowList) {
     if (!allowList.includes("ua")) {
         //Google analytics
         killCookieAndRelated("_ga");
+        killCookieAndRelated("_ga_");
         killCookie("_gid");
         killCookieAndRelated("_gat");
     }
