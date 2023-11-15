@@ -213,6 +213,7 @@ function clearOurCookies(allowList) {
     if (!allowList.includes("ua")) {
         //Google analytics
         killCookieAndRelated("_ga");
+        killCookieAndRelated("_ga_");
         killCookie("_gid");
         killCookieAndRelated("_gat");
     }
@@ -242,7 +243,7 @@ function killCookieAndRelated(name) {
         if (!cookie) continue;
         let eqPos = cookie.indexOf("=");
         let fullname = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        if (fullname.substring(0,name.length + 1) == name + "_") {
+        if (fullname.substring(0,name.length) == name) {
             killCookie(fullname);
         }
     }
