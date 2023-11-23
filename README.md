@@ -3,7 +3,7 @@ This WP plugin loads a cookie consent banner at the bottom of the page and provi
 
 # Features
 
-* Users have the ability to consent to the cookies from Google Tag Manager
+* Users have the ability to consent to the cookies from Google Tag Manager.
 * Create interactive consent screens (utilises the allowlist feature of GTM)
 
 ## Issues
