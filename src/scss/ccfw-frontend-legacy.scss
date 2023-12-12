@@ -615,6 +615,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
     width: 94px;
     color: #FFF;
     fill: #FFF;
+    clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
     
     &:hover {
         background-color: transparent;
@@ -632,6 +633,7 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         color: #0B0C0C;
         fill: #0B0C0C;
         top: initial;
+        clip-path: polygon(100% -5%, 100% 100%, -5% 100%);
 
         .ccfw-settings-button__background-triangle path {
             fill: #FD0;
