@@ -160,9 +160,9 @@ $ccfw_ccfw_gtm_id = $ccfw_ccfw_gtm_id['gtm_id'] ?? 'null';
 
                         <details class="ccfw-banner__expanding-section" data-module="govuk-details">
                             <summary class="ccfw-banner__expanding-section-summary">
-                                        <span class="ccfw-banner__expanding-section-summary-text">
-                                            See our <?= $group['name'] ?> cookies
-                                        </span>
+                                <span class="ccfw-banner__expanding-section-summary-text">
+                                    See our <?= $group['name'] ?> cookies
+                                </span>
                             </summary>
                             <div class="ccfw-banner__expanding-section-text">
                                 <table class="ccfw-banner__table">

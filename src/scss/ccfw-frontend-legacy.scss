@@ -519,13 +519,13 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         }
 
         &__expanding-section-summary {
-            @extend .govuk-details__summary;
-            border-bottom: 4px solid transparent;
+            cursor: pointer;
         }
 
         &__expanding-section-summary-text {
             @extend .govuk-details__summary-text;
             text-decoration: none;
+            cursor: pointer;
 
             @include respond-to('extra-small') {
                 display: inline-block;

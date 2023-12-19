@@ -542,17 +542,21 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 
         &__expanding-section {
             /*@extend .govuk-details;*/
-
+            &[open] .ccfw-banner__expanding-section-summary:before {
+                clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+                -webkit-clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+                border-color: currentColor;
+            }
         }
 
         &__expanding-section-summary {
-            @extend .govuk-details__summary;
-            border-bottom: 4px solid transparent;
+            cursor: pointer;
         }
 
         &__expanding-section-summary-text {
             @extend .govuk-details__summary-text;
             text-decoration: none;
+            cursor: pointer;
 
             @include respond-to('extra-small') {
                 display: inline-block;
