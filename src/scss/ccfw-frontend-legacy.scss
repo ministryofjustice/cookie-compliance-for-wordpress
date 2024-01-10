@@ -65,13 +65,13 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
     $govuk-font-family: Arial, sans-serif;
 
     /* Import necessary components from the GOV.UK Frontend toolkit */
-    @import "node_modules/govuk-frontend/govuk/base";
-    @import 'node_modules/govuk-frontend/govuk/components/button/button';
-    @import 'node_modules/govuk-frontend/govuk/components/details/details';
-    @import 'node_modules/govuk-frontend/govuk/components/table/table';
-    @import 'node_modules/govuk-frontend/govuk/core/typography';
-    @import 'node_modules/govuk-frontend/govuk/core/links';
-    @import 'node_modules/govuk-frontend/govuk/overrides/width';
+    @import "node_modules/govuk-frontend/dist/govuk/base";
+    @import 'node_modules/govuk-frontend/dist/govuk/components/button/button';
+    @import 'node_modules/govuk-frontend/dist/govuk/components/details/details';
+    @import 'node_modules/govuk-frontend/dist/govuk/components/table/table';
+    @import 'node_modules/govuk-frontend/dist/govuk/core/typography';
+    @import 'node_modules/govuk-frontend/dist/govuk/core/links';
+    @import 'node_modules/govuk-frontend/dist/govuk/overrides/width';
 
     all: unset;
     // normalise CSS
@@ -519,13 +519,13 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
         }
 
         &__expanding-section-summary {
-            @extend .govuk-details__summary;
-            border-bottom: 4px solid transparent;
+            cursor: pointer;
         }
 
         &__expanding-section-summary-text {
             @extend .govuk-details__summary-text;
             text-decoration: none;
+            cursor: pointer;
 
             @include respond-to('extra-small') {
                 display: inline-block;
