@@ -134,36 +134,9 @@
             bannerDisplay: function () {
                 if (utilities.checkForCookie(cookie_key_banner_hidden) === false) {
                     utilities.showBanner()
-                    this.trapBannerFocus()
                 } else {
                     utilities.hideBanner()
                 }
-            },
-            trapBannerFocus: function () {
-                let cookieBannerButtons = $('.ccfw-banner__buttons')
-                let focusableEls = $('.ccfw-banner__buttons #cookie-accept, .ccfw-banner__buttons #cookie-decline, .ccfw-banner__buttons #cookie-more-info')
-
-                let firstFocusableEl = focusableEls[0];
-                let lastFocusableEl = focusableEls[focusableEls.length - 1];
-
-                cookieBannerButtons.on('keydown', function (e) {
-                    var isTabPressed = (e.key === 'Tab');
-
-                    if (!isTabPressed) {
-                        return;
-                    }
-                    if (e.shiftKey) /* shift + tab */ {
-                        if (document.activeElement === firstFocusableEl) {
-                            lastFocusableEl.focus()
-                            e.preventDefault()
-                        }
-                    } else /* tab */ {
-                        if (document.activeElement === lastFocusableEl) {
-                            firstFocusableEl.focus()
-                            e.preventDefault()
-                        }
-                    }
-                })
             },
             acceptAllButton: function () {
                 utilities.setCookie(cookie_key_banner_hidden, 'true', 365)
