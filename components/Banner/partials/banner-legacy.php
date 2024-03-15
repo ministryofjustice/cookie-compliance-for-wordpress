@@ -191,6 +191,14 @@ $ccfw_ccfw_gtm_id = $options['gtm_id'] ?? '';
                             <td class="ccfw-banner__table-cell">1 year</td>
                         </tr>
 
+                        <tr>
+                            <th scope="row" class="ccfw-banner__table-header">info_banner_dismissed</th>
+                            <td class="ccfw-banner__table-cell">This remembers whether an information banner has been
+                                dismissed and prevents it from being displayed again.
+                            </td>
+                            <td class="ccfw-banner__table-cell">When you close your browser</td>
+                        </tr>
+
                         </tbody>
                     </table>
                     <table class="ccfw-banner__table">
