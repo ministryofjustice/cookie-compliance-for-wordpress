@@ -127,6 +127,7 @@ import { CCFW } from './ccfw-gtm';
                     CCFW.toggleAll(true)
                 );
                 CCFW.storage.bannerHidden.set(true);
+                CCFW.storage.time.set();
                 utilities.hideBanner();
                 clearOurCookies(CCFW.storage.allowed.get());
                 window.location.reload(false);
