@@ -50,6 +50,11 @@ class General
      */
     public function setGTMIDCookie()
     {
+        // If we're in a cron process, return early.
+        if (defined('DOING_CRON') && DOING_CRON === true) {
+            return;
+        }
+
         // We only want to display GTM code when an ID has been entered.
         if (!empty($this->googleTagManagerID)) {
             $gtm_id = $_COOKIE['ccfw_gtm_id'] ?? null;
