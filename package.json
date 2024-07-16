@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "@babel/core": "^7.14.8",
-        "govuk-frontend": "^5.2.0",
+        "govuk-frontend": "^5.4.1",
         "tippy.js": "^6.3.1"
     }
 }
