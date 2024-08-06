@@ -207,6 +207,13 @@ import { CCFW } from './ccfw-gtm';
         settingsModal.init();
         CCFW.manageAll(CCFW.storage.allowed.get(), 'init', true)
     });
+
+    // adds padding to the footer so there is room for the cookie triangle to go without covering up any text
+    // we do not know the current value of the footer padding, so we add to the existing value
+    let footerPadding = $("footer").css("paddingBottom");
+    let newFooterPadding = increasePixelValue(footerPadding,94);
+    $("footer").css("paddingBottom",newFooterPadding + "px");
+
 })(jQuery);
 
 function clearOurCookies(allowList) {
@@ -259,4 +266,10 @@ function killCookie(name) {
     if (domain.length >= 3) domain[0] = "";
     domain = domain.join(".");
     document.cookie = name + "=; expires=Sun, 01 May 1707 00:00:00 UTC; path=/;domain=" + domain; // e.g. .judiciary.uk
+}
+
+function increasePixelValue(initialValue,additionalValue) {
+    let value = initialValue.replace("px", "");
+    value = value * 1 + additionalValue;
+    return value;
 }
