@@ -212,7 +212,7 @@ import { CCFW } from './ccfw-gtm';
     // we do not know the current value of the footer padding, so we add to the existing value
     let footerPadding = $("footer").css("paddingBottom");
     let newFooterPadding = increasePixelValue(footerPadding,94);
-    $("footer").css("paddingBottom",newFooterPadding + "px");
+    $("footer").css("paddingBottom",newFooterPadding);
 
 })(jQuery);
 
@@ -271,5 +271,5 @@ function killCookie(name) {
 function increasePixelValue(initialValue,additionalValue) {
     let value = initialValue.replace("px", "");
     value = value * 1 + additionalValue;
-    return value;
+    return value + "px";
 }
