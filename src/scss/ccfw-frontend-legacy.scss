@@ -681,3 +681,12 @@ $breakpoints: ('extra-extra-small': (min-width: 420px),
 .ccfw-cookie-banner-open {
     height: 100%;
 }
+
+@media print {
+    #ccfw-page-banner {
+        display: none!important; //JS can add inline styles which override this, so !important is needed here
+    }
+    .ccfw-settings-button {
+        visibility: hidden;
+    }
+}
