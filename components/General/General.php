@@ -60,7 +60,8 @@ class General
             $gtm_id = $_COOKIE['ccfw_gtm_id'] ?? null;
 
             if (!$gtm_id || ($this->googleTagManagerID !== $gtm_id)) {
-                setcookie('ccfw_gtm_id', $this->googleTagManagerID, time() + 31556926);
+                $secure = apply_filters('ccfw_set_secure_cookie', is_ssl());
+                setcookie('ccfw_gtm_id', $this->googleTagManagerID, time() + 31556926, '', '', $secure);
                 $_COOKIE['ccfw_gtm_id'] = $this->googleTagManagerID;
             }
         }
